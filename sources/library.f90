@@ -458,12 +458,6 @@ end subroutine BOUNDARIES
 
   pure subroutine SOLVE_TRIDIAG(a,b,c,d,x,n)
     implicit none
-    !        a - sub-diagonal
-    !        b - main diagonal
-    !        c - sup-diagonal
-    !        d - right part
-    !        x - the answer
-    !        n - matrix dimension
     integer,intent(in)                :: n
     real(PR),dimension(n),intent(in)  :: a,b,c,d
     real(PR),dimension(n),intent(out) :: x
