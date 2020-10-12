@@ -1,0 +1,30 @@
+Written by Michael J TOUATI - CLPU - mtouati@clpu.es
+
+ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell code developed for an educational purpose and for testing different numerical advection schemes.
+
+In order to :
+
+1) Compile the code :
+
+Modify the makefile as a function of the wished compilation options and the compilers installed on your computer and then type :
+
+make
+
+2) Run a simulation :
+
+Fill the wished input-deck (all parameters are described inside) and type :
+
+./esvm
+
+3) Plot the simulation results :
+
+Type :
+
+make extract
+
+If you want to plot the distribution function in logarithmic scale, type :
+
+make extract_logfe  
+
+All simulation results are stored in text files located in the folder 'results' and the python scripts used to make the plots are located in the folder 'sources'.
+The plots will be located in the folder 'figures'.
