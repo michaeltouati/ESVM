@@ -103,6 +103,10 @@
 ##                                                                   ##
 ##        BOUNDARY CONDITIONS AND NUMERICAL ADVECTION SCHEMES        ##
 ##                                                                   ##
+## maxwell = 1 for Maxwell-Ampere solver                             ##
+##                 (Poisson is computed at the 1st iteration only)   ##
+##           2  for Maxwell-Poisson solver                           ##
+##                                                                   ##
 ## b_cond = 1 for absorbing or                                       ##
 ##          2 for periodic                                           ##
 ##                                                                   ##
@@ -115,6 +119,8 @@
 ## b = free parameter for Van Leer schemes only (1<=b<=2)            ##
 ##                                                                   ##
 #######################################################################
+#
+#maxwell 1
 #
 #b_cond 2
 #
