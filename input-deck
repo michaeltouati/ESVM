@@ -101,7 +101,6 @@
 ##                                                                   ##
 ##        BOUNDARY CONDITIONS AND NUMERICAL ADVECTION SCHEMES        ##
 ##                                                                   ##
-##                                                                   ##
 ## maxwell = 1 for Maxwell-Ampere solver                             ##
 ##                 (Poisson is computed at the 1st iteration only)   ##
 ##           2  for Maxwell-Poisson solver                           ##
@@ -119,7 +118,7 @@
 ##                                                                   ##
 #######################################################################
 #
-#maxwell 1
+#maxwell 2
 #
 #b_cond 2
 #
