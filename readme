@@ -1,6 +1,6 @@
 Written by Michael J TOUATI - CLPU - mtouati@clpu.es
 
-ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell code developed for an educational purpose and for testing different numerical advection schemes.
+ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell Fortran code developed for an educational purpose and for testing different numerical advection schemes.
 
 In order to :
 
