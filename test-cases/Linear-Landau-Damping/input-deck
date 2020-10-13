@@ -1,7 +1,7 @@
 
 #######################################################################
 ##                                                                   ##
-##          1D-1V ElectroStatic Vlasov-Maxwell (ESV) code            ##
+##          1D-1V ElectroStatic Vlasov-Maxwell (ESVM) code           ##
 ##                                                                   ##
 ##                            INPUT DECK                             ##  
 ##                                                                   ##
@@ -30,7 +30,7 @@
 #######################################################################
 ##                                                                   ##
 ##                 Plasma properties - immobile ions                 ##
-##               ( Do not affect simulation results )                ##
+##               ( Do not affect simulation results! )               ##
 ##                                                                   ##
 ##                                                                   ##
 ## T  = electron temperature in eV                                   ##
@@ -126,8 +126,8 @@
 #
 #######################################################################
 ##                                                                   ##
-##       Test cases for code validation and teachning pourpose       ##
-##    see esv.pdf file for the meaning of perturbation parameters    ##
+##       Test cases for code validation and teaching pourpose        ##
+##   see esvm.pdf file for the meaning of perturbation parameters    ##
 ##                                                                   ##
 ## perturb = 0 for no perturbation,                                  ##
 ##           1 for the electrostatic wakefield test case,            ##
