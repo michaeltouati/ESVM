@@ -39,11 +39,11 @@ between computing the Poisson equation versus the Ampere equation with Poisson e
 
 `ESVM` was designed for an educational purpose to compare Vlasov-Maxwell codes with Particle-In-Cell codes.
 Three well known academic Plasma Physics cases are provided :
-- the two-stream instability
-- the emission of an electrostatic wakefield 
-  by a "small" Gaussian (in space and velocity) electron beam drifting at a mean velocity higher than the plasma electron thermal velocity 
-- the linear Landau damping of an electrostatic wave and
-- the non-linear Landau damping of an electrostatic wave
+- the two-stream instability \autoref{fig:two-stream-instability}
+- the emission of an electrostatic wakefield \autoref{fig:electrostatic-wakefield}
+  by a "small" Gaussian (in space and velocity) electron beam drifting at a mean velocity higher than the plasma electron thermal velocity \autoref{fig:two-stream-instability}
+- the linear Landau damping of an electrostatic wave \autoref{fig:linear-landau-damping} and 
+- the non-linear Landau damping of an electrostatic wave \autoref{fig:non-linear-landau-damping} \autoref{fig:non-linear-landau-damping-2}
 
 # Mathematics
 
@@ -72,12 +72,12 @@ E_x (x,t) = - \displaystyle \frac{\partial \Phi}{\partial x} (x,t) \Rightarrow \
 
 # Figures
 
-![Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
+![Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
 
-![Non Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/energy.png)
+![Non Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/energy.png)
 
-![Non Linear Landau damping test case : Plasma electrons phase-space.\label{fig:linear-landau}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
+![Non Linear Landau damping test case : Plasma electrons phase-space.\label{fig:non-linear-landau-damping-2}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
 
-![Two stream instability test case : Plasma electrons phase-space.\label{fig:linear-landau}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
+![Two stream instability test case : Plasma electrons phase-space.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
 
-![Electrostatic wakefield test case : Electrostatic wakefield.\label{fig:linear-landau}](test-cases/Wakefield-Emission/figures-Poisson/Ex/Ex_30.png)
+![Electrostatic wakefield test case : Electrostatic wakefield.\label{fig:electrostatic-wakefield}](test-cases/Wakefield-Emission/figures-Poisson/Ex/Ex_30.png)
