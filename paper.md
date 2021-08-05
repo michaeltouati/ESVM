@@ -38,7 +38,7 @@ compute the electrostatic Vlasov equation as well as the comparison
 between computing the Poisson equation versus computing the Maxwell-Ampere equation with Poisson equation computed at the first time step only.
 
 `ESVM` was designed for an educational purpose to compare Vlasov-Maxwell simulations with Particle-In-Cell ones.
-Three academic Plasma Physics cases are provided :
+Four academic Plasma Physics cases are provided :
 - the two-stream instability; cf. \autoref{fig:two-stream-instability}
 - the emission of an electrostatic wakefield \autoref{fig:electrostatic-wakefield}
   by a Gaussian (in space and velocity-space) electron drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:two-stream-instability}
