@@ -2,6 +2,8 @@
 title: 'ESVM' tags:
   - Fortran
   - OpenMP
+  - Python
+  - Matplotlib
   - Educational
   - Electrostatic 1D-1V collisionless plasma
   - Poisson versus Maxwell-Ampere solver
@@ -27,8 +29,8 @@ date: 5 August 2021
 
 # Summary
 
-ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell Fortran code developed 
-for an educational purpose and for testing different numerical advection schemes.
+ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell Fortran code parallelized using OpenMP only and developed 
+for an educational purpose as well as for testing different numerical advection schemes. Python scripts are provided to automatically extract the simulation results and plot them. Compilation rules can be easily modified depending on the user compiler and preferences using the provided makefile.
 
 # Statement of need
 
