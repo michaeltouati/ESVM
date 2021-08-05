@@ -72,12 +72,12 @@ E_x (x,t) = - \displaystyle \frac{\partial \Phi}{\partial x} (x,t) \Rightarrow \
 
 # Figures
 
-[Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
+![Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
 
-[Non Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/energy.png)
+![Non Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/energy.png)
 
-[Non Linear Landau damping test case : Plasma electrons phase-space.\label{fig:linear-landau}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
+![Non Linear Landau damping test case : Plasma electrons phase-space.\label{fig:linear-landau}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
 
-[Two stream instability test case : Plasma electrons phase-space.\label{fig:linear-landau}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
+![Two stream instability test case : Plasma electrons phase-space.\label{fig:linear-landau}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
 
 ![Electrostatic wakefield test case : Electrostatic wakefield.\label{fig:linear-landau}](test-cases/Wakefield-Emission/figures-Poisson/Ex/Ex_30.png)
