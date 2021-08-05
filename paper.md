@@ -50,14 +50,14 @@ The equations computed by the codes are :
 - the 1D-1V Vlasov equation for plasma electrons (ions are assumed to be fully ionized with a charge $Z e$ and that they remain immobile with a density $n_i$): 
 \begin{equation}
 \label{eq:vlasov1d1v}
-\displaystyle \frac{\partial f_e}{\partial t} (x,v_x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x f_e(x,v_x,t) \right ) - \displaystyle \frac{\partial }{\partial v_x} \displaystyle \left ( \displaystyle \frac{e}{m_e} E_x (x,t) f_e (x,v_x,t)\right )
+\displaystyle \frac{\partial f_e}{\partial t} (x,v_x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x f_e(x,v_x,t) \right ) - \displaystyle \frac{\partial }{\partial v_x} \displaystyle \left ( \displaystyle \frac{e}{m_e} E_x (x,t) f_e (x,v_x,t)\right ) = 0
 \end{equation}
 - the Poisson equation for the electrostatic field 
 $$
-\begin{array}{l}
-    E_x (x,t) = - \displaystyle \frac{\partial \Phi}{\partial x} (x,t)
+\displaystyle \left \{ \begin{array}{l}
+    \displaystyle \frac{\partial \Phi}{\partial x} (x,t) = - E_x (x,t)
 \cr \displaystyle \frac{\partial E_x}{\partial x} (x,t) = 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \, d v_x \right )
-\end{array}
+\end{array} \right .
 $$
 \begin{equation}
 \label{eq:poisson}
@@ -66,10 +66,10 @@ $$
 - or equivalently, the Maxwell-Ampere equation with Poisson equation computed at $t=0$ only
 \begin{equation}
 \label{eq:ampere}
-\begin{array}{l}
+\displaystyle \left \{ \begin{array}{l}
     \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t=0) = - 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t=0) \, d v_x\right )
 \cr  \displaystyle \frac{\partial E_x }{\partial x } (x,t) = 4 \pi e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) v_x \, d v_x
-\end{array}
+\end{array} \right .
 \end{equation}
 
 The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p_e} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_D = \displaystyle \sqrt{k_B T_e / 4 \pi Z n_i e^2}$ where $k_B$ is the Boltzmann constant and $T_e$ the plasma electron temperature (and therefore the thermal plasma electron velocity $v_{T_e} = \lambda_D  \omega_{p_e}$ for velocities) and the constant ion density $n_i$ for densities ($\underline{f}_e = f_e v_{T_e} / n_i$). The resulting electrostatic field unit is therefore $\underline{E}_x = e E_x / m_e \omega_{p_e} v_{T_e}$.
