@@ -1,0 +1,88 @@
+---
+title: 'ESVM : ElectroStatic Vlasov-Maxwell'
+tags:
+  - Fortran
+  - OpenMP
+  - Educational
+  - Electrostatic 1D-1V collisionless plasma
+  - Poisson versus Ampere solver
+  - Vlasov equation
+  - linear (donor_cell, Lax-Wendroff), Beam_Warming or Fromm) or 
+    non-linear (minmod, superbee, Van_Leer, MUSCL1 or MUSCL2) finite volume schemes 
+    for phase-space advection
+authors:
+  - name: Michaël J-M R TOUATI
+    affiliation: "1, 2, 3"
+affiliations:
+ - name: Department of Electrical Engineering, 
+         University of California Los Angeles, Los Angeles, CA 90095, USA
+   index: 1
+ - name: Group of Lasers and Plasmas, 
+         IPFN, IST, Universidade de Lisboa, Lisbon, Portugal
+   index: 2
+ - name: Centro de Láseres Pulsados de Salamanca (CLPU), 
+         Edificio M5, Parque Cientfico, C/ Adaja 8, 37185 Villamayor, Salamanca, Spain
+         (current affiliation)
+   index: 3
+date: 5 August 2021
+
+# Summary
+
+ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell Fortran code developed 
+for an educational purpose and for testing different numerical advection schemes.
+
+# Statement of need
+
+`ESVM` allows for the comparison between different numerical advection schemes to 
+compute the electrostatic Vlasov equation as well as the comparison 
+between computing the Poisson equation versus the Ampere equation with Poisson equation computed at the first time step.
+
+`ESVM` was designed for an educational purpose to compare Vlasov-Maxwell codes with Particle-In-Cell codes.
+Three well known academic Plasma Physics cases are provided :
+- the two-stream instability
+- the emission of an electrostatic wakefield 
+  by a "small" Gaussian (in space and velocity) electron beam drifting at a mean velocity higher than the plasma electron thermal velocity 
+- the linear Landau damping of an electrostatic wave and
+- the non-linear Landau damping of an electrostatic wave
+
+# Mathematics
+
+Equations computed by the codes :
+- the 1D-1V Vlasov equation for plasma electrons (ions are assumed to remain immobile): 
+\begin{equation}
+\label{eq:vlasov1d1v}
+\displaystyle \frac{\partial f_e}{\partial t} (x,v_x,t) + \displaystyle \frac{\partial f_e}{\partial x} (x,v_x,t) - \displaystyle \frac{\partial }{\partial v_x} \displaystyle \left [ \displaystyle \frac{e}{m_e} E_x (x,t) f_e (x,v_x,t)\right ]
+\end{equation}
+- the Poisson equation for the electrostatic field 
+$$
+\displaystyle \frac{\partial E_x}{\partial x} (x,t) = 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \, d v_x\right )
+$$
+\begin{equation}
+\label{eq:poisson}
+E_x (x,t) = - \displaystyle \frac{\partial \Phi}{\partial x} (x,t) \Rightarrow \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t) = - 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \, d v_x\right )
+\end{equation}
+- or equivalently, the Maxwell-Ampere equation with Poisson equation computed at $t=0$ only
+\begin{equation}
+\label{eq:ampere}
+\begin{array}{l}
+    \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t=0) = - 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t=0) \, d v_x\right )
+\cr  \displaystyle \frac{\partial E_x }{\partial x } (x,t) = 4 \pi e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) v_x \, d v_x
+\end{array}
+\end{equation}
+# Citations
+
+# Figures
+
+![Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
+
+![Non Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/energy.png)
+
+![Non Linear Landau damping test case : Plasma electrons phase-space.\label{fig:linear-landau}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
+
+![Two stream instability test case : Plasma electrons phase-space.\label{fig:linear-landau}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
+
+![Electrostatic wakefield test case : Electrostatic wakefield.\label{fig:linear-landau}](test-cases/Wakefield-Emission/figures-Poisson/Ex/Ex_30.png)
+
+# Acknowledgements
+
+# References
