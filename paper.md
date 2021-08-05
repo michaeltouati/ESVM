@@ -43,11 +43,11 @@ for an educational purpose as well as for testing linear finite volume numerical
 1) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
 2) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and \autoref{fig:non-linear-landau-damping-2}, 
 3) the two-stream instability; cf. \autoref{fig:two-stream-instability} and 
-4) the emission of an electrostatic wakefield \autoref{fig:electrostatic-wakefield} by a Gaussian (in space and velocity-space) electron drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:two-stream-instability}.
+4) the emission of an electrostatic wakefield \autoref{fig:electrostatic-wakefield} by a Gaussian (in space and velocity-space) electron drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:two-stream-instability}. For each Academic case, an example of input deck is provided together with the corresponding simulation result plots the code generates.
 
 # Mathematics
 
-The equations computed explicitely by the codes are the 1D-1V Vlasov equation for plasma electrons (ions are assumed to be fully ionized with a charge $Z e$ and that they remain immobile with a density $n_i$): 
+The equations computed explicitely by the code are the 1D-1V Vlasov equation for plasma electrons (ions are assumed to be fully ionized with an electrical charge $Z e$, $Z$ being the ion atomic number, and that they remain immobile with a density $n_i$): 
 \begin{equation}
 \label{eq:vlasov1d1v}
 \displaystyle \frac{\partial f_e}{\partial t} (x,v_x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x f_e(x,v_x,t) \right ) - \displaystyle \frac{\partial }{\partial v_x} \displaystyle \left ( \displaystyle \frac{e}{m_e} E_x (x,t) f_e (x,v_x,t)\right ) = 0
@@ -68,7 +68,7 @@ or equivalently, the coupled Maxwell-Ampere equation with Poisson equation compu
 \label{eq:ampere}
 \displaystyle \left \{ \begin{array}{l}
     \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t=0) = - 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t=0) \, d v_x\right )
-\cr  \displaystyle \frac{\partial E_x }{\partial x } (x,t) = 4 \pi e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) v_x \, d v_x
+\cr  \displaystyle \frac{\partial E_x }{\partial t } (x,t) = 4 \pi e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) v_x \, d v_x
 \end{array} \right .
 \end{equation}
 
@@ -78,7 +78,7 @@ Obviously, the spatial grid cells $\Delta x$ must be chosen lower than the Debye
 \begin{equation}
 \Delta t = \mathrm{cfl} \times F(\Delta x, \Delta v_x) < F(\Delta x, \Delta v_x)
 \end{equation}
-where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme.
+where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme and is implemented in a code subroutine.
 
 # Figures
 
