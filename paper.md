@@ -1,5 +1,5 @@
 ---
-title: 'ESVM : An ElectroStatic 1D-1V Vlasov-Maxwell code for educational purpose'
+title: 'ESVM : An ElectroStatic 1D-1V Vlasov-Maxwell Open-source Code for Educational Purpose'
 tags:
   - Fortran
   - OpenMP
@@ -33,7 +33,7 @@ bibliography: paper.bib
 # Summary
 
 ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell Fortran code parallelized using OpenMP only and developed 
-for an educational purpose as well as for testing different numerical advection schemes. Python scripts are provided to automatically extract the simulation results and plot them. Compilation rules can be easily modified depending on the user compiler and preferences using the provided makefile.
+for an educational purpose as well as for testing different numerical advection schemes. Python scripts are provided to automatically extract the simulation results, to plot them and save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile.
 
 # Statement of need
 
@@ -43,15 +43,14 @@ between computing the Poisson equation versus computing the Maxwell-Ampere equat
 
 `ESVM` was designed for an educational purpose to compare Vlasov-Maxwell simulations with Particle-In-Cell ones.
 Four academic Plasma Physics cases are provided :
-- the two-stream instability; cf. \autoref{fig:two-stream-instability}
-- the emission of an electrostatic wakefield \autoref{fig:electrostatic-wakefield}
-  by a Gaussian (in space and velocity-space) electron drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:two-stream-instability}
-- the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping} and 
-- the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and \autoref{fig:non-linear-landau-damping-2}
+1) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
+2) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and \autoref{fig:non-linear-landau-damping-2}, 
+3) the two-stream instability; cf. \autoref{fig:two-stream-instability} and 
+4) the emission of an electrostatic wakefield \autoref{fig:electrostatic-wakefield} by a Gaussian (in space and velocity-space) electron drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:two-stream-instability}.
 
 # Mathematics
 
-The equations computed by the codes are the 1D-1V Vlasov equation for plasma electrons (ions are assumed to be fully ionized with a charge $Z e$ and that they remain immobile with a density $n_i$): 
+The equations computed explicitely by the codes are the 1D-1V Vlasov equation for plasma electrons (ions are assumed to be fully ionized with a charge $Z e$ and that they remain immobile with a density $n_i$): 
 \begin{equation}
 \label{eq:vlasov1d1v}
 \displaystyle \frac{\partial f_e}{\partial t} (x,v_x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x f_e(x,v_x,t) \right ) - \displaystyle \frac{\partial }{\partial v_x} \displaystyle \left ( \displaystyle \frac{e}{m_e} E_x (x,t) f_e (x,v_x,t)\right ) = 0
@@ -77,6 +76,12 @@ or equivalently, the coupled Maxwell-Ampere equation with Poisson equation compu
 \end{equation}
 
 The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = \displaystyle \sqrt{k_B T_e / 4 \pi Z n_i e^2}$ where $k_B$ is the Boltzmann constant and $T_e$ the plasma electron temperature (and therefore the thermal plasma electron velocity $v_{T} = \lambda_{\mathrm{Debye}} \omega_{p}$ for velocities) and the constant ion density $n_i$ for densities ($\underline{f}_e = f_e v_{T_e} / n_i$). The resulting electrostatic field unit consequently reads $\underline{E}_x = e E_x / m_e \omega_{p} v_{T}$.
+
+Obviously, the spatial grid cells $\Delta x$ must be chosen lower than the Debye length for the simulations to be Physical, the velocity bins size $\Delta v_x$ and extrema $[v_{\mathrm{min}},v_{\mathrm{max}}]$ in agreement with the considered Plasma Physics problem. The CFL stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl}$ such that the simulation time step respects
+\begin{equation}
+\Delta t = \mathrm{cfl} \times F(\Delta x, \Delta v_x) < F(\Delta x, \Delta v_x)
+\end{equation}
+where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme.
 
 # Figures
 
