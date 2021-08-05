@@ -8,8 +8,8 @@ tags:
   - Electrostatic 1D-1V collisionless plasma
   - Poisson versus Maxwell-Ampere solver
   - 1D-1V Vlasov equation
-  - Linear : donor_cell, Lax-Wendroff, Beam_Warming or Fromm or 
-    Non-linear : minmod, superbee, Van_Leer, MUSCL1 or MUSCL2 
+  - Linear (donor_cell, Lax-Wendroff, Beam_Warming or Fromm) or 
+    Non-linear (minmod, superbee, Van_Leer, MUSCL1 or MUSCL2) 
     finite volume numerical schemes for phase-space advection
 authors:
   - name: Michaël J-M R TOUATI
