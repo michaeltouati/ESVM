@@ -32,8 +32,8 @@ bibliography: paper.bib
 
 # Summary
 
-ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell Fortran code parallelized using OpenMP only and developed 
-for an educational purpose as well as for testing different numerical advection schemes. Python scripts are provided to automatically extract the simulation results, to plot them and save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile.
+ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell Fortran code parallelized using OpenMP and developed 
+for an educational purpose as well as for testing both linear finite volume advection numerical schemes both linear (donor_cell, Lax-Wendroff, Beam_Warming or Fromm) and non-linear ones (minmod, superbee, Van_Leer, MUSCL1 or MUSCL2). Python scripts are provided to automatically extract the simulation results, to plot them and save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile.
 
 # Statement of need
 
