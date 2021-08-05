@@ -11,6 +11,10 @@ tags:
   - Linear (donor_cell, Lax-Wendroff, Beam_Warming or Fromm) or 
     Non-linear (minmod, superbee, Van_Leer, MUSCL1 or MUSCL2) 
     finite volume numerical schemes for phase-space advection
+  - Linear Landau damping
+  - Non-linear Landau damping
+  - Two-stream instability
+  - Electrostatic wakefield
 authors:
   - name: Michaël J-M R TOUATI
     orcid: 0000-0001-7590-0941
