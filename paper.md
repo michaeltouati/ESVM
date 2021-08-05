@@ -33,16 +33,13 @@ bibliography: paper.bib
 # Summary
 
 ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell Fortran code parallelized using OpenMP and developed 
-for an educational purpose as well as for testing both linear finite volume advection numerical schemes both linear (donor_cell, Lax-Wendroff, Beam_Warming or Fromm) and non-linear ones (minmod, superbee, Van_Leer, MUSCL1 or MUSCL2). Python scripts are provided to automatically extract the simulation results, to plot them and save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile.
+for an educational purpose as well as for testing both linear finite volume numerical advection schemes both linear (donor cell, Lax-Wendroff, Beam Warming or Fromm) and non-linear ones (minmod, superbee, Van_Leer, MUSCL1 or MUSCL2). Python scripts, using Matplotlib and Numpy packages, are provided to automatically extract the simulation results, to plot them and to save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile.
 
 # Statement of need
 
-`ESVM` allows for the comparison between different numerical advection schemes to 
-compute the electrostatic Vlasov equation as well as the comparison 
-between computing the Poisson equation versus computing the Maxwell-Ampere equation with Poisson equation computed at the first time step only.
+`ESVM` allows for the comparison between different numerical advection schemes to compute the electrostatic Vlasov equation, the comparison between computing the Poisson equation versus computing the Maxwell-Ampere equation with Poisson equation computed at the first time step only and the illustration of academic Plasma Physics problem usually used to introduce students to Plasma Physics.
 
-`ESVM` was designed for an educational purpose to compare Vlasov-Maxwell simulations with Particle-In-Cell ones.
-Four academic Plasma Physics cases are provided :
+`ESVM` was indeed designed for an educational purpose to compare Vlasov-Maxwell simulations with more commonly used Particle-In-Cell ones. Four academic Plasma Physics cases are provided :
 1) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
 2) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and \autoref{fig:non-linear-landau-damping-2}, 
 3) the two-stream instability; cf. \autoref{fig:two-stream-instability} and 
