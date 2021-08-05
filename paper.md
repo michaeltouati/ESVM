@@ -1,5 +1,6 @@
 ---
-title: 'ESVM' tags:
+title: 'ESVM : An Electrostatic 1D-1V Vlasov-Maxwell code for educational purpose' 
+tags:
   - Fortran
   - OpenMP
   - Python
@@ -13,19 +14,17 @@ title: 'ESVM' tags:
     for phase-space advection
 authors:
   - name: Michaël J-M R TOUATI
+    orcid: 0000-0001-7590-0941
     affiliation: "1, 2, 3"
 affiliations:
- - name: Department of Electrical Engineering, 
-         University of California Los Angeles, Los Angeles, CA 90095, USA
+ - name: Department of Electrical Engineering, University of California Los Angeles, Los Angeles, CA 90095, USA
    index: 1
- - name: Group of Lasers and Plasmas, 
-         IPFN, IST, Universidade de Lisboa, Lisbon, Portugal
+ - name: Group of Lasers and Plasmas, IPFN, IST, Universidade de Lisboa, Lisbon, Portugal
    index: 2
- - name: Centro de Láseres Pulsados de Salamanca (CLPU), 
-         Edificio M5, Parque Cientfico, C/ Adaja 8, 37185 Villamayor, Salamanca, Spain
-         (current affiliation)
+ - name: Centro de Láseres Pulsados de Salamanca (CLPU), Edificio M5, Parque Cientfico, C/ Adaja 8, 37185 Villamayor, Salamanca, Spain # current affiliation
    index: 3
 date: 5 August 2021
+bibliography: 
 
 # Summary
 
