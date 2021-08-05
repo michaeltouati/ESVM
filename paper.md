@@ -23,7 +23,7 @@ affiliations:
  - name: Centro de Láseres Pulsados de Salamanca (CLPU), Edificio M5, Parque Cientfico, C/ Adaja 8, 37185 Villamayor, Salamanca, Spain # current affiliation
    index: 3
 date: 5 August 2021
-bibliography: 
+bibliography: paper.bib
 ---
 
 # Summary
