@@ -72,7 +72,7 @@ $$
 \end{array}
 \end{equation}
 
-The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p_e} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e} $ for times, the Debye electron screening length $\lambda_D = \displaystyle \sqrt{k_\mathrm{B} T_e / 4 \pi Z n_i e^2}$ where $k_B$ is the Boltzman constant and $T_e$ the plasma electron temperature (and therefore the thermal plasma electron velocity $v_{T_e} = \lambda_D \omega_{p_e}$ for velocities) and the constant ion density $n_i$ for densities ($\underline{f}_e = f_e v_{T_e} / n_i$ ). The resulting electrostatic field unit is therefore $\underline{E}_x = e E_x / m_e \omega_{p_e} v_{T_e}$.
+The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $ \omega_{p_e} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e} $ for times, the Debye electron screening length $ \lambda_D = \displaystyle \sqrt{k_B T_e / 4 \pi Z n_i e^2}$ where $k_B$ is the Boltzmann constant and $T_e$ the plasma electron temperature (and therefore the thermal plasma electron velocity $v_{T_e} = \lambda_D  \omega_{p_e} $ for velocities) and the constant ion density $n_i$ for densities ($\underline{f}_e = f_e v_{T_e} / n_i $). The resulting electrostatic field unit is therefore $ \underline{E}_x = e E_x / m_e \omega_{p_e} v_{T_e} $.
 
 # Figures
 
