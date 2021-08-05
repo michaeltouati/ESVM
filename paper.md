@@ -51,13 +51,12 @@ Four academic Plasma Physics cases are provided :
 
 # Mathematics
 
-The equations computed by the codes are :
-- the 1D-1V Vlasov equation for plasma electrons (ions are assumed to be fully ionized with a charge $Z e$ and that they remain immobile with a density $n_i$): 
+The equations computed by the codes are the 1D-1V Vlasov equation for plasma electrons (ions are assumed to be fully ionized with a charge $Z e$ and that they remain immobile with a density $n_i$): 
 \begin{equation}
 \label{eq:vlasov1d1v}
 \displaystyle \frac{\partial f_e}{\partial t} (x,v_x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x f_e(x,v_x,t) \right ) - \displaystyle \frac{\partial }{\partial v_x} \displaystyle \left ( \displaystyle \frac{e}{m_e} E_x (x,t) f_e (x,v_x,t)\right ) = 0
 \end{equation}
-- the Poisson equation for the electrostatic field 
+and the coupled Poisson equation for the electrostatic field 
 $$
 \displaystyle \left \{ \begin{array}{l}
     \displaystyle \frac{\partial \Phi}{\partial x} (x,t) = - E_x (x,t)
@@ -68,7 +67,7 @@ $$
 \label{eq:poisson}
 \Rightarrow \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t) = - 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \, d v_x\right )
 \end{equation}
-- or equivalently, the Maxwell-Ampere equation with Poisson equation computed at $t=0$ only
+or equivalently, the coupled Maxwell-Ampere equation with Poisson equation computed at $t=0$ only
 \begin{equation}
 \label{eq:ampere}
 \displaystyle \left \{ \begin{array}{l}
