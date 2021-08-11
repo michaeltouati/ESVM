@@ -1,10 +1,9 @@
 ---
-title: 'ESVM : An ElectroStatic 1D-1V Vlasov-Maxwell Open-source Code for Educational Purpose'
+title: 'ESVM : An ElectroStatic 1D-1V Vlasov-Maxwell Open-source Code'
 tags:
   - Fortran
   - OpenMP
   - Python
-  - Educational code
   - Electrostatic 1D-1V collisionless plasma
   - Poisson versus Maxwell-Ampere solver
   - 1D-1V Vlasov equation
@@ -40,13 +39,17 @@ bibliography: paper.bib
 # Summary
 
 ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell Fortran code parallelized using OpenMP and developed 
-for an educational purpose as well as for testing linear finite volume numerical advection schemes such as the donor cell, the Lax-Wendroff, the beam warming or the Fromm method and non-linear ones such as the minmod, the superbee, the Van Leer, the MUSCL1 or the MUSCL2 method. Python scripts, using matplotlib and numpy packages, are provided to automatically extract the simulation results, to plot them and to save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile.
+to adapt simulations to specific Plasma Physics problems with linear finite volume numerical advection schemes such as the donor cell, the Lax-Wendroff, the beam warming or the Fromm method and non-linear ones such as the minmod, the superbee, the Van Leer, the MUSCL1 or the MUSCL2 method. Python scripts, using matplotlib and numpy packages, are provided to automatically extract the simulation results, to plot them and to save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile.
 
 # Statement of need
 
-`ESVM` allows for the comparison between different numerical advection schemes to compute the electrostatic Vlasov equation, the comparison between computing the Poisson equation versus computing the Maxwell-Ampere equation with Poisson equation computed at the first time step only and the illustration of academic Plasma Physics problem usually used to introduce students to Plasma Physics.
+`ESVM` allows for adapting simulations to a specific Plasma Physics problem : it is possible to chose a linear finite volume numerical advection schemes such as the donor cell, the Lax-Wendroff, the beam warming or the Fromm method or a non-linear one such as the minmod, the superbee, the Van Leer, the MUSCL1 or the MUSCL2 method in order to compute the Vlasov equation phase-space derivatives and to chose between computing the Poisson equation versus computing the Maxwell-Ampere equation (with Poisson equation computed at the first time step only). Well known academic Plasma Physics problems have been used to validate the code and are provided as examples (input deck and obtained simulation results). It is planned to :
+- extend the code to relativistic 2D-2V phase-space simulations
+- implement the Perfectly Matched Layer technique for Electromagnetic Fields absorption at the spatial simulation box boundaries
+- implement its MPI parallelization
+- implement the Belyaev-Budker relativistic collision operator
 
-`ESVM` was indeed designed for an educational purpose to compare Vlasov-Maxwell simulations with more commonly used Particle-In-Cell ones. Four academic Plasma Physics cases are provided :
+Four academic Plasma Physics cases are provided :
 1) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
 2) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and \autoref{fig:non-linear-landau-damping-2}, 
 3) the two-stream instability; cf. \autoref{fig:two-stream-instability} and 
