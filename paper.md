@@ -1,12 +1,12 @@
 ---
-title: 'ESVM : An ElectroStatic 1D-1V Vlasov-Maxwell Open-source Code'
+title: 'ESVM : An Electrostatic Vlasov-Maxwell Open-source Code'
 tags:
   - Fortran
   - OpenMP
   - Python
-  - Electrostatic 1D-1V collisionless plasma
+  - Electrostatic Plasma
   - Poisson versus Maxwell-Ampere solver
-  - 1D-1V Vlasov equation
+  - Vlasov equation
   - donor cell
   - Lax-Wendroff
   - beam warming
