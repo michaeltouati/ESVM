@@ -39,7 +39,7 @@ bibliography: paper.bib
 # Summary
 
 ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell Fortran code parallelized using OpenMP and developed 
-to adapt simulations to specific Plasma Physics problems with linear finite volume numerical advection schemes such as the donor cell, the Lax-Wendroff, the beam warming or the Fromm method and non-linear ones such as the minmod, the superbee, the Van Leer, the MUSCL1 or the MUSCL2 method. Python scripts, using matplotlib and numpy packages, are provided to automatically extract the simulation results, to plot them and to save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile.
+to adapt simulations to specific Plasma Physics problems with explicit linear finite volume numerical advection schemes such as the donor cell, the Lax-Wendroff, the beam warming or the Fromm method and non-linear ones such as the minmod, the superbee, the Van Leer, the MUSCL1 or the MUSCL2 method coupled to the Maxwell-Gauss equation for the electrostatic field or the Maxwell-Ampere equation with Poisson equation computed at the first time step. Python scripts, using matplotlib and numpy packages, are provided to automatically extract the simulation results, to plot them and to save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile.
 
 # Statement of need
 
