@@ -99,25 +99,20 @@ for line in file:
     if counter % N3 == 0:
         time = math.floor(100.*float(array[0]))/100.
         N = int(counter / N3)
-        # val=max(abs(np.amax(p[(N-1)*N3:N*N3])),abs(np.amin(p[(N-1)*N3:N*N3])))
-        # if (val != 0):
-        #     Power=math.floor(np.log(val)/np.log(10))
-        # else:
-        #     Power = 0
-        # p[(N-1)*N3:N*N3] = [pp / (10.**Power) for pp in p[(N-1)*N3:N*N3]]
         for i in range(0,N1):
             for k in range(0,N2):
                 X[i][k]            = x[(N-1)*N3+i*N2+k]
                 VX[i][k]           = vx[(N-1)*N3+i*N2+k]
-                #p[(N-1)*N3+i*N2+k] = np.log(np.max([1.e-15,p[(N-1)*N3+i*N2+k]/np.log(10.)])) # double precision
                 P[i][k]            = np.log(p[(N-1)*N3+i*N2+k])/np.log(10.)
         cmap = plt.get_cmap(cmap)
         Maxval = 1+int(np.amax(np.log(p[(int(N)-1)*int(N3):int(N)*int(N3)]))/np.log(10.))
-        Minval = -15. #int(np.amin(p[(int(N)-1)*int(N3):int(N)*int(N3)]))
+        Minval = -15
+        if Maxval <= Minval :
+            Maxval = -14
         norm = cm.colors.Normalize(vmax=Maxval, vmin=Minval)
         fig=plt.figure()
         plt.rc('text', usetex=True)
-        plt.pcolormesh(X,VX,P,cmap=cmap,norm=norm,vmax=Maxval,vmin=Minval)
+        plt.pcolormesh(X,VX,P,cmap=cmap,norm=norm,shading='auto')
         cbar=plt.colorbar()
         cbar.ax.tick_params(labelsize=16)
         plt.title(title+' at '+str(time)+r'$\,\omega_p^{-1}$', fontdict=font)

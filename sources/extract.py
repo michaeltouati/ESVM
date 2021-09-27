@@ -167,10 +167,17 @@ for i in range(0,Nx):
 cmap = plt.get_cmap(cmap)
 Maxval = np.amax(p)
 Minval = np.amin(p)
+if ( Minval == Maxval ) :
+    if ( Minval == 0. ) :
+        Maxval =  1.
+        Minval = -1.
+    else :
+        Maxval = 1.1*Maxval
+        Minval = 0.9*Maxval
 norm = cm.colors.Normalize(vmax=Maxval, vmin=Minval)
 fig=plt.figure()
 plt.rc('text', usetex=True)
-plt.pcolormesh(X,T,P,cmap=cmap,norm=norm,vmax=Maxval,vmin=Minval)
+plt.pcolormesh(X,T,P,cmap=cmap,norm=norm,shading='auto')
 cbar=plt.colorbar()
 cbar.ax.tick_params(labelsize=16)
 plt.title(title, fontdict=font)
@@ -217,10 +224,17 @@ for i in range(0,Nx):
 cmap = plt.get_cmap(cmap)
 Maxval = np.amax(p)
 Minval = np.amin(p)
+if ( Minval == Maxval ) :
+    if ( Minval == 0. ) :
+        Maxval =  1.
+        Minval = -1.
+    else :
+        Maxval = 1.1*Maxval
+        Minval = 0.9*Maxval
 norm = cm.colors.Normalize(vmax=Maxval, vmin=Minval)
 fig=plt.figure()
 plt.rc('text', usetex=True)
-plt.pcolormesh(X,T,P,cmap=cmap,norm=norm,vmax=Maxval,vmin=Minval)
+plt.pcolormesh(X,T,P,cmap=cmap,norm=norm,shading='auto')
 cbar=plt.colorbar()
 cbar.ax.tick_params(labelsize=16)
 plt.title(title, fontdict=font)
@@ -285,10 +299,17 @@ for line in file:
         cmap = plt.get_cmap(cmap)
         Maxval = np.amax(p[(int(N)-1)*int(N3):int(N)*int(N3)])
         Minval = np.amin(p[(int(N)-1)*int(N3):int(N)*int(N3)])
+        if ( Minval == Maxval ) :
+            if ( Minval == 0. ) :
+                Maxval =  1.
+                Minval = -1.
+            else :
+                Maxval = 1.1*Maxval
+                Minval = 0.9*Maxval
         norm = cm.colors.Normalize(vmax=Maxval, vmin=Minval)
         fig=plt.figure()
         plt.rc('text', usetex=True)
-        plt.pcolormesh(X,VX,P,cmap=cmap,norm=norm,vmax=Maxval,vmin=Minval)
+        plt.pcolormesh(X,VX,P,cmap=cmap,norm=norm,shading='auto')
         cbar=plt.colorbar()
         cbar.ax.tick_params(labelsize=16)
         plt.title(title+' at '+str(time)+r'$\,\omega_p^{-1}$', fontdict=font)
@@ -342,7 +363,16 @@ for line in file:
         plt.xlim([np.amin(X),np.amax(X)])
         plt.ylabel(r'$E_x\,(m_e \omega_p v_T / e)$', fontdict=font)
         plt.yticks(fontsize=16)
-        plt.ylim([np.amin(p),np.amax(p)])
+        ex_min = np.amin(p)
+        ex_max = np.amax(p)
+        if ( ex_min == ex_max ):
+            if (ex_min == 0.) :
+                ex_min = -1.
+                ex_max =  1.
+            else :
+                ex_min = 0.9 * ex_max
+                ex_max = 1.1 * ex_max
+        plt.ylim([ex_min,ex_max])
         fig.savefig(name+str(N)+'.png',bbox_inches='tight')
         plt.close(fig)
 file.close()
@@ -383,7 +413,16 @@ for line in file:
         plt.xlim([np.amin(X),np.amax(X)])
         plt.ylabel(r'$n_e\,(n_0)$', fontdict=font)
         plt.yticks(fontsize=16)
-        plt.ylim([np.amin(p),np.amax(p)])
+        ne_min = np.amin(p)
+        ne_max = np.amax(p)
+        if ( ne_min == ne_max ):
+            if (ne_min == 0.) :
+                ne_min = -1.
+                ne_max =  1.
+            else :
+                ne_min = 0.9 * ne_max
+                ne_max = 1.1 * ne_max
+        plt.ylim([ne_min,ne_max])
         fig.savefig(name+str(N)+'.png',bbox_inches='tight')
         plt.close(fig)
 file.close()
@@ -424,7 +463,16 @@ for line in file:
         plt.xlim([np.amin(X),np.amax(X)])
         plt.ylabel(r'$j_e\,(n_0 \,e \,v_T)$', fontdict=font)
         plt.yticks(fontsize=16)
-        plt.ylim([np.amin(p),np.amax(p)])
+        je_min = np.amin(p)
+        je_max = np.amax(p)
+        if ( je_min == je_max ):
+            if (je_min == 0.) :
+                je_min = -1.
+                je_max =  1.
+            else :
+                je_min = 0.9 * je_max
+                je_max = 1.1 * je_max
+        plt.ylim([je_min,je_max])
         fig.savefig(name+str(N)+'.png',bbox_inches='tight')
         plt.close(fig)
 file.close()
@@ -465,7 +513,16 @@ for line in file:
         plt.xlim([np.amin(X),np.amax(X)])
         plt.ylabel(r'$v_e\,(v_T)$', fontdict=font)
         plt.yticks(fontsize=16)
-        plt.ylim([np.amin(p),np.amax(p)])
+        ve_min = np.amin(p)
+        ve_max = np.amax(p)
+        if ( ve_min == ve_max ):
+            if (ve_min == 0.) :
+                ve_min = -1.
+                ve_max =  1.
+            else :
+                ve_min = 0.9 * ve_max
+                ve_max = 1.1 * ve_max
+        plt.ylim([ve_min,ve_max])
         fig.savefig(name+str(N)+'.png',bbox_inches='tight')
         plt.close(fig)
 file.close()
@@ -506,7 +563,16 @@ for line in file:
         plt.xlim([np.amin(X),np.amax(X)])
         plt.ylabel(r'$v_{T,e}\,(v_T)$', fontdict=font)
         plt.yticks(fontsize=16)
-        plt.ylim([np.amin(p),np.amax(p)])
+        vTe_min = np.amin(p)
+        vTe_max = np.amax(p)
+        if ( vTe_min == vTe_max ):
+            if (vTe_min == 0.) :
+                vTe_min = -1.
+                vTe_max =  1.
+            else :
+                vTe_min = 0.9 * vTe_max
+                vTe_max = 1.1 * vTe_max
+        plt.ylim([vTe_min,vTe_max])
         fig.savefig(name+str(N)+'.png',bbox_inches='tight')
         plt.close(fig)
 file.close()
