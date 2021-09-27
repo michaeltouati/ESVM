@@ -90,14 +90,14 @@ pure subroutine INIT_SIMU(x, vx, f_n)
     dx  = 0.25_PR  ! "particle size"
     dvx = 0.025_PR ! "particle size"
     xs  = (x_max - x_min) / 8.  
-	  do l=1,N_vx,1
-  		do i=1,N_x,1
+    do l=1,N_vx,1
+      do i=1,N_x,1
         f_n(i,l) = (1.0_PR/sqrt(2._PR*pi*(vs**2._PR)))*&
         & exp(-(vx(l)**2._PR)/(2._PR*(vs**2._PR))) 
         X2 = -0.5_PR * ( ( ( (x(i)-xs) / dx )**2._PR) + ( ( (vx(l)-vd) / dvx )**2._PR) )
         f_n(i,l) = f_n(i,l) + ( A * exp(X2)/ (2._PR * pi * dx * dvx ) )
-	  	end do
-  	end do
+      end do
+    end do
   ! Landau damping test case :
   else if (perturb == 2) then
     do l=1,N_vx,1
@@ -127,21 +127,21 @@ pure subroutine INIT_SIMU(x, vx, f_n)
   ! Boundary conditions
   select case (b_cond)
     ! absorbing
-  	case (1)
-	  	do l=-1,N_vx+2,1
+    case (1)
+      do l=-1,N_vx+2,1
         f_n(N_x+1,l) = 0._PR
         f_n(N_x+2,l) = 0._PR
         f_n(0,l)     = 0._PR
         f_n(-1,l)    = 0._PR
-  		end do
+      end do
     ! periodic
-  	case (2)
-	 		do l=-1,N_vx+2,1
+    case (2)
+      do l=-1,N_vx+2,1
         f_n(N_x+1,l) = f_n(1,l)
         f_n(N_x+2,l) = f_n(2,l)
         f_n(0,l)     = f_n(N_x,l)
         f_n(-1,l)    = f_n(N_x-1,l)
-  		end do
+      end do
   end select
   do i=-1,N_x+2,1
     f_n(i,N_vx+1) = 0._PR
@@ -187,10 +187,10 @@ subroutine DENSITIES(vx, f_n, n_e, j_e, v_e, vT_e)
   do i=-1,N_x+2,1
     allocate(F1(1:N_vx),F2(1:N_vx),F3(1:N_vx))
     F1(1:N_vx) = f_n(i,1:N_vx)*d_vx
-  	do l=1,N_vx,1
+    do l=1,N_vx,1
       F2(l) = - f_n(i,l) * vx(l) * d_vx
       F3(l) = f_n(i,l) * (vx(l)**2._PR) * d_vx
-  	end do
+    end do
     n_e(i)  = sum(F1(1:N_vx))
     j_e(i)  = sum(F2(1:N_vx))
     v_e(i)  = - j_e(i) / n_e(i)
@@ -233,10 +233,10 @@ subroutine POISSON(N_t, d_t, d_x, x, j_e, n_e, E_x_n, E_x_np1, phi_n)
     b(i)        =  2._PR
     c(i)        = -1._PR
     d(i)        = (1._PR - n_e(i))*(d_x**2._PR)
-  	if (b_cond.eq.2) then
+    if (b_cond.eq.2) then
       e(i)        = 0._PR
       phi_temp(i) = 0._PR
-  	end if
+    end if
   end do
   !omp END PARALLEL DO
   select case (b_cond)
@@ -358,7 +358,7 @@ subroutine DRIVE(N_t, d_t, time, d_x, x, E_x_n, E_x_np1, phi_n)
 end subroutine DRIVE
 
 pure subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
-  					   & u_im2, u_im1, u_i, u_ip1, u_ip2, flux_l, flux_r) 
+                     & u_im2, u_im1, u_i, u_ip1, u_ip2, flux_l, flux_r) 
   implicit none
   integer, intent(in)   :: scheme
   real(PR), intent(in)  :: vx, u_max, d_t, d_mu, u_im2, u_im1, u_i, u_ip1, u_ip2
@@ -367,65 +367,65 @@ pure subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
   real(PR)              :: t, sigma_im1, sigma_i, sigma_ip1
   if (scheme.eq.NL_MUSCL1) then 
     if (vx.ge.0._PR) then
-  	  if ((u_ip1-u_i).gt.0._PR) then
+      if ((u_ip1-u_i).gt.0._PR) then
         eps_r = min(1._PR,2._PR*u_i/(u_ip1-u_i))
       else 
         eps_r = 0._PR
-  		end if
-  		if ((u_i-u_im1).gt.0._PR) then
+      end if
+      if ((u_i-u_im1).gt.0._PR) then
         eps_l = min(1._PR,2._PR*u_im1/(u_i-u_im1))
-  		else 
+      else 
         eps_l = 0._PR
-  		end if
+      end if
       flux_r = vx*(u_i  +(0.5_PR*eps_r*(u_ip1-u_i)))
       flux_l = vx*(u_im1+(0.5_PR*eps_l*(u_i  -u_im1)))
-  	else
-  		if ((u_ip1-u_i).lt.0._PR) then
+    else
+      if ((u_ip1-u_i).lt.0._PR) then
         eps_r = min(1._PR,-2._PR*u_ip1/(u_ip1-u_i))
-  		else 
+      else 
         eps_r = 0._PR
-  		end if
-  	  if ((u_i-u_im1).lt.0._PR) then
+      end if
+      if ((u_i-u_im1).lt.0._PR) then
         eps_l = min(1._PR,-2._PR*u_i/(u_i-u_im1))
-  		else 
+      else 
         eps_l = 0._PR
-  		end if
+      end if
       flux_r = vx*(u_ip1-(0.5_PR*eps_r*(u_ip1-u_i)))
       flux_l = vx*(u_i  -(0.5_PR*eps_l*(u_i-u_im1)))
-  	end if
+    end if
   else if (scheme.eq.NL_MUSCL2) then
-  	if (vx.ge.0._PR) then
-  		if ((u_ip1-u_i)*(u_i-u_im1).le.0._PR) then
+    if (vx.ge.0._PR) then
+      if ((u_ip1-u_i)*(u_i-u_im1).le.0._PR) then
         eps_r = 0._PR
-  		else if ((u_ip1-u_i).lt.0._PR) then
+      else if ((u_ip1-u_i).lt.0._PR) then
         eps_r = min(1._PR,-2._PR*(u_max-u_i)/(u_ip1-u_i))
-  		else
+      else
         eps_r = min(1._PR,2._PR*u_i/(u_ip1-u_i))
-  		end if
-  		if ((u_ip1-u_i)*(u_i-u_im1).le.0._PR) then
+      end if
+      if ((u_ip1-u_i)*(u_i-u_im1).le.0._PR) then
         eps_l = 0._PR
-  		else if ((u_i-u_im1).lt.0._PR) then
+      else if ((u_i-u_im1).lt.0._PR) then
         eps_l = min(1._PR,-2._PR*(u_max-u_im1)/(u_i-u_im1))
-  		else 
+      else 
         eps_l = min(1._PR,2._PR*u_im1/(u_i-u_im1))
-  		end if
+      end if
       flux_r = vx*(u_i  +(0.5_PR*eps_r*(u_ip1-u_i  )))
       flux_l = vx*(u_im1+(0.5_PR*eps_l*(u_i  -u_im1)))
     else
       if ((u_ip1-u_i)*(u_i-u_im1).le.0._PR) then
         eps_r = 0._PR
-  	  else if ((u_ip1-u_i).gt.0._PR) then
+      else if ((u_ip1-u_i).gt.0._PR) then
         eps_r = min(1._PR,2._PR*(u_max-u_ip1)/(u_ip1-u_i))
-  	  else
+      else
         eps_r = min(1._PR,-2._PR*u_ip1/(u_ip1-u_i))
-  	  end if
-  	  if ((u_ip1-u_i)*(u_i-u_im1).le.0._PR) then
+      end if
+      if ((u_ip1-u_i)*(u_i-u_im1).le.0._PR) then
         eps_l = 0._PR
-  	  else if ((u_i-u_im1).gt.0._PR) then
+      else if ((u_i-u_im1).gt.0._PR) then
         eps_l = min(1._PR,2._PR*(u_max-u_i)/(u_i-u_im1))
-  	  else 
+      else 
         eps_l = min(1._PR,-2._PR*u_i/(u_i-u_im1))
-  	  end if
+      end if
       flux_r = vx*(u_ip1-(0.5_PR*eps_r*(u_ip1-u_i  )))
       flux_l = vx*(u_i  -(0.5_PR*eps_l*(u_i  -u_im1)))
     end if
@@ -444,26 +444,26 @@ pure subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
 end subroutine FLUXES
 
 pure subroutine BOUNDARIES(f_np1)  
- 	implicit none
+   implicit none
   real(PR), dimension(-1:N_x+2,-1:N_vx+2),intent(inout) :: f_np1
   integer                                               :: l,i
   select case (b_cond)
     ! absorbing
     case (1)
-		  do l=-1,N_vx+2,1
+      do l=-1,N_vx+2,1
         f_np1(N_x+1,l) = 0._PR
         f_np1(N_x+2,l) = 0._PR
         f_np1(0,l)     = 0._PR
         f_np1(-1,l)    = 0._PR
-  	  end do
+      end do
     ! periodic
     case (2)
-		  do l=-1,N_vx+2,1
+      do l=-1,N_vx+2,1
         f_np1(N_x+1,l) = f_np1(1,l)
         f_np1(N_x+2,l) = f_np1(2,l)
         f_np1(0,l)     = f_np1(N_x,l)
         f_np1(-1,l)    = f_np1(N_x-1,l)
-  	  end do
+      end do
   end select
   do i=-1,N_x+2,1
     f_np1(i,N_vx+1) = 0._PR
@@ -502,40 +502,40 @@ elemental function slope(scheme,u_im1, u_i, u_ip1)
   real(PR), intent(in) :: u_im1, u_i, u_ip1
   real(PR)             :: slope
   select case (scheme)
-  	case (L_donor_cell)
+    case (L_donor_cell)
       slope = 0._PR
-  	case (L_Lax_Wendroff)
+    case (L_Lax_Wendroff)
       slope = u_ip1 - u_i
-  	case (L_Beam_Warming)
+    case (L_Beam_Warming)
       slope = u_i - u_im1
-  	case (L_Fromm)
+    case (L_Fromm)
       slope = (u_ip1 - u_im1) / 2._PR
-  	case (NL_minmod)
+    case (NL_minmod)
       slope = minmod(u_i - u_im1,u_ip1 - u_i)
-  	case (NL_superbee)
+    case (NL_superbee)
       slope = maxmod(minmod(u_ip1 - u_i,2._PR*(u_i - u_im1)),minmod(2._PR*(u_ip1 - u_i),u_i - u_im1))
-  	case (NL_Van_Leer)
+    case (NL_Van_Leer)
       slope = minmod_3(b*(u_ip1 - u_i),0.5_PR*(u_ip1 - u_im1),b*(u_i - u_im1))
   end select
 end function slope
   
 elemental function minmod(a, b)
- 	implicit none
+   implicit none
   real(PR), intent(in) :: a,b
   real(PR)             :: minmod
   if ((a*b).le.0._PR) then
     minmod = 0._PR
   else
-  	if (abs(a).gt.abs(b)) then
+    if (abs(a).gt.abs(b)) then
       minmod = b
-  	else
+    else
       minmod = a
-  	end if
+    end if
   end if
 end function minmod
   
 elemental function minmod_3(a, b, c)
- 	implicit none
+   implicit none
   real(PR), intent(in) :: a, b, c
   real(PR)             :: minmod_3
   minmod_3 = max(0._PR,min(a,b,c)) + min(0._PR,max(a,b,c))
@@ -550,9 +550,9 @@ elemental function maxmod(a, b)
   else
     if (abs(a).gt.abs(b)) then
       maxmod = a
-  	else
+    else
       maxmod = b
-  	end if
+    end if
   end if
 end function maxmod
   

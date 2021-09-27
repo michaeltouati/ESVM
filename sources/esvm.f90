@@ -75,7 +75,7 @@ do while (time.lt.L_t)
       call fluxes(scheme, vx(l), f_max, d_t, d_x, &
                 & f_n(i-2,l), f_n(i-1,l), f_n(i,l), f_n(i+1,l), f_n(i+2,l), &
                 & flux_im1, flux_ip1)
-      f_np1(i,l) = f_n(i,l) - (d_t * (flux_ip1 - flux_im1) / d_x)	
+      f_np1(i,l) = f_n(i,l) - (d_t * (flux_ip1 - flux_im1) / d_x)  
     end do
   end do
   !$omp END PARALLEL DO

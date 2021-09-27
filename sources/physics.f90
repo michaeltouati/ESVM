@@ -18,7 +18,7 @@ public :: omega_pe, v_T, Debye
 contains
 
 elemental function omega_pe(n0)
- 	implicit none
+  implicit none
   real(PR), intent(in) :: n0       ! (/cm^3)
   real(PR)             :: omega_pe ! (/s)
   omega_pe = sqrt(4 * pi * n0 * (e**2._PR) / me)
