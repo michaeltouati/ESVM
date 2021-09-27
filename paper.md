@@ -101,12 +101,22 @@ in a near future.
 
 The following figures have been directly obtained using the provided input decks corresponding to the previously mentioned well known academic Plasma Physics problems. Except for the non-linear Landau damping problem for which the non-linear theory should be used in order to check the simulation results, all other simulation results can be checked by solving analytically the equations computed by the codes, linearized around the considered equilibrium distribution function and introducing the considered small perturbation. In all cases, a large number of Plasma Physics papers and textbooks can corroborate them.
 
+Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time :
+
 ![Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
+
+Non-linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time :
 
 ![Non Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/energy.png)
 
+Non Linear Landau damping test case : Plasma electrons phase-space :
+
 ![Non Linear Landau damping test case : Plasma electrons phase-space.\label{fig:non-linear-landau-damping-2}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
 
+Two stream instability test case : Plasma electrons phase-space :
+
 ![Two stream instability test case : Plasma electrons phase-space.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
+
+Electrostatic wakefield test case : Electrostatic wakefield :
 
 ![Electrostatic wakefield test case : Electrostatic wakefield.\label{fig:electrostatic-wakefield}](test-cases/Wakefield-Emission/figures-Poisson/Ex/Ex_30.png)
