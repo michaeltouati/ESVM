@@ -35,7 +35,7 @@ subroutine INIT_DIAG()
 end subroutine INIT_DIAG
 
 subroutine DIAG_ENERGY(time, N_x, d_x, n_e, v_e, vT_e, E_x_n, &
-	                 & dU_K, dU_T, dU_E, U_K, U_T, U_E)
+                     & dU_K, dU_T, dU_E, U_K, U_T, U_E)
   implicit none
   integer                      , intent(in)    :: N_x   
   real(PR)                     , intent(in)    :: d_x, time
@@ -79,7 +79,7 @@ subroutine DIAG_ENERGY(time, N_x, d_x, n_e, v_e, vT_e, E_x_n, &
 end subroutine DIAG_ENERGY
 
 subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
-	          & f_n, n_e, E_x_n, j_e, v_e, vT_e, phi_n)
+              & f_n, n_e, E_x_n, j_e, v_e, vT_e, phi_n)
   implicit none
   integer                                , intent(in) :: N_t, N_x, N_vx
   real(PR), dimension(-1:N_x+2)          , intent(in) :: x
