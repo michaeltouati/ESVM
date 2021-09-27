@@ -1,6 +1,6 @@
 Written by Michael J TOUATI - CLPU - mtouati@clpu.es
 
-ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran code 
+ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 90 code 
 parallelized using OpenMP allowing for using many different numerical advection schemes 
 as well as two numerical methods for solving the coupled Maxwell equations 
 in order to adapt the simulation to specific Plasma Physics problems.
