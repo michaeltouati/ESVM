@@ -9,7 +9,7 @@ tags:
   - Vlasov equation
   - donor cell
   - Lax-Wendroff
-  - beam warming
+  - Beam-Warming
   - Fromm 
   - minmod
   - superbee
@@ -38,16 +38,12 @@ bibliography: paper.bib
 
 # Summary
 
-ESVM (ElectroStatic Vlasov-Maxwell) is a 1D-1V Vlasov-Maxwell Fortran code parallelized using OpenMP and developed 
-to adapt simulations to specific Plasma Physics problems with explicit linear finite volume numerical advection schemes such as the donor cell, the Lax-Wendroff, the beam warming or the Fromm method and non-linear ones such as the minmod, the superbee, the Van Leer, the MUSCL1 or the MUSCL2 method coupled to the Maxwell-Gauss equation for the electrostatic field or the Maxwell-Ampere equation with Poisson equation computed at the first time step. Python scripts, using matplotlib and numpy packages, are provided to automatically extract the simulation results, to plot them and to save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile.
+ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 90 standard compliant code, parallelized using OpenMP and developed 
+to adapt simulations to specific Plasma Physics problems with explicit linear finite volume numerical advection schemes such as the donor cell, the Lax-Wendroff, the Beam-Warming or the Fromm method and non-linear ones such as the minmod, the superbee, the Van Leer, the MUSCL1 or the MUSCL2 method coupled to the Maxwell-Gauss equation for the electrostatic field or the Maxwell-Ampere equation with Poisson equation computed at the first time step. Python scripts, using matplotlib and numpy packages, are provided to automatically extract the simulation results, to plot them and to save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. 
 
 # Statement of need
 
-`ESVM` allows for adapting simulations to a specific Plasma Physics problem : it is possible to chose a linear finite volume numerical advection schemes such as the donor cell, the Lax-Wendroff, the beam warming or the Fromm method or a non-linear one such as the minmod, the superbee, the Van Leer, the MUSCL1 or the MUSCL2 method in order to compute the Vlasov equation phase-space derivatives and to chose between computing the Poisson equation versus computing the Maxwell-Ampere equation (with Poisson equation computed at the first time step only). Well known academic Plasma Physics problems have been used to validate the code and are provided as examples (input deck and obtained simulation results). It is planned to :
-- extend the code to relativistic 2D-2V phase-space simulations
-- implement the Perfectly Matched Layer technique for Electromagnetic Fields absorption at the spatial simulation box boundaries
-- implement its MPI parallelization
-- implement the Belyaev-Budker relativistic collision operator
+`ESVM` allows for adapting simulations to a specific Plasma Physics problem : it is possible to chose a linear finite volume numerical advection schemes such as the donor cell, the Lax-Wendroff, the Beam-Warming or the Fromm method or a non-linear schemes using total variation diminishing (TVD) flux limiters such as the minmod, the superbee, the Van Leer, the MUSCL1 or the MUSCL2 method in order to compute the Vlasov equation phase-space derivatives and to chose between computing the Poisson equation versus computing the Maxwell-Ampere equation (with Poisson equation computed at the first time step only). Well known academic Plasma Physics problems have been used to validate the code and are provided as examples (input deck and obtained simulation results). The code can be used by Plasma Physics undergradurate students, teachers and researchers.
 
 Four academic Plasma Physics cases are provided :
 1) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
@@ -84,13 +80,26 @@ or equivalently, the coupled Maxwell-Ampere equation with Poisson equation compu
 
 The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = \displaystyle \sqrt{k_B T_e / 4 \pi Z n_i e^2}$ where $k_B$ is the Boltzmann constant and $T_e$ the plasma electron temperature (and therefore the thermal plasma electron velocity $v_{T} = \lambda_{\mathrm{Debye}} \omega_{p}$ for velocities) and the constant ion density $n_i$ for densities ($\underline{f}_e = f_e v_{T_e} / n_i$). The resulting electrostatic field unit consequently reads $\underline{E}_x = e E_x / m_e \omega_{p} v_{T}$.
 
-Obviously, the spatial grid cells $\Delta x$ must be chosen lower than the Debye length for the simulations to be Physical, the velocity bins size $\Delta v_x$ and extrema $[v_{\mathrm{min}},v_{\mathrm{max}}]$ in agreement with the considered Plasma Physics problem. The CFL stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl}$ such that the simulation time step respects
+Obviously, the spatial grid cells $\Delta x$ must be chosen lower than the Debye length for the simulations to be Physical, the 
+size $\Delta v_x$ and extrema $[v_{\mathrm{min}},v_{\mathrm{max}}]$ in agreement with the considered Plasma Physics problem. The CFL stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl}$ such that the simulation time step respects
 \begin{equation}
 \Delta t = \mathrm{cfl} \times F(\Delta x, \Delta v_x) < F(\Delta x, \Delta v_x)
 \end{equation}
 where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme and is implemented in a code subroutine.
 
+# Perspectives
+
+It is planned to :
+- extend the code to relativistic 2D-2V phase-space simulations
+- implement the Perfectly Matched Layer technique for Electromagnetic Fields absorption at the spatial simulation box boundaries
+- implement its MPI parallelization
+- implement the Belyaev-Budker relativistic collision operator
+- deploy the code to GPU architectures
+in a near future.
+
 # Figures
+
+The following figures have been directly obtained using the provided input decks corresponding to the previously mentioned well known academic Plasma Physics problems. Except for the non-linear Landau damping problem for which the non-linear theory should be used in order to check the simulation results, all other simulation results can be checked by solving analytically the equations computed by the codes, linearized around the considered equilibrium distribution function and introducing the considered small perturbation. In all cases, a large number of Plasma Physics papers and textbooks can corroborate them.
 
 ![Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
 
