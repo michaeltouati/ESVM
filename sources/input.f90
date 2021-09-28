@@ -201,6 +201,7 @@ subroutine read_init_parameters
   print*,'n0      = ',n0
   print*,'Te      = ',Te
   print*,'-----------------------------------------' 
+  print*, ' '
 end subroutine read_init_parameters
 
 subroutine get_str(str)

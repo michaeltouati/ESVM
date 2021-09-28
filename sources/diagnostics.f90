@@ -96,12 +96,14 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   print*,'time (/omega_p) =', time 
   print*,'Number of iteration :',N_t
   print*,'==========================='
+  print*, ' '
   if (test_positivity.eqv..true.) print*, 'the distribution function became negative'
   print*,'Kinetic energy  (n0 Debye^3 me v_T^2 / 2) = ', U_K
   print*,'Thermal energy  (n0 Debye^3 me v_T^2 / 2) = ', U_T
   print*,'Electric energy (n0 Debye^3 me v_T^2 / 2) = ', U_E
   print*,'--------------------------------------------'
   print*,'Total energy    (n0 Debye^3 me v_T^2 / 2) = ', U_K + U_T + U_E 
+  print*, ' '
   !
   do l=1,N_vx,1
     do i = 1,N_x,1
