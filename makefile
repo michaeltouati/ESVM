@@ -157,7 +157,7 @@ test_ampere :
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Ampere/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_poisson :
 	@echo -n 'Maxwell-Poisson solver : '
@@ -165,7 +165,18 @@ test_poisson :
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Poisson/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+
+test_openMP :
+	@echo '--------------------------------'
+	@echo '            OpenMP              '
+	@echo '--------------------------------'
+	@echo -n 'OpenMP parallelization : '
+	@cp test-cases/Test/OpenMP/input-deck .
+	@./esvm > test.output
+	@diff test.output test-cases/Test/OpenMP/output; \
+    TST=$$?;\
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_donor_cell :
 	@echo '--------------------------------'
@@ -176,7 +187,7 @@ test_donor_cell :
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Linear-advection-schemes/Donor-cell/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_Lax_Wendroff :
 	@echo -n 'Lax-Wendroff solver    : '
@@ -184,7 +195,7 @@ test_Lax_Wendroff :
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Linear-advection-schemes/Lax-Wendroff/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_Beam_Warming :
 	@echo -n 'Beam-Warming solver    : '
@@ -192,7 +203,7 @@ test_Beam_Warming :
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Linear-advection-schemes/Beam-Warming/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_Fromm :
 	@echo -n 'Fromm solver           : '
@@ -200,7 +211,7 @@ test_Fromm :
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Linear-advection-schemes/Fromm/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_minmod :
 	@echo '--------------------------------'
@@ -211,7 +222,7 @@ test_minmod :
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/Minmod/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_superbee :
 	@echo -n 'Superbee solver        : '
@@ -219,7 +230,7 @@ test_superbee :
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/Superbee/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_Van_Leer :
 	@echo -n 'Van Leer (b=1.5) solver: '
@@ -227,7 +238,7 @@ test_Van_Leer :
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/Van-Leer/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_MUSCL1 :
 	@echo -n 'MUSCL 1 solver         : '
@@ -235,7 +246,7 @@ test_MUSCL1 :
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/MUSCL1/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_MUSCL2 :
 	@echo -n 'MUSCL 2 solver         : '
@@ -243,7 +254,7 @@ test_MUSCL2 :
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/MUSCL2/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
     rm -f test.output
 	rm -rf results/
 
