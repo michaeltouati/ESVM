@@ -1,0 +1,274 @@
+ -----------------------------------------
+ Recapitulation of simulation parameters :
+ -----------------------------------------
+ * Number of OpenMP threads :
+ N_th    =                    64
+ -----------------------------------------
+ * Plasma properties (immobile ions)
+ T       =    1000.0000000000000     
+ Z       =    1.0000000000000000     
+ ni      =    1.0000000000000000E+021
+ -----------------------------------------
+ * 1D-1V phase-space : 
+ x_min   =    0.0000000000000000     
+ x_max   =    5.0000000000000000     
+ d_x     =   0.25000000000000000     
+ vx_min  =   -5.0000000000000000     
+ vx_max  =    5.0000000000000000     
+ d_vx    =   0.10000000000000001     
+ -----------------------------------------
+ * Simulation properties : 
+ cfl     =   0.90000000000000002     
+ L_t     =    5.0000000000000000     
+ dt_diag =   0.25000000000000000     
+ maxwell =                     2
+ b_cond  =                     2
+ scheme  =                     6
+ b       =    2.0000000000000000     
+ -----------------------------------------
+ * Perturbation properties : 
+ perturb =                     0
+ A       =   0.10000000000000001     
+ k       =    7.8539816329999998E-002
+ omega_0 =    7.8539816329999998E-002
+ vd      =    5.0000000000000000     
+ vs      =    1.0000000000000000     
+ -----------------------------------------
+ * Deduced parameters : 
+ N_x     =                    21
+ N_vx    =                   101
+ n0      =    1.0000000000000000E+021
+ Te      =    11604258.709350331     
+ -----------------------------------------
+  
+ ===========================
+ time (/omega_p) =   0.0000000000000000     
+ Number of iteration :                    1
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    1.2900859457764644E-032
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391762359338     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    1.9399839882805772E-015
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391762359355     
+  
+ ===========================
+ time (/omega_p) =  0.26999999583528139     
+ Number of iteration :                   13
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    1.1515093206040227E-016
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391761047480     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    1.8215801183395092E-015
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391761047498     
+  
+ ===========================
+ time (/omega_p) =  0.51749999219978193     
+ Number of iteration :                   24
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    2.7225980470962488E-016
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391759911065     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    1.5582241282687717E-015
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391759911083     
+  
+ ===========================
+ time (/omega_p) =  0.76499998880721709     
+ Number of iteration :                   35
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    3.1855986643924415E-016
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391758882270     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    1.2677692271942551E-015
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391758882279     
+  
+ ===========================
+ time (/omega_p) =   1.0124999856379264     
+ Number of iteration :                   46
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    2.3518020589130447E-016
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391757974108     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    1.0319424030087600E-015
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391757974117     
+  
+ ===========================
+ time (/omega_p) =   1.2599999826392878     
+ Number of iteration :                   57
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    1.0678273570153952E-016
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391757172003     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.7879396360108860E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391757172011     
+  
+ ===========================
+ time (/omega_p) =   1.5074999797495299     
+ Number of iteration :                   68
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    2.2705371626940764E-017
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391756442728     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.0102014114811755E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391756442737     
+  
+ ===========================
+ time (/omega_p) =   1.7549999769099500     
+ Number of iteration :                   79
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    2.1549446996390999E-019
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391755748128     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    7.7914887467834123E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391755748137     
+  
+ ===========================
+ time (/omega_p) =   2.0024999740742535     
+ Number of iteration :                   90
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    5.7216520020756006E-018
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391755056415     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    7.9317128996437612E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391755056424     
+  
+ ===========================
+ time (/omega_p) =   2.2724999709530986     
+ Number of iteration :                  102
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    9.7802882672313047E-018
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391754282989     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.2782681737021568E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391754282998     
+  
+ ===========================
+ time (/omega_p) =   2.5199999680574532     
+ Number of iteration :                  113
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    6.2941183198508423E-018
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391753550508     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.6070057901194724E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391753550517     
+  
+ ===========================
+ time (/omega_p) =   2.7674999651337395     
+ Number of iteration :                  124
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    1.9294370930867454E-018
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391752799074     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.8435378359899770E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391752799083     
+  
+ ===========================
+ time (/omega_p) =   3.0149999621930919     
+ Number of iteration :                  135
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    1.6347163059085320E-019
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391752036253     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.9543344823581179E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391752036262     
+  
+ ===========================
+ time (/omega_p) =   3.2624999592468868     
+ Number of iteration :                  146
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    3.2109930347029630E-019
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391751269764     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.9583848351008694E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391751269773     
+  
+ ===========================
+ time (/omega_p) =   3.5099999563030533     
+ Number of iteration :                  157
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    7.2969441496460308E-019
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391750504927     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.9036754775548440E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391750504936     
+  
+ ===========================
+ time (/omega_p) =   3.7574999533651989     
+ Number of iteration :                  168
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    7.2335333097161991E-019
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391749744175     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.8331331427060831E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391749744184     
+  
+ ===========================
+ time (/omega_p) =   4.0049999504334508     
+ Number of iteration :                  179
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    4.5748835290312471E-019
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391748987714     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.7738975577800370E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391748987723     
+  
+ ===========================
+ time (/omega_p) =   4.2524999475061733     
+ Number of iteration :                  190
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    2.2605121957852213E-019
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391748234325     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.7396978364134094E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391748234334     
+  
+ ===========================
+ time (/omega_p) =   4.5224999443148928     
+ Number of iteration :                  202
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    1.1872237381546148E-019
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391747414039     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.7290935450626107E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391747414048     
+  
+ ===========================
+ time (/omega_p) =   4.7699999413896039     
+ Number of iteration :                  213
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    8.9866352185767614E-020
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391746662241     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.7364092471482961E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391746662250     
+  
+ ===========================
+ time (/omega_p) =   4.9949999387291646     
+ Number of iteration :                  223
+ ===========================
+  
+ Kinetic energy  (n0 Debye^3 me v_T^2 / 2) =    8.5967068199528250E-020
+ Thermal energy  (n0 Debye^3 me v_T^2 / 2) =    5.2499391745978166     
+ Electric energy (n0 Debye^3 me v_T^2 / 2) =    8.7486042942664998E-016
+ --------------------------------------------
+ Total energy    (n0 Debye^3 me v_T^2 / 2) =    5.2499391745978174     
+  

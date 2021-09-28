@@ -95,11 +95,12 @@ esvm.o : $(SRC_PATH)esvm.f90
 
 check-input-deck : $(OBJTS_CHK)
 	$(F90) $(OPTS) $(OBJTS_CHK) -o check-input-deck
-	rm *.mod
-	rm *.o
+	@rm *.mod
+	@rm *.o
 
 check : check-input-deck
 	./check-input-deck
+	@rm check-input-deck
 
 ################
 ################
@@ -118,6 +119,12 @@ clean_results :
 
 clean_all :
 	rm -rf *.o *.mod esvm results figures
+
+################
+################
+##  PLOTTING  ##
+################
+################
 
 extract : $(SRC_PATH_PY)extract.py
 	python3 $(SRC_PATH_PY)extract.py
@@ -237,6 +244,8 @@ test_MUSCL2 :
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/MUSCL2/output; \
     TST=$$?;\
     if [ $$TST -eq 0 ]; then echo -n "${GREEN}PASSED${RESET}"; else echo -n "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+    rm -f test.output
+	rm -rf results/
 
 test : test_ampere test_poisson \
 	   test_donor_cell test_Lax_Wendroff test_Beam_Warming test_Fromm \

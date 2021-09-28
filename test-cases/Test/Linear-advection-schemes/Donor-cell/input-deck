@@ -1,0 +1,161 @@
+
+#######################################################################
+##                                                                   ##
+##          1D-1V ElectroStatic Vlasov-Maxwell (ESVM) code           ##
+##                                                                   ##
+##                            INPUT DECK                             ##  
+##                                                                   ##
+##   Code units :                                                    ##
+## - the Debye length $\lambda_D$ for space,                         ##
+## - inverse of Langmuir electron angular frequency                  ##
+##   $1/omega_{p_e}$ for times                                       ##
+## - Electron thermal velocity $v_T$ for velocities                  ##
+## - elementary charge $e$ for electrical charges                    ##
+##                                                                   ##
+##  Written by Dr Michaël J TOUATI - CLPU - 2020 - mtouati@clpu.es   ##
+##                                                                   ##
+#######################################################################
+#
+#######################################################################
+##                                                                   ##
+##                     Number of OpenMP threads                      ##
+##                                                                   ##
+## N_th = Number of threads used by OPEN_MP                          ##
+##        if 0, the maximum possible value is used                   ##
+##                                                                   ##
+#######################################################################
+#
+#N_th 0 
+#
+#######################################################################
+##                                                                   ##
+##                 Plasma properties - immobile ions                 ##
+##               ( Do not affect simulation result!  )               ##
+##                                                                   ##
+## T  = electron temperature in eV                                   ##
+##                                                                   ##
+## Z  = atomic number of fully ionized immobile ions                 ##
+##                                                                   ##
+## ni = ion density in /cm^3                                         ##
+##                                                                   ##
+#######################################################################
+#
+#T  1000.
+#
+#Z  1
+#
+#ni 1.e21
+#
+#v0    0.
+#
+#######################################################################
+##                                                                   ##
+##          1D - 1V Phase-space simulation box properties            ##
+##                                                                   ##
+## x_min  = lower spatial simulation box boundary                    ##
+##                                                                   ##
+## x_max  = upper spatial simulation box boundary                    ##
+##                                                                   ##
+## d_x    = simulation box spatial cell size                         ## 
+##                                                                   ##
+## vx_min = lower velocity space simulation box boundary             ##
+##                                                                   ##
+## vx_max = upper velocity space simulation box boundary             ##
+##                                                                   ##
+## d_vx   = simulation box velocity bin size                         ## 
+##                                                                   ##
+#######################################################################
+#
+#x_min    0. 
+#
+#x_max    5.  
+#
+#d_x     0.25
+#
+#vx_min   -5.
+#
+#vx_max    5.
+#
+#d_vx    0.1
+#
+#######################################################################
+##                                                                   ##          
+##                         Simulation times                          ##
+##                                                                   ##    
+## cfl      = CFL parameter (must be < 1)                            ##
+##                                                                   ##    
+## L_t      = Simulation time duration                               ##
+##                                                                   ##
+## dt_diag  = Time interval between simulation results dumping       ##
+##                                                                   ##
+#######################################################################
+#
+#cfl      9.e-1
+#
+#L_t     5.
+#
+#dt_diag 0.25  
+#
+#######################################################################
+##                                                                   ##
+##        BOUNDARY CONDITIONS AND NUMERICAL ADVECTION SCHEMES        ##
+##                                                                   ##
+## maxwell = 1 for Maxwell-Ampere solver                             ##
+##                 (Poisson is computed at the 1st iteration only)   ##
+##           2  for Maxwell-Poisson solver                           ##
+##                                                                   ##
+## b_cond = 1 for absorbing or                                       ##
+##          2 for periodic                                           ##
+##                                                                   ##
+## scheme = Available numerical advection schemes                    ##
+##          - Linear     : scheme = 1 (donor_cell), 2 (Lax-Wendroff),##
+##                         3 (Beam_Warming) or 4 (Fromm)             ##
+##          - Non linear : scheme = 5 (minmod), 6 (superbee),        ##
+##                         7 (Van_Leer), 8 (MUSCL1) or 9 (MUSCL2)    ##
+##                                                                   ##
+## b = free parameter for Van Leer schemes only (1<=b<=2)            ##
+##                                                                   ##
+#######################################################################
+#
+#maxwell 1
+#
+#b_cond 2
+#
+#scheme 1
+#
+#b      2.
+#
+#######################################################################
+##                                                                   ##
+##       Test cases for code validation and teaching pourpose        ##
+##    see esvm.pdf file for the meaning of perturbation parameters   ##
+##                                                                   ##
+## perturb = 0 for no perturbation,                                  ##
+##           1 for the electrostatic wakefield test case,            ##
+##           2 for the linear Landau damping test case or            ##
+##           3 for the two stream instability test case              ##
+##                                                                   ##
+## A       = perturbation amplitude                                  ##
+##                                                                   ##
+## k       = perturbation wave vector                                ##
+##                                                                   ##
+## omega_0 = perturbation angular frequency                          ##
+##                                                                   ##
+## vd      = perturbation drift velocity(ies)                        ##
+##                                                                   ##
+## vs      = perturbation thermal velocity(ies)                      ##
+##                                                                   ##
+#######################################################################
+#
+#perturb  0  
+#
+#A        1.e-1
+#
+#k        0.07853981633
+#
+#omega_0  0.07853981633
+#
+#vd       5.
+#
+#vs       1.
+
