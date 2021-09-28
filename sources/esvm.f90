@@ -22,7 +22,7 @@ real(PR), dimension(:), allocatable   :: x, vx
 real(PR), dimension(:,:), allocatable :: f_n, f_np1
 real(PR), dimension(:), allocatable   :: n_e, j_e, v_e, vT_e
 real(PR), dimension(:), allocatable   :: E_x_n, E_x_np1, phi_n
-integer                               :: N_threads, N_t, i, l 
+integer                               :: N_t, i, l 
 real(PR)                              :: f_max, flux_im1, flux_ip1
 real(PR), dimension(:), allocatable   :: dU_K, dU_T, dU_E 
 real(PR)                              :: U_K, U_T, U_E 
@@ -58,13 +58,13 @@ do while (time.lt.L_t)
   ! Landau damping test-case
   if (perturb == 2) then
     if ( time < (6.* pi / omega_0) ) then
-      call DRIVE(N_t, d_t, time, d_x, x, E_x_n, E_x_np1, phi_n)
+      call DRIVE(d_t, time, x, E_x_n, E_x_np1)
     else 
-      call MAXWELL_SOLVER(maxwell, N_t, d_t, d_x, x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+      call MAXWELL_SOLVER(maxwell, N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
     end if
   ! All other cases
   else
-    call MAXWELL_SOLVER(maxwell, N_t, d_t, d_x, x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+    call MAXWELL_SOLVER(maxwell, N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
   end if
   !   
   d_t   = cfl*(0.5_PR/((maxval(vx(1:N_vx))/d_x)+(maxval(abs(E_x_n(1:N_x)))/d_vx)))

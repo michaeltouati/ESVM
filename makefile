@@ -30,13 +30,13 @@ F90 = gfortran
 # openMP #
 ##########
 
-OPTS = -fopenmp -O3 -ffixed-line-length-none  -fdefault-real-8
+# OPTS = -fopenmp -O3 -ffixed-line-length-none -fdefault-integer-8 -fdefault-real-8
 
 #########
 # debug #
 #########
 
-#OPTS = -g -fopenmp -fbacktrace -ffpe-trap=zero,overflow,underflow
+OPTS = -fdefault-integer-8 -fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -ffpe-trap=invalid,zero,overflow
 
 #####################################
 #####################################
@@ -80,7 +80,7 @@ library.o : $(SRC_PATH)library.f90
 esvm.o : $(SRC_PATH)esvm.f90
 	$(F90) $(OPTS) -c $(SRC_PATH)esvm.f90
 
-clean_compilation :
+clean :
 	rm -rf *.o *.mod esvm
 
 clean_figures :
