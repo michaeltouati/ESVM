@@ -8,8 +8,8 @@
 ##   Code units :                                                    ##
 ## - the Debye length $\lambda_D$ for space,                         ##
 ## - inverse of Langmuir electron angular frequency                  ##
-##   $1/omega_{p_e}$ for times                                       ##
-## - Electron thermal velocity $v_T$ for velocities                  ##
+##   $1/omega_{p_e}$ for time                                        ##
+## (- Electron thermal velocity $v_T$ for velocities )               ##
 ## - elementary charge $e$ for electrical charges                    ##
 ##                                                                   ##
 ##  Written by Dr Michaël J TOUATI - CLPU - 2020 - mtouati@clpu.es   ##
@@ -41,7 +41,7 @@
 ##                                                                   ##
 #######################################################################
 #
-#T  1000.
+#T  100.
 #
 #Z  1
 #
@@ -65,23 +65,23 @@
 ##                                                                   ##
 #######################################################################
 #
-#x_min   -51. 
+#x_min  -10.5
 #
-#x_max    51.  
+#x_max   10.5
 #
-#d_x     0.5
+#d_x     0.05
 #
-#vx_min   -40.
+#vx_min   -6.
 #
-#vx_max    40.
+#vx_max    6.
 #
-#d_vx    0.1
+#d_vx    0.01
 #
 #######################################################################
 ##                                                                   ##          
 ##                         Simulation times                          ##
 ##                                                                   ##    
-## cfl      = CFL parameter (must be < 1)                            ##
+## cfl      = CFL parameter (must be 0 < cfl < 1)                    ##
 ##                                                                   ##    
 ## L_t      = Simulation time duration                               ##
 ##                                                                   ##
@@ -89,11 +89,11 @@
 ##                                                                   ##
 #######################################################################
 #
-#cfl      9.e-1
+#cfl       9.e-1
 #
-#L_t     20.
+#L_t     200.
 #
-#dt_diag 0.25  
+#dt_diag   1.  
 #
 #######################################################################
 ##                                                                   ##
@@ -146,15 +146,14 @@
 ##                                                                   ##
 #######################################################################
 #
-#perturb  3  
+#perturb  2  
 #
-#A        1.e-1
+#A        1.e-3
 #
-#k        0.06159985595
+#k        0.29919930034
 #
-#omega_0  0.06159985595
+#omega_0  1.18
 #
-#vd       10.
+#vd       0.
 #
 #vs       1.
-

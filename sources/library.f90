@@ -200,33 +200,28 @@ subroutine DENSITIES(vx, f_n, n_e, j_e, v_e, vT_e)
   !$omp END PARALLEL DO
 end subroutine DENSITIES
 
-subroutine MAXWELL_SOLVER(solver, N_t, d_t, d_x, x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+subroutine MAXWELL_SOLVER(solver, N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
   implicit none
   integer, intent(in)                          :: solver, N_t
   real(PR), intent(in)                         :: d_t, d_x
-  real(PR), dimension(-1:N_x+2), intent(in)    :: x, j_e, n_e
+  real(PR), dimension(-1:N_x+2), intent(in)    :: j_e, n_e
   real(PR), dimension(-1:N_x+2), intent(inout) :: E_x_n
   real(PR), dimension(-1:N_x+2), intent(out)   :: E_x_np1, phi_n
-  integer                                      :: i
-  real(PR), dimension(1:N_x+1)                 :: a, b, c, d, e, phi_temp 
-  real(PR)                                     :: phi_g, phi_d
   if (solver == 1) then
-    call AMPERE(N_t, d_t, d_x, x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+    call AMPERE(N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
   else 
-    call POISSON(N_t, d_t, d_x, x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+    call POISSON(d_x, n_e, E_x_n, E_x_np1, phi_n)
   end if
 end subroutine MAXWELL_SOLVER
 
-subroutine POISSON(N_t, d_t, d_x, x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+subroutine POISSON(d_x, n_e, E_x_n, E_x_np1, phi_n)
   implicit none
-  integer, intent(in)                          :: N_t
-  real(PR), intent(in)                         :: d_t, d_x
-  real(PR), dimension(-1:N_x+2), intent(in)    :: x, j_e, n_e
+  real(PR), intent(in)                         :: d_x
+  real(PR), dimension(-1:N_x+2), intent(in)    :: n_e
   real(PR), dimension(-1:N_x+2), intent(inout) :: E_x_n
   real(PR), dimension(-1:N_x+2), intent(out)   :: E_x_np1, phi_n
   integer                                      :: i
   real(PR), dimension(1:N_x+1)                 :: a, b, c, d, e, phi_temp 
-  real(PR)                                     :: phi_g, phi_d
   !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
   do i=1,N_x,1
     a(i)        = -1._PR
@@ -289,18 +284,16 @@ subroutine POISSON(N_t, d_t, d_x, x, j_e, n_e, E_x_n, E_x_np1, phi_n)
   end select
 end subroutine POISSON
 
-subroutine AMPERE(N_t, d_t, d_x, x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+subroutine AMPERE(N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
   implicit none
   integer, intent(in)                          :: N_t
   real(PR), intent(in)                         :: d_t, d_x
-  real(PR), dimension(-1:N_x+2), intent(in)    :: x, j_e, n_e
+  real(PR), dimension(-1:N_x+2), intent(in)    :: j_e, n_e
   real(PR), dimension(-1:N_x+2), intent(inout) :: E_x_n
   real(PR), dimension(-1:N_x+2), intent(out)   :: E_x_np1, phi_n
   integer                                      :: i
-  real(PR), dimension(1:N_x+1)                 :: a, b, c, d, e, phi_temp 
-  real(PR)                                     :: phi_g, phi_d
   if (N_t.eq.1) then
-    call POISSON(N_t, d_t, d_x, x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+    call POISSON(d_x, n_e, E_x_n, E_x_np1, phi_n)
   else
     !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
     do i=1,N_x,1
@@ -332,14 +325,12 @@ subroutine AMPERE(N_t, d_t, d_x, x, j_e, n_e, E_x_n, E_x_np1, phi_n)
   end if
 end subroutine AMPERE
 
-subroutine DRIVE(N_t, d_t, time, d_x, x, E_x_n, E_x_np1, phi_n)
+subroutine DRIVE(d_t, time, x, E_x_n, E_x_np1)
   implicit none
-  integer, intent(in)                          :: N_t
-  real(PR), intent(in)                         :: d_t, d_x, time
+  real(PR), intent(in)                         :: d_t, time
   real(PR), dimension(-1:N_x+2), intent(in)    :: x
   real(PR), dimension(-1:N_x+2), intent(inout) :: E_x_n
   real(PR), dimension(-1:N_x+2), intent(inout) :: E_x_np1
-  real(PR), dimension(-1:N_x+2), intent(inout) :: phi_n
   integer                                      :: i
  !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
   do i=1,N_x
@@ -502,6 +493,8 @@ elemental function slope(scheme,u_im1, u_i, u_ip1)
   real(PR), intent(in) :: u_im1, u_i, u_ip1
   real(PR)             :: slope
   select case (scheme)
+    case DEFAULT
+      slope = 0._PR
     case (L_donor_cell)
       slope = 0._PR
     case (L_Lax_Wendroff)
