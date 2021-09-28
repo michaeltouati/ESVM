@@ -2,7 +2,7 @@
  Recapitulation of simulation parameters :
  -----------------------------------------
  * Number of OpenMP threads :
- N_th    =                    64
+ N_th    =                     1
  -----------------------------------------
  * Plasma properties (immobile ions)
  T       =    1000.0000000000000     
