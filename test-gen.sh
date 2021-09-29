@@ -3,6 +3,8 @@
 cp test-cases/Test/Ampere/input-deck . && ./esvm > output && cp output test-cases/Test/Ampere/ 
 cp test-cases/Test/Poisson/input-deck . && ./esvm > output && cp output test-cases/Test/Poisson/ 
 cp test-cases/Test/OpenMP/input-deck . && ./esvm > output && cp output test-cases/Test/OpenMP/ 
+cp test-cases/Test/Boundary-conditions/Periodic/input-deck . && ./esvm > output && cp output test-cases/Test/Boundary-conditions/Periodic/ 
+cp test-cases/Test/Boundary-conditions/Absorbing/input-deck . && ./esvm > output && cp output test-cases/Test/Boundary-conditions/Absorbing/
 cp test-cases/Test/Linear-advection-schemes/Donor-cell/input-deck . && ./esvm > output && cp output test-cases/Test/Linear-advection-schemes/Donor-cell/ 
 cp test-cases/Test/Linear-advection-schemes/Lax-Wendroff/input-deck . && ./esvm > output && cp output test-cases/Test/Linear-advection-schemes/Lax-Wendroff/ 
 cp test-cases/Test/Linear-advection-schemes/Beam-Warming/input-deck . && ./esvm > output && cp output test-cases/Test/Linear-advection-schemes/Beam-Warming/ 

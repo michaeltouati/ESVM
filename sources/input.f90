@@ -214,28 +214,28 @@ subroutine get_str(str)
   continue ; 10 str = 'end'
 end subroutine get_str
 
-elemental function get_logical(str)
+function get_logical(str)
   character(len=*), intent(in) :: str
   logical :: get_logical
   read (str, *) get_logical
   return
 end function get_logical
 
-elemental function get_integer(str)
+function get_integer(str)
   character(len=*), intent(in) :: str
   integer :: get_integer
   read (str, *) get_integer
   return
 end function get_integer
 
-elemental function get_real(str)
+function get_real(str)
   character(len=*), intent(in) :: str
   real(PR) :: get_real
   read (str, *) get_real
   return
 end function get_real
 
-elemental function get_char(str)
+function get_char(str)
   character(len=*), intent(in) :: str
   Character(len=2) :: get_char
   read (str, *) get_char
