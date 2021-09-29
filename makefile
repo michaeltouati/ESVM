@@ -10,7 +10,7 @@
 # openMP #
 ##########
 
-#OPTS = -openmp -r8 -i8 -O3
+#OPTS = -openmp -r8 -O3
 
 #########
 # debug #
@@ -30,13 +30,13 @@ F90 = gfortran
 # openMP #
 ##########
 
-OPTS = -fopenmp -fdefault-real-8 -fdefault-integer-8 -O3
+OPTS = -fopenmp -fdefault-real-8 -O3
 
 #########
 # debug #
 #########
 
-#OPTS = -fdefault-integer-8 -fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -ffpe-trap=invalid,zero,overflow
+#OPTS = -fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -ffpe-trap=invalid,zero,overflow
 
 #####################################
 #####################################
@@ -146,6 +146,7 @@ test_ampere :
 	@echo '--------------------------------'
 	@echo '        TESTS DESCRIPTION       '
 	@echo '--------------------------------'
+	@echo '                                '
 	@echo '${RED}The code should be compiled with'
 	@echo 'double floating point precisions'
 	@echo '     for the tests to pass!${RESET}     '
@@ -160,9 +161,11 @@ test_ampere :
 	@echo ' concerning a simple plasma     '
 	@echo ' simulation at Maxwell-Boltzmann'
 	@echo ' equilibrium                    ' 
+	@echo '                                '
 	@echo '--------------------------------'
 	@echo '         Maxwell solver         '
 	@echo '--------------------------------'
+	@echo '                                '
 	@echo -n 'Maxwell-Ampere solver  : '
 	@cp test-cases/Test/Ampere/input-deck .
 	@./esvm > test.output
@@ -182,6 +185,7 @@ test_openMP :
 	@echo '--------------------------------'
 	@echo '            OpenMP              '
 	@echo '--------------------------------'
+	@echo '                                '
 	@echo -n 'OpenMP parallelization : '
 	@cp test-cases/Test/OpenMP/input-deck .
 	@./esvm > test.output
@@ -193,6 +197,7 @@ test_donor_cell :
 	@echo '--------------------------------'
 	@echo '    Linear advection solvers    '
 	@echo '--------------------------------'
+	@echo '                                '
 	@echo -n 'Donor cell solver      : '
 	@cp test-cases/Test/Linear-advection-schemes/Donor-cell/input-deck .
 	@./esvm > test.output
@@ -228,6 +233,7 @@ test_minmod :
 	@echo '--------------------------------'
 	@echo '  Non-linear advection solvers  '
 	@echo '--------------------------------'
+	@echo '                                '
 	@echo -n 'Minmod solver          : '
 	@cp test-cases/Test/Non-linear-advection-schemes/Minmod/input-deck .
 	@./esvm > test.output

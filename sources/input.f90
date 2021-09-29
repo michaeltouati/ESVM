@@ -182,13 +182,13 @@ subroutine read_init_parameters
   write (*,'(A,1E22.14)')'cfl     = ',cfl
   write (*,'(A,1E22.14)')'L_t     = ',L_t
   write (*,'(A,1E22.14)')'dt_diag = ',dt_diag
-  write (*,'(A,1I1)')'maxwell = ',maxwell
-  write (*,'(A,1I1)')'b_cond  = ',b_cond
-  write (*,'(A,1I2)')'scheme  = ',scheme
+  write (*,'(A,1I3)')'maxwell = ',maxwell
+  write (*,'(A,1I3)')'b_cond  = ',b_cond
+  write (*,'(A,1I3)')'scheme  = ',scheme
   write (*,'(A,1E22.14)')'b       = ',b
   write (*,*)'-----------------------------------------'
   write (*,*)'* Perturbation properties : '
-  write (*,'(A,1I2)')'perturb = ',perturb
+  write (*,'(A,1I3)')'perturb = ',perturb
   if (perturb .ne. 0) then
     write (*,'(A,1E22.14)')'A       = ',A
     write (*,'(A,1E22.14)')'k       = ',k
@@ -200,8 +200,8 @@ subroutine read_init_parameters
   write (*,*)'* Deduced parameters : '
   write (*,'(A,1I7)')'N_x     = ',N_x
   write (*,'(A,1I7)')'N_vx    = ',N_vx
-  write (*,'(A,1E22.14)')'n0      = ',n0
-  write (*,'(A,1E22.14)')'Te      = ',Te
+  write (*,'(A,1E22.14)')'n0(/cm3)= ',n0
+  write (*,'(A,1E22.14)')'Te(K)   = ',Te
   write (*,*)'-----------------------------------------' 
   write (*,*) ' '
 end subroutine read_init_parameters
