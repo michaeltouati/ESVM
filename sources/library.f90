@@ -120,7 +120,7 @@ subroutine INIT_SIMU(x, vx, f_n)
     do l=1,N_vx,1
       do i=1,N_x,1
         f_n(i,l) = (1._PR/sqrt(2._PR*pi))*&
-                 & exp(-(vx(l)**2._PR)/2._PR) 
+                 & exp(-((vx(l)-vd)**2._PR)/2._PR) 
        end do
     end do
   end if
@@ -193,8 +193,16 @@ subroutine DENSITIES(vx, f_n, n_e, j_e, v_e, vT_e)
     end do
     n_e(i)  = sum(F1(1:N_vx))
     j_e(i)  = sum(F2(1:N_vx))
-    v_e(i)  = - j_e(i) / n_e(i)
-    vT_e(i) = ((sum(F3(1:N_vx))/n_e(i))-(v_e(i)**2._PR))**0.5_PR
+    if (abs(n_e(i)).lt.zero) then
+      v_e(i) = 0.
+    else
+      v_e(i)  = - j_e(i) / n_e(i)
+    end if
+    if (abs(n_e(i)).ne.(v_e(i)**2._PR)) then
+      vT_e(i) = ((sum(F3(1:N_vx))/n_e(i))-(v_e(i)**2._PR))**0.5_PR
+    else
+      vT_e(i) = 0.
+    end if
    deallocate(F1,F2,F3)
   end do
   !$omp END PARALLEL DO
@@ -487,7 +495,7 @@ end subroutine BOUNDARIES
 
 ! Functions
   
-elemental function slope(scheme,u_im1, u_i, u_ip1)
+function slope(scheme,u_im1, u_i, u_ip1)
   implicit none
   integer, intent(in)  :: scheme
   real(PR), intent(in) :: u_im1, u_i, u_ip1
@@ -512,7 +520,7 @@ elemental function slope(scheme,u_im1, u_i, u_ip1)
   end select
 end function slope
   
-elemental function minmod(a, b)
+function minmod(a, b)
    implicit none
   real(PR), intent(in) :: a,b
   real(PR)             :: minmod
@@ -527,14 +535,14 @@ elemental function minmod(a, b)
   end if
 end function minmod
   
-elemental function minmod_3(a, b, c)
+function minmod_3(a, b, c)
    implicit none
   real(PR), intent(in) :: a, b, c
   real(PR)             :: minmod_3
   minmod_3 = max(0._PR,min(a,b,c)) + min(0._PR,max(a,b,c))
 end function minmod_3
   
-elemental function maxmod(a, b)
+function maxmod(a, b)
   implicit none
   real(PR), intent(in) :: a,b
   real(PR)             :: maxmod
@@ -549,7 +557,7 @@ elemental function maxmod(a, b)
   end if
 end function maxmod
   
-elemental function theta(vx)
+function theta(vx)
   implicit none
   real(PR), intent(in) :: vx
   real(PR)             :: theta

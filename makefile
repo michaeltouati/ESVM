@@ -4,19 +4,19 @@
 #############
 #############
 
-F90 = ifort
+# F90 = ifort
 
 ##########
 # openMP #
 ##########
 
-OPTS = -fopenmp -prec-div -prec-sqrt -mp1 -r8 -O3 
+# OPTS = -fopenmp -r8 -O3
 
 #########
 # debug #
 #########
 
-#OPTS = -g -fpe0 -ftrapuv -debug all -debug-parameters all -C -traceback -openmp -openmp-report2 -r8
+# OPTS = -g -traceback -fopenmp -r8 -std90 -fpe0 -debug all -debug-parameters all -C 
 
 ################
 ################
@@ -24,19 +24,19 @@ OPTS = -fopenmp -prec-div -prec-sqrt -mp1 -r8 -O3
 ################
 ################
 
-#F90 = gfortran
+F90 = gfortran
 
 ##########
 # openMP #
 ##########
 
-#OPTS = -fopenmp -fdefault-real-8 -O3
+OPTS = -fopenmp -fdefault-real-8 -O3
 
 #########
 # debug #
 #########
 
-#OPTS = -fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -ffpe-trap=invalid,zero,overflow
+# OPTS = -fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow
 
 #####################################
 #####################################
@@ -147,9 +147,6 @@ test_ampere :
 	@echo '        TESTS DESCRIPTION       '
 	@echo '--------------------------------'
 	@echo '                                '
-	@echo '${RED}The code should be compiled with'
-	@echo 'double floating point precisions'
-	@echo '     for the tests to pass!${RESET}     '
 	@echo 'The tests consist in performing '
 	@echo ' diff file1 file2 where :       '
 	@echo ' * file1 is the test simulation '
@@ -193,6 +190,26 @@ test_openMP :
     TST=$$?;\
     if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
+test_periodic :
+	@echo '--------------------------------'
+	@echo '      Boundary conditions       '
+	@echo '--------------------------------'
+	@echo '                                '
+	@echo -n 'Periodic bound. cond.  : '
+	@cp test-cases/Test/Boundary-conditions/Periodic/input-deck .
+	@./esvm > test.output
+	@diff test.output test-cases/Test/Boundary-conditions/Periodic/output; \
+    TST=$$?;\
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+
+test_absorbing :
+	@echo -n 'Absorbing bound. cond. : '
+	@cp test-cases/Test/Boundary-conditions/Absorbing/input-deck .
+	@./esvm > test.output
+	@diff test.output test-cases/Test/Boundary-conditions/Absorbing/output; \
+    TST=$$?;\
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+
 test_donor_cell :
 	@echo '--------------------------------'
 	@echo '    Linear advection solvers    '
@@ -218,16 +235,16 @@ test_Beam_Warming :
 	@cp test-cases/Test/Linear-advection-schemes/Beam-Warming/input-deck .
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Linear-advection-schemes/Beam-Warming/output; \
-    TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+	TST=$$?;\
+	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_Fromm :
 	@echo -n 'Fromm solver           : '
 	@cp test-cases/Test/Linear-advection-schemes/Fromm/input-deck .
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Linear-advection-schemes/Fromm/output; \
-    TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+	TST=$$?;\
+	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_minmod :
 	@echo '--------------------------------'
@@ -238,44 +255,44 @@ test_minmod :
 	@cp test-cases/Test/Non-linear-advection-schemes/Minmod/input-deck .
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/Minmod/output; \
-    TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+	TST=$$?;\
+	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_superbee :
 	@echo -n 'Superbee solver        : '
 	@cp test-cases/Test/Non-linear-advection-schemes/Superbee/input-deck .
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/Superbee/output; \
-    TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+	TST=$$?;\
+	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_Van_Leer :
 	@echo -n 'Van Leer (b=1.5) solver: '
 	@cp test-cases/Test/Non-linear-advection-schemes/Van-Leer/input-deck .
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/Van-Leer/output; \
-    TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+	TST=$$?;\
+	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_MUSCL1 :
 	@echo -n 'MUSCL 1 solver         : '
 	@cp test-cases/Test/Non-linear-advection-schemes/MUSCL1/input-deck .
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/MUSCL1/output; \
-    TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+	TST=$$?;\
+	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_MUSCL2 :
 	@echo -n 'MUSCL 2 solver         : '
 	@cp test-cases/Test/Non-linear-advection-schemes/MUSCL2/input-deck .
 	@./esvm > test.output
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/MUSCL2/output; \
-    TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
-    rm -f test.output
+	TST=$$?;\
+	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+		rm -f test.output
 	@rm -rf results/
 
-test : test_ampere test_poisson test_openMP \
+test : test_ampere test_poisson test_openMP test_periodic test_absorbing \
 	   test_donor_cell test_Lax_Wendroff test_Beam_Warming test_Fromm \
- 	   test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2
+	   test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2
 

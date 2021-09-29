@@ -60,21 +60,21 @@ subroutine DIAG_ENERGY(time, N_x, d_x, n_e, v_e, vT_e, E_x_n, &
   end do
   !
   if (abs(U_K).lt.zero) then
-    write (8,'(4E22.14)') time, 0.
+    write(8,'(4E23.15)') time, zero
   else
-    write(8,'(4E22.14)') time, U_K
+    write(8,'(4E23.15)') time, U_K
   end if
-
+  !
   if (abs(U_T).lt.zero) then
-    write (9,'(4E22.14)') time, 0.
+    write(9,'(4E23.15)') time, zero
   else
-    write(9,'(4E22.14)') time, U_T
+    write(9,'(4E23.15)') time, U_T
   end if
-
+  !
   if (abs(U_E).lt.zero) then
-    write (10,'(4E22.14)') time, 0.
+    write(10,'(4E23.15)') time, zero
   else
-    write(10,'(4E22.14)') time, U_E
+    write(10,'(4E23.15)') time, U_E
   end if
 end subroutine DIAG_ENERGY
 
@@ -94,85 +94,75 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   integer                                             :: l, i
   !
   write (*,*)'==========================='
-  write (*,'(A,1E22.14)')'time (/omega_p) =', time 
+  write (*,'(A,1E11.3)')'time (/omega_p) =',time 
   write (*,'(A,1I7)')'Number of iteration :',N_t
   write (*,*)'==========================='
-  write (*,*) ' '
+  write (*,*)' '
   if (test_positivity.eqv..true.) print*, 'the distribution function became negative'
-  if (abs(U_K).lt.zero) then
-    write (*,'(A,1E22.2)')'Kinetic energy  (n0 Debye^3 me v_T^2 / 2) = ', U_K
-  else
-    write (*,'(A,1E22.2)')'Kinetic energy  (n0 Debye^3 me v_T^2 / 2) = ', 0.
-  end if
-  if (abs(U_T).lt.zero) then
-    write (*,'(A,1E22.2)')'Thermal energy  (n0 Debye^3 me v_T^2 / 2) = ', U_T
-  else
-    write (*,'(A,1E22.2)')'Thermal energy  (n0 Debye^3 me v_T^2 / 2) = ', 0.
-  end if
-  if (abs(U_E).lt.zero) then
-    write (*,'(A,1E22.2)')'Electric energy (n0 Debye^3 me v_T^2 / 2) = ', U_E
-  else
-    write (*,'(A,1E22.2)')'Electric energy (n0 Debye^3 me v_T^2 / 2) = ', 0.
-  end if
-  write (*,*)'--------------------------------------------'
+  write (*,'(A,1E8.1)')'Kinetic energy  (n0 Debye^3 me v_T^2 / 2) = ', U_K
+  write (*,'(A,1E8.1)')'Thermal energy  (n0 Debye^3 me v_T^2 / 2) = ', U_T
+  write (*,'(A,1E8.1)')'Electric energy (n0 Debye^3 me v_T^2 / 2) = ', U_E
+  write (*,*)'---------------------------------------------------'
   U_tot = U_K + U_T + U_E 
-  if (abs(U_tot).lt.zero) then
-    write (*,'(A,1E22.2)')'Total energy    (n0 Debye^3 me v_T^2 / 2) = ', U_tot
-  else
-    write (*,'(A,1E22.2)')'Total energy    (n0 Debye^3 me v_T^2 / 2) = ', 0.
-  end if
-  write (*,*) ' '
+  write (*,'(A,1E8.1)')'Total energy    (n0 Debye^3 me v_T^2 / 2) = ', U_tot
+  write (*,*)' '
   !
   do l=1,N_vx,1
     do i = 1,N_x,1
       if (abs(f_n(i,l)).lt.zero) then
-        write (1,'(4E22.14)') time, vx(l), x(i), 0.
+        write(1,'(4E23.15)') time, vx(l), x(i), zero
       else
-        write(1,'(4E22.14)') time, vx(l), x(i), f_n(i,l)
+        write(1,'(4E23.15)') time, vx(l), x(i), f_n(i,l)
       end if
     end do
   end do
+  !
   do i = 1,N_x,1
     if (abs(n_e(i)).lt.zero) then
-      write (2,'(4E22.14)') time, x(i), 0.
+      write(2,'(4E23.15)') time, x(i), zero
     else
-      write(2,'(4E22.14)') time, x(i), n_e(i)
+      write(2,'(4E23.15)') time, x(i), n_e(i)
     end if
   end do
+  !
   do i = 1,N_x,1
     if (abs(E_x_n(i)).lt.zero) then
-      write (3,'(4E22.14)') time, x(i), 0.
+      write(3,'(4E23.15)') time, x(i), zero
     else
-      write(3,'(4E22.14)') time, x(i), E_x_n(i)
+      write(3,'(4E23.15)') time, x(i), E_x_n(i)
     end if
   end do
+  !
   do i = 1,N_x,1
     if (abs(j_e(i)).lt.zero) then
-      write (4,'(4E22.14)') time, x(i), 0.
+      write(4,'(4E23.15)') time, x(i), zero
     else
-      write(4,'(4E22.14)') time, x(i), j_e(i)
+      write(4,'(4E23.15)') time, x(i), j_e(i)
     end if
   end do
+  !
   do i = 1,N_x,1
     if (abs(v_e(i)).lt.zero) then
-      write (5,'(4E22.14)') time, x(i), 0.
+      write(5,'(4E23.15)') time, x(i), zero
     else
-      write(5,'(4E22.14)') time, x(i), v_e(i)
+      write(5,'(4E23.15)') time, x(i), v_e(i)
     end if
   end do
+  !
   do i = 1,N_x,1
     if (abs(vT_e(i)).lt.zero) then
-      write (7,'(4E22.14)') time, x(i), 0.
+      write(7,'(4E23.15)') time, x(i), zero
     else
-      write(7,'(4E22.14)') time, x(i), vT_e(i)
+      write(7,'(4E23.15)') time, x(i), vT_e(i)
     end if
   end do
+  !
   do i = 1,N_x,1
     !
     if (abs(phi_n(i)).lt.zero) then
-      write (11,'(4E22.14)') time, x(i), 0.
+      write(11,'(4E23.15)') time, x(i), zero
     else
-      write(11,'(4E22.14)') time, x(i), phi_n(i)
+      write(11,'(4E23.15)') time, x(i), phi_n(i)
     end if
   end do
 end subroutine DIAG
