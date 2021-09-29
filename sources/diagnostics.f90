@@ -99,12 +99,12 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   write (*,*)'==========================='
   write (*,*)' '
   if (test_positivity.eqv..true.) print*, 'the distribution function became negative'
-  write (*,'(A,1E8.1)')'Kinetic energy  (n0 Debye^3 me v_T^2 / 2) = ', U_K
-  write (*,'(A,1E8.1)')'Thermal energy  (n0 Debye^3 me v_T^2 / 2) = ', U_T
-  write (*,'(A,1E8.1)')'Electric energy (n0 Debye^3 me v_T^2 / 2) = ', U_E
-  write (*,*)'---------------------------------------------------'
+  write (*,'(A,1E11.3)')'Kinetic energy  (n0 Debye^3 me v_T^2 / 2) = ', U_K
+  write (*,'(A,1E11.3)')'Thermal energy  (n0 Debye^3 me v_T^2 / 2) = ', U_T
+  write (*,'(A,1E11.3)')'Electric energy (n0 Debye^3 me v_T^2 / 2) = ', U_E
+  write (*,*)'-----------------------------------------------------'
   U_tot = U_K + U_T + U_E 
-  write (*,'(A,1E8.1)')'Total energy    (n0 Debye^3 me v_T^2 / 2) = ', U_tot
+  write (*,'(A,1E11.3)')'Total energy    (n0 Debye^3 me v_T^2 / 2) = ', U_tot
   write (*,*)' '
   !
   do l=1,N_vx,1
