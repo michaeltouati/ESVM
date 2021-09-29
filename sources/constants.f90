@@ -45,7 +45,7 @@ module constants
   !                                      Advection schemes
   !=======================================================================================
 
-  real(PR), parameter, public           :: zero = 1.e-15_PR
+  real(PR), parameter, public           :: zero = 1.e-14_PR
   integer, parameter, public            :: L_donor_cell   = 1
   integer, parameter, public            :: L_Lax_Wendroff = 2
   integer, parameter, public            :: L_Beam_Warming = 3
