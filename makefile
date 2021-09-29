@@ -24,7 +24,7 @@
 ################
 ################
 
-F90 = gfortran
+F90 = mpifort
 
 ##########
 # openMP #
@@ -36,7 +36,7 @@ OPTS = -fopenmp -fdefault-real-8 -fdefault-integer-8 -O3
 # debug #
 #########
 
-OPTS = -fdefault-integer-8 -fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -ffpe-trap=invalid,zero,overflow
+#OPTS = -fdefault-integer-8 -fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -ffpe-trap=invalid,zero,overflow
 
 #####################################
 #####################################
