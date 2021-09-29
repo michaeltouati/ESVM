@@ -142,7 +142,8 @@ RED=$(shell tput setaf 1)
 GREEN=$(shell tput setaf 2)
 RESET=$(shell tput sgr0)
 
-test_ampere :
+test_start : 
+	@mv input-deck input-deck-old
 	@echo '--------------------------------'
 	@echo '        TESTS DESCRIPTION       '
 	@echo '--------------------------------'
@@ -159,6 +160,8 @@ test_ampere :
 	@echo ' simulation at Maxwell-Boltzmann'
 	@echo ' equilibrium                    ' 
 	@echo '                                '
+
+test_ampere :
 	@echo '--------------------------------'
 	@echo '         Maxwell solver         '
 	@echo '--------------------------------'
@@ -289,10 +292,13 @@ test_MUSCL2 :
 	@diff test.output test-cases/Test/Non-linear-advection-schemes/MUSCL2/output; \
 	TST=$$?;\
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
-		rm -f test.output
-	@rm -rf results/
 
-test : test_ampere test_poisson test_openMP test_periodic test_absorbing \
+test_end :
+	@rm -f test.output
+	@rm -rf results/
+	@mv input-deck-old input-deck
+
+test : test_start test_ampere test_poisson test_openMP test_periodic test_absorbing \
 	   test_donor_cell test_Lax_Wendroff test_Beam_Warming test_Fromm \
-	   test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2
+	   test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2 test_end
 
