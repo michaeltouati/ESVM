@@ -4,13 +4,13 @@
 #############
 #############
 
-#F90 = ifort
+F90 = ifort
 
 ##########
 # openMP #
 ##########
 
-#OPTS = -openmp -r8 -O3
+OPTS = -fopenmp -prec-div -prec-sqrt -mp1 -r8 -O3 
 
 #########
 # debug #
@@ -24,13 +24,13 @@
 ################
 ################
 
-F90 = gfortran
+#F90 = gfortran
 
 ##########
 # openMP #
 ##########
 
-OPTS = -fopenmp -fdefault-real-8 -O3
+#OPTS = -fopenmp -fdefault-real-8 -O3
 
 #########
 # debug #

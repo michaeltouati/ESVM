@@ -60,19 +60,19 @@ subroutine DIAG_ENERGY(time, N_x, d_x, n_e, v_e, vT_e, E_x_n, &
   end do
   !
   if (abs(U_K).lt.zero) then
-    write (8,'(4E22.14)') time, zero
+    write (8,'(4E22.14)') time, 0.
   else
     write(8,'(4E22.14)') time, U_K
   end if
 
   if (abs(U_T).lt.zero) then
-    write (9,'(4E22.14)') time, zero
+    write (9,'(4E22.14)') time, 0.
   else
     write(9,'(4E22.14)') time, U_T
   end if
 
   if (abs(U_E).lt.zero) then
-    write (10,'(4E22.14)') time, zero
+    write (10,'(4E22.14)') time, 0.
   else
     write(10,'(4E22.14)') time, U_E
   end if
@@ -90,6 +90,7 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   real(PR), dimension(-1:N_x+2)          , intent(in) :: n_e, j_e, v_e, vT_e
   real(PR), dimension(-1:N_x+2)          , intent(in) :: E_x_n , phi_n
   real(PR)                               , intent(in) :: U_K, U_T, U_E
+  real(PR)                                            :: U_tot
   integer                                             :: l, i
   !
   write (*,*)'==========================='
@@ -98,17 +99,34 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   write (*,*)'==========================='
   write (*,*) ' '
   if (test_positivity.eqv..true.) print*, 'the distribution function became negative'
-  write (*,'(A,1E22.14)')'Kinetic energy  (n0 Debye^3 me v_T^2 / 2) = ', U_K
-  write (*,'(A,1E22.14)')'Thermal energy  (n0 Debye^3 me v_T^2 / 2) = ', U_T
-  write (*,'(A,1E22.14)')'Electric energy (n0 Debye^3 me v_T^2 / 2) = ', U_E
+  if (abs(U_K).lt.zero) then
+    write (*,'(A,1E22.2)')'Kinetic energy  (n0 Debye^3 me v_T^2 / 2) = ', U_K
+  else
+    write (*,'(A,1E22.2)')'Kinetic energy  (n0 Debye^3 me v_T^2 / 2) = ', 0.
+  end if
+  if (abs(U_T).lt.zero) then
+    write (*,'(A,1E22.2)')'Thermal energy  (n0 Debye^3 me v_T^2 / 2) = ', U_T
+  else
+    write (*,'(A,1E22.2)')'Thermal energy  (n0 Debye^3 me v_T^2 / 2) = ', 0.
+  end if
+  if (abs(U_E).lt.zero) then
+    write (*,'(A,1E22.2)')'Electric energy (n0 Debye^3 me v_T^2 / 2) = ', U_E
+  else
+    write (*,'(A,1E22.2)')'Electric energy (n0 Debye^3 me v_T^2 / 2) = ', 0.
+  end if
   write (*,*)'--------------------------------------------'
-  write (*,'(A,1E22.14)')'Total energy    (n0 Debye^3 me v_T^2 / 2) = ', U_K + U_T + U_E 
+  U_tot = U_K + U_T + U_E 
+  if (abs(U_tot).lt.zero) then
+    write (*,'(A,1E22.2)')'Total energy    (n0 Debye^3 me v_T^2 / 2) = ', U_tot
+  else
+    write (*,'(A,1E22.2)')'Total energy    (n0 Debye^3 me v_T^2 / 2) = ', 0.
+  end if
   write (*,*) ' '
   !
   do l=1,N_vx,1
     do i = 1,N_x,1
       if (abs(f_n(i,l)).lt.zero) then
-        write (1,'(4E22.14)') time, vx(l), x(i), zero
+        write (1,'(4E22.14)') time, vx(l), x(i), 0.
       else
         write(1,'(4E22.14)') time, vx(l), x(i), f_n(i,l)
       end if
@@ -116,35 +134,35 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   end do
   do i = 1,N_x,1
     if (abs(n_e(i)).lt.zero) then
-      write (2,'(4E22.14)') time, x(i), zero
+      write (2,'(4E22.14)') time, x(i), 0.
     else
       write(2,'(4E22.14)') time, x(i), n_e(i)
     end if
   end do
   do i = 1,N_x,1
     if (abs(E_x_n(i)).lt.zero) then
-      write (3,'(4E22.14)') time, x(i), zero
+      write (3,'(4E22.14)') time, x(i), 0.
     else
       write(3,'(4E22.14)') time, x(i), E_x_n(i)
     end if
   end do
   do i = 1,N_x,1
     if (abs(j_e(i)).lt.zero) then
-      write (4,'(4E22.14)') time, x(i), zero
+      write (4,'(4E22.14)') time, x(i), 0.
     else
       write(4,'(4E22.14)') time, x(i), j_e(i)
     end if
   end do
   do i = 1,N_x,1
     if (abs(v_e(i)).lt.zero) then
-      write (5,'(4E22.14)') time, x(i), zero
+      write (5,'(4E22.14)') time, x(i), 0.
     else
       write(5,'(4E22.14)') time, x(i), v_e(i)
     end if
   end do
   do i = 1,N_x,1
     if (abs(vT_e(i)).lt.zero) then
-      write (7,'(4E22.14)') time, x(i), zero
+      write (7,'(4E22.14)') time, x(i), 0.
     else
       write(7,'(4E22.14)') time, x(i), vT_e(i)
     end if
@@ -152,7 +170,7 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   do i = 1,N_x,1
     !
     if (abs(phi_n(i)).lt.zero) then
-      write (11,'(4E22.14)') time, x(i), zero
+      write (11,'(4E22.14)') time, x(i), 0.
     else
       write(11,'(4E22.14)') time, x(i), phi_n(i)
     end if

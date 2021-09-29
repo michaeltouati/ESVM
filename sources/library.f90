@@ -23,7 +23,7 @@ contains
 
 ! Subroutines
   
-pure subroutine GRID(Nx,Nv,dx,dv,xmin,vmin,x,vx)
+subroutine GRID(Nx,Nv,dx,dv,xmin,vmin,x,vx)
   implicit none
   integer, intent(in)                         :: Nx, Nv
   real(PR), intent(in)                        :: dx, dv, xmin, vmin
@@ -42,7 +42,7 @@ pure subroutine GRID(Nx,Nv,dx,dv,xmin,vmin,x,vx)
     vx(-1) = vx(0) - dx
   end subroutine GRID
 
-pure subroutine INIT_VAR(f_n, f_np1, n_e, j_e, v_e, vT_e, E_x_np1, E_x_n , phi_n, &
+subroutine INIT_VAR(f_n, f_np1, n_e, j_e, v_e, vT_e, E_x_np1, E_x_n , phi_n, &
             & dU_K, dU_T, dU_E, U_K, U_T, U_E, time, N_t, & 
             & test_positivity, save_results)
   implicit none
@@ -78,7 +78,7 @@ pure subroutine INIT_VAR(f_n, f_np1, n_e, j_e, v_e, vT_e, E_x_np1, E_x_n , phi_n
   save_results    = .false.
 end subroutine INIT_VAR
 
-pure subroutine INIT_SIMU(x, vx, f_n)
+subroutine INIT_SIMU(x, vx, f_n)
   implicit none
   real(PR), dimension(1:N_x), intent(in)                 :: x
   real(PR), dimension(1:N_vx), intent(in)                :: vx
@@ -348,7 +348,7 @@ subroutine DRIVE(d_t, time, x, E_x_n, E_x_np1)
   E_x_np1(-1)    = E_x_np1(N_x-2) 
 end subroutine DRIVE
 
-pure subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
+subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
                      & u_im2, u_im1, u_i, u_ip1, u_ip2, flux_l, flux_r) 
   implicit none
   integer, intent(in)   :: scheme
@@ -434,7 +434,7 @@ pure subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
   end if
 end subroutine FLUXES
 
-pure subroutine BOUNDARIES(f_np1)  
+subroutine BOUNDARIES(f_np1)  
    implicit none
   real(PR), dimension(-1:N_x+2,-1:N_vx+2),intent(inout) :: f_np1
   integer                                               :: l,i
@@ -464,7 +464,7 @@ pure subroutine BOUNDARIES(f_np1)
   end do
 end subroutine BOUNDARIES
 
-  pure subroutine SOLVE_TRIDIAG(a,b,c,d,x,n)
+  subroutine SOLVE_TRIDIAG(a,b,c,d,x,n)
     implicit none
     integer,intent(in)                :: n
     real(PR),dimension(n),intent(in)  :: a,b,c,d
