@@ -24,7 +24,7 @@
 ################
 ################
 
-F90 = mpifort
+F90 = gfortran
 
 ##########
 # openMP #
@@ -149,6 +149,22 @@ test_ampere :
 	@echo 'The code should be compiled with'
 	@echo 'double floating point precisions'
 	@echo '     for the tests to pass!     '
+	@echo '--------------------------------'
+	@echo '            ${RED}WARNING${RESET}          '
+	@echo '--------------------------------'
+	@echo 'The code should be compiled with'
+	@echo 'double floating point precisions'
+	@echo '     for the tests to pass!     '
+	@echo 'The tests consist in performing '
+	@echo ' diff file1 file2 where :       '
+	@echo ' * file1 is the test simulation '
+	@echo '   terminal output              '
+	@echo ' * file2 the terminal output of '
+	@echo '   the corresponding simulation '
+	@echo '   performed by the developper  '
+	@echo '   located in test-cases/Test/  '
+	@echo ' concerning a plasma at Maxwell-'
+	@echo ' Boltzmann equilibrium          ' 
 	@echo '--------------------------------'
 	@echo '         Maxwell solver         '
 	@echo '--------------------------------'
