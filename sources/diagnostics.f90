@@ -94,7 +94,7 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   !
   write (*,*)'==========================='
   write (*,'(A,1E22.14)')'time (/omega_p) =', time 
-  write (*,'(A,I7)')'Number of iteration :',N_t
+  write (*,'(A,1I7)')'Number of iteration :',N_t
   write (*,*)'==========================='
   write (*,*) ' '
   if (test_positivity.eqv..true.) print*, 'the distribution function became negative'
