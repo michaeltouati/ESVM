@@ -38,8 +38,17 @@ bibliography: paper.bib
 
 # Summary
 
-ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 90 standard compliant code, parallelized using OpenMP and developed 
-to adapt simulations to specific Plasma Physics problems with explicit linear finite volume numerical advection schemes such as the donor cell, the Lax-Wendroff, the Beam-Warming or the Fromm method and non-linear ones such as the minmod, the superbee, the Van Leer, the MUSCL1 or the MUSCL2 method coupled to the Maxwell-Gauss equation for the electrostatic field or the Maxwell-Ampere equation with Poisson equation computed at the first time step. Python scripts, using matplotlib and numpy packages, are provided to automatically extract the simulation results, to plot them and to save them. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. 
+ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 90 code, parallelized using OpenMP and developed in order to adapt simulations to specific Plasma Physics problems thanks to different finite volume numerical advection schemes @Godunov:1959 implemented such as the linear :
+- donor-cell scheme i.e. the downwind scheme or upwind one @Courant:1952 depending on the advection direction in each cell, 
+- Lax-Wendroff scheme @LaxWendroff:1960, 
+- Fromm scheme @Fromm:1968 or
+- Beam-Warming scheme @BeamWarming:1976
+and the non-linear:
+- minmod scheme @Roe:1986, 
+- superbee scheme @Roe:1986, 
+- Van Leer scheme @VanLeer:1977 and 
+- two resulting Monotonic Upwind-centered Scheme for Conservation Laws (MUSCL) schemes MUSCL1 and MUSCL2. 
+making use of total variation diminishing (TVD) flux limiters. The discretized Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation for the electrostatic field or equivalently with the Maxwell-Ampere equation with Poisson equation computed at the first time step. While the discretized Poisson equation needs the inversion of a triangular matrix, the second one make use of a faster second order finite difference numerical scheme. Python scripts, using matplotlib and numpy packages, are provided to automatically extract and plot the simulation results that are stored in text files. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. 
 
 # Statement of need
 
@@ -89,13 +98,13 @@ where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme and is im
 
 # Perspectives
 
-It is planned to :
-- extend the code to relativistic 2D-2V phase-space simulations
+It is planned in a near future to :
+- extend the code to relativistic 2D-2V and 1D-3V phase-space electromagnetic plasma simulations
 - implement the Perfectly Matched Layer technique for Electromagnetic Fields absorption at the spatial simulation box boundaries
 - implement its MPI parallelization
+- implement a relativistic BGK collision operator
 - implement the Belyaev-Budker relativistic collision operator
-- deploy the code to GPU architectures
-in a near future.
+- deploy the code to GPU architectures.
 
 # Figures
 
