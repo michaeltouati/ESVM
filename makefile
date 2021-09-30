@@ -156,7 +156,7 @@ test_start :
 	@echo '   the corresponding simulation '
 	@echo '   performed by the developper  '
 	@echo '   located in test-cases/Test/  '
-	@echo ' concerning a simple plasma     '
+	@echo ' concerning a drifting plasma   '
 	@echo ' simulation at Maxwell-Boltzmann'
 	@echo ' equilibrium                    ' 
 	@echo '                                '
