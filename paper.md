@@ -49,7 +49,8 @@ and the non-linear:
 - superbee scheme @Roe:1986, 
 - Van Leer scheme @VanLeer:1977 and 
 - two resulting Monotonic Upwind-centered Scheme for Conservation Laws (MUSCL) schemes MUSCL1 and MUSCL2. 
-making use of total variation diminishing (TVD) flux limiters. The discretized Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation for the electrostatic field or equivalently with the Maxwell-Ampere equation with Poisson equation computed at the first time step. While the discretized Poisson equation needs the inversion of a triangular matrix, the second one make use of a faster second order finite difference numerical scheme. Python scripts, using matplotlib and numpy packages, are provided to automatically extract and plot the simulation results that are stored in text files. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. 
+
+make use of total variation diminishing (TVD) flux limiters. The discretized Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation for the electrostatic field or equivalently with the Maxwell-Ampere equation with Poisson equation computed at the first time step. While the discretized Poisson equation needs the inversion of a triangular matrix, the second one make use of a faster second order finite difference numerical scheme. Python scripts, using matplotlib and numpy packages, are provided to automatically extract and plot the simulation results that are stored in text files. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. 
 
 # Statement of need
 
