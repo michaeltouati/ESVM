@@ -74,7 +74,7 @@ for the electrostatic field $E_x (x,t)$ or, equivalently, self-consistently coup
   \label{eq:ampere}
   \displaystyle \frac{\partial E_x }{\partial t } (x,t) = - 4 \pi j_e(x,t) 
 \end{equation}
-with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v} over the whole velocity space $v_x \in \left [ v_{x,\mathrm{min}},\, v_{x,\mathrm{max}} \right ]$, one gets the hydrodynamic equation of plasma electron number conservation 
+with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v} over the whole plasma electron velocity space $v_x \in \left [ v_{x,\mathrm{min}},\, v_{x,\mathrm{max}} \right ]$, one gets the hydrodynamic equation of plasma electron number conservation 
 \begin{equation}
   \label{eq:continuity}
   \displaystyle \frac{\partial n_e}{\partial t} (x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( n_e v_e(x,t) \right ) = 0,
@@ -86,7 +86,7 @@ which, when injected in the time derivative of Maxwell-Gauss equation \autoref{e
 \end{equation}
 \begin{equation}
   \label{eq:mean_velocity}
-  v_e (x,t) = \displaystyle\frac{1}{n_e (x,t)} \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) v_x \, d v_x,
+  v_e (x,t) = \displaystyle\frac{1}{n_e (x,t)} \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) v_x \, d v_x
 \end{equation}
 and
 \begin{equation}
@@ -98,7 +98,7 @@ the plasma electron density, mean velocity and electrical charge current, respec
   \label{eq:internal_energy}
   u_{T_e} (x,t) = n_e (x,t) \displaystyle \frac{ m_e {v_{T_e} (x,t)}^2 }{2}  = \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) \displaystyle \frac{ m_e {\displaystyle \left ( v_x - v_e (x,t) \right )}^2 }{2} \, d v_x.
 \end{equation}
-$v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should always be chosen sufficiently large in such a way that there is no plasma electrons outside of the simulation velocity space during the whole simulation. Maxwell-Gauss equation \autoref{eq:gauss} is computed by using the electrostatic potential definition 
+For plasmas at local Maxwell-Boltzmann equilibrium, $v_{T_e} (x,t) = \displaystyle \sqrt{k_B T_e (x,t) / m_e}$ where $k_B$ is the Boltzmann constant, $T_e(x,t)$ is the local electron temperature and $m_e$ the electron mass. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should always be chosen sufficiently large in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. Maxwell-Gauss equation \autoref{eq:gauss} is computed by using the electrostatic potential definition 
 \begin{equation}
   \label{eq:potential}
   \displaystyle \frac{\partial \Phi}{\partial x} (x,t) = - E_x (x,t)
@@ -120,10 +120,13 @@ U_{K_e} (t_d) = \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} n_e (x,
 \end{equation}
 and
 \begin{equation}
-\label{eq:total_electrostatic_energy}
-U_{E_x} (t_d) = \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} \displaystyle \frac{{E_x (x,t_d)}^2}{8 \pi} \, d x,
+  \label{eq:total_electrostatic_energy}
+  U_{E_x} (t_d) = \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} \displaystyle \frac{{E_x (x,t_d)}^2}{8 \pi} \, d x,
 \end{equation}
-respectively. 
+respectively as well as the total energy area density
+\begin{equation}
+  U_{\mathrm{tot}} (t_d) = U_{T_e} (t_d)+ U_{K_e} (t_d) + U_{E_x} (t_d).
+\end{equation}
 
 # ESVM units
 
