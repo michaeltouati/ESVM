@@ -59,7 +59,7 @@ Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes
 
 # Equations computed by ESVM
 
-Ions are assumed to be immobile with a homogeneous density $n_i$ and fully ionized with an electrical charge $Z e$ where $Z$ is the ion atomic number and $e$ the elementary charge. The plasma electron distribution function $f_e (x,v_x,t)$ is computed by the code according to the plasma electron 1D-1V Vlasov equation
+Plasma ions are assumed to be immobile with a homogeneous density $n_i$ and fully ionized with an electrical charge $Z e$ where $Z$ is the ion atomic number and $e$ the elementary charge. The plasma electron distribution function $f_e (x,v_x,t)$ is computed by the code according to the plasma electron 1D-1V Vlasov equation
 \begin{equation}
   \label{eq:vlasov1d1v}
   \displaystyle \frac{\partial f_e}{\partial t} (x,v_x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x f_e(x,v_x,t) \right ) - \displaystyle \frac{\partial }{\partial v_x} \displaystyle \left ( \displaystyle \frac{e}{m_e} E_x (x,t) f_e (x,v_x,t)\right ) = 0
@@ -67,33 +67,33 @@ Ions are assumed to be immobile with a homogeneous density $n_i$ and fully ioniz
 that is self-consistently coupled with the Maxwell-Gauss equation 
 \begin{equation}
   \label{eq:gauss}
-  \displaystyle \frac{\partial E_x}{\partial x} (x,t) = 4 \pi \displaystyle \left ( Z e n_i - e n_e (x,t) \, d v_x \right ) = 4 \pi \displaystyle \left ( Z e n_i - e  \right )
+  \displaystyle \frac{\partial E_x}{\partial x} (x,t) = 4 \pi e \displaystyle \left ( Z n_i - n_e (x,t) \right )
 \end{equation}
-or equivalently self-consistently coupled with the Maxwell-Ampere equation
+or, equivalently, self-consistently coupled with the Maxwell-Ampere equation
 \begin{equation}
   \label{eq:ampere}
   \displaystyle \frac{\partial E_x }{\partial t } (x,t) = - 4 \pi j_e(x,t) 
 \end{equation}
-with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v}, one gets the hydrodynamic equation of plasma electron number conservation 
+with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v} over the whole velocity space $v_x \in \left [ -\infty,\,\infty \right ] $, one gets the hydrodynamic equation of plasma electron number conservation 
 \begin{equation}
   \label{eq:continuity}
   \displaystyle \frac{\partial n_e}{\partial t} (x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( n_e v_e(x,t) \right ) = 0,
 \end{equation}
-which, when injected in the time derivative of Maxwell-Gauss equation \autoref{eq:gauss}, provide Maxwell-Ampere equation if Maxwell-Gauss equation \autoref{eq:gauss} is verified at the simulation start. Here, we have noted 
+which, when injected in the time derivative of Maxwell-Gauss equation \autoref{eq:gauss}, provides the Maxwell-Ampere equation \autoref{eq:ampere} if Maxwell-Gauss equation \autoref{eq:gauss} is verified at the simulation start t=0. Here, we have noted 
 \begin{equation}
   \label{eq:density}
   n_e (x,t) = \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \, d v_x,
 \end{equation}
 \begin{equation}
   \label{eq:mean_velocity}
-  v_e (x,t) = \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) v_x \, d v_x,
+  v_e (x,t) = \displaystyle\frac{1}{n_e (x,t)} \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) v_x \, d v_x,
 \end{equation}
 and
-\begin{equuation}
+\begin{equation}
   \label{eq:current}
   j_e(x,t) = -e n_e (x,t) v_e (x,t)
 \end{equation}
-the plasma electron density, mean velocity and electrical charge current. The code also computes the plasma thermal electron velocity $v_{T_e} (x,t)$ defined according to the plasma electron internal energy density definition
+the plasma electron density, mean velocity and electrical charge current. ESVM also computes the plasma electron thermal velocity $v_{T_e} (x,t)$ defined according to the plasma electron internal energy density
 \begin{equation}
   \label{eq:internal_energy}
   u_{T_e} (x,t) = n_e (x,t) \displaystyle \frac{ m_e {v_{T_e} (x,t)}^2 }{2}  = \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \displaystyle \frac{ m_e {\displaystyle \left ( v_x - v_e (x,t) \right )}^2 }{2} \, d v_x.
@@ -106,22 +106,22 @@ Maxwell-Gauss equation \autoref{eq:gauss} is computed by using the electrostatic
 that gives the Poisson equation
 \begin{equation}
   \label{eq:poisson}
-  \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t) = - 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \, d v_x\right )
+  \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t) = - 4 \pi e \displaystyle \left ( Z n_i - n_e (x,t) \right )
 \end{equation}
 when injected in the Maxwell-Gauss equation \autoref{eq:gauss}.
-When the simulation is running, ESVM stores at every time steps and displays on the terminal at every dumped time step $t_d$ the total plasma electron internal and kinetic energy area density and the total electrostatic energy area density in the simulation box
+When the simulation is running, ESVM stores at every time steps and displays on the terminal at every dumped time steps $t_d$ the total plasma electron internal and kinetic energy area density and the total electrostatic energy area density in the simulation box $\left [ x_{\mathrm{min}},\, x_{\mathrm{max}}\right ]$
 \begin{equation}
   \label{eq:total_internal_energy}
-  U_{T_e} (t_d) = \displaystyle \int_{\mathrm{simu.\,box}} u_{T_e} (x,t_d) \, d x,
+  U_{T_e} (t_d) = \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} u_{T_e} (x,t_d) \, d x,
 \end{equation}
 \begin{equation}
 \label{eq:total_kinetic_energy}
-U_{K_e} (x,t_d) = \displaystyle \int_{\mathrm{simu.\,box}} n_e (x,t) \displaystyle \frac{m_e {v_e (x,t_d)}^2}{2}  \,  d x
+U_{K_e} (t_d) = \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} n_e (x,t) \displaystyle \frac{m_e {v_e (x,t_d)}^2}{2}  \,  d x
 \end{equation}
 and
 \begin{equation}
 \label{eq:total_electrostatic_energy}
-U_{E_x} (x,t_d) = \displaystyle \int_{\mathrm{simu.\,box}} \displaystyle \frac{{E_x (x,t_d)}^2}{8 \pi} \, d x,
+U_{E_x} (t_d) = \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} \displaystyle \frac{{E_x (x,t_d)}^2}{8 \pi} \, d x,
 \end{equation}
 respectively. 
 
