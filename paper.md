@@ -82,18 +82,18 @@ with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start 
 which, when injected in the time derivative of Maxwell-Gauss equation \autoref{eq:gauss}, provides the Maxwell-Ampere equation \autoref{eq:ampere} if Maxwell-Gauss equation \autoref{eq:gauss} is verified at the simulation start t=0. Here, we have noted 
 \begin{equation}
   \label{eq:density}
-  n_e (x,t) = \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \, d v_x,
+  n_e (x,t) = \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) \, d v_x,
 \end{equation}
 \begin{equation}
   \label{eq:mean_velocity}
-  v_e (x,t) = \displaystyle\frac{1}{n_e (x,t)} \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) v_x \, d v_x,
+  v_e (x,t) = \displaystyle\frac{1}{n_e (x,t)} \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) v_x \, d v_x,
 \end{equation}
 and
 \begin{equation}
   \label{eq:current}
   j_e(x,t) = -e n_e (x,t) v_e (x,t)
 \end{equation}
-the plasma electron density, mean velocity and electrical charge current. ESVM also computes the plasma electron thermal velocity $v_{T_e} (x,t)$ defined according to the plasma electron internal energy density
+the plasma electron density, mean velocity and electrical charge current, respectively. ESVM also computes the plasma electron thermal velocity $v_{T_e} (x,t)$ defined according to the plasma electron internal energy density
 \begin{equation}
   \label{eq:internal_energy}
   u_{T_e} (x,t) = n_e (x,t) \displaystyle \frac{ m_e {v_{T_e} (x,t)}^2 }{2}  = \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \displaystyle \frac{ m_e {\displaystyle \left ( v_x - v_e (x,t) \right )}^2 }{2} \, d v_x.
