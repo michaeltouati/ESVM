@@ -74,7 +74,7 @@ or, equivalently, self-consistently coupled with the Maxwell-Ampere equation
   \label{eq:ampere}
   \displaystyle \frac{\partial E_x }{\partial t } (x,t) = - 4 \pi j_e(x,t) 
 \end{equation}
-with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v} over the whole velocity space $ v_x \in \left [ v_{x,\mathrm{min}},\, v_{x,\mathrm{min}} \right ] $, one gets the hydrodynamic equation of plasma electron number conservation 
+with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v} over the whole velocity space $\left [ v_{x,\mathrm{min}},\, v_{x,\mathrm{max}} \right ]$, one gets the hydrodynamic equation of plasma electron number conservation 
 \begin{equation}
   \label{eq:continuity}
   \displaystyle \frac{\partial n_e}{\partial t} (x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( n_e v_e(x,t) \right ) = 0,
