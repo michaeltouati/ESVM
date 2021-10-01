@@ -74,7 +74,7 @@ or, equivalently, self-consistently coupled with the Maxwell-Ampere equation
   \label{eq:ampere}
   \displaystyle \frac{\partial E_x }{\partial t } (x,t) = - 4 \pi j_e(x,t) 
 \end{equation}
-with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v} over the whole velocity space $v_x \in \left [ -\infty,\,\infty \right ] $, one gets the hydrodynamic equation of plasma electron number conservation 
+with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v} over the whole velocity space, one gets the hydrodynamic equation of plasma electron number conservation 
 \begin{equation}
   \label{eq:continuity}
   \displaystyle \frac{\partial n_e}{\partial t} (x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( n_e v_e(x,t) \right ) = 0,
@@ -148,7 +148,7 @@ It is planned in a near future to :
 - implement its MPI parallelization
 - implement its vectorization
 - store the simulation results in hdf5 files instead of text files
-- implement the Perfectly Matched Layer (PML) technique @Berenger:2014 to absorb the electromagnetic fields at the spatial simulation box boundaries
+- implement the Perfectly Matched Layer (PML) technique @Berenger:1994 to absorb the electromagnetic fields at the spatial simulation box boundaries
 - implement a relativistic BGK collision operator
 - implement the Belyaev-Budker relativistic collision operator
 - deploy the code to GPU architectures.
