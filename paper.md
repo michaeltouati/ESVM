@@ -59,30 +59,33 @@ Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes
 
 # Equations computed by ESVM
 
-The equations computed explicitely by the code are the 1D-1V Vlasov equation for plasma electrons (ions are assumed to be fully ionized with an electrical charge $Z e$, $Z$ being the ion atomic number, and that they remain immobile with a density $n_i$): 
+Ions are assumed to be fully ionized with an electrical charge $Z e$, $Z$ being the ion atomic number, and immobile with a homogeneous density $n_i$
+The equations computed by the code are the plasma electron 1D-1V Vlasov equation
 \begin{equation}
 \label{eq:vlasov1d1v}
 \displaystyle \frac{\partial f_e}{\partial t} (x,v_x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x f_e(x,v_x,t) \right ) - \displaystyle \frac{\partial }{\partial v_x} \displaystyle \left ( \displaystyle \frac{e}{m_e} E_x (x,t) f_e (x,v_x,t)\right ) = 0
 \end{equation}
-and the coupled Poisson equation for the electrostatic field 
-$$
-\displaystyle \left \{ \begin{array}{l}
+and the self-consistent Maxwell-Gauss equation for the electrostatic field 
+\begin{equation}
+\label{eq:gauss}
+\displaystyle \frac{\partial E_x}{\partial x} (x,t) = 4 \pi \displaystyle \left ( Z e n_i - e n_e (x,t) \, d v_x \right ) = 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \, d v_x \right )
+\end{equation}
+or equivalently, the self-consistent Maxwell-Ampere equation
+\begin{equation}
+\displaystyle \frac{\partial E_x }{\partial t } (x,t) = - 4 \pi j_e(x,v_x,t)  = 4 \pi e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) v_x \, d v_x
+\end{equation}
+with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$.
+Maxwell-Gauss equation is computed by using the electrostatic potential defined according to 
+\begin{equation}
+\label{eq:potential}
     \displaystyle \frac{\partial \Phi}{\partial x} (x,t) = - E_x (x,t)
-\cr \displaystyle \frac{\partial E_x}{\partial x} (x,t) = 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \, d v_x \right )
-\end{array} \right .
-$$
+\end{equation}
+and the resulting Poisson equation
 \begin{equation}
 \label{eq:poisson}
-\Rightarrow \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t) = - 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \, d v_x\right )
+\Rightarrow \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t) = - 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \, d v_x\right ).
 \end{equation}
-or equivalently, the coupled Maxwell-Ampere equation with Poisson equation computed at $t=0$ only
-\begin{equation}
-\label{eq:ampere}
-\displaystyle \left \{ \begin{array}{l}
-    \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t=0) = - 4 \pi \displaystyle \left ( Z e n_i - e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t=0) \, d v_x\right )
-\cr  \displaystyle \frac{\partial E_x }{\partial t } (x,t) = 4 \pi e \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) v_x \, d v_x
-\end{array} \right .
-\end{equation}
+
 
 # ESVM units
 
