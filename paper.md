@@ -59,7 +59,7 @@ Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes
 
 # Equations computed by ESVM
 
-Plasma ions are assumed to be immobile with a homogeneous density $n_i$ and fully ionized with an electrical charge $Z e$ where $Z$ is the ion atomic number and $e$ the elementary charge. The plasma electron distribution function $f_e (x,v_x,t)$ is computed by the code according to the plasma electron 1D-1V Vlasov equation
+Plasma ions are assumed to be immobile with a homogeneous density $n_i$ and fully ionized with an electrical charge $Z e$ where $Z$ is the plasma ion atomic number and $e$ the elementary charge. The plasma electron distribution function $f_e (x,v_x,t)$ is computed by the code according to the plasma electron 1D-1V Vlasov equation
 \begin{equation}
   \label{eq:vlasov1d1v}
   \displaystyle \frac{\partial f_e}{\partial t} (x,v_x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x f_e(x,v_x,t) \right ) - \displaystyle \frac{\partial }{\partial v_x} \displaystyle \left ( \displaystyle \frac{e}{m_e} E_x (x,t) f_e (x,v_x,t)\right ) = 0
@@ -69,12 +69,12 @@ that is self-consistently coupled with the Maxwell-Gauss equation
   \label{eq:gauss}
   \displaystyle \frac{\partial E_x}{\partial x} (x,t) = 4 \pi e \displaystyle \left ( Z n_i - n_e (x,t) \right )
 \end{equation}
-or, equivalently, self-consistently coupled with the Maxwell-Ampere equation
+for the electrostatic field $E_x (x,t)$ or, equivalently, self-consistently coupled with the Maxwell-Ampere equation
 \begin{equation}
   \label{eq:ampere}
   \displaystyle \frac{\partial E_x }{\partial t } (x,t) = - 4 \pi j_e(x,t) 
 \end{equation}
-with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v} over the whole velocity space $\left [ v_{x,\mathrm{min}},\, v_{x,\mathrm{max}} \right ]$, one gets the hydrodynamic equation of plasma electron number conservation 
+with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v} over the whole velocity space $v_x \in \left [ v_{x,\mathrm{min}},\, v_{x,\mathrm{max}} \right ]$, one gets the hydrodynamic equation of plasma electron number conservation 
 \begin{equation}
   \label{eq:continuity}
   \displaystyle \frac{\partial n_e}{\partial t} (x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( n_e v_e(x,t) \right ) = 0,
@@ -96,9 +96,9 @@ and
 the plasma electron density, mean velocity and electrical charge current, respectively. ESVM also computes the plasma electron thermal velocity $v_{T_e} (x,t)$ defined according to the plasma electron internal energy density
 \begin{equation}
   \label{eq:internal_energy}
-  u_{T_e} (x,t) = n_e (x,t) \displaystyle \frac{ m_e {v_{T_e} (x,t)}^2 }{2}  = \displaystyle \int_{-\infty}^\infty f_e (x,v_x,t) \displaystyle \frac{ m_e {\displaystyle \left ( v_x - v_e (x,t) \right )}^2 }{2} \, d v_x.
+  u_{T_e} (x,t) = n_e (x,t) \displaystyle \frac{ m_e {v_{T_e} (x,t)}^2 }{2}  = \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) \displaystyle \frac{ m_e {\displaystyle \left ( v_x - v_e (x,t) \right )}^2 }{2} \, d v_x.
 \end{equation}
-Maxwell-Gauss equation \autoref{eq:gauss} is computed by using the electrostatic potential definition 
+$v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should always be chosen sufficiently large in such a way that there is no plasma electrons outside of the simulation velocity space during the whole simulation. Maxwell-Gauss equation \autoref{eq:gauss} is computed by using the electrostatic potential definition 
 \begin{equation}
   \label{eq:potential}
   \displaystyle \frac{\partial \Phi}{\partial x} (x,t) = - E_x (x,t)
