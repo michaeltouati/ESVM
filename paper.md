@@ -43,7 +43,7 @@ ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 90 code, paralle
 - Lax-Wendroff scheme @LaxWendroff:1960, 
 - Fromm scheme @Fromm:1968 or
 - Beam-Warming scheme @BeamWarming:1976
-and the non-linear:
+or such as the non-linear:
 - minmod scheme @Roe:1986, 
 - superbee scheme @Roe:1986, 
 - Van Leer scheme @VanLeer:1977 and 
