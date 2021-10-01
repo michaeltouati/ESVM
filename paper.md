@@ -127,3 +127,5 @@ Two stream instability test case : Plasma electrons phase-space :
 Electrostatic wakefield test case : Electrostatic wakefield :
 
 ![Electrostatic wakefield test case : Electrostatic wakefield.\label{fig:electrostatic-wakefield}](test-cases/Wakefield-Emission/figures-Poisson/Ex/Ex_30.png)
+
+# References
