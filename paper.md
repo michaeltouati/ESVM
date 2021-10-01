@@ -74,7 +74,7 @@ or, equivalently, self-consistently coupled with the Maxwell-Ampere equation
   \label{eq:ampere}
   \displaystyle \frac{\partial E_x }{\partial t } (x,t) = - 4 \pi j_e(x,t) 
 \end{equation}
-with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v} over the whole velocity space, one gets the hydrodynamic equation of plasma electron number conservation 
+with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start $t=0$ only. Indeed, by integrating the plasma electron Vlasov equation \autoref{eq:vlasov1d1v} over the whole velocity space $ v_x \in \left [ v_{x,\mathrm{min}},\, v_{x,\mathrm{min}} \right ] $, one gets the hydrodynamic equation of plasma electron number conservation 
 \begin{equation}
   \label{eq:continuity}
   \displaystyle \frac{\partial n_e}{\partial t} (x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( n_e v_e(x,t) \right ) = 0,
@@ -109,7 +109,7 @@ that gives the Poisson equation
   \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t) = - 4 \pi e \displaystyle \left ( Z n_i - n_e (x,t) \right )
 \end{equation}
 when injected in the Maxwell-Gauss equation \autoref{eq:gauss}.
-When the simulation is running, ESVM stores at every time steps and displays on the terminal at every dumped time steps $t_d$ the total plasma electron internal and kinetic energy area density and the total electrostatic energy area density in the simulation box $\left [ x_{\mathrm{min}},\, x_{\mathrm{max}}\right ]$
+When the simulation is running, ESVM stores at every time steps and displays on the terminal at every dumped time steps $t_d$ the total plasma electron internal and kinetic energy area density and the total electrostatic energy area density in the simulation box $\left [ x_{\mathrm{min}},\, x_{\mathrm{max}} \right ]$
 \begin{equation}
   \label{eq:total_internal_energy}
   U_{T_e} (t_d) = \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} u_{T_e} (x,t_d) \, d x,
