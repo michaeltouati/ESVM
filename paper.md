@@ -55,7 +55,7 @@ Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes
 1) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
 2) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and \autoref{fig:non-linear-landau-damping-2}, 
 3) the two-stream instability; cf. \autoref{fig:two-stream-instability} and 
-4) the emission of an electrostatic wakefield  by a Gaussian (in space and velocity-space) electron drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:electrostatic-wakefield}. For each Academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates.
+4) the emission of an electrostatic wakefield  by a Gaussian (in space and velocity-space) electron beam drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:electrostatic-wakefield}. For each Academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. Tools for testing the compilation of the code and for checking the simulation parameters are also provided. 
 
 # Equations computed by ESVM
 
