@@ -38,12 +38,11 @@ bibliography: paper.bib
 
 # Summary
 
-ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 90 code, parallelized using OpenMP and developed in order to adapt simulations to specific Plasma Physics problems thanks to different finite volume numerical advection schemes @Godunov:1959 implemented such as the linear :
+ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 90 code, parallelized using OpenMP and developed in order to adapt simulations to specific Plasma Physics problems thanks to different finite volume numerical advection schemes @Godunov:1959 implemented in the code :
 - donor-cell scheme i.e. the downwind scheme or upwind one @Courant:1952 depending on the advection direction in each cell, 
 - Lax-Wendroff scheme @LaxWendroff:1960, 
-- Fromm scheme @Fromm:1968 or
-- Beam-Warming scheme @BeamWarming:1976 
-or such as the non-linear:
+- Fromm scheme @Fromm:1968,
+- Beam-Warming scheme @BeamWarming:1976,
 - minmod scheme @Roe:1986, 
 - superbee scheme @Roe:1986, 
 - Van Leer scheme @VanLeer:1977 and 
