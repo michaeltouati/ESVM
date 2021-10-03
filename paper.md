@@ -131,17 +131,17 @@ The code units consist in the commonly used electrostatic units : the electron m
 # ESVM numerical stability
 
 The spatial grid cells $\Delta x$ must be chosen lower than the Debye length for the simulations to be Physical, the 
-size $\Delta v_x$ and extrema $[v_{\mathrm{min}},v_{\mathrm{max}}]$ in agreement with the considered Plasma Physics problem. The CFL stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl}$ such that the simulation time step respects
+size $\Delta v_x$ and extrema $[v_{\mathrm{min}},v_{\mathrm{max}}]$ in agreement with the considered Plasma Physics problem. The CFL stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the simulation time step respects
 \begin{equation}
 \Delta t = \mathrm{cfl} \times F(\Delta x, \Delta v_x) < F(\Delta x, \Delta v_x)
 \end{equation}
-where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme and is implemented in a code subroutine.
+where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme.
 
 # Provided academic cases
 
-Four well-known academic Plasma Physics cases are provided with ESVM :
+Four well-known Plasma Physics academic cases are provided with ESVM :
 1) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
-2) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and \autoref{fig:non-linear-landau-damping-2}, 
+2) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping}, 
 3) the two-stream instability; cf. \autoref{fig:two-stream-instability} and 
 4) the emission of an electrostatic wakefield by a Gaussian (in space and velocity-space) electron beam drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:electrostatic-wakefield}. 
 
@@ -171,7 +171,7 @@ Linear Landau damping test case : Electrostatic field energy and Plasma electron
 
 Non Linear Landau damping test case : Plasma electrons phase-space :
 
-![Non Linear Landau damping test case : Plasma electrons phase-space.\label{fig:non-linear-landau-damping-2}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
+![Non Linear Landau damping test case : Plasma electrons phase-space.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
 
 Two stream instability test case : Plasma electrons phase-space :
 
