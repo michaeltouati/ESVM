@@ -146,8 +146,9 @@ where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme and is im
 # Perspectives
 
 It is planned in a near future to :
+- implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes @Liu:1994
 - compute the plasma ion Vlasov equation to allow for the ions to be mobile 
-- extend the code to relativistic 2D-2V and 1D-3V phase-space electromagnetic plasma simulations
+- extend the code to relativistic electromagnetic 2D-2V and 1D-3V phase-space electromagnetic plasma simulations
 - implement its MPI parallelization
 - implement its vectorization
 - store the simulation results in hdf5 files instead of text files
