@@ -47,15 +47,11 @@ ESVM (ElectroStatic Vlasov-Maxwell) is a single species 1D-1V Vlasov-Maxwell For
 - the superbee scheme @Roe:1986 and 
 - two Monotonic Upwind-centered Scheme for Conservation Laws (MUSCL) @VanLeerV:1977 schemes MUSCL1 @Crouseilles:2004 and MUSCL2 @Duclous:2009. 
 
-Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes, the non-linear second order minmod, superbee, Van Leer and MUSCL schemes make use of a Total Variation Diminishing (TVD) flux limiter with the price of becoming a first order scheme in some phase-space cells to limit the numerical oscillations. The donor-cell scheme is a first order method and has the pros of limiting such eventual oscillations but the cons of being highly numerically diffusive too. In ESVM, the discretized Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation for the electrostatic field or equivalently with the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step. While the 1D second order Maxwell-Gauss solver needs the inversion of a triangular matrix for the computation of the Poisson equation for the electrostatic potential, the 1D Maxwell-Ampere equation solver makes use of the faster second order finite difference Yee scheme @Yee:1966. Both absorbing and periodic boundary conditions for both the particles and the fields are implemented. Python scripts, using the Matplotlib and Numpy packages, are provided to automatically extract and plot the simulation results that are stored in text files. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. 
+Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes, the non-linear second order minmod, superbee, Van Leer and MUSCL schemes make use of a Total Variation Diminishing (TVD) flux limiter with the price of becoming a first order scheme in some phase-space cells to limit the numerical oscillations. The donor-cell scheme is a first order method and has the pros of limiting such eventual oscillations but the cons of being highly numerically diffusive too. In ESVM, the discretized Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation for the electrostatic field or equivalently with the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step. While the 1D second order Maxwell-Gauss solver needs the inversion of a triangular matrix for the computation of the Poisson equation for the electrostatic potential, the 1D Maxwell-Ampere equation solver makes use of the faster second order finite difference Yee scheme @Yee:1966. Both absorbing and periodic boundary conditions for both the particles and the fields are implemented. Python scripts, using the Matplotlib and Numpy packages, are provided to automatically extract and plot the simulation results that are stored in text files. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. Well known Plasma Physics academic cases, tools for testing the compilation of the code and for checking the simulation parameters are provided. 
 
 # Statement of need
 
-`ESVM` has been developed in order to adapt simulations to specific Plasma Physics problems by chosing the more adequate finite volume numerical advection scheme in order to compute the Vlasov equation phase-space advection derivatives and to chose between computing the Maxwell-Gauss equation or the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step only. The code aims at beeing used by the open-source Highly Parallel Computing (HPC) Plasma Physics community ranging from under/post-graduate students to teachers and theoretical researchers who usually use Particle-In-Cell (PIC) codes @Dawson:1962 to study collisionless plasmas. Indeed, the PIC method, that can be seen as a Lagrangian Vlasov equation solver, prohibit the study of Plasma Physical processes on large time scales and/or for very dense collisionless plasmas due to the statistical and numerical fluctuations of the computed quantities imposed by the use of a finite number of particles. Also, plasma instabilities naturally develop in PIC codes, seeded by the available fluctuations spatial spectrum k-vector for which the instability growth rate is maximum and some small amplitude Plasma Physical processes may be hidden under the fluctuactions level. Compared to open source PIC and semi-Lagrangian codes such as @Derouillat:2018, there isn't an abundant number of open source Eulerian Vlasov codes in the literature that are not based on an expansion method such as @Tzoufras:2011 @Touati:2014 @Joglekar:2020. Finally, since the Vlasov equation is a conservation equation of the number of particle in the phase-space, using a finite volume method in order to compute the Vlasov equation presents the advantage of allowing the use of numerical schemes that are numerically flux conserving compared to other numerical methods. Four well-known academic Plasma Physics cases are provided with ESVM :
-1) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
-2) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and \autoref{fig:non-linear-landau-damping-2}, 
-3) the two-stream instability; cf. \autoref{fig:two-stream-instability} and 
-4) the emission of an electrostatic wakefield  by a Gaussian (in space and velocity-space) electron beam drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:electrostatic-wakefield}. For each Academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. Tools for testing the compilation of the code and for checking the simulation parameters are also provided. 
+`ESVM` has been developed in order to adapt simulations to specific Plasma Physics problems by chosing the more adequate finite volume numerical advection scheme in order to compute the Vlasov equation phase-space advection derivatives and to chose between computing the Maxwell-Gauss equation or the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step only. The code aims at beeing used by the open-source Highly Parallel Computing (HPC) Plasma Physics community ranging from under/post-graduate students to teachers and theoretical researchers who usually use Particle-In-Cell (PIC) codes @Dawson:1962 to study collisionless plasmas. Indeed, the PIC method, that can be seen as a Lagrangian Vlasov equation solver, prohibit the study of Plasma Physical processes on large time scales and/or for very dense collisionless plasmas due to the statistical and numerical fluctuations of the computed quantities imposed by the use of a finite number of particles. Also, plasma instabilities naturally develop in PIC codes, seeded by the available fluctuations spatial spectrum k-vector for which the instability growth rate is maximum and some small amplitude Plasma Physical processes may be hidden under the fluctuactions level. Compared to open source PIC and semi-Lagrangian codes such as @Derouillat:2018, there isn't an abundant number of open source Eulerian Vlasov codes in the literature that are not based on an expansion method such as @Tzoufras:2011 @Touati:2014 @Joglekar:2020. Finally, since the Vlasov equation is a conservation equation of the number of particle in the phase-space, using a finite volume method in order to compute the Vlasov equation presents the advantage of allowing for the use of numerical schemes that are numerically flux conserving and/or ensure the distribution function positivity compared to other numerical methods. 
 
 # Equations computed by ESVM
 
@@ -141,7 +137,17 @@ size $\Delta v_x$ and extrema $[v_{\mathrm{min}},v_{\mathrm{max}}]$ in agreement
 \end{equation}
 where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme and is implemented in a code subroutine.
 
-# Academic cases
+# Provided academic cases
+
+Four well-known academic Plasma Physics cases are provided with ESVM :
+1) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
+2) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and \autoref{fig:non-linear-landau-damping-2}, 
+3) the two-stream instability; cf. \autoref{fig:two-stream-instability} and 
+4) the emission of an electrostatic wakefield by a Gaussian (in space and velocity-space) electron beam drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:electrostatic-wakefield}. 
+
+For each Academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. In order to highlight how such ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 3) and recommend the reader the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 as well as @Decyk:1987 in order to check the provided academic case simulation results 1), 2) and 4), respectively.
+
+
 
 # Perspectives
 
@@ -159,15 +165,9 @@ It is planned in a near future to :
 
 # Figures
 
-The following figures have been directly obtained using the provided input decks corresponding to the previously mentioned well known academic Plasma Physics problems. Except for the non-linear Landau damping problem for which the non-linear theory should be applied in order to check the simulation results, all other simulation results can be checked by solving analytically the equations computed by the codes, linearized around the considered equilibrium distribution function and introducing the considered small perturbation. 
-
 Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time :
 
 ![Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
-
-Non-linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time :
-
-![Non Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/energy.png)
 
 Non Linear Landau damping test case : Plasma electrons phase-space :
 
@@ -179,6 +179,6 @@ Two stream instability test case : Plasma electrons phase-space :
 
 Electrostatic wakefield test case : Electrostatic wakefield :
 
-![Electrostatic wakefield test case : Electrostatic wakefield.\label{fig:electrostatic-wakefield}](test-cases/Wakefield-Emission/figures-Poisson/Ex/Ex_30.png)
+![Electrostatic wakefield test case : Electrostatic wakefield.\label{fig:electrostatic-wakefield}](test-cases/Wakefield-Emission/figures-Poisson/Ex.png)
 
 # References
