@@ -131,7 +131,7 @@ The code units consist in the commonly used electrostatic units : the electron m
 
 # ESVM numerical stability
 
-The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulations of collisionless plasmas where, by definition, the number of electrons in Debye spheres is infinite. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{max}/\mathrm{max}}| \gg v_{T_e}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_e}$ and also sufficiently small to capture the desired Physics. The CFL (from the name of its founder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step respects
+The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to b Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_e}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_e}$ and also sufficiently small to capture the desired Physics. The CFL stability criterium (from the name of its founder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step respects
 \begin{equation}
 \underline{\Delta t} = \mathrm{cfl} \times F(\underline{\Delta x}, \underline{\Delta v}_x )
 \end{equation}
@@ -145,7 +145,7 @@ the electron distribution function finite volume at the spatial location $\under
   \label{eq:advection}
   \displaystyle \frac{\partial \underline{f_e}}{\partial \underline{t}} + \underline{v_x} \displaystyle \frac{\partial \underline{f_e}}{\partial \underline{x} } = 0
 \end{equation}
-of the electrons along the spatial $\underline{x}$-axis, the numerical scheme reads
+of plasma electrons along the spatial $\underline{x}$-axis in the phase-space, the numerical scheme reads
 \begin{equation}
   \label{eq:LaxWendroff}
   {\left [ \displaystyle \frac{\underline{f_e}^{n+1} - \underline{f_e}^{n} }{ \underline{\Delta t} } \right ]}^i + \underline{v_x} {\left [ \displaystyle \frac{\underline{F_x}^{i+1/2} - \underline{F_x}^{i-1/2} }{ \underline{\Delta x} } \right ]}^n = 0
@@ -168,6 +168,20 @@ According to the Taylor expansion of $\underline{f_e}^{n,i+i}$, $\underline{f_e}
   \cr &=& \displaystyle \frac{ {\underline{\Delta t}}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{t}^3} \right |}^{n,i}  + \underline{v_x} \displaystyle \frac{ {\underline{\Delta x}}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{x}^3} \right |}^{n,i} + O\left ( {\underline{\Delta t}}^3 + {\underline{\Delta x}}^3 + \underline{\Delta t} {\underline{\Delta x}}^2\right ).
   \end{array}
 \end{equation}
+By using the Von Neumann stability analysis noting
+\begin{equation}
+  \label{eq:VonNeumann}
+  \underline{f_e}^{n,i} = \displaystyle \int_{-\infty}^\infty \widehat{\underline{f_e}}^n (k) \exp{\left ( j k x_i \right )}\,dx \text{ and } \widehat{\underline{f_e}}^n(k) = \displaystyle \sum_{i=0}^{N_x} \underline{f_e}^{i,n} \exp{\left (-  j k x_i \right )}\,dx
+\end{equation}
+one gets 
+\begin{equation}
+\displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} }{  \widehat{\underline{f_e}}^{n} } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } j \sin{\left ( k \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( k \underline{\Delta x} \right )}   -1 \right ].
+\end{equation}
+It implies, by noting $\alpha = \underline{v_x} \underline{\Delta t} / \underline{\Delta x}$, that
+\begin{equation}
+{\displaystyle \left | \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} }{  \widehat{\underline{f_e}}^{n} } \right |}^2 = 1- \alpha^2 \left ( 1 - \alpha^2\right ) { \left [ \cos{\left ( k \underline{\Delta x} \right )}   -1 \right ] }^2 < 1 \,\mathrm{if}\, \alpha <1
+\end{equation}
+for the numerical scheme to be stable.
 
 # Provided academic cases
 
