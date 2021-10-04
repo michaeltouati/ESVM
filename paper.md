@@ -131,11 +131,11 @@ The code units consist in the commonly used electrostatic units : the electron m
 
 # ESVM numerical stability
 
-The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to b Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_e}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_e}$ and also sufficiently small to capture the desired Physics. The CFL stability criterium (from the name of its founder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step respects
+The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to b Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_e}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_e}$ and also sufficiently small to capture the desired Physics. The CFL stability criterium (from the name of its founder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step reads
 \begin{equation}
-\underline{\Delta t}_n = \mathrm{cfl} \times F^n(\underline{\Delta x}, \underline{\Delta v}_x )
+\underline{\Delta t}_n = \mathrm{cfl} \times F^n(\underline{\Delta x}, \underline{\Delta v}_x ) < F^n(\underline{\Delta x}, \underline{\Delta v}_x)
 \end{equation}
-at the time step $\underline{t}_n = n \underline{\Delta t}$ where $F^n(\underline{\Delta x}, \underline{\Delta v}_x)$ depends on the chosen numerical scheme. For example, if one notes
+at the time step $\underline{t}_n = (n-1) \underline{\Delta t}$ where $F^n(\underline{\Delta x}, \underline{\Delta v}_x)$ depends on the chosen numerical scheme. For example, if one notes
 \begin{equation}
   \label{eq:vol_def}
 \underline{f_e}^{n,i} = \displaystyle \frac{1}{\underline{\Delta x} } \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f_e} \left(\underline{x},\,\underline{t}_n\right)\, d \underline{x}
@@ -150,7 +150,7 @@ of plasma electrons along the spatial $\underline{x}$-axis in the phase-space, t
   \label{eq:LaxWendroff}
   {\left [ \displaystyle \frac{\underline{f_e}^{n+1} - \underline{f_e}^{n} }{ \underline{\Delta t} } \right ]}^i + \underline{v_x} {\left [ \displaystyle \frac{\underline{F_x}^{i+1/2} - \underline{F_x}^{i-1/2} }{ \underline{\Delta x} } \right ]}^n = 0
 \end{equation}
-where the fluxes at the volume interfaces $\underline{x}_{i\pm1/2}$ along the $\underline{x}$-axis are given by
+where the fluxes across the volume sections located at $\underline{x}_{i\pm1/2}$ are given by
 \begin{equation}
   \label{eq:LaxWendroff_fluxes_plus}
   \underline{F_x}^{n,i+1/2} = \displaystyle \frac{\underline{f_e}^{n,i+1} + \underline{f_e}^{n,i}}{2} - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x}} \displaystyle \frac{\underline{f_e}^{n,i+1} - \underline{f_e}^{n,i}}{2}
@@ -175,9 +175,9 @@ By using the Von Neumann stability analysis, assuming periodic boundary conditio
 \end{equation}
 with $j^2=-1$, $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$, one gets by injecting \autoref{eq:VonNeumann} in \autoref{eq:LaxWendroff}
 \begin{equation}
-\displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{  \widehat{\underline{f_e}}^{n} (\underline{k}^p) } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } j \sin{\left ( \underline{k}^p \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( \underline{k}^p \underline{\Delta x} \right )}   -1 \right ].
+\displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{  \widehat{\underline{f_e}}^{n} (\underline{k}^p) } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } j \sin{\left ( \underline{k}^p \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( \underline{k}^p \underline{\Delta x} \right )}   -1 \right ]
 \end{equation}
-for each term $p$ of the series. It implies the numerical scheme is stable, meaning $| \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) /   \widehat{\underline{f_e}}^{n} (\underline{k}^p) | < 1$, if $\underline{v_x} \underline{\Delta t} / \underline{\Delta x} <1$. Performing the same reasoning when discretizing also the velocity space $\underline{v}_{x}^\ell = \underline{v}_{x,\mathrm{min}} + (\ell-1 ) \underline{\Delta v}_x$ with $N_{v_x} = 1 + \underline{v}_{x,\mathrm{max}} / \underline{\Delta v}_x$ grid points and considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in \autoref{eq:advection} for computing the Vlasov equation \autoref{eq:vlasov1d1v}, one finds 
+for each term $p$ of the series. It implies the numerical scheme is stable, meaning $| \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) /   \widehat{\underline{f_e}}^{n} (\underline{k}^p) | < 1$, if $\underline{v_x} \underline{\Delta t} / \underline{\Delta x} <1$. Performing the same reasoning when discretizing also the velocity space $\underline{v}_{x}^\ell = \underline{v}_{x,\mathrm{min}} + (\ell-1 ) \underline{\Delta v}_x$ with $N_{v_x} = 1 + (\underline{v}_{x,\mathrm{max}}-\underline{v}_{x,\mathrm{min}}) / \underline{\Delta v}_x$ velocity grid points and considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in \autoref{eq:advection} for computing the Vlasov equation \autoref{eq:vlasov1d1v} for each numerical scheme  implemented in ESVM, one finds 
 \begin{equation}
   \label{CFL}
   F^n(\underline{\Delta x}, \underline{\Delta v}_x) = \displaystyle \frac{1/2}{ \displaystyle \frac{ \underset{\ell \in [1,N_{v_x}]}{\mathrm{max}}\{ \underline{v}_x^\ell \} }{ \underline{\Delta x} } + \displaystyle \frac{ \underset{i \in [1,N_x]}{\mathrm{max}}\{ \underline{E}_x^{n,i} \} }{ \underline{\Delta v}_x } }.
