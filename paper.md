@@ -217,7 +217,7 @@ during a short time interval at the simulation start for 2) and 3) where $A$, $v
   \cr E_x (x,t) &=& E_x^{(0)} (x,t) &+& \delta E_x (x,t)
   \end{array} \right . \, \mathrm{with}\, \left | \delta f_e (x,t) \right | \ll f_e^{(0)} (x,t)
 \end{equation}
-during the simulation. In order to highlight how such ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 3) and recommend the reader the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 as well as @Decyk:1987 in order to check the provided academic case simulation results 1), 2) and 4), respectively.
+during the linear stage of the simulation. In order to highlight how such ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 3) and recommend the reader the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 as well as @Decyk:1987 in order to check the provided academic case simulation results 1), 2) and 4), respectively.
 
 # Perspectives
 
