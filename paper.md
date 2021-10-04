@@ -140,8 +140,21 @@ where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme. For exam
   \label{eq:vol_def}
 \underline{f}_e^{n,i} = \displaystyle \frac{1}{\underline{\Delta}_x} \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f}_e \left(x,\,t_n\right)
 \end{equation}
-the finite volume distribution function element at the cell $i$ located between $\underline{x}_{i-1/2} = \underline{x}_{i} - \underline{\Delta}_x/2$ and $\underline{x}_{i+1/2} = \underline{x}_{i} + \underline{\Delta}_x/2$ at the time step $t_n = n \underline{\Delta}_t$, let us consider the Lax-Wendroff scheme to compute the advection 
-
+the electron distribution function finite volume at the spatial location $\underline{x}_i$ located in between $\underline{x}_{i-1/2} = \underline{x}_{i} - \underline{\Delta}_x/2$ and $\underline{x}_{i+1/2} = \underline{x}_{i} + \underline{\Delta}_x/2$ at the time step $t_n = n \underline{\Delta}_t$, and one considers the Lax-Wendroff method to compute the advection 
+\begin{equation}
+  \label{eq:advection}
+  \displaystyle \frac{\partial underline{f}_e}{\partial \underline{t}} + \underline{v}_x \displaystyle \frac{\partial underline{f}_e}{\partial \underline{x} } = 0
+\end{equation}
+of the electrons along the spatial $x$-axis, the numerical scheme reads
+\begin{equation}
+  \label{eq:LaxWendroff}
+  {\left [ \displaystyle \frac{\underline{f}_e^{n+1} - \underline{f}_e^{n} }{ \underline{\Delta} t } \right ]}^i + \underline{v}_x {\left [ \displaystyle \frac{\underline{F}_x^{i+1/2} - \underline{F}_x^{i-1/2} }{ \underline{\Delta} x } \right ]}^n = 0
+\end{equation}
+where the fluxes along the $x$-axis given by
+\begin{equation}
+  \label{eq:LaxWendroff_fluxes}
+  \underline{F}_x ^{n,i+1/2} = \displaystyle \frac{\underline{f}_e^{n,i+1} + \underline{f}_e^{n,i}}{2} - \displaystyle \frac{\underline{v}_x \underline{\Delta}_t}{\underline{\Delta} x} \displaystyle \frac{\underline{f}_e^{n,i+1} - \underline{f}_e^{n,i}}{2}.
+\end{equation}
 
 # Provided academic cases
 
