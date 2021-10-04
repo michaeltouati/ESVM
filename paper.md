@@ -21,8 +21,7 @@ tags:
   - superbee
   - Van Leer
   - MUSCL
-  - Linear Landau damping
-  - Non-linear Landau damping
+  - Landau damping
   - Two-stream instability
   - Electrostatic wakefield
 authors:
@@ -202,13 +201,13 @@ For each academic case, an example of input deck is provided together with the c
   \label{MaxwellBoltzmannEquilibrium}
   \displaystyle \left \{
   \begin{array}{l}
-      f_e^{(0)} (x,t=0) = \displaystyle \frac{Z n_i}{ \displaystyle \sqrt{ 2 \pi {v_{T_e}}^2 } } \exp{ \displaystyle \left [ - \displaystyle \frac{ v_x^2 }{ 2 {v_{T_e}}^2 } \right ] }
+      f_e^{(0)} (x,v_x,t=0) = \displaystyle \frac{Z n_i}{ \displaystyle \sqrt{ 2 \pi {v_{T_e}}^2 } } \exp{ \displaystyle \left [ - \displaystyle \frac{ v_x^2 }{ 2 {v_{T_e}}^2 } \right ] }
   \cr E_x^{(0)} (x,t=0) = 0
   \end{array} \right .
 \end{equation}
 that is perturbed with a small perturbation 
 \begin{equation}
-  \delta f_e (x,t=0)= \displaystyle \frac{ A }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] },
+  \delta f_e (x,v_x,t=0)= \displaystyle \frac{ A }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] },
 \end{equation}
 consisting of a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a spatial standard deviation $\delta x = \lambda_{\mathrm{Debye}} / 4$ drifting at a velocity $v_d$ with a velocity standard deviation $\delta v = v_{T_e} / 40$ at the simulation start for 1), and a small perturbation 
 \begin{equation}
@@ -218,24 +217,24 @@ during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation 
 \begin{equation}
   \displaystyle \left \{
   \begin{array}{ccccc}
-      f_e (x,t) &=& f_e^{(0)} (x,t) &+& \delta f_e (x,t)
+      f_e (x,v_x,t) &=& f_e^{(0)} (x,v_x,t) &+& \delta f_e (x,v_x,t)
   \cr E_x (x,t) &=& E_x^{(0)} (x,t) &+& \delta E_x (x,t)
-  \end{array} \right . \, \mathrm{with}\, \left | \delta f_e (x,t) \right | \ll f_e^{(0)} (x,t)
+  \end{array} \right . \, \mathrm{with}\, \left | \delta f_e (x,v_x,t) \right | \ll f_e^{(0)} (x,v_x,t)
 \end{equation}
 is still respected during the linear stage of the simulation. 
 
 We refer the user to the paper @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 in order to check the provided academic case simulation results 1), 2) and 3), respectively, and we only detail here the derivation of analytical estimates in order to check the ESVM simulation results related with the provided academic case 4) initialized assuming two counter-propagating homogeneous non-relativistic Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $v_\text{d}$ and same standard velocity deviation $v_\text{th}$
 \begin{equation}
   \label{EDF}
-  f_e^{(0)} \displaystyle \left ( v_x \right ) = f_{e,+}^{(0)} \displaystyle \left (v_x \right ) + f_{e,-}^{(0)} \displaystyle \left ( v_x \right )
+  f_e^{(0)} \displaystyle \left ( x,v_x,t \right ) = f_{e,+}^{(0)} \displaystyle \left (x,v_x,t \right ) + f_{e,-}^{(0)} \displaystyle \left (x,v_x,t \right )
 \end{equation}
 with
 \begin{equation}
-  f_{e,\pm}^{(0)} \displaystyle \left ( v_x \right ) = \displaystyle \frac{Z n_i / 2}{\sqrt{2 \pi {v_\text{th}}^2} } \exp{ \displaystyle \left [ - \displaystyle \frac{ {\left ( v_x \mp v_d \right )}^2 }{ 2 {v_\text{th}}^2 } \right ] }
+  f_{e,\pm}^{(0)} \displaystyle \left (x,v_x,t\right ) = \displaystyle \frac{Z n_i / 2}{\sqrt{2 \pi {v_\text{th}}^2} } \exp{ \displaystyle \left [ - \displaystyle \frac{ {\left ( v_x \mp v_d \right )}^2 }{ 2 {v_\text{th}}^2 } \right ] }
 \end{equation}
 that is a solution of the Vlasov Equation (\autoref{vlasov1d1v}) and that doesn't produce any electrostatic fields 
 \begin{equation}
-  E_x^{(0)}  = 0
+  E_x^{(0)}(x,t)  = 0
 \end{equation}
 according to Maxwell-Gauss Equation \autoref{eq:gauss}. If we compute the Vlasov-Maxwell set of Equations $\{$(\autoref{eq:vlasov1d1v}), (\autoref{eq:gauss})$\}$ exactly, initializing it with the two-stream equilibrium distribution function (\autoref{eq:EDF}) without any perturbation, we will only see the counter-propagating electron beams continuing their propagation through the immobile ion matrix without any modification. In order to observe the two-stream instability, we have to perturb this equilibrium by using a seed on which the instability is going to grow. For this purpose, we initialize the distribution function according to
 \begin{equation}
