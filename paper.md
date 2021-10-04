@@ -165,7 +165,7 @@ According to the Taylor expansion of $\underline{f}_e^{n,i+i}$, $\underline{f}_e
   \label{eq:LaxWendroff_error}
   \begin{array}{lll}
   \underline{\epsilon}^{n,i} &=& {\left [ \displaystyle \frac{\underline{f}_e^{n+1} - \underline{f}_e^{n} }{ \underline{\Delta}_t } \right ]}^i + \underline{v}_x {\left [ \displaystyle \frac{\underline{F}_x^{i+1/2} - \underline{F}_x^{i-1/2} }{ \underline{\Delta}_x } \right ]}^n - \displaystyle \left (  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial \underline{t}} \right |}^{n,i} + \underline{v}_x  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial \underline{x}} \right |}^{n,i} \right )
-  \cr &=& \displaystyle \frac{ {\underline{\Delta}_t}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial \underline{t}^3} \right |}^{n,i}  + \underline{v}_x \displaystyle \frac{ {\underline{\Delta}_x}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial \underline{x}^3} \right |}^{n,i} + O\left ( {\underline{\Delta}_t}^3 + {\\underline{Delta}_x}^3 + \underline{\Delta}_t {\underline{\Delta}_x}^2\right ).
+  \cr &=& \displaystyle \frac{ {\underline{\Delta}_t}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial \underline{t}^3} \right |}^{n,i}  + \underline{v}_x \displaystyle \frac{ {\underline{\Delta}_x}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial \underline{x}^3} \right |}^{n,i} + O\left ( {\underline{\Delta}_t}^3 + {\underline{Delta}_x}^3 + \underline{\Delta}_t {\underline{\Delta}_x}^2\right ).
   \end{array}
 \end{equation}
 
