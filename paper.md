@@ -207,9 +207,9 @@ that is perturbed with a small perturbation
 \end{equation}
 consisting of an electron beam located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a spatial size $\delta x = \lambda_{\mathrm{Debye}} / 4$ drifting at a velocity $v_d$ with a velocity standard deviation $\delta v = v_{T_e} / 40$ at the simulation start for 1), and a small perturbation 
 \begin{equation}
-  \delta E_x (x,t < 6 \pi / \omega_0)= A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
+  \delta E_x (x,t < \delta t)= A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
 \end{equation}
-during a short time interval at the simulation start for 2) and 3) where $A$, $v_d$, $\omega_0$ and $k$ are the perturbation amplitude, drift velocity, angular temporal frequency and angular spatial frequency that the user can choose for the perturbation when filling the input-deck, such that
+during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3) where $A \ll 1$, $v_d > v_{T_e}$, $\omega_0$ and $k$ are the perturbation amplitude, drift velocity, angular temporal frequency and angular spatial frequency, respectively, that the user can choose when filling the input-deck, such that
 \begin{equation}
   \displaystyle \left \{
   \begin{array}{ccccc}
