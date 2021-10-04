@@ -173,15 +173,16 @@ By using the Von Neumann stability analysis, assuming periodic boundary conditio
   \label{eq:VonNeumann}
    \widehat{\underline{f_e}}^n(\underline{k}^p) = \displaystyle \frac{1}{ N_x } \displaystyle \sum_{i=1}^{N_x} \underline{f_e}^{i,n} \exp{\left (-  j \underline{k}^p \underline{x}_i \right )} \Leftrightarrow \underline{f_e}^{n,i}  = \displaystyle \sum_{p=1}^{N_x} \widehat{\underline{f_e}}^n(\underline{k}^p)  \exp{\left ( j \underline{k}^p \underline{x}_i \right )}
 \end{equation}
-with $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$, one gets by injecting \autoref{eq:VonNeumann} in \autoref{eq:LaxWendroff}
+with $j^2=-1$, $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$, one gets by injecting \autoref{eq:VonNeumann} in \autoref{eq:LaxWendroff}
 \begin{equation}
 \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{  \widehat{\underline{f_e}}^{n} (\underline{k}^p) } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } j \sin{\left ( \underline{k}^p \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( \underline{k}^p \underline{\Delta x} \right )}   -1 \right ].
 \end{equation}
-for each term $p$ of the series. It implies that
+for each term $p$ of the series. It implies the numerical scheme is stable if $\underline{v_x} \underline{\Delta t} / \underline{\Delta x} <1$. Performing the same reasoning when considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in \autoref{eq:advection}, one deduces 
 \begin{equation}
-{\displaystyle \left | \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} }{  \widehat{\underline{f_e}}^{n} } \right |}^2 = 1- \alpha^2 \left ( 1 - \alpha^2\right ) { \left [ \cos{\left ( k \underline{\Delta x} \right )}   -1 \right ] }^2 
+  \label{LaxWendroffCFL}
+  F(\underline{\Delta x}, \underline{\Delta v}_x) = \displaystyle \frac{1/2}{ \displaystyle \frac{ \mathrm{max}\{ \underline{v}_x \} }{ \underline{\Delta x} } + \displaystyle \frac{ \mathrm{max}\{ \underline{E}_x \} }{ \underline{\Delta v}_x } }.
 \end{equation}
-so that the numerical scheme is stable if $\alpha = \underline{v_x} \underline{\Delta t} / \underline{\Delta x} <1$.
+is sufficient for the full Lax-Wendroff to be stable in ESVM.
 
 # Provided academic cases
 
