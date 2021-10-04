@@ -47,11 +47,11 @@ ESVM (ElectroStatic Vlasov-Maxwell) is a single species 1D-1V Vlasov-Maxwell For
 - the superbee scheme @Roe:1986 and 
 - two Monotonic Upwind-centered Scheme for Conservation Laws (MUSCL) @VanLeerV:1977 schemes MUSCL1 @Crouseilles:2004 and MUSCL2 @Duclous:2009. 
 
-Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes, the non-linear second order minmod, superbee, Van Leer and MUSCL schemes make use of a Total Variation Diminishing (TVD) flux limiter with the price of becoming a first order scheme in some phase-space cells to limit the numerical oscillations. The donor-cell scheme is a first order method and has the pros of limiting such eventual oscillations but the cons of being highly numerically diffusive too. In ESVM, the discretized Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation for the electrostatic field or equivalently with the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step. While the 1D second order Maxwell-Gauss solver needs the inversion of a triangular matrix for the computation of the Poisson equation for the electrostatic potential, the 1D Maxwell-Ampere equation solver makes use of the faster second order finite difference Yee scheme @Yee:1966. Both absorbing and periodic boundary conditions for both the particles and the fields are implemented. Python scripts, using the Matplotlib and Numpy packages, are provided to automatically extract and plot the simulation results that are stored in text files. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. Well known Plasma Physics academic cases, tools for testing the compilation and tools for checking the simulation parameters are provided. 
+Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes, the non-linear second order minmod, superbee, Van Leer and MUSCL schemes make use of a Total Variation Diminishing (TVD) flux limiter with the price of becoming a first order scheme in some phase-space cells to limit the numerical oscillations. The donor-cell scheme is a first order method and has the pros of limiting such eventual oscillations but the cons of being numerically less consistent and more diffusive too. In ESVM, the discretized Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation for the electrostatic field or equivalently with the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step, only. While the 1D second order Maxwell-Gauss solver needs an eventually expensive inversion of a tridiagonal matrix for the computation of the Poisson equation for the electrostatic potential, the 1D Maxwell-Ampere equation solver makes use of the faster second order finite difference Yee scheme @Yee:1966. Both absorbing and periodic boundary conditions for both the particles and the fields are implemented. Python scripts, using the Matplotlib and Numpy packages, are provided to automatically extract and plot the simulation results that are stored in text files. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. Well known Plasma Physics academic cases, tools for testing the compilation and tools for checking the simulation parameters are provided. 
 
 # Statement of need
 
-`ESVM` has been developed in order to adapt simulations to specific Plasma Physics problems by chosing the more adequate finite volume numerical advection scheme in order to compute the Vlasov equation phase-space advection derivatives and to chose between computing the Maxwell-Gauss equation or the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step only. The code aims at beeing used by the open-source Highly Parallel Computing (HPC) Plasma Physics community ranging from under/post-graduate students to teachers and theoretical researchers who usually use Particle-In-Cell (PIC) codes @Dawson:1962 to study collisionless plasmas. Indeed, the PIC method, that can be seen as a Lagrangian Vlasov equation solver, prohibit the study of Plasma Physical processes on large time scales and/or for very dense collisionless plasmas due to the statistical and numerical fluctuations of the computed quantities imposed by the use of a finite number of particles. Also, plasma instabilities naturally develop in PIC codes, seeded by the available fluctuations spatial spectrum k-vector for which the instability growth rate is maximum and some small amplitude Plasma Physical processes may be hidden under the fluctuactions level. Compared to open source PIC such as @Derouillat:2018 and semi-Lagrangian codes, there isn't an abundant number of open source finite volume Vlasov codes in the literature that are not based on an expansion method such as @Tzoufras:2011 @Touati:2014 @Joglekar:2020. In addition, since the Vlasov equation is a conservation equation of the number of particle in the phase-space, using a finite volume method in order to compute the Vlasov equation presents the advantage of allowing for the use of numerical schemes that are numerically flux conserving and/or ensure the distribution function positivity compared to other numerical methods. ESVM has already been used during courses for under and post-graduate students on the "numerical tools for laser-plasma interaction Physics" and it is currently used for theoretical Plasma Physics investigations.
+`ESVM` has been developed in order to adapt simulations to specific Plasma Physics problems by chosing the more adequate finite volume numerical advection scheme in order to compute the Vlasov equation phase-space advection derivatives and to chose between computing the Maxwell-Gauss equation or the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step, only. The code aims at beeing used by the open-source Highly Parallel Computing (HPC) Plasma Physics community ranging from under or post-graduate students to teachers and researchers who usually use Particle-In-Cell (PIC) codes @Dawson:1962 to study collisionless plasmas. Indeed, the PIC method may prohibit the study of Plasma Physical processes on large time scales and/or for very dense collisionless plasmas due to the statistical and numerical fluctuations of the computed quantities imposed by the use of a finite number of macroparticles. Also, plasma instabilities naturally develop in PIC codes, seeded by the available fluctuations spatial spectrum k-vector for which the instability growth rate is maximum and some small amplitude Plasma Physical processes may be hidden under the fluctuactions level. Compared to the many open source PIC code such as @Derouillat:2018 and semi-Lagrangian codes, there is no open source finite volume Vlasov codes in the literature that are not based on an expansion method such as @Tzoufras:2011 @Touati:2014 or @Joglekar:2020. In addition, since the Vlasov equation is a conservation equation of the number of particle in the phase-space, using a finite volume method in order to compute the Vlasov equation presents the advantage of allowing for the use of numerical schemes that are numerically flux conserving and/or that ensure the distribution function positivity compared to other numerical methods. ESVM has already been used during courses for under and post-graduate students about the "numerical tools for laser-plasma interaction Physics" and it is currently used for theoretical Plasma Physics investigations.
 
 # Equations computed by ESVM
 
@@ -127,15 +127,56 @@ in order to check the energy conservation in the simulation.
 
 # ESVM units
 
-The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = v_{T_e} / \omega_{p}$ and the constant ion density $n_i$ for densities. The resulting normalized electrostatic field and distribution function consequently reads $\underline{E}_x = e E_x / m_e \omega_{p} v_{T}$ and $\underline{f}_e = f_e v_{T_e} / n_i$, respectively.
+The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = v_{T_e} / \omega_{p}$ and the constant ion density $n_i$ for spatial densities. The resulting normalized electrostatic field and electron distribution function consequently reads $\underline{E}_x = e E_x / m_e \omega_{p} v_{T}$ and $\underline{f}_e = f_e v_{T_e} / n_i$, respectively.
 
 # ESVM numerical stability
 
-The spatial grid cells $\Delta x$ must be chosen lower than the Debye length for the simulations to be Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should always be chosen sufficiently large in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation and the simulation velocity bin size $\Delta v_x$ should always be chosen sufficiently small to capture the desired Physics. The CFL stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the simulation time step respects
+The spatial grid cells $\Delta x$ must be chosen lower than the Debye length for the simulations of collisionless plasmas where, by definition, the number of electrons in Debye spheres is infinite. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should always be chosen sufficiently large in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size $\Delta v_x$ should always be chosen lower than the thermal electron velocity and also sufficiently small to capture the desired Physics. The CFL (from the name of its founder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the simulation time step respects
 \begin{equation}
 \Delta t = \mathrm{cfl} \times F(\Delta x, \Delta v_x) < F(\Delta x, \Delta v_x)
 \end{equation}
-where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme.
+where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme. For example, if one notes
+\begin{equation}
+  \label{eq:vol_def}
+\underline{f}_e^{n,i} = \displaystyle \frac{1}{\underline{\Delta}_x} \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f}_e \left(x,\,t_n\right)
+\end{equation}
+the finite volume distribution function element at the cell $i$ located between $\underline{x}_{i-1/2} = \underline{x}_{i} - \underline{\Delta}_x/2$ and $\underline{x}_{i+1/2} = \underline{x}_{i} + \underline{\Delta}_x/2$ at the time step $t_n = n \underline{\Delta}_t$, let us consider the Lax-Wendroff scheme to compute the advection 
+\begin{equation}
+  \label{eq:advection}
+  \displaystyle \frac{\partial underline{f}_e}{\partial \underline{t}} + \underline{v}_x \displaystyle \frac{\partial \partial underline{f}_e}{\partial \underline{x} = 0
+\end{equation}
+of the electrons along the spatial $x$axis to computed $\underline{f}_e^{n+1,i}$ according to
+\begin{equation}
+  \label{eq:LaxWendroff}
+  {\left [ \displaystyle \frac{\underline{f}_e^{n+1} - \underline{f}_e^{n} }{ \underline{\Delta} t } \right ]}^i + \underline{v}_x {\left [ \displaystyle \frac{\underline{F}_x^{i+1/2} - \underline{F}_x^{i-1/2} }{ \underline{\Delta} x } \right ]}^n = 0
+\end{equation}
+with the fluxes along the $x$-axis given by
+\begin{equation}
+  \label{eq:LaxWendroff_fluxes}
+  \underline{F}_x ^{n,i+1/2} = \displaystyle \frac{\underline{f}_e^{n,i+1} + \underline{f}_e^{n,i}}{2} - \displaystyle \frac{\underline{v}_x \underline{\Delta}_t}{\underline{\Delta} x} \displaystyle \frac{\underline{f}_e^{n,i+1} - \underline{f}_e^{n,i}}{2}.
+\end{equation}
+According to the Taylor expansion of \autoref{eq:vol_def} and \autoref{eq:LaxWendroff}, one deduces the second order numerical consistency error 
+\begin{equation}
+  \label{eq:LaxWendroff_error}
+  \begin{array}{lll}
+  \epsilon^{n,i} &=& {\left [ \displaystyle \frac{\underline{f}_e^{n+1} - \underline{f}_e^{n} }{ \Delta_t } \right ]}^i + v_x {\left [ \displaystyle \frac{F^{i+1/2} - F^{i-1/2} }{ \Delta x } \right ]}^n - \displaystyle \left (  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial t} \right |}^{n,i} + v_x  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial x} \right |}^{n,i} \right )
+  \cr &=& \displaystyle \frac{ {\Delta_t}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial t^3} \right |}^{n,i}  + v_x \displaystyle \frac{ {\Delta x}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial x^3} \right |}^{n,i} + O\left ( {\Delta_t}^3 + {\Delta x}^3 + \Delta_t {\Delta_x}^2\right ).
+  \end{array}
+\end{equation}
+Also, by noting \underline{Von Neumann stability analysis :}\\
+Let us note
+\begin{equation}
+\underline{f}_e^{n,i} = \displaystyle \int_{-\infty}^\infty \widehat{\underline{f}_e}^n (k) \exp{\left ( j k x_i \right )}dx \text{ and } \widehat{\underline{f}_e}^n(k) = \displaystyle \sum_{i=0}^{N_x} \underline{f}_e^{i,n} \exp{\left (-  j k x_i \right )}dx
+\end{equation}
+and , one gets :
+\begin{equation}
+\displaystyle \frac{ \widehat{\underline{f}_e}^{n+1} }{  \widehat{\underline{f}_e}^{n} } =  1 - \displaystyle \frac{v_x \Delta t}{\Delta x} j \sin{\left ( k \Delta x \right )} + { \left (  \displaystyle \frac{v_x \Delta t}{\Delta x} \right )}^2 \left [ \cos{\left ( k \Delta x \right )}   -1 \right ]
+\end{equation}
+that implies, by noting $\alpha = v_x \Delta t / \Delta x$, that
+\begin{equation}
+{\displaystyle \left | \displaystyle \frac{ \widehat{f}^{n+1} }{  \widehat{f}^{n} } \right |}^2 = 1- \alpha^2 \left ( 1 - \alpha^2\right ) { \left [ \cos{\left ( k \Delta x \right )}   -1 \right ] }^2 < 1 \text{ if } \alpha <1
+\end{equation}
+for the sheme to be stable.
 
 # Provided academic cases
 
