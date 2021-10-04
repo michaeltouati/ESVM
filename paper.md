@@ -222,20 +222,22 @@ during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation 
   \cr E_x (x,t) &=& E_x^{(0)} (x,t) &+& \delta E_x (x,t)
   \end{array} \right . \, \mathrm{with}\, \left | \delta f_e (x,t) \right | \ll f_e^{(0)} (x,t)
 \end{equation}
-is still respected during the linear stage of the simulation. We refer the reader to the paper @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 in order to check the provided academic case simulation results 1), 2) and 3), respectively, and we only detail here the derivation of analytical estimates tocheck the ESVM simulation results related with the provided academic case 4) initialized assuming two 
+is still respected during the linear stage of the simulation. 
+
+We refer the user to the paper @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 in order to check the provided academic case simulation results 1), 2) and 3), respectively, and we only detail here the derivation of analytical estimates in order to check the ESVM simulation results related with the provided academic case 4) initialized assuming two counter-propagating homogeneous non-relativistic Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $v_\text{d}$ and same standard velocity deviation $v_\text{th}$
 \begin{equation}
-\label{EDF}
-f_e^{(0)} \displaystyle \left ( v_x \right ) = f_{e,+}^{(0)} \displaystyle \left (v_x \right ) + f_{e,-}^{(0)} \displaystyle \left ( v_x \right )
+  \label{EDF}
+  f_e^{(0)} \displaystyle \left ( v_x \right ) = f_{e,+}^{(0)} \displaystyle \left (v_x \right ) + f_{e,-}^{(0)} \displaystyle \left ( v_x \right )
 \end{equation}
-consisting of two counter-propagating homogeneous non-relativistic Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $v_\text{d}$ and same standard velocity deviation $v_\text{th}$
+with
 \begin{equation}
-f_{e,\pm}^{(0)} \displaystyle \left ( v_x \right ) = \displaystyle \frac{Z n_i / 2}{\sqrt{2 \pi {v_\text{th}}^2} } \exp{ \displaystyle \left [ - \displaystyle \frac{ {\left ( v_x \mp v_d \right )}^2 }{ 2 {v_\text{th}}^2 } \right ] }
+  f_{e,\pm}^{(0)} \displaystyle \left ( v_x \right ) = \displaystyle \frac{Z n_i / 2}{\sqrt{2 \pi {v_\text{th}}^2} } \exp{ \displaystyle \left [ - \displaystyle \frac{ {\left ( v_x \mp v_d \right )}^2 }{ 2 {v_\text{th}}^2 } \right ] }
 \end{equation}
-is a solution of the Vlasov Equation (\ref{Vlasov}) and doesn't produce any electrostatic fields 
+that is a solution of the Vlasov Equation (\autoref{vlasov1d1v}) and that doesn't produce any electrostatic fields 
 \begin{equation}
-E_x^{(0)}  = 0
+  E_x^{(0)}  = 0
 \end{equation}
-according to Maxwell-Gauss Equation \autoref{eq:gauss}. If we compute the Vlasov-Maxwell set of Equations $\{$(\autoref{eq:vlasov}), (\autoref{eq:gauss})$\}$ exactly, initializing it with the two-stream equilibrium distribution function (\autoref{eq:EDF}) without any perturbation, we will only see the counter-propagating electron beams continuing their propagation through the immobile ion matrix without any modification. In order to observe the two-stream instability, we have to perturb this equilibrium by using a seed on which the instability is going to grow. For this purpose, we initialize the distribution function according to
+according to Maxwell-Gauss Equation \autoref{eq:gauss}. If we compute the Vlasov-Maxwell set of Equations $\{$(\autoref{eq:vlasov1d1v}), (\autoref{eq:gauss})$\}$ exactly, initializing it with the two-stream equilibrium distribution function (\autoref{eq:EDF}) without any perturbation, we will only see the counter-propagating electron beams continuing their propagation through the immobile ion matrix without any modification. In order to observe the two-stream instability, we have to perturb this equilibrium by using a seed on which the instability is going to grow. For this purpose, we initialize the distribution function according to
 \begin{equation}
 f_e \displaystyle \left ( x,\,v_x,\,t=0\right ) = f_e^{(0)} \displaystyle \left ( v_x \right ) + \delta f_{e} \displaystyle \left ( x,\,v_x,\,t=0 \right ),
 \end{equation}
