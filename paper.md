@@ -160,7 +160,7 @@ and
   \label{eq:LaxWendroff_fluxes}
   \underline{F}_x ^{n,i+1/2} = \displaystyle \frac{\underline{f}_e^{n,i+1} + \underline{f}_e^{n,i}}{2} - \displaystyle \frac{\underline{v}_x \underline{\Delta}_t}{\underline{\Delta} x} \displaystyle \frac{\underline{f}_e^{n,i+1} - \underline{f}_e^{n,i}}{2}.
 \end{equation}
-According to the Taylor expansion of $\underline{f}_e \left(\underline{x},\,\underline{t}_n\right)$ in \autoref{eq:vol_def} up to the third order and \autoref{eq:LaxWendroff}, one can check the Lax-Wendroof numerical consistency error is a second order :
+According to the Taylor expansion of $\underline{f}_e^{n,i+i}$, $\underline{f}_e^{n,i-i}$ and $\underline{f}_e^{n+1,i}$ up to the third order, one can check the Lax-Wendroff numerical consistency error is a second order one :
 \begin{equation}
   \label{eq:LaxWendroff_error}
   \begin{array}{lll}
