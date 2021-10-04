@@ -168,12 +168,12 @@ According to the Taylor expansion of $\underline{f_e}^{n,i+i}$, $\underline{f_e}
   \cr &=& \displaystyle \frac{ {\underline{\Delta t}}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{t}^3} \right |}^{n,i}  + \underline{v_x} \displaystyle \frac{ {\underline{\Delta x}}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{x}^3} \right |}^{n,i} + O\left ( {\underline{\Delta t}}^3 + {\underline{\Delta x}}^3 + \underline{\Delta t} {\underline{\Delta x}}^2\right ).
   \end{array}
 \end{equation}
-By using the Von Neumann stability analysis noting
+By using the Von Neumann stability analysis, assuming periodic boundary conditions for simplicity and noting
 \begin{equation}
   \label{eq:VonNeumann}
-  \underline{f_e}^{n,i} = \displaystyle \int_{-\infty}^\infty \widehat{\underline{f_e}}^n (k) \exp{\left ( j k x_i \right )}\,dx \text{ and } \widehat{\underline{f_e}}^n(k) = \displaystyle \sum_{i=0}^{N_x} \underline{f_e}^{i,n} \exp{\left (-  j k x_i \right )}\,dx
+   \widehat{\underline{f_e}}^n(\underline{k^p}) = \displaystyle \frac{1}{ N_x } \displaystyle \sum_{i=1}^{N_x} \underline{f_e}^{i,n} \exp{\left (-  j \underline{k}^p \underline{x}_i \right )} \Leftrightarrow \underline{f_e}^{n,i}  = \displaystyle \sum_{p=1}^{N_x} \widehat{\underline{f_e}}^n(\underline{k^p})  \exp{\left ( j \underline{k}^p \underline{x}_i \right )}\,dx
 \end{equation}
-one gets 
+with $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}}) $one gets 
 \begin{equation}
 \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} }{  \widehat{\underline{f_e}}^{n} } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } j \sin{\left ( k \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( k \underline{\Delta x} \right )}   -1 \right ].
 \end{equation}
