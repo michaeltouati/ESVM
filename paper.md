@@ -194,7 +194,7 @@ Four well-known Plasma Physics academic cases are provided with ESVM :
 1) the emission of an electrostatic wakefield by a Gaussian electron; cf. \autoref{fig:electrostatic-wakefield}
 2) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
 3) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and 
-3) the two-stream instability of two counter-propagating Gaussian electron beams; cf. \autoref{fig:two-stream-instability}.
+4) the two-stream instability of two counter-propagating Gaussian electron beams; cf. \autoref{fig:two-stream-instability}.
 
 For each academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. For 1), 2) and 3), the simulation is initialized assuming a non-drifting collisionless plasma at Maxwell-Boltzmann equilibrium 
 \begin{equation}
@@ -209,11 +209,11 @@ that is perturbed with a small perturbation
 \begin{equation}
   \delta f_e (x,v_x,t=0)= \displaystyle \frac{ A }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] },
 \end{equation}
-consisting in a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a standard deviation $\delta x = \lambda_{\mathrm{Debye}} / 4$ drifting at a velocity $v_d$ with a standard deviation $\delta v = v_{T_e} / 40$ at the simulation start for 1), and a small perturbation consisting in a small amplitude propagating electron plasma wave
+consisting in a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a standard deviation $\delta x = \lambda_{\mathrm{Debye}} / 4$ drifting at a velocity $v_d$ with a standard deviation $\delta v = v_{T_e} / 40$ at the simulation start for 1), and a small perturbation consisting in a small amplitude electron plasma wave
 \begin{equation}
   \delta E_x (x,t < \delta t) = A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
 \end{equation}
-during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3). Only the perturbation amplitudes $A < 1$ for 1), 2) and 3), the perturbation drift velocity  $v_d > v_{T_e}$ for 1) and the perturbation temporal and spatial angular frequencies $\omega_0$ and $k$ for 2) and 3) should be modified by the user when filling the input-deck in such a way that
+propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3). Only the perturbation amplitudes $A < 1$ for 1), 2) and 3), the perturbation drift velocity  $v_d > v_{T_e}$ for 1) and the perturbation temporal and spatial angular frequencies $\omega_0$ and $k$ for 2) and 3) should be modified by the user when filling the input-deck in such a way that
 \begin{equation}
   \displaystyle \left \{
   \begin{array}{lllll}
@@ -248,7 +248,7 @@ on each beam of the form
 \begin{equation}
 \delta f_{e,\pm} \displaystyle \left ( x,v_x,t=0 \right ) = \pm A \sin{\displaystyle \left ( k x \right )  } f_{e,\pm}^{(0)} \displaystyle \left ( x,v_x,t=0 \right )
 \end{equation}
-with $A = 0.1$, $k = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{≤mathrm{max}} - x_{≤mathrm{min}}$ is the simulation box size. Considering periodic boundary conditions,
+with $A = 0.1$, $k = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. Considering periodic boundary conditions,
 
 # Perspectives
 
