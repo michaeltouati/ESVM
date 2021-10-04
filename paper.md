@@ -1,7 +1,7 @@
 ---
 title: 'ESVM : An Electrostatic Vlasov-Maxwell Open-source Code'
 tags:
-  - Fortran
+  - Fortran 90
   - OpenMP
   - Python
   - Electrostatic Plasma
@@ -209,7 +209,7 @@ consisting of an electron beam located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm
 \begin{equation}
   \delta E_x (x,t < \delta t)= A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
 \end{equation}
-during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3) where $A \ll 1$, $v_d > v_{T_e}$, $\omega_0$ and $k$ are the perturbation amplitude, drift velocity, angular temporal frequency and angular spatial frequency, respectively, that the user can choose when filling the input-deck, such that
+during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3). $A < 1$, $v_d > v_{T_e}$, $\omega_0$ and $k$ are the perturbation amplitude, drift velocity, angular temporal frequency and angular spatial frequency of the perturbation, respectively, that the user can choose when filling the input-deck, such that
 \begin{equation}
   \displaystyle \left \{
   \begin{array}{ccccc}
