@@ -171,7 +171,7 @@ According to the Taylor expansion of $\underline{f_e}^{n,i+i}$, $\underline{f_e}
 By using the Von Neumann stability analysis, assuming periodic boundary conditions for simplicity and noting
 \begin{equation}
   \label{eq:VonNeumann}
-   \widehat{\underline{f_e}}^n(\underline{k^p}) = \displaystyle \frac{1}{ N_x } \displaystyle \sum_{i=1}^{N_x} \underline{f_e}^{i,n} \exp{\left (-  j \underline{k}^p \underline{x}_i \right )} \Leftrightarrow \underline{f_e}^{n,i}  = \displaystyle \sum_{p=1}^{N_x} \widehat{\underline{f_e}}^n(\underline{k^p})  \exp{\left ( j \underline{k}^p \underline{x}_i \right )}\,dx
+   \widehat{\underline{f_e}}^n(\underline{k}^p) = \displaystyle \frac{1}{ N_x } \displaystyle \sum_{i=1}^{N_x} \underline{f_e}^{i,n} \exp{\left (-  j \underline{k}^p \underline{x}_i \right )} \Leftrightarrow \underline{f_e}^{n,i}  = \displaystyle \sum_{p=1}^{N_x} \widehat{\underline{f_e}}^n(\underline{k}^p)  \exp{\left ( j \underline{k}^p \underline{x}_i \right )}
 \end{equation}
 with $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}}) $one gets 
 \begin{equation}
