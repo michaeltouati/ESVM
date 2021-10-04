@@ -1,5 +1,5 @@
 ---
-title: 'ESVM : An Electrostatic Vlasov-Maxwell Open-source Code'
+title: 'ESVM : An Open-source Electrostatic Vlasov-Maxwell Code'
 tags:
   - Fortran 90
   - OpenMP
