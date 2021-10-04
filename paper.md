@@ -193,14 +193,7 @@ Four well-known Plasma Physics academic cases are provided with ESVM :
 3) the two-stream instability; cf. \autoref{fig:two-stream-instability}.
 
 For each Academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. For 1), 2) and 3), the simulation is initialized assuming a non-drifting collisionless plasma at Maxwell-Boltzmann equilibrium 
-\begin{equation}
-  \label{MaxwellBoltzmannEquilibrium}
-  \displaystyle \left \{
-  \begin{array}{l}
-      f_e^{(0)} (x,t_0=0) = \displaystyle \frac{Z n_i}{ \displaystyle \sqrt{ 2 \pi {v_{T_e}}^2 } } \exp{ \displaystyle \left [ - \displaystyle \frac{ v_x^2 }{ 2 {v_{T_e}}^2 } \right ] }
-  \cr E_x^{(0)} = 0
-  \right .
-\end{equation}
+
 for 2) and 3) where $A$, $\omega_0$ and $k$ are free parameters that the user can choose when filling the input-deck. In order to highlight how such ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 3) and recommend the reader the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 as well as @Decyk:1987 in order to check the provided academic case simulation results 1), 2) and 4), respectively.
 
 # Perspectives
