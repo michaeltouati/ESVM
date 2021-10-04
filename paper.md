@@ -173,7 +173,7 @@ By using the Von Neumann stability analysis, assuming periodic boundary conditio
   \label{eq:VonNeumann}
    \widehat{\underline{f_e}}^n(\underline{k}^p) = \displaystyle \frac{1}{ N_x } \displaystyle \sum_{i=1}^{N_x} \underline{f_e}^{i,n} \exp{\left (-  j \underline{k}^p \underline{x}_i \right )} \Leftrightarrow \underline{f_e}^{n,i}  = \displaystyle \sum_{p=1}^{N_x} \widehat{\underline{f_e}}^n(\underline{k}^p)  \exp{\left ( j \underline{k}^p \underline{x}_i \right )}
 \end{equation}
-with $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}}) $one gets 
+with $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$, one gets 
 \begin{equation}
 \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} }{  \widehat{\underline{f_e}}^{n} } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } j \sin{\left ( k \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( k \underline{\Delta x} \right )}   -1 \right ].
 \end{equation}
