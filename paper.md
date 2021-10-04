@@ -131,11 +131,11 @@ The code units consist in the commonly used electrostatic units : the electron m
 
 # ESVM numerical stability
 
-The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to b Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_e}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_e}$ and also sufficiently small to capture the desired Physics. The CFL stability criterium (from the name of its founder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step reads
+The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to be Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_e}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_e}$ (or standard deviation velocity if the plasma is not at the Maxwell-Boltzmann equilibrium) and also sufficiently small to capture the desired Physics. The CFL stability criterium (from the name of its founder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step reads
 \begin{equation}
 \underline{\Delta t}_n = \mathrm{cfl} \times F^n(\underline{\Delta x}, \underline{\Delta v}_x ) < F^n(\underline{\Delta x}, \underline{\Delta v}_x)
 \end{equation}
-at the time step $\underline{t}_n = (n-1) \underline{\Delta t}$ where $F^n(\underline{\Delta x}, \underline{\Delta v}_x)$ depends on the chosen numerical scheme. For example, if one notes
+at the time step $\underline{t}_n = \sum_{m=1}^{n} \underline{\Delta t}_m $ at the time iteration $n$ where $F^n(\underline{\Delta x}, \underline{\Delta v}_x)$ depends on the chosen numerical scheme. For example, if one notes
 \begin{equation}
   \label{eq:vol_def}
 \underline{f_e}^{n,i} = \displaystyle \frac{1}{\underline{\Delta x} } \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f_e} \left(\underline{x},\,\underline{t}_n\right)\, d \underline{x}
@@ -150,7 +150,7 @@ of plasma electrons along the spatial $\underline{x}$-axis in the phase-space, t
   \label{eq:LaxWendroff}
   {\left [ \displaystyle \frac{\underline{f_e}^{n+1} - \underline{f_e}^{n} }{ \underline{\Delta t} } \right ]}^i + \underline{v_x} {\left [ \displaystyle \frac{\underline{F_x}^{i+1/2} - \underline{F_x}^{i-1/2} }{ \underline{\Delta x} } \right ]}^n = 0
 \end{equation}
-where the fluxes across the volume sections located at $\underline{x}_{i\pm1/2}$ are given by
+where the plasma electron fluxes across the volume sections located at $\underline{x}_{i\pm1/2}$ are given by
 \begin{equation}
   \label{eq:LaxWendroff_fluxes_plus}
   \underline{F_x}^{n,i+1/2} = \displaystyle \frac{\underline{f_e}^{n,i+1} + \underline{f_e}^{n,i}}{2} - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x}} \displaystyle \frac{\underline{f_e}^{n,i+1} - \underline{f_e}^{n,i}}{2}
@@ -160,7 +160,7 @@ and
   \label{eq:LaxWendroff_fluxes_minus}
   \underline{F_x} ^{n,i-1/2} = \displaystyle \frac{\underline{f_e}^{n,i} + \underline{f_e}^{n,i-1}}{2} - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x}} \displaystyle \frac{\underline{f_e}^{n,i} - \underline{f_e}^{n,i-1}}{2}.
 \end{equation}
-According to the Taylor expansion of $\underline{f_e}^{n,i+i}$, $\underline{f_e}^{n,i-i}$ and $\underline{f_e}^{n+1,i}$ up to the third order in space and time, one can check the Lax-Wendroff numerical consistency error is indeed a second order one :
+According to the Taylor expansion of $\underline{f_e}^{n,i+i}$, $\underline{f_e}^{n,i-i}$ and $\underline{f_e}^{n+1,i}$ up to the third order in space and time, one can check the Lax-Wendroff numerical consistency error is indeed of 2nd order :
 \begin{equation}
   \label{eq:LaxWendroff_error}
   \begin{array}{lll}
@@ -173,7 +173,7 @@ By using the Von Neumann stability analysis, assuming periodic boundary conditio
   \label{eq:VonNeumann}
    \widehat{\underline{f_e}}^n(\underline{k}^p) = \displaystyle \frac{1}{ N_x } \displaystyle \sum_{i=1}^{N_x} \underline{f_e}^{i,n} \exp{\left (-  j \underline{k}^p \underline{x}_i \right )} \Leftrightarrow \underline{f_e}^{n,i}  = \displaystyle \sum_{p=1}^{N_x} \widehat{\underline{f_e}}^n(\underline{k}^p)  \exp{\left ( j \underline{k}^p \underline{x}_i \right )}
 \end{equation}
-with $j^2=-1$, $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$, one gets by injecting \autoref{eq:VonNeumann} in \autoref{eq:LaxWendroff}
+with $j^2=-1$, $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$ the discrete Fourier mode, one gets by injecting \autoref{eq:VonNeumann} in \autoref{eq:LaxWendroff}
 \begin{equation}
 \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{  \widehat{\underline{f_e}}^{n} (\underline{k}^p) } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } j \sin{\left ( \underline{k}^p \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( \underline{k}^p \underline{\Delta x} \right )}   -1 \right ]
 \end{equation}
