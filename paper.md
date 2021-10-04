@@ -138,12 +138,12 @@ The spatial grid cells $\Delta x$ must be chosen lower than the Debye length for
 where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme. For example, if one notes
 \begin{equation}
   \label{eq:vol_def}
-\underline{f}_e^{n,i} = \displaystyle \frac{1}{\underline{\Delta}_x} \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f}_e \left(x,\,t_n\right)
+\underline{f}_e^{n,i} = \displaystyle \frac{1}{\underline{\Delta}_x} \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f}_e \left(\underline{x},\,\underline{t}_n\right)\, d \underline{x}
 \end{equation}
 the electron distribution function finite volume at the spatial location $\underline{x}_i$ located in between $\underline{x}_{i-1/2} = \underline{x}_{i} - \underline{\Delta}_x/2$ and $\underline{x}_{i+1/2} = \underline{x}_{i} + \underline{\Delta}_x/2$ at the time step $t_n = n \underline{\Delta}_t$, and one considers the Lax-Wendroff method to compute the advection 
 \begin{equation}
   \label{eq:advection}
-  \displaystyle \frac{\partial underline{f}_e}{\partial \underline{t}} + \underline{v}_x \displaystyle \frac{\partial underline{f}_e}{\partial \underline{x} } = 0
+  \displaystyle \frac{\partial \underline{f}_e}{\partial \underline{t}} + \underline{v}_x \displaystyle \frac{\partial \underline{f}_e}{\partial \underline{x} } = 0
 \end{equation}
 of the electrons along the spatial $x$-axis, the numerical scheme reads
 \begin{equation}
@@ -154,6 +154,19 @@ where the fluxes along the $x$-axis given by
 \begin{equation}
   \label{eq:LaxWendroff_fluxes}
   \underline{F}_x ^{n,i+1/2} = \displaystyle \frac{\underline{f}_e^{n,i+1} + \underline{f}_e^{n,i}}{2} - \displaystyle \frac{\underline{v}_x \underline{\Delta}_t}{\underline{\Delta} x} \displaystyle \frac{\underline{f}_e^{n,i+1} - \underline{f}_e^{n,i}}{2}.
+\end{equation}
+and
+\begin{equation}
+  \label{eq:LaxWendroff_fluxes}
+  \underline{F}_x ^{n,i+1/2} = \displaystyle \frac{\underline{f}_e^{n,i+1} + \underline{f}_e^{n,i}}{2} - \displaystyle \frac{\underline{v}_x \underline{\Delta}_t}{\underline{\Delta} x} \displaystyle \frac{\underline{f}_e^{n,i+1} - \underline{f}_e^{n,i}}{2}.
+\end{equation}
+According to the Taylor expansion of $\underline{f}_e \left(\underline{x},\,\underline{t}_n\right)$ in \autoref{eq:vol_def} up to the third order and \autoref{eq:LaxWendroff}, one can check the Lax-Wendroof numerical consistency error is a second order :
+\begin{equation}
+  \label{eq:LaxWendroff_error}
+  \begin{array}{lll}
+  \epsilon^{n,i} &=& {\left [ \displaystyle \frac{\underline{f}_e^{n+1} - \underline{f}_e^{n} }{ \Delta_t } \right ]}^i + v_x {\left [ \displaystyle \frac{F^{i+1/2} - F^{i-1/2} }{ \Delta x } \right ]}^n - \displaystyle \left (  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial t} \right |}^{n,i} + v_x  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial x} \right |}^{n,i} \right )
+  \cr &=& \displaystyle \frac{ {\Delta_t}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial t^3} \right |}^{n,i}  + v_x \displaystyle \frac{ {\Delta x}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial x^3} \right |}^{n,i} + O\left ( {\Delta_t}^3 + {\Delta x}^3 + \Delta_t {\Delta_x}^2\right ).
+  \end{array}
 \end{equation}
 
 # Provided academic cases
