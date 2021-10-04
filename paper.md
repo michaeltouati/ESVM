@@ -135,7 +135,7 @@ The spatial grid cells should be chosen lower than the Debye length $\Delta x < 
 \begin{equation}
 \underline{\Delta t}_n = \mathrm{cfl} \times F^n(\underline{\Delta x}, \underline{\Delta v}_x ) < F^n(\underline{\Delta x}, \underline{\Delta v}_x)
 \end{equation}
-at the time step $\underline{t}_n = \sum_{m=1}^{n} \underline{\Delta t}_m$ at the time iteration $n$ where $F^n(\underline{\Delta x}, \underline{\Delta v}_x)$ depends on the chosen numerical scheme. For example, if one notes
+at the time step $\underline{t}_n = \sum_{m=1}^{n} \underline{\Delta t}_m$ at time iteration $n$ where $F^n(\underline{\Delta x}, \underline{\Delta v}_x)$ depends on the chosen numerical scheme. For example, if one notes
 \begin{equation}
   \label{eq:vol_def}
 \underline{f_e}^{n,i} = \displaystyle \frac{1}{\underline{\Delta x} } \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f_e} \left(\underline{x},\,\underline{t}_n\right)\, d \underline{x}
