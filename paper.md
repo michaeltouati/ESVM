@@ -160,7 +160,7 @@ It is planned in a near future to :
 - store the simulation results in hdf5 files instead of text files
 - implement the Perfectly Matched Layer (PML) technique @Berenger:1994 to absorb the electromagnetic fields at the spatial simulation box boundaries
 - implement a relativistic BGK (from the name of its founder P. L. Bhatnagar, E. P. Gross  and M. Krook) collision operator @BhatnagarGrossKrook:1954
-- implement the Belyaev-Budker relativistic collision operator
+- implement the Belyaev-Budker relativistic collision operator @BelaievBudker:1957 using the Braams-Karney relativistic extension of Rosenbluth potentials @BraamsKarney:1987
 - deploy the code to GPU architectures.
 
 # Figures
