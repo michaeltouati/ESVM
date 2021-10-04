@@ -214,7 +214,7 @@ consisting of a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mat
 \begin{equation}
   \delta E_x (x,t < \delta t) = A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
 \end{equation}
-during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3). The perturbation amplitudes $A < 1$ for 1), 2) and 3), the perturbation drift velocity  $v_d > v_{T_e}$ for 1) and the perturbation angular temporal and spatial frequencies $\omega_0$ and $k$ can be chosen by the user when filling the input-deck, such that
+during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3). Only the perturbation amplitudes $A < 1$ for 1), 2) and 3), the perturbation drift velocity  $v_d > v_{T_e}$ for 1) and the perturbation temporal and spatial angular frequencies $\omega_0$ and $k$ can be modified by the user when filling the input-deck in such a way that
 \begin{equation}
   \displaystyle \left \{
   \begin{array}{ccccc}
@@ -222,7 +222,11 @@ during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation 
   \cr E_x (x,t) &=& E_x^{(0)} (x,t) &+& \delta E_x (x,t)
   \end{array} \right . \, \mathrm{with}\, \left | \delta f_e (x,t) \right | \ll f_e^{(0)} (x,t)
 \end{equation}
-during the linear stage of the simulation. In order to highlight how the resulting ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 4) and refer the reader to the paper @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 in order to check the provided academic case simulation results 1), 2) and 3), respectively.
+is still respected during the linear stage of the simulation. In order to highlight how the resulting ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 4) initialized assuming two 
+
+and perturbed with a small perturbation
+
+We refer the reader to the paper @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 in order to check similarly the provided academic case simulation results 1), 2) and 3), respectively.
 
 # Perspectives
 
