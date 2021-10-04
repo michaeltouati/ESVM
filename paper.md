@@ -47,11 +47,11 @@ ESVM (ElectroStatic Vlasov-Maxwell) is a single species 1D-1V Vlasov-Maxwell For
 - the superbee scheme @Roe:1986 and 
 - two Monotonic Upwind-centered Scheme for Conservation Laws (MUSCL) @VanLeerV:1977 schemes MUSCL1 @Crouseilles:2004 and MUSCL2 @Duclous:2009. 
 
-Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes, the non-linear second order minmod, superbee, Van Leer and MUSCL schemes make use of a Total Variation Diminishing (TVD) flux limiter with the price of becoming a first order scheme in some phase-space cells to limit the numerical oscillations. The donor-cell scheme is a first order method and has the pros of limiting such eventual oscillations but the cons of being highly numerically diffusive too. In ESVM, the discretized Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation for the electrostatic field or equivalently with the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step. While the 1D second order Maxwell-Gauss solver needs the inversion of a triangular matrix for the computation of the Poisson equation for the electrostatic potential, the 1D Maxwell-Ampere equation solver makes use of the faster second order finite difference Yee scheme @Yee:1966. Both absorbing and periodic boundary conditions for both the particles and the fields are implemented. Python scripts, using the Matplotlib and Numpy packages, are provided to automatically extract and plot the simulation results that are stored in text files. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. Well known Plasma Physics academic cases, tools for testing the compilation of the code and for checking the simulation parameters are provided. 
+Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes, the non-linear second order minmod, superbee, Van Leer and MUSCL schemes make use of a Total Variation Diminishing (TVD) flux limiter with the price of becoming a first order scheme in some phase-space cells to limit the numerical oscillations. The donor-cell scheme is a first order method and has the pros of limiting such eventual oscillations but the cons of being highly numerically diffusive too. In ESVM, the discretized Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation for the electrostatic field or equivalently with the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step. While the 1D second order Maxwell-Gauss solver needs the inversion of a triangular matrix for the computation of the Poisson equation for the electrostatic potential, the 1D Maxwell-Ampere equation solver makes use of the faster second order finite difference Yee scheme @Yee:1966. Both absorbing and periodic boundary conditions for both the particles and the fields are implemented. Python scripts, using the Matplotlib and Numpy packages, are provided to automatically extract and plot the simulation results that are stored in text files. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. Well known Plasma Physics academic cases, tools for testing the compilation and tools for checking the simulation parameters are provided. 
 
 # Statement of need
 
-`ESVM` has been developed in order to adapt simulations to specific Plasma Physics problems by chosing the more adequate finite volume numerical advection scheme in order to compute the Vlasov equation phase-space advection derivatives and to chose between computing the Maxwell-Gauss equation or the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step only. The code aims at beeing used by the open-source Highly Parallel Computing (HPC) Plasma Physics community ranging from under/post-graduate students to teachers and theoretical researchers who usually use Particle-In-Cell (PIC) codes @Dawson:1962 to study collisionless plasmas. Indeed, the PIC method, that can be seen as a Lagrangian Vlasov equation solver, prohibit the study of Plasma Physical processes on large time scales and/or for very dense collisionless plasmas due to the statistical and numerical fluctuations of the computed quantities imposed by the use of a finite number of particles. Also, plasma instabilities naturally develop in PIC codes, seeded by the available fluctuations spatial spectrum k-vector for which the instability growth rate is maximum and some small amplitude Plasma Physical processes may be hidden under the fluctuactions level. Compared to open source PIC and semi-Lagrangian codes such as @Derouillat:2018, there isn't an abundant number of open source Eulerian Vlasov codes in the literature that are not based on an expansion method such as @Tzoufras:2011 @Touati:2014 @Joglekar:2020. Finally, since the Vlasov equation is a conservation equation of the number of particle in the phase-space, using a finite volume method in order to compute the Vlasov equation presents the advantage of allowing for the use of numerical schemes that are numerically flux conserving and/or ensure the distribution function positivity compared to other numerical methods. 
+`ESVM` has been developed in order to adapt simulations to specific Plasma Physics problems by chosing the more adequate finite volume numerical advection scheme in order to compute the Vlasov equation phase-space advection derivatives and to chose between computing the Maxwell-Gauss equation or the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step only. The code aims at beeing used by the open-source Highly Parallel Computing (HPC) Plasma Physics community ranging from under/post-graduate students to teachers and theoretical researchers who usually use Particle-In-Cell (PIC) codes @Dawson:1962 to study collisionless plasmas. Indeed, the PIC method, that can be seen as a Lagrangian Vlasov equation solver, prohibit the study of Plasma Physical processes on large time scales and/or for very dense collisionless plasmas due to the statistical and numerical fluctuations of the computed quantities imposed by the use of a finite number of particles. Also, plasma instabilities naturally develop in PIC codes, seeded by the available fluctuations spatial spectrum k-vector for which the instability growth rate is maximum and some small amplitude Plasma Physical processes may be hidden under the fluctuactions level. Compared to open source PIC such as @Derouillat:2018 and semi-Lagrangian codes, there isn't an abundant number of open source finite volume Vlasov codes in the literature that are not based on an expansion method such as @Tzoufras:2011 @Touati:2014 @Joglekar:2020. In addition, since the Vlasov equation is a conservation equation of the number of particle in the phase-space, using a finite volume method in order to compute the Vlasov equation presents the advantage of allowing for the use of numerical schemes that are numerically flux conserving and/or ensure the distribution function positivity compared to other numerical methods. ESVM has already been used during courses for under and post-graduate students on the "numerical tools for laser-plasma interaction Physics" and it is currently used for theoretical Plasma Physics investigations.
 
 # Equations computed by ESVM
 
@@ -92,9 +92,9 @@ and
 the plasma electron density, mean velocity and electrical charge current, respectively. ESVM also computes the plasma electron thermal velocity $v_{T_e} (x,t)$ defined according to the plasma electron internal energy density
 \begin{equation}
   \label{eq:internal_energy}
-  u_{T_e} (x,t) = n_e (x,t) \displaystyle \frac{ m_e {v_{T_e} (x,t)}^2 }{2}  = \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) \displaystyle \frac{ m_e {\displaystyle \left ( v_x - v_e (x,t) \right )}^2 }{2} \, d v_x.
+  u_{T_e} (x,t) = n_e (x,t) m_e {v_{T_e} (x,t)}^2  = m_e  \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) {\displaystyle \left ( v_x - v_e (x,t) \right )}^2 \, d v_x.
 \end{equation}
-For plasmas at local Maxwell-Boltzmann equilibrium, $v_{T_e} (x,t) = \displaystyle \sqrt{k_B T_e (x,t) / m_e}$ where $k_B$ is the Boltzmann constant, $T_e(x,t)$ is the local electron temperature and $m_e$ the electron mass. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should always be chosen sufficiently large in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. Maxwell-Gauss equation \autoref{eq:gauss} is computed by using the electrostatic potential definition 
+For example, in plasmas at local Maxwell-Boltzmann equilibrium, $v_{T_e} (x,t) = \displaystyle \sqrt{k_B T_e (x,t) / m_e}$ where $k_B$ is the Boltzmann constant, $T_e(x,t)$ is the local electron temperature and $m_e$ the electron mass. Maxwell-Gauss equation \autoref{eq:gauss} is computed by using the electrostatic potential definition 
 \begin{equation}
   \label{eq:potential}
   \displaystyle \frac{\partial \Phi}{\partial x} (x,t) = - E_x (x,t)
@@ -104,7 +104,7 @@ that gives the Poisson equation
   \label{eq:poisson}
   \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t) = - 4 \pi e \displaystyle \left ( Z n_i - n_e (x,t) \right )
 \end{equation}
-when injected in the Maxwell-Gauss equation \autoref{eq:gauss}.
+for the electrostatic potential $\Phi$ when injected in the Maxwell-Gauss equation \autoref{eq:gauss}.
 When the simulation is running, ESVM stores at every time steps and displays on the terminal at every dumped time steps $t_d$ the total plasma electron internal and kinetic energy area density and the total electrostatic energy area density in the simulation box $x \in \left [ x_{\mathrm{min}},\, x_{\mathrm{max}} \right ]$
 \begin{equation}
   \label{eq:total_internal_energy}
@@ -121,17 +121,17 @@ and
 \end{equation}
 respectively as well as the total energy area density
 \begin{equation}
-  U_{\mathrm{tot}} (t_d) = U_{T_e} (t_d)+ U_{K_e} (t_d) + U_{E_x} (t_d).
+  U_{\mathrm{tot}} (t_d) = U_{T_e} (t_d)+ U_{K_e} (t_d) + U_{E_x} (t_d)
 \end{equation}
+in order to check the energy conservation in the simulation.
 
 # ESVM units
 
-The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = \displaystyle \sqrt{k_B T_e / 4 \pi Z n_i e^2}$ where $k_B$ is the Boltzmann constant and $T_e$ the plasma electron temperature (and therefore the thermal plasma electron velocity $v_{T} = \lambda_{\mathrm{Debye}} \omega_{p}$ for velocities) and the constant ion density $n_i$ for densities ($\underline{f}_e = f_e v_{T_e} / n_i$). The resulting electrostatic field unit consequently reads $\underline{E}_x = e E_x / m_e \omega_{p} v_{T}$.
+The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = v_{T_e} / \omega_{p}$ and the constant ion density $n_i$ for densities. The resulting normalized electrostatic field and distribution function consequently reads $\underline{E}_x = e E_x / m_e \omega_{p} v_{T}$ and $\underline{f}_e = f_e v_{T_e} / n_i$, respectively.
 
 # ESVM numerical stability
 
-The spatial grid cells $\Delta x$ must be chosen lower than the Debye length for the simulations to be Physical, the 
-size $\Delta v_x$ and extrema $[v_{\mathrm{min}},v_{\mathrm{max}}]$ in agreement with the considered Plasma Physics problem. The CFL stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the simulation time step respects
+The spatial grid cells $\Delta x$ must be chosen lower than the Debye length for the simulations to be Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should always be chosen sufficiently large in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation and the simulation velocity bin size $\Delta v_x$ should always be chosen sufficiently small to capture the desired Physics. The CFL stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the simulation time step respects
 \begin{equation}
 \Delta t = \mathrm{cfl} \times F(\Delta x, \Delta v_x) < F(\Delta x, \Delta v_x)
 \end{equation}
@@ -147,11 +147,16 @@ Four well-known Plasma Physics academic cases are provided with ESVM :
 
 For each Academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. In order to highlight how such ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 3) and recommend the reader the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 as well as @Decyk:1987 in order to check the provided academic case simulation results 1), 2) and 4), respectively.
 
-
+\begin{table}
+    a & b
+\cr c & d
+\end{table}
 
 # Perspectives
 
 It is planned in a near future to :
+- provide another Plasma Physics academic simulation about one BGK (from the name of its founder Bernstein Green and Kruskal) non linear solution @BernsteinGreenKruskal:1957
+- provide a second Plasma Physics academic simulation about Plasma wave echo @Gould:1967
 - implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes @Liu:1994
 - compute the plasma ion Vlasov equation to allow for the ions to be mobile 
 - extend the code to relativistic electromagnetic 2D-2V and 1D-3V phase-space electromagnetic plasma simulations
