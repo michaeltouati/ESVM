@@ -133,14 +133,14 @@ The code units consist in the commonly used electrostatic units : the electron m
 
 The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulations of collisionless plasmas where, by definition, the number of electrons in Debye spheres is infinite. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{max}/\mathrm{max}}| \gg v_{T_e}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_e}$ and also sufficiently small to capture the desired Physics. The CFL (from the name of its founder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step respects
 \begin{equation}
-\underline{\Delta t} = \mathrm{cfl} \times F(\underline{\Delta x}, \underline{\Delta v_x})
+\underline{\Delta t} = \mathrm{cfl} \times F(\underline{\Delta x}, \underline{\Delta v}_x )
 \end{equation}
-where $F(\underline{\Delta x}, \underline{\Delta v_x})$ depends on the chosen numerical scheme. For example, if one notes
+where $F(\underline{\Delta x}, \underline{\Delta v}_x)$ depends on the chosen numerical scheme. For example, if one notes
 \begin{equation}
   \label{eq:vol_def}
 \underline{f_e}^{n,i} = \displaystyle \frac{1}{\underline{\Delta x} } \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f_e} \left(\underline{x},\,\underline{t}_n\right)\, d \underline{x}
 \end{equation}
-the electron distribution function finite volume at the spatial location $\underline{x}_i$ located in between $\underline{x}_{i-1/2} = \underline{x}_{i} - \underline{\Delta x}/2$ and $\underline{x}_{i+1/2} = \underline{x}_{i} + \underline{\Delta x}/2$ at the time step $t_n = n \underline{\Delta t}$, and one considers the Lax-Wendroff method to compute the advection 
+the electron distribution function finite volume at the spatial location $\underline{x}_i$ located in between $\underline{x}_{i-1/2} = \underline{x}_{i} - \underline{\Delta x}/2$ and $\underline{x}_{i+1/2} = \underline{x}_{i} + \underline{\Delta x}/2$ at the time step $\underline{t}_n = n \underline{\Delta t}$, and one considers the Lax-Wendroff method to compute the advection 
 \begin{equation}
   \label{eq:advection}
   \displaystyle \frac{\partial \underline{f_e}}{\partial \underline{t}} + \underline{v_x} \displaystyle \frac{\partial \underline{f_e}}{\partial \underline{x} } = 0
@@ -165,7 +165,7 @@ According to the Taylor expansion of $\underline{f_e}^{n,i+i}$, $\underline{f_e}
   \label{eq:LaxWendroff_error}
   \begin{array}{lll}
   \underline{\epsilon}^{n,i} &=& {\left [ \displaystyle \frac{\underline{f_e}^{n+1} - \underline{f_e}^{n} }{ \underline{\Delta t} } \right ]}^i + \underline{v_x} {\left [ \displaystyle \frac{\underline{F_x}^{i+1/2} - \underline{F_x}^{i-1/2} }{ \underline{\Delta x} } \right ]}^n - \displaystyle \left (  {\left . \displaystyle \frac{\partial \underline{f_e} }{\partial \underline{t}} \right |}^{n,i} + \underline{v_x}  {\left . \displaystyle \frac{\partial \underline{f_e} }{\partial \underline{x}} \right |}^{n,i} \right )
-  \cr &=& \displaystyle \frac{ {\underline{\Delta t}}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{t}^3} \right |}^{n,i}  + \underline{v_x} \displaystyle \frac{ {\underline{\Delta x}}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{x}^3} \right |}^{n,i} + O\left ( {\underline{\Delta t}}^3 + {\underline{Delta x}}^3 + \underline{\Delta t} {\underline{\Delta x}}^2\right ).
+  \cr &=& \displaystyle \frac{ {\underline{\Delta t}}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{t}^3} \right |}^{n,i}  + \underline{v_x} \displaystyle \frac{ {\underline{\Delta x}}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{x}^3} \right |}^{n,i} + O\left ( {\underline{\Delta t}}^3 + {\underline{\Delta x}}^3 + \underline{\Delta t} {\underline{\Delta x}}^2\right ).
   \end{array}
 \end{equation}
 
