@@ -89,7 +89,7 @@ subroutine INIT_SIMU(x, vx, f_n)
   ! Electrostatic wakefield test case :
     dx  = 0.25_PR  ! "particle size"
     dvx = 0.025_PR ! "particle size"
-    xs  = (x_max - x_min) / 8.  
+    xs  = x_min + ( (x_max - x_min) / 8. ) 
     do l=1,N_vx,1
       do i=1,N_x,1
         f_n(i,l) = (1.0_PR/sqrt(2._PR*pi*(vs**2._PR)))*&
