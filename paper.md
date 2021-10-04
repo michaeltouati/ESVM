@@ -133,14 +133,14 @@ The code units consist in the commonly used electrostatic units : the electron m
 
 The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to b Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_e}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_e}$ and also sufficiently small to capture the desired Physics. The CFL stability criterium (from the name of its founder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step respects
 \begin{equation}
-\underline{\Delta t} = \mathrm{cfl} \times F^n(\underline{\Delta x}, \underline{\Delta v}_x )
+\underline{\Delta t}_n = \mathrm{cfl} \times F^n(\underline{\Delta x}, \underline{\Delta v}_x )
 \end{equation}
-where $F^n(\underline{\Delta x}, \underline{\Delta v}_x)$ depends on the chosen numerical scheme. For example, if one notes
+at the time step $\underline{t}_n = n \underline{\Delta t}$ where $F^n(\underline{\Delta x}, \underline{\Delta v}_x)$ depends on the chosen numerical scheme. For example, if one notes
 \begin{equation}
   \label{eq:vol_def}
 \underline{f_e}^{n,i} = \displaystyle \frac{1}{\underline{\Delta x} } \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f_e} \left(\underline{x},\,\underline{t}_n\right)\, d \underline{x}
 \end{equation}
-the electron distribution function finite volume at the spatial location $\underline{x}_i$ located in between $\underline{x}_{i-1/2} = \underline{x}_{i} - \underline{\Delta x}/2$ and $\underline{x}_{i+1/2} = \underline{x}_{i} + \underline{\Delta x}/2$ at the time step $\underline{t}_n = n \underline{\Delta t}$, and one considers the Lax-Wendroff method to compute the advection 
+the electron distribution function finite volume at the spatial location $\underline{x}_i$ located in between $\underline{x}_{i-1/2} = \underline{x}_{i} - \underline{\Delta x}/2$ and $\underline{x}_{i+1/2} = \underline{x}_{i} + \underline{\Delta x}/2$ and one considers the Lax-Wendroff method to compute the advection 
 \begin{equation}
   \label{eq:advection}
   \displaystyle \frac{\partial \underline{f_e}}{\partial \underline{t}} + \underline{v_x} \displaystyle \frac{\partial \underline{f_e}}{\partial \underline{x} } = 0
