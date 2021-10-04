@@ -141,42 +141,7 @@ where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme. For exam
 \underline{f}_e^{n,i} = \displaystyle \frac{1}{\underline{\Delta}_x} \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f}_e \left(x,\,t_n\right)
 \end{equation}
 the finite volume distribution function element at the cell $i$ located between $\underline{x}_{i-1/2} = \underline{x}_{i} - \underline{\Delta}_x/2$ and $\underline{x}_{i+1/2} = \underline{x}_{i} + \underline{\Delta}_x/2$ at the time step $t_n = n \underline{\Delta}_t$, let us consider the Lax-Wendroff scheme to compute the advection 
-\begin{equation}
-  \label{eq:advection}
-  \displaystyle \frac{\partial underline{f}_e}{\partial \underline{t}} + \underline{v}_x \displaystyle \frac{\partial \partial underline{f}_e}{\partial \underline{x} = 0
-\end{equation}
-of the electrons along the spatial $x$axis to computed $\underline{f}_e^{n+1,i}$ according to
-\begin{equation}
-  \label{eq:LaxWendroff}
-  {\left [ \displaystyle \frac{\underline{f}_e^{n+1} - \underline{f}_e^{n} }{ \underline{\Delta} t } \right ]}^i + \underline{v}_x {\left [ \displaystyle \frac{\underline{F}_x^{i+1/2} - \underline{F}_x^{i-1/2} }{ \underline{\Delta} x } \right ]}^n = 0
-\end{equation}
-with the fluxes along the $x$-axis given by
-\begin{equation}
-  \label{eq:LaxWendroff_fluxes}
-  \underline{F}_x ^{n,i+1/2} = \displaystyle \frac{\underline{f}_e^{n,i+1} + \underline{f}_e^{n,i}}{2} - \displaystyle \frac{\underline{v}_x \underline{\Delta}_t}{\underline{\Delta} x} \displaystyle \frac{\underline{f}_e^{n,i+1} - \underline{f}_e^{n,i}}{2}.
-\end{equation}
-According to the Taylor expansion of \autoref{eq:vol_def} and \autoref{eq:LaxWendroff}, one deduces the second order numerical consistency error 
-\begin{equation}
-  \label{eq:LaxWendroff_error}
-  \begin{array}{lll}
-  \epsilon^{n,i} &=& {\left [ \displaystyle \frac{\underline{f}_e^{n+1} - \underline{f}_e^{n} }{ \Delta_t } \right ]}^i + v_x {\left [ \displaystyle \frac{F^{i+1/2} - F^{i-1/2} }{ \Delta x } \right ]}^n - \displaystyle \left (  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial t} \right |}^{n,i} + v_x  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial x} \right |}^{n,i} \right )
-  \cr &=& \displaystyle \frac{ {\Delta_t}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial t^3} \right |}^{n,i}  + v_x \displaystyle \frac{ {\Delta x}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial x^3} \right |}^{n,i} + O\left ( {\Delta_t}^3 + {\Delta x}^3 + \Delta_t {\Delta_x}^2\right ).
-  \end{array}
-\end{equation}
-Also, by noting \underline{Von Neumann stability analysis :}\\
-Let us note
-\begin{equation}
-\underline{f}_e^{n,i} = \displaystyle \int_{-\infty}^\infty \widehat{\underline{f}_e}^n (k) \exp{\left ( j k x_i \right )}dx \text{ and } \widehat{\underline{f}_e}^n(k) = \displaystyle \sum_{i=0}^{N_x} \underline{f}_e^{i,n} \exp{\left (-  j k x_i \right )}dx
-\end{equation}
-and , one gets :
-\begin{equation}
-\displaystyle \frac{ \widehat{\underline{f}_e}^{n+1} }{  \widehat{\underline{f}_e}^{n} } =  1 - \displaystyle \frac{v_x \Delta t}{\Delta x} j \sin{\left ( k \Delta x \right )} + { \left (  \displaystyle \frac{v_x \Delta t}{\Delta x} \right )}^2 \left [ \cos{\left ( k \Delta x \right )}   -1 \right ]
-\end{equation}
-that implies, by noting $\alpha = v_x \Delta t / \Delta x$, that
-\begin{equation}
-{\displaystyle \left | \displaystyle \frac{ \widehat{f}^{n+1} }{  \widehat{f}^{n} } \right |}^2 = 1- \alpha^2 \left ( 1 - \alpha^2\right ) { \left [ \cos{\left ( k \Delta x \right )}   -1 \right ] }^2 < 1 \text{ if } \alpha <1
-\end{equation}
-for the sheme to be stable.
+
 
 # Provided academic cases
 
