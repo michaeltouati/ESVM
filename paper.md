@@ -147,15 +147,15 @@ Four well-known Plasma Physics academic cases are provided with ESVM :
 
 For each Academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. In order to highlight how such ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 3) and recommend the reader the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 as well as @Decyk:1987 in order to check the provided academic case simulation results 1), 2) and 4), respectively.
 
-\begin{tabulate}
+\begin{tabulated}
     a & b
 \cr c & d
-\end{tabulate}
+\end{tabulated}
 
 # Perspectives
 
 It is planned in a near future to :
-- provide another Plasma Physics academic simulation about one BGK (from the name of its founder Bernstein Green and Kruskal) non linear solution @BernsteinGreenKruskal:1957
+- provide another Plasma Physics academic simulation about one BGK (from the name of its founder I. B. Bernstein, J. M. Greene and M. D. Kruskal) non linear solution @BernsteinGreenKruskal:1957
 - provide a second Plasma Physics academic simulation about Plasma wave echo @Gould:1967
 - implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes @Liu:1994
 - compute the plasma ion Vlasov equation to allow for the ions to be mobile 
@@ -164,7 +164,7 @@ It is planned in a near future to :
 - implement its vectorization
 - store the simulation results in hdf5 files instead of text files
 - implement the Perfectly Matched Layer (PML) technique @Berenger:1994 to absorb the electromagnetic fields at the spatial simulation box boundaries
-- implement a relativistic BGK collision operator
+- implement a relativistic BGK (from the name of its founder P. L. Bhatnagar, E. P. Gross  and M. Krook) collision operator @BhatnagarGrossKrook:1954
 - implement the Belyaev-Budker relativistic collision operator
 - deploy the code to GPU architectures.
 
