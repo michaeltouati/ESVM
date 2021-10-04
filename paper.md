@@ -203,13 +203,21 @@ For each Academic case, an example of input deck is provided together with the c
 \end{equation}
 that is perturbed with a small perturbation 
 \begin{equation}
-  \delta f_e (x,t=0)= \displaystyle \frac{ A }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] }
+  \delta f_e (x,t=0)= \displaystyle \frac{ A }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] },
 \end{equation}
-consisting of a drifting electron beam located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/4$ with a spatial size $\delta x = \lambda_{\mathrm{Debye}} / 4$ and a velocity standard deviation $\delta v = v_{T_e} / 40$ for 1) and 
+consisting of a drifting electron beam located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/4$ with a spatial size $\delta x = \lambda_{\mathrm{Debye}} / 4$ and a velocity standard deviation $\delta v = v_{T_e} / 40$ for 1), and 
 \begin{equation}
   \delta E_x (x,t < 6 \pi / \omega_0)= A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
 \end{equation}
-for 2) and 3) where $A$, $\omega_0$ and $k$ are the perturbation amplitude, angular temporal and spatial frequencies that the user can choose when filling the input-deck. In order to highlight how such ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 3) and recommend the reader the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 as well as @Decyk:1987 in order to check the provided academic case simulation results 1), 2) and 4), respectively.
+for 2) and 3) where $A$, $\omega_0$ and $k$ are the perturbation amplitude, angular temporal and spatial frequencies that the user can choose when filling the input-deck, such that
+\begin{equation}
+  \displaystyle \left \{
+  \begin{array}{l}
+      f_e (x,t) = f_e^{(0)} (x,t) + \delta f_e (x,t)
+  \cr E_x (x,t) = E_x^{(0)} (x,t) + \delta E_x (x,t)
+  \end{array} \right . with \left | \delta f_e (x,t) \right | \ll f_e^{(0)} (x,t)
+\end{equation}
+during the simulation. In order to highlight how such ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 3) and recommend the reader the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 as well as @Decyk:1987 in order to check the provided academic case simulation results 1), 2) and 4), respectively.
 
 # Perspectives
 
