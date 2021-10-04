@@ -131,11 +131,11 @@ The code units consist in the commonly used electrostatic units : the electron m
 
 # ESVM numerical stability
 
-The spatial grid cells $\Delta x$ must be chosen lower than the Debye length for the simulations of collisionless plasmas where, by definition, the number of electrons in Debye spheres is infinite. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should always be chosen sufficiently large in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size $\Delta v_x$ should always be chosen lower than the thermal electron velocity and also sufficiently small to capture the desired Physics. The CFL (from the name of its founder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the simulation time step respects
+The spatial grid cells $\Delta x$ must be chosen lower than the Debye length for the simulations of collisionless plasmas where, by definition, the number of electrons in Debye spheres is infinite. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should always be chosen sufficiently large in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size $\Delta v_x$ should always be chosen lower than the thermal electron velocity and also sufficiently small to capture the desired Physics. The CFL (from the name of its founder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) stability criterium is taken into account inside the code so that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step respects
 \begin{equation}
-\Delta t = \mathrm{cfl} \times F(\Delta x, \Delta v_x) < F(\Delta x, \Delta v_x)
+\underline{\Delta _t} = \mathrm{cfl} \times F(\underline{\Delta x}, \underline{\Delta v}_x) < F(\underline{\Delta x}, \underline{\Delta v}_x)
 \end{equation}
-where $F(\Delta x, \Delta v_x)$ depends on the chosen numerical scheme. For example, if one notes
+where $F(\underline{\Delta} x, \underline{\Delta} v_x)$ depends on the chosen numerical scheme. For example, if one notes
 \begin{equation}
   \label{eq:vol_def}
 \underline{f}_e^{n,i} = \displaystyle \frac{1}{\underline{\Delta}_x} \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f}_e \left(\underline{x},\,\underline{t}_n\right)\, d \underline{x}
