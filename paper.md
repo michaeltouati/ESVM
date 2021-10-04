@@ -145,27 +145,27 @@ the electron distribution function finite volume at the spatial location $\under
   \label{eq:advection}
   \displaystyle \frac{\partial \underline{f}_e}{\partial \underline{t}} + \underline{v}_x \displaystyle \frac{\partial \underline{f}_e}{\partial \underline{x} } = 0
 \end{equation}
-of the electrons along the spatial $x$-axis, the numerical scheme reads
+of the electrons along the spatial $\underline{x}$-axis, the numerical scheme reads
 \begin{equation}
   \label{eq:LaxWendroff}
   {\left [ \displaystyle \frac{\underline{f}_e^{n+1} - \underline{f}_e^{n} }{ \underline{\Delta} t } \right ]}^i + \underline{v}_x {\left [ \displaystyle \frac{\underline{F}_x^{i+1/2} - \underline{F}_x^{i-1/2} }{ \underline{\Delta} x } \right ]}^n = 0
 \end{equation}
-where the fluxes along the $x$-axis given by
+where the fluxes at the volume interfaces $\underline{x_{i\pm1/2}}$ along the $x$-axis are given by
 \begin{equation}
   \label{eq:LaxWendroff_fluxes}
-  \underline{F}_x ^{n,i+1/2} = \displaystyle \frac{\underline{f}_e^{n,i+1} + \underline{f}_e^{n,i}}{2} - \displaystyle \frac{\underline{v}_x \underline{\Delta}_t}{\underline{\Delta} x} \displaystyle \frac{\underline{f}_e^{n,i+1} - \underline{f}_e^{n,i}}{2}.
+  \underline{F}_x ^{n,i+1/2} = \displaystyle \frac{\underline{f}_e^{n,i+1} + \underline{f}_e^{n,i}}{2} - \displaystyle \frac{\underline{v}_x \underline{\Delta}_t}{\underline{\Delta} x} \displaystyle \frac{\underline{f}_e^{n,i+1} - \underline{f}_e^{n,i}}{2}
 \end{equation}
 and
 \begin{equation}
   \label{eq:LaxWendroff_fluxes}
-  \underline{F}_x ^{n,i+1/2} = \displaystyle \frac{\underline{f}_e^{n,i+1} + \underline{f}_e^{n,i}}{2} - \displaystyle \frac{\underline{v}_x \underline{\Delta}_t}{\underline{\Delta} x} \displaystyle \frac{\underline{f}_e^{n,i+1} - \underline{f}_e^{n,i}}{2}.
+  \underline{F}_x ^{n,i-1/2} = \displaystyle \frac{\underline{f}_e^{n,i} + \underline{f}_e^{n,i-1}}{2} - \displaystyle \frac{\underline{v}_x \underline{\Delta}_t}{\underline{\Delta} x} \displaystyle \frac{\underline{f}_e^{n,i} - \underline{f}_e^{n,i-1}}{2}.
 \end{equation}
-According to the Taylor expansion of $\underline{f}_e^{n,i+i}$, $\underline{f}_e^{n,i-i}$ and $\underline{f}_e^{n+1,i}$ up to the third order, one can check the Lax-Wendroff numerical consistency error is a second order one :
+According to the Taylor expansion of $\underline{f}_e^{n,i+i}$, $\underline{f}_e^{n,i-i}$ and $\underline{f}_e^{n+1,i}$ up to the third order in space and time, one can check the Lax-Wendroff numerical consistency error is indeed a second order one :
 \begin{equation}
   \label{eq:LaxWendroff_error}
   \begin{array}{lll}
-  \epsilon^{n,i} &=& {\left [ \displaystyle \frac{\underline{f}_e^{n+1} - \underline{f}_e^{n} }{ \Delta_t } \right ]}^i + v_x {\left [ \displaystyle \frac{F^{i+1/2} - F^{i-1/2} }{ \Delta x } \right ]}^n - \displaystyle \left (  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial t} \right |}^{n,i} + v_x  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial x} \right |}^{n,i} \right )
-  \cr &=& \displaystyle \frac{ {\Delta_t}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial t^3} \right |}^{n,i}  + v_x \displaystyle \frac{ {\Delta x}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial x^3} \right |}^{n,i} + O\left ( {\Delta_t}^3 + {\Delta x}^3 + \Delta_t {\Delta_x}^2\right ).
+  \underline{\epsilon}^{n,i} &=& {\left [ \displaystyle \frac{\underline{f}_e^{n+1} - \underline{f}_e^{n} }{ \underline{\Delta}_t } \right ]}^i + \underline{v}_x {\left [ \displaystyle \frac{\underline{F}_x^{i+1/2} - \underline{F}_x^{i-1/2} }{ \underline{\Delta}_x } \right ]}^n - \displaystyle \left (  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial \underline{t}} \right |}^{n,i} + \underline{v}_x  {\left . \displaystyle \frac{\partial \underline{f}_e }{\partial \underline{x}} \right |}^{n,i} \right )
+  \cr &=& \displaystyle \frac{ {\underline{\Delta}_t}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial \underline{t}^3} \right |}^{n,i}  + \underline{v}_x \displaystyle \frac{ {\underline{\Delta}_x}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f}_e }{\partial \underline{x}^3} \right |}^{n,i} + O\left ( {\underline{\Delta}_t}^3 + {\\underline{Delta}_x}^3 + \underline{\Delta}_t {\underline{\Delta}_x}^2\right ).
   \end{array}
 \end{equation}
 
