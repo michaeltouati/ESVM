@@ -21,7 +21,7 @@ tags:
   - Two-stream instability
   - Electrostatic wakefield
 authors:
-  - name: Michaël J-M R TOUATI
+  - name: Michaël J TOUATI
     orcid: 0000-0001-7590-0941
     affiliation: "1, 2, 3"
 affiliations:
@@ -205,11 +205,11 @@ that is perturbed with a small perturbation
 \begin{equation}
   \delta f_e (x,t=0)= \displaystyle \frac{ A }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] },
 \end{equation}
-consisting of a drifting electron beam located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a spatial size $\delta x = \lambda_{\mathrm{Debye}} / 4$ and a velocity standard deviation $\delta v = v_{T_e} / 40$ at the simulation start for 1), and a small perturbation 
+consisting of an electron beam located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a spatial size $\delta x = \lambda_{\mathrm{Debye}} / 4$ drifting at a velocity $v_d$ with a velocity standard deviation $\delta v = v_{T_e} / 40$ at the simulation start for 1), and a small perturbation 
 \begin{equation}
   \delta E_x (x,t < 6 \pi / \omega_0)= A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
 \end{equation}
-during a short time interval at the simulation start for 2) and 3) where $A$, $\omega_0$ and $k$ are the perturbation amplitude, angular temporal and spatial frequencies that the user can choose when filling the input-deck, such that
+during a short time interval at the simulation start for 2) and 3) where $A$, $v_d$, $\omega_0$ and $k$ are the perturbation amplitude, drift velocity, angular temporal frequency and angular spatial frequency that the user can choose for the perturbation when filling the input-deck, such that
 \begin{equation}
   \displaystyle \left \{
   \begin{array}{ccccc}
