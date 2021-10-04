@@ -187,12 +187,29 @@ is a sufficient condition for all numerical schemes implemented in ESVM to be st
 # Provided academic cases
 
 Four well-known Plasma Physics academic cases are provided with ESVM :
-1) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
-2) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping}, 
-3) the two-stream instability; cf. \autoref{fig:two-stream-instability} and 
-4) the emission of an electrostatic wakefield by a Gaussian (in space and velocity-space) electron beam drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:electrostatic-wakefield}. 
+1) the emission of an electrostatic wakefield by a Gaussian (in space and velocity-space) electron beam drifting at a mean velocity higher than the plasma electron thermal velocity; cf. \autoref{fig:electrostatic-wakefield}
+2) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
+3) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and 
+3) the two-stream instability; cf. \autoref{fig:two-stream-instability}.
 
-For each Academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. In order to highlight how such ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 3) and recommend the reader the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 as well as @Decyk:1987 in order to check the provided academic case simulation results 1), 2) and 4), respectively.
+For each Academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. For 1), 2) and 3), the simulation is initialized assuming a non-drifting collisionless plasma at Maxwell-Boltzmann equilibrium 
+\begin{equation}
+  \label{MaxwellBoltzmannEquilibrium}
+  \displaystyle \left \{
+  \begin{array}{l}
+      f_e^{(0)} (x,t_0=0) = \displaystyle \frac{Z n_i}{\displaystyle \sqrt{ 2 \pi {v_{T_e}}^2 }} \exp{ \displaystyle \left [ - \displaystyle \frac{ v_x^2 }{ 2 {v_{T_e}}^2 } \right ] }
+  \cr E_x^{(0)} = 0
+  \right .
+\end{equation}
+perturbed with a small perturbation 
+\begin{equation}
+  \delta f_e (x,t=0)= \displaystyle \frac{A}{2 \pi \delta x \delta v} \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] }
+\end{equation}
+consisting of a drifting electron beam with $x_d= x_{\mathrm{min}} + (x_{\mathrm{max}}-x_{\mathrm{min}})/4 $, $\delta x = \lambda_{\mathrm{Debye}} / 4$ and $\delta v = v_{T_e} / 40$ for 1) and 
+\begin{equation}
+  \forall t < 6 \pi / \omega_0,\, \delta E_x (x,t)= A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
+\end{equation}
+for 2) and 3) where $A$, $\omega_0$ and $k$ are free parameters that the user can choose when filling the input-deck. In order to highlight how such ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 3) and recommend the reader the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 as well as @Decyk:1987 in order to check the provided academic case simulation results 1), 2) and 4), respectively.
 
 # Perspectives
 
@@ -212,6 +229,10 @@ It is planned in a near future to :
 
 # Figures
 
+Electrostatic wakefield test case : Electrostatic wakefield :
+
+![Electrostatic wakefield test case : Electrostatic wakefield.\label{fig:electrostatic-wakefield}](test-cases/Wakefield-Emission/figures-Poisson/Ex.png)
+
 Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time :
 
 ![Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
@@ -223,9 +244,5 @@ Non Linear Landau damping test case : Plasma electrons phase-space :
 Two stream instability test case : Plasma electrons phase-space :
 
 ![Two stream instability test case : Plasma electrons phase-space.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
-
-Electrostatic wakefield test case : Electrostatic wakefield :
-
-![Electrostatic wakefield test case : Electrostatic wakefield.\label{fig:electrostatic-wakefield}](test-cases/Wakefield-Emission/figures-Poisson/Ex.png)
 
 # References
