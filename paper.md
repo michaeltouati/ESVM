@@ -205,7 +205,7 @@ that is perturbed with a small perturbation
 \begin{equation}
   \delta f_e (x,t=0)= \displaystyle \frac{ A }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] }
 \end{equation}
-consisting of a drifting electron beam with $x_d= x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/4 $, $\delta x = \lambda_{\mathrm{Debye}} / 4$ and $\delta v = v_{T_e} / 40$ for 1) and 
+consisting of a drifting electron beam with $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/4$, $\delta x = \lambda_{\mathrm{Debye}} / 4$ and $\delta v = v_{T_e} / 40$ for 1) and 
 \begin{equation}
   \forall t < 6 \pi / \omega_0,\, \delta E_x (x,t)= A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
 \end{equation}
