@@ -199,7 +199,7 @@ For each Academic case, an example of input deck is provided together with the c
   \begin{array}{l}
       f_e^{(0)} (x,t=0) = \displaystyle \frac{Z n_i}{ \displaystyle \sqrt{ 2 \pi {v_{T_e}}^2 } } \exp{ \displaystyle \left [ - \displaystyle \frac{ v_x^2 }{ 2 {v_{T_e}}^2 } \right ] }
   \cr E_x^{(0)} = 0
-  \right \.
+  \end{array} \right .
 \end{equation}
 that is perturbed with a small perturbation 
 \begin{equation}
