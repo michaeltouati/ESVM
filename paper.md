@@ -180,7 +180,7 @@ with $j^2=-1$, $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}}
 for each term $p$ of the series. It implies the numerical scheme is stable, meaning $| \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) /   \widehat{\underline{f_e}}^{n} (\underline{k}^p) | < 1$, if $\underline{v_x} \underline{\Delta t} / \underline{\Delta x} <1$. Performing the same reasoning when discretizing also the velocity space $\underline{v}_{x}^\ell = \underline{v}_{x,\mathrm{min}} + (\ell-1 ) \underline{\Delta v}_x$ with $N_{v_x} = 1 + \underline{v}_{x,\mathrm{max}} / \underline{\Delta v}_x$ grid points and considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in \autoref{eq:advection} for computing the Vlasov equation \autoref{eq:vlasov1d1v}, one finds 
 \begin{equation}
   \label{CFL}
-  F^n(\underline{\Delta x}, \underline{\Delta v}_x) = \displaystyle \frac{1/2}{ \displaystyle \frac{ \underset{\ell \in [1,N_{v_x}]}{\mathrm{max}}\{ \underline{v}_x^\ell \} }{ \underline{\Delta x} } + \displaystyle \frac{ \underset{i \in [1,N_x]}\mathrm{max}\{ \underline{E}_x^{n,i} \} }{ \underline{\Delta v}_x } }.
+  F^n(\underline{\Delta x}, \underline{\Delta v}_x) = \displaystyle \frac{1/2}{ \displaystyle \frac{ \underset{\ell \in [1,N_{v_x}]}{\mathrm{max}}\{ \underline{v}_x^\ell \} }{ \underline{\Delta x} } + \displaystyle \frac{ \underset{i \in [1,N_x]}{\mathrm{max}}\{ \underline{E}_x^{n,i} \} }{ \underline{\Delta v}_x } }.
 \end{equation}
 is a sufficient condition for all numerical schemes implemented in ESVM to be stable.
 
