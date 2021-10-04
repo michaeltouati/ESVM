@@ -177,7 +177,7 @@ with $j^2=-1$, $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}}
 \begin{equation}
 \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{  \widehat{\underline{f_e}}^{n} (\underline{k}^p) } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } j \sin{\left ( \underline{k}^p \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( \underline{k}^p \underline{\Delta x} \right )}   -1 \right ].
 \end{equation}
-for each term $p$ of the series. It implies the numerical scheme is stable if $\underline{v_x} \underline{\Delta t} / \underline{\Delta x} <1$. Performing the same reasoning when considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in \autoref{eq:advection}, one deduces 
+for each term $p$ of the series. It implies the numerical scheme is stable if $\underline{v_x} \underline{\Delta t} / \underline{\Delta x} <1$. Performing the same reasoning when discretizing the velocity space $\underline{v}_{x,\ell} = \underline{v}_{x,\mathrm{min}} + (\ell-1 ) \underline{\Delta v}_x$ and considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in \autoref{eq:advection}, one finds that 
 \begin{equation}
   \label{LaxWendroffCFL}
   F(\underline{\Delta x}, \underline{\Delta v}_x) = \displaystyle \frac{1/2}{ \displaystyle \frac{ \mathrm{max}\{ \underline{v}_x \} }{ \underline{\Delta x} } + \displaystyle \frac{ \mathrm{max}\{ \underline{E}_x \} }{ \underline{\Delta v}_x } }.
