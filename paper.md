@@ -152,12 +152,12 @@ of plasma electrons along the spatial $\underline{x}$-axis in the phase-space, t
 \end{equation}
 where the fluxes at the volume interfaces $\underline{x}_{i\pm1/2}$ along the $\underline{x}$-axis are given by
 \begin{equation}
-  \label{eq:LaxWendroff_fluxes}
+  \label{eq:LaxWendroff_fluxes_plus}
   \underline{F_x}^{n,i+1/2} = \displaystyle \frac{\underline{f_e}^{n,i+1} + \underline{f_e}^{n,i}}{2} - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x}} \displaystyle \frac{\underline{f_e}^{n,i+1} - \underline{f_e}^{n,i}}{2}
 \end{equation}
 and
 \begin{equation}
-  \label{eq:LaxWendroff_fluxes}
+  \label{eq:LaxWendroff_fluxes_minus}
   \underline{F_x} ^{n,i-1/2} = \displaystyle \frac{\underline{f_e}^{n,i} + \underline{f_e}^{n,i-1}}{2} - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x}} \displaystyle \frac{\underline{f_e}^{n,i} - \underline{f_e}^{n,i-1}}{2}.
 \end{equation}
 According to the Taylor expansion of $\underline{f_e}^{n,i+i}$, $\underline{f_e}^{n,i-i}$ and $\underline{f_e}^{n+1,i}$ up to the third order in space and time, one can check the Lax-Wendroff numerical consistency error is indeed a second order one :
@@ -173,15 +173,15 @@ By using the Von Neumann stability analysis, assuming periodic boundary conditio
   \label{eq:VonNeumann}
    \widehat{\underline{f_e}}^n(\underline{k}^p) = \displaystyle \frac{1}{ N_x } \displaystyle \sum_{i=1}^{N_x} \underline{f_e}^{i,n} \exp{\left (-  j \underline{k}^p \underline{x}_i \right )} \Leftrightarrow \underline{f_e}^{n,i}  = \displaystyle \sum_{p=1}^{N_x} \widehat{\underline{f_e}}^n(\underline{k}^p)  \exp{\left ( j \underline{k}^p \underline{x}_i \right )}
 \end{equation}
-with $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$, one gets 
+with $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$, one gets by injecting \autoref{eq:VonNeumann} in \autoref{eq:LaxWendroff}
 \begin{equation}
-\displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} }{  \widehat{\underline{f_e}}^{n} } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } j \sin{\left ( k \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( k \underline{\Delta x} \right )}   -1 \right ].
+\displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{  \widehat{\underline{f_e}}^{n} (\underline{k}^p) } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } j \sin{\left ( \underline{k}^p \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( \underline{k}^p \underline{\Delta x} \right )}   -1 \right ].
 \end{equation}
-It implies, by noting $\alpha = \underline{v_x} \underline{\Delta t} / \underline{\Delta x}$, that
+for each term $p$ of the series. It implies that
 \begin{equation}
-{\displaystyle \left | \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} }{  \widehat{\underline{f_e}}^{n} } \right |}^2 = 1- \alpha^2 \left ( 1 - \alpha^2\right ) { \left [ \cos{\left ( k \underline{\Delta x} \right )}   -1 \right ] }^2 < 1 \,\mathrm{if}\, \alpha <1
+{\displaystyle \left | \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} }{  \widehat{\underline{f_e}}^{n} } \right |}^2 = 1- \alpha^2 \left ( 1 - \alpha^2\right ) { \left [ \cos{\left ( k \underline{\Delta x} \right )}   -1 \right ] }^2 
 \end{equation}
-for the numerical scheme to be stable.
+so that the numerical scheme is stable if $\alpha = \underline{v_x} \underline{\Delta t} / \underline{\Delta x} <1$.
 
 # Provided academic cases
 
