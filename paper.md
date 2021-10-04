@@ -147,11 +147,6 @@ Four well-known Plasma Physics academic cases are provided with ESVM :
 
 For each Academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. In order to highlight how such ESVM simulation result can be checked, we will only detail here the derivation of analytical estimates related with the provided academic case 3) and recommend the reader the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 as well as @Decyk:1987 in order to check the provided academic case simulation results 1), 2) and 4), respectively.
 
-\begin{tabulated}
-    a & b
-\cr c & d
-\end{tabulated}
-
 # Perspectives
 
 It is planned in a near future to :
