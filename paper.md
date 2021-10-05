@@ -131,7 +131,7 @@ in order to check the energy conservation in the simulation.
 
 # ESVM units
 
-The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = v_{T_e} / \omega_{p}$ and the constant ion density $n_i$ for spatial densities. The resulting normalized electrostatic field and electron distribution function consequently reads $\underline{E_x} = e E_x / m_e \omega_{p} v_{T}$ and $\underline{f_e} = f_e v_{T_e} / n_i$, respectively.
+The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = v_{T_e} / \omega_{p}$ and the constant electron density $n_0 = Z n_i$ for spatial densities. The resulting normalized electrostatic field and electron distribution function consequently reads $\underline{E_x} = e E_x / m_e \omega_{p} v_{T}$ and $\underline{f_e} = f_e v_{T_e} / n_0$, respectively.
 
 # ESVM numerical stability
 
@@ -208,7 +208,7 @@ For each academic case, an example of input deck is provided together with the c
 that is perturbed with a small perturbation 
 \begin{equation}
    \label{eq:Gaussian_electron}
-  \delta f_e (x,v_x,t=0)= \displaystyle \frac{ A }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] },
+  \delta f_e (x,v_x,t=0)= A \displaystyle \frac{ Z n_i }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] },
 \end{equation}
 consisting in a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a standard deviation $\delta x = \lambda_{\mathrm{Debye}} / 4$ and drifting at a velocity $v_d$ with a standard deviation $\delta v = v_{T_e} / 40$ at the simulation start $t=0$ for 1), and with a small perturbation consisting in a small amplitude electron plasma wave
 \begin{equation}
