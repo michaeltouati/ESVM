@@ -111,8 +111,8 @@ subroutine INIT_SIMU(x, vx, f_n)
     do l=1,N_vx,1
       do i=1,N_x,1
         f_n(i,l) = (0.5_PR/sqrt(2._PR*pi*(vs**2._PR)))*&
-        & ((1._PR+A*sin(k*x(i)))*exp(-((vx(l)-vd)**2._PR)/(2._PR*(vs**2._PR))) + &
-        &  (1._PR-A*sin(k*x(i)))*exp(-((vx(l)+vd)**2._PR)/(2._PR*(vs**2._PR))))
+        & ((1._PR+A*sin(k*x(i)))*exp(-((vx(l)-vd)**2._PR)/2._PR) + &
+        &  (1._PR-A*sin(k*x(i)))*exp(-((vx(l)+vd)**2._PR)/2._PR))
        end do
     end do
   else
