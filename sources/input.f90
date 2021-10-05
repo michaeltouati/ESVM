@@ -43,7 +43,6 @@ real(PR), public  :: A
 real(PR), public  :: k
 real(PR), public  :: omega_0
 real(PR), public  :: vd
-real(PR), public  :: vs
 integer,  public  :: N_x
 integer,  public  :: N_vx
 real(PR), public  :: n0
