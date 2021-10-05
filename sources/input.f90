@@ -123,8 +123,6 @@ subroutine read_init_parameters
         omega_0= get_real(str(istr+1:))
       case ('#vd')
         vd = get_real(str(istr+1:))
-      case ('#vs')
-        vs = get_real(str(istr+1:))
     end select
 
   end do read
@@ -194,7 +192,6 @@ subroutine read_init_parameters
     write (*,'(A,1E22.14)')'k       = ',k
     write (*,'(A,1E22.14)')'omega_0 = ',omega_0
     write (*,'(A,1E22.14)')'vd      = ',vd
-    write (*,'(A,1E22.14)')'vs      = ',vs
   end if
   write (*,*)'-----------------------------------------'
   write (*,*)'* Deduced parameters : '
