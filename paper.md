@@ -212,6 +212,7 @@ that is perturbed with a small perturbation
 \end{equation}
 consisting in a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a standard deviation $\delta x = \lambda_{\mathrm{Debye}} / 4$ drifting at a velocity $v_d$ with a standard deviation $\delta v = v_{T_e} / 40$ at the simulation start for 1), and a small perturbation consisting in a small amplitude electron plasma wave
 \begin{equation}
+  \label{eq:EPW}
   \delta E_x (x,t < \delta t) = A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
 \end{equation}
 propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3). Only the perturbation amplitudes $A < 1$ for 1), 2) and 3), the perturbation drift velocity  $v_d > v_{T_e}$ for 1) and the perturbation temporal and spatial angular frequencies $\omega_0$ and $k$ for 2) and 3) should be modified by the user when filling the input-deck in such a way that
@@ -271,15 +272,15 @@ It is planned in a near future to :
 
 Electrostatic wakefield test case : Electrostatic wakefield :
 
-![Electrostatic wakefield test case : Electrostatic wakefield $E_x(x,t)$ emitted by a Gaussian electron propagating in a collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and initialized according to \autoref{eq:gaussian_electron} with $A=0.1$ and $v_d=5$.\label{fig:electrostatic-wakefield}](test-cases/Wakefield-Emission/figures-Poisson/Ex.png)
+![Electrostatic wakefield test case : Electrostatic wakefield $E_x(x,t)$ emitted by a Gaussian electron propagating in a collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and initialized according to \autoref{eq:Gaussian_electron} with $A=0.1$ and $v_d=5$.\label{fig:electrostatic-wakefield}](test-cases/Wakefield-Emission/figures-Poisson/Ex.png)
 
 Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time :
 
-![Linear Landau damping test case : Electrostatic field energy and plasma electrons kinetic energy area densities time evolution of the linearly Landau damped electron plasma wave initialized with \autoref{eq:epw} with $A=10^{-3}$, $k=0.29919930034$ and $\omega_0=1.18$.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
+![Linear Landau damping test case : Electrostatic field energy and plasma electrons kinetic energy area densities time evolution of the linearly Landau damped electron plasma wave initialized according to \autoref{eq:EPW} with $A=10^{-3}$, $k=0.29919930034$ and $\omega_0=1.18$.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
 
 Non Linear Landau damping test case : Plasma electrons phase-space :
 
-![Non Linear Landau damping test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=68)$ participating in the non-linear Landau damping of the electron plasma wave initialized with \autoref{eq:epw} with $A=10^{-1}$, $k=0.29919930034$ and $\omega_0=1.18$.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
+![Non Linear Landau damping test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=68)$ participating in the non-linear Landau damping of the electron plasma wave initialized according to \autoref{eq:EPW} with $A=10^{-1}$, $k=0.29919930034$ and $\omega_0=1.18$.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
 
 Two stream instability test case : Plasma electrons phase-space :
 
