@@ -102,8 +102,8 @@ subroutine INIT_SIMU(x, vx, f_n)
   else if (perturb == 2) then
     do l=1,N_vx,1
       do i=1,N_x,1
-        f_n(i,l) = (1._PR/sqrt(2._PR*pi*(vs**2._PR)))*&
-                 & exp(-(vx(l)**2._PR)/(2._PR*(vs**2._PR))) 
+        f_n(i,l) = (1._PR/sqrt(2._PR*pi))*&
+                 & exp(-(vx(l)**2._PR)/2._PR) 
        end do
     end do
   else if (perturb == 3) then
