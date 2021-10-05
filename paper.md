@@ -252,7 +252,37 @@ on each beam of the form
 \begin{equation}
 \delta f_{e,\pm} \displaystyle \left ( x,v_x,t=0 \right ) = \pm A \sin{\displaystyle \left ( k_1 x \right )  } f_{e,\pm}^{(0)} \displaystyle \left ( x,v_x,t=0 \right )
 \end{equation}
-at the simulation start $t=0$ with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ ($k$ in the input-deck) and $v_\text{d}$ can be modified by the user. Considering periodic boundary conditions,
+at the simulation start $t=0$ with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ (parameter $k$ in the input-deck) and $v_\text{d}$ can be modified by the user. 
+
+Assuming during the simulation, one can linearize up to the first order the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM. They read
+\begin{equation}
+  \label{eq:linearized_vlasov1d1v}
+  \displaystyle \frac{\partial \delta f_e }{ \partial t} + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x \delta f_e \right ) - \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_e^{(0)}}{d v_x} \delta E_x= 0
+\end{equation}
+and
+\begin{equation}
+  \label{eq:linearized_gauss}
+  \displaystyle \frac{ \partial \delta E_x}{ \partial x } = - 4 \pi e \displaystyle \int_{-\infty}^\infty \delta f_e  \displaystyle \left ( x,\,v_x,\,t \right ) d v_x.
+\end{equation}
+Considering periodic boundary conditions, we may use a one-sided Fourier transformation in time (thus equivalent to a Laplace transform) and a Fourier series expansion in space or such a $L_x$-periodic initial condition problem. We will note
+\begin{equation}
+  \label{eq:Fourier_series}
+  \widehat{\text{X}}_p \displaystyle \left ( t \right ) = \displaystyle \frac{1}{L_x} \displaystyle \int_{0}^{L_x}  X \displaystyle \left ( x,\,t\right) \exp{ \displaystyle \left (+ \iota k_p x \right )  } d x \Leftrightarrow
+ X \displaystyle \left ( x,\,t \right ) = \displaystyle \sum_{p=-\infty}^\infty \widehat{\text{X}}_p \displaystyle \left ( t \right) \exp{ \displaystyle \left (- \iota k_p x \right ) }
+\end{equation}
+with
+\begin{equation}
+  \forall p \in \Relatives,\, k_p = 2 \pi \displaystyle \frac{p}{L_x},
+\end{equation}
+and
+\begin{equation}
+  \begin{array}{lrllclcrl}
+                             & \widehat{\widehat{\text{X}}}_p^{(+)} \displaystyle \left ( \omega \right ) &=& \displaystyle \int_{0}^\infty                                                 & d t                                                    &                                                   &     & \widehat{\text{X}}_p \displaystyle \left ( t\right) & \exp{ \displaystyle \left ( - \iota \omega t \right ) }
+\cr                         &                                                                                                                &=& \displaystyle \int_{0}^\infty                                                     & d t                                                    & \displaystyle \int_{0}^{L_x} & \displaystyle \frac{d x}{L_x} &  X \displaystyle \left ( x,\,t\right) & \exp{ \displaystyle \left [ - \iota \displaystyle \left ( \omega t - k_p x \right ) \right ] }
+\cr  \Leftrightarrow & X \displaystyle \left ( x,\,t\right)                                                               &=& \displaystyle \int_{\iota R - \infty}^{\iota R + \infty} & \displaystyle \frac{d \omega}{2 \pi}  & \displaystyle \sum_{p=-\infty}^\infty &   & \widehat{\widehat{\text{X}}}_p^{(+)} \displaystyle \left ( \omega \right ) &  \exp{ \displaystyle \left [ + \iota \displaystyle \left ( \omega t - k_p x \right ) \right ] }
+\end{array}
+\end{equation}
+where the integral in the complex $\omega$-plane is taken along a straight line $\omega = \iota R$.
 
 # Perspectives
 
