@@ -79,7 +79,7 @@ with Maxwell-Gauss equation \autoref{eq:gauss} computed at the simulation start 
   \label{eq:continuity}
   \displaystyle \frac{\partial n_e}{\partial t} (x,t) + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( n_e v_e(x,t) \right ) = 0,
 \end{equation}
-which, when injected in the time derivative of Maxwell-Gauss equation \autoref{eq:gauss}, provides the Maxwell-Ampere equation \autoref{eq:ampere} if Maxwell-Gauss equation \autoref{eq:gauss} is verified at the simulation start t=0. Here, we have noted 
+which, when injected in the time derivative of Maxwell-Gauss equation \autoref{eq:gauss}, provides the Maxwell-Ampere equation \autoref{eq:ampere} if Maxwell-Gauss equation \autoref{eq:gauss} is verified at the simulation start t=0. Here,
 \begin{equation}
   \label{eq:density}
   n_e (x,t) = \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) \, d v_x,
@@ -93,7 +93,7 @@ and
   \label{eq:current}
   j_e(x,t) = -e n_e (x,t) v_e (x,t)
 \end{equation}
-the plasma electron density, mean velocity and electrical charge current, respectively. ESVM also computes the plasma electron thermal velocity $v_{T_e} (x,t)$ defined according to the plasma electron internal energy density
+are the plasma electron density, mean velocity and electrical charge current, respectively. ESVM also computes the plasma electron thermal velocity $v_{T_e} (x,t)$ defined according to the plasma electron internal energy density
 \begin{equation}
   \label{eq:internal_energy}
   u_{T_e} (x,t) = \displaystyle \frac{ n_e (x,t) }{2} m_e {v_{T_e} (x,t)}^2  = \displaystyle \frac{m_e}{2} \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) {\displaystyle \left ( v_x - v_e (x,t) \right )}^2 \, d v_x.
@@ -227,7 +227,7 @@ propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the
 \end{equation}
 keeps being respected during the linear stage of the simulation. 
 
-We refer the user to the paper @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969 in order to check the provided academic case simulation results 1), 2) and 3), respectively, and we only detail here the derivation of analytical estimates in order to check the ESVM simulation results related with the provided academic case 4). 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $v_d$ with same standard velocity deviation $v_{T_e}$
+The user can check the provided academic case simulation results 1), 2) and 3) by using the paper @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969, respectively. Only the derivation of analytical estimates done in order to check the ESVM simulation results related with the provided academic case 4) is detailed here. 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $v_d$ with same standard velocity deviation $v_{T_e}$
 \begin{equation}
   \label{eq:EDF}
   f_e^{(0)} \displaystyle \left ( x,v_x,t\right ) = f_{e,+}^{(0)} \displaystyle \left (x,v_x,t \right ) + f_{e,-}^{(0)} \displaystyle \left (x,v_x,t \right )
@@ -240,7 +240,7 @@ that is a solution of the Vlasov Equation (\autoref{eq:vlasov1d1v}) and that doe
 \begin{equation}
   E_x^{(0)}(x,t)  = 0
 \end{equation}
-according to Maxwell-Gauss Equation \autoref{eq:gauss}. If we compute the Vlasov-Maxwell set of Equations $\{$(\autoref{eq:vlasov1d1v}), (\autoref{eq:gauss})$\}$ exactly, initializing it with the two-stream equilibrium distribution function (\autoref{eq:EDF}) without any perturbation, we will only see the counter-propagating electron beams continuing their propagation through the immobile plasma ions without any modification. In order to observe the two-stream instability, we perturb this equilibrium by using a seed on which the instability is going to grow and we initialize instead 
+according to Maxwell-Gauss Equation \autoref{eq:gauss}. If one computes the Vlasov-Maxwell set of Equations $\{$(\autoref{eq:vlasov1d1v}), (\autoref{eq:gauss})$\}$ exactly, initializing it with the two-stream equilibrium distribution function (\autoref{eq:EDF}) without any perturbation, the counter-propagating electron beams would continue their propagation through the immobile plasma ions without any modification. In order to observe the two-stream instability, one must perturb this equilibrium by using a seed on which the instability is going to grow. 4) is thus initialized according to  
 \begin{equation}
 f_e \displaystyle \left ( x,v_x,t=0\right ) = f_e^{(0)} \displaystyle \left ( x,v_x,t=0 \right ) + \delta f_{e} \displaystyle \left ( x,v_x,t=0 \right ),
 \end{equation}
@@ -252,7 +252,7 @@ on each beam of the form
 \begin{equation}
 \delta f_{e,\pm} \displaystyle \left ( x,v_x,t=0 \right ) = \pm A \sin{\displaystyle \left ( k x \right )  } f_{e,\pm}^{(0)} \displaystyle \left ( x,v_x,t=0 \right )
 \end{equation}
-with $A = 0.1$, $k = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. Considering periodic boundary conditions,
+at the simulation start $t=0$ with $A = 0.1$, $k = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. Considering periodic boundary conditions,
 
 # Perspectives
 
