@@ -140,8 +140,6 @@
 ##                                                                   ##
 ## vd      = perturbation drift velocity(ies)                        ##
 ##                                                                   ##
-## vs      = perturbation thermal velocity(ies)                      ##
-##                                                                   ##
 #######################################################################
 #
 #perturb  3  
@@ -154,5 +152,3 @@
 #
 #vd       10.
 #
-#vs       1.
-
