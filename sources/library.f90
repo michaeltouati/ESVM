@@ -92,8 +92,8 @@ subroutine INIT_SIMU(x, vx, f_n)
     xs  = x_min + ( (x_max - x_min) / 8. ) 
     do l=1,N_vx,1
       do i=1,N_x,1
-        f_n(i,l) = (1.0_PR/sqrt(2._PR*pi*(vs**2._PR)))*&
-        & exp(-(vx(l)**2._PR)/(2._PR*(vs**2._PR))) 
+        f_n(i,l) = (1.0_PR/sqrt(2._PR*pi))*&
+        & exp(-(vx(l)**2._PR)/2._PR) 
         X2 = -0.5_PR * ( ( ( (x(i)-xs) / dx )**2._PR) + ( ( (vx(l)-vd) / dvx )**2._PR) )
         f_n(i,l) = f_n(i,l) + ( A * exp(X2)/ (2._PR * pi * dx * dvx ) )
       end do
