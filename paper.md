@@ -272,7 +272,7 @@ Considering periodic boundary conditions, we may use a one-sided Fourier transfo
 \end{equation}
 with
 \begin{equation}
-  \forall p \in \Relatives,\, k_p = 2 \pi \displaystyle \frac{p}{L_x},
+  \forall p \in \mathbb{Z},\, k_p = 2 \pi \displaystyle \frac{p}{L_x},
 \end{equation}
 and
 \begin{equation}
