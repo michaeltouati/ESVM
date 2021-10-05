@@ -227,7 +227,7 @@ propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the
 \end{equation}
 keeps being respected during the linear stage of the simulation. 
 
-The user can check the provided academic case simulation results 1), 2) and 3) by using the paper @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969, respectively. Only the derivation of analytical estimates done in order to check the ESVM simulation results related with the provided academic case 4) is detailed here. 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $v_d$ with same standard velocity deviation $v_{T_e}$
+The user can check the provided academic case simulation results 1), 2) and 3) with @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969, respectively. Only analytical estimates used to check the provided academic case simulation result 4) are detailed here. 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $v_d$ with same standard velocity deviation $v_{T_e}$
 \begin{equation}
   \label{eq:EDF}
   f_e^{(0)} \displaystyle \left ( x,v_x,t\right ) = f_{e,+}^{(0)} \displaystyle \left (x,v_x,t \right ) + f_{e,-}^{(0)} \displaystyle \left (x,v_x,t \right )
@@ -240,11 +240,11 @@ that is a solution of the Vlasov Equation (\autoref{eq:vlasov1d1v}) and that doe
 \begin{equation}
   E_x^{(0)}(x,t)  = 0
 \end{equation}
-according to Maxwell-Gauss Equation \autoref{eq:gauss}. If one computes the Vlasov-Maxwell set of Equations $\{$(\autoref{eq:vlasov1d1v}), (\autoref{eq:gauss})$\}$ exactly, initializing it with the two-stream equilibrium distribution function (\autoref{eq:EDF}) without any perturbation, the counter-propagating electron beams would continue their propagation through the immobile plasma ions without any modification. In order to observe the two-stream instability, one must perturb this equilibrium by using a seed on which the instability is going to grow. 4) is thus initialized according to  
+according to Maxwell-Gauss Equation \autoref{eq:gauss}. If one computes the Vlasov-Maxwell set of Equations $\{$(\autoref{eq:vlasov1d1v}), (\autoref{eq:gauss})$\}$ exactly, initializing it with the two-stream equilibrium distribution function (\autoref{eq:EDF}) without any perturbation, the counter-propagating electron beams would continue their propagation through the immobile plasma ions without any modification. In order to observe the two-stream instability, 
 \begin{equation}
 f_e \displaystyle \left ( x,v_x,t=0\right ) = f_e^{(0)} \displaystyle \left ( x,v_x,t=0 \right ) + \delta f_{e} \displaystyle \left ( x,v_x,t=0 \right ),
 \end{equation}
-by adding a small perturbation 
+instead by adding a small perturbation 
 \begin{equation}
   \label{eq:perturbation}
   \delta f_{e}\displaystyle \left ( x,v_x,t=0 \right ) = \delta f_{e,+}\displaystyle \left ( x,v_x,t=0 \right ) + \delta f_{e,-}\displaystyle \left ( x,v_x,t=0 \right )
@@ -253,9 +253,9 @@ on each beam of the form
 \begin{equation}
 \delta f_{e,\pm} \displaystyle \left ( x,v_x,t=0 \right ) = \pm A \sin{\displaystyle \left ( k_1 x \right )  } f_{e,\pm}^{(0)} \displaystyle \left ( x,v_x,t=0 \right )
 \end{equation}
-at the simulation start $t=0$ with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ (parameter $k$ in the input-deck) and $v_\text{d}$ can be modified by the user. 
+at the simulation start $t=0$.
 
-Assuming the perturbation \autoref{eq:perturbation} compared to the equilibrium distribution \autoref{eq:EDF} during the simulation, one can linearize up to the first order the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM. They read
+Assuming the perturbation \autoref{eq:perturbation} remains small compared to the equilibrium distribution \autoref{eq:EDF} during the simulation, one can linearize the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM. They read
 \begin{equation}
   \label{eq:linearized_vlasov1d1v}
   \displaystyle \frac{\partial \delta f_e }{ \partial t} + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x \delta f_e \right ) - \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_e^{(0)}}{d v_x} \delta E_x= 0
@@ -263,9 +263,9 @@ Assuming the perturbation \autoref{eq:perturbation} compared to the equilibrium 
 and
 \begin{equation}
   \label{eq:linearized_gauss}
-  \displaystyle \frac{ \partial \delta E_x}{ \partial x } = - 4 \pi e \displaystyle \int_{-\infty}^\infty \delta f_e  \displaystyle \left ( x,\,v_x,\,t \right ) d v_x.
+  \displaystyle \frac{ \partial \delta E_x}{ \partial x } = - 4 \pi e \displaystyle \int_{-\infty}^\infty \delta f_e  \displaystyle \left ( x,\,v_x,\,t \right ) d v_x,
 \end{equation}
-Considering periodic boundary conditions, we may use a one-sided Fourier transformation in time (thus equivalent to a Laplace transform) and a Fourier series expansion in space or such a $L_x$-periodic initial condition problem. We will note
+up to the first order. Considering periodic boundary conditions, we may use a one-sided Fourier transformation in time (thus equivalent to a Laplace transform) and a Fourier series expansion in space for such a $L_x$-periodic initial condition problem. We will note
 \begin{equation}
   \label{eq:Fourier_series}
   \widehat{\text{X}}_p \displaystyle \left ( t \right ) = \displaystyle \frac{1}{L_x} \displaystyle \int_{0}^{L_x}  X \displaystyle \left ( x,\,t\right) \exp{ \displaystyle \left (+ \iota k_p x \right )  } d x \Leftrightarrow
@@ -305,6 +305,8 @@ and
   \label{eq:Eq2}
    \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} = \displaystyle \frac{4 \pi e}{\iota k_p} \displaystyle \int_{-\infty}^\infty \widehat{\widehat{ \delta \text{f}}}_{e,p}^{(+)}  \displaystyle \left ( \omega,\,v_x \right ) d v_x.
 \end{equation}
+
+ with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ (parameter $k$ in the input-deck) and $v_\text{d}$ can be modified by the user. 
 
 # Perspectives
 
