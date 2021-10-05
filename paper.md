@@ -250,9 +250,9 @@ by adding a small perturbation
 \end{equation}
 on each beam of the form 
 \begin{equation}
-\delta f_{e,\pm} \displaystyle \left ( x,v_x,t=0 \right ) = \pm A \sin{\displaystyle \left ( k x \right )  } f_{e,\pm}^{(0)} \displaystyle \left ( x,v_x,t=0 \right )
+\delta f_{e,\pm} \displaystyle \left ( x,v_x,t=0 \right ) = \pm A \sin{\displaystyle \left ( k_1 x \right )  } f_{e,\pm}^{(0)} \displaystyle \left ( x,v_x,t=0 \right )
 \end{equation}
-at the simulation start $t=0$ with $A = 0.1$, $k = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. Considering periodic boundary conditions,
+at the simulation start $t=0$ with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ ($k$ in the input-deck) and $v_\text{d}$ can be modified by the user. Considering periodic boundary conditions,
 
 # Perspectives
 

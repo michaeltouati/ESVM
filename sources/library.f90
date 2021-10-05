@@ -110,7 +110,11 @@ subroutine INIT_SIMU(x, vx, f_n)
   ! Two-stream instability test case :
     do l=1,N_vx,1
       do i=1,N_x,1
+<<<<<<< HEAD
         f_n(i,l) = (0.5_PR/sqrt(2._PR*pi))*&
+=======
+        f_n(i,l) = (0.5_PR/sqrt(2._PR*pi*))*&
+>>>>>>> c8e5f1e6986004ebc91a4261af751a90ab66743f
         & ((1._PR+A*sin(k*x(i)))*exp(-((vx(l)-vd)**2._PR)/2._PR) + &
         &  (1._PR-A*sin(k*x(i)))*exp(-((vx(l)+vd)**2._PR)/2._PR))
        end do
