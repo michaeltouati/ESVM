@@ -109,19 +109,19 @@ that gives the Poisson equation
   \displaystyle \frac{\partial^2 \Phi}{\partial x^2} (x,t) = - 4 \pi e \displaystyle \left ( Z n_i - n_e (x,t) \right )
 \end{equation}
 for the electrostatic potential $\Phi$ when injected in the Maxwell-Gauss equation \autoref{eq:gauss}.
-When the simulation is running, ESVM stores at every time steps and displays on the terminal at every dumped time steps $t_d$ the total plasma electron internal and kinetic energy area density and the total electrostatic energy area density in the simulation box $x \in \left [ x_{\mathrm{min}},\, x_{\mathrm{max}} \right ]$
+When the simulation is running, ESVM stores at every time steps and displays on the terminal at every dumped time steps $t_d$ the total plasma electron internal and kinetic energy (assuming an area density ${\lambda_{\mathrm{Debye}}}^2$ in these 1D simulations) and the total electrostatic energy area density in the simulation box $x \in \left [ x_{\mathrm{min}},\, x_{\mathrm{max}} \right ]$
 \begin{equation}
   \label{eq:total_internal_energy}
-  U_{T_e} (t_d) = \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} u_{T_e} (x,t_d) \, d x,
+  U_{T_e} (t_d) = {\lambda_{\mathrm{Debye}}}^2 \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} u_{T_e} (x,t_d) \, d x,
 \end{equation}
 \begin{equation}
 \label{eq:total_kinetic_energy}
-U_{K_e} (t_d) = \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} n_e (x,t) \displaystyle \frac{m_e {v_e (x,t_d)}^2}{2}  \,  d x
+U_{K_e} (t_d) = {\lambda_{\mathrm{Debye}}}^2 \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} n_e (x,t) \displaystyle \frac{m_e {v_e (x,t_d)}^2}{2}  \,  d x
 \end{equation}
 and
 \begin{equation}
   \label{eq:total_electrostatic_energy}
-  U_{E_x} (t_d) = \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} \displaystyle \frac{{E_x (x,t_d)}^2}{8 \pi} \, d x,
+  U_{E_x} (t_d) = {\lambda_{\mathrm{Debye}}}^2 \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} \displaystyle \frac{{E_x (x,t_d)}^2}{8 \pi} \, d x,
 \end{equation}
 respectively as well as the total energy area density
 \begin{equation}
@@ -210,7 +210,7 @@ that is perturbed with a small perturbation
    \label{eq:Gaussian_electron}
   \delta f_e (x,v_x,t=0)= \displaystyle \frac{ A }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] },
 \end{equation}
-consisting in a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a standard deviation $\delta x = \lambda_{\mathrm{Debye}} / 4$ drifting at a velocity $v_d$ with a standard deviation $\delta v = v_{T_e} / 40$ at the simulation start for 1), and a small perturbation consisting in a small amplitude electron plasma wave
+consisting in a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a standard deviation $\delta x = \lambda_{\mathrm{Debye}} / 4$ and drifting at a velocity $v_d$ with a standard deviation $\delta v = v_{T_e} / 40$ at the simulation start $t=0$ for 1), and with a small perturbation consisting in a small amplitude electron plasma wave
 \begin{equation}
   \label{eq:EPW}
   \delta E_x (x,t < \delta t) = A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
@@ -238,7 +238,7 @@ that is a solution of the Vlasov Equation (\autoref{eq:vlasov1d1v}) and that doe
 \begin{equation}
   E_x^{(0)}(x,t)  = 0
 \end{equation}
-according to Maxwell-Gauss Equation \autoref{eq:gauss}. If we compute the Vlasov-Maxwell set of Equations $\{$(\autoref{eq:vlasov1d1v}), (\autoref{eq:gauss})$\}$ exactly, initializing it with the two-stream equilibrium distribution function (\autoref{eq:EDF}) without any perturbation, we will only see the counter-propagating electron beams continuing their propagation through the immobile plasma ions without any modification. In order to observe the two-stream instability, we perturb this equilibrium by using a seed on which the instability is going to grow amd we initialize instead 
+according to Maxwell-Gauss Equation \autoref{eq:gauss}. If we compute the Vlasov-Maxwell set of Equations $\{$(\autoref{eq:vlasov1d1v}), (\autoref{eq:gauss})$\}$ exactly, initializing it with the two-stream equilibrium distribution function (\autoref{eq:EDF}) without any perturbation, we will only see the counter-propagating electron beams continuing their propagation through the immobile plasma ions without any modification. In order to observe the two-stream instability, we perturb this equilibrium by using a seed on which the instability is going to grow and we initialize instead 
 \begin{equation}
 f_e \displaystyle \left ( x,v_x,t=0\right ) = f_e^{(0)} \displaystyle \left ( x,v_x,t=0 \right ) + \delta f_{e} \displaystyle \left ( x,v_x,t=0 \right ),
 \end{equation}
@@ -270,19 +270,19 @@ It is planned in a near future to :
 
 # Figures
 
-Electrostatic wakefield test case : Electrostatic wakefield :
+Electrostatic wakefield test case :
 
 ![Electrostatic wakefield test case : Electrostatic wakefield $E_x(x,t)$ emitted by a Gaussian electron propagating in a collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and initialized according to \autoref{eq:Gaussian_electron} with $A=0.1$ and $v_d=5$.\label{fig:electrostatic-wakefield}](test-cases/Wakefield-Emission/figures-Poisson/Ex.png)
 
-Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time :
+Linear Landau damping test case :
 
-![Linear Landau damping test case : Electrostatic field energy and plasma electrons kinetic energy area densities time evolution of the linearly Landau damped electron plasma wave propagating in the collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and initialized according to \autoref{eq:EPW} with $A=10^{-3}$, $k=0.29919930034$ and $\omega_0=1.18$.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
+![Linear Landau damping test case : Total electrostatic field energy and plasma electrons kinetic energy time evolution of the linearly Landau damped electron plasma wave propagating in the collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and initialized according to \autoref{eq:EPW} with $A=10^{-3}$, $k=0.29919930034$ and $\omega_0=1.18$.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
 
-Non Linear Landau damping test case : Plasma electrons phase-space :
+Non Linear Landau damping test case :
 
 ![Non Linear Landau damping test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=68)$ participating in the non-linear Landau damping of the electron plasma wave propagating in the collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and  and initialized according to \autoref{eq:EPW} with $A=10^{-1}$, $k=0.29919930034$ and $\omega_0=1.18$.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
 
-Two stream instability test case : Plasma electrons phase-space :
+Two stream instability test case :
 
 ![Two stream instability test case : Plasma electrons phase-space.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
 
