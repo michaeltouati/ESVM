@@ -198,7 +198,7 @@ Four well-known Plasma Physics academic cases are provided with ESVM :
 
 For each academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. For 1), 2) and 3), the simulation is initialized assuming a non-drifting collisionless plasma at Maxwell-Boltzmann equilibrium 
 \begin{equation}
-  \label{MaxwellBoltzmannEquilibrium}
+  \label{eq:MaxwellBoltzmannEquilibrium}
   \displaystyle \left \{
   \begin{array}{lll}
       f_e^{(0)} (x,v_x,t=0) &=& \displaystyle \frac{Z n_i}{ \displaystyle \sqrt{ 2 \pi {v_{T_e}}^2 } } \exp{ \displaystyle \left [ - \displaystyle \frac{ {v_x}^2 }{ 2 {v_{T_e}}^2 } \right ] }
@@ -276,11 +276,11 @@ Electrostatic wakefield test case : Electrostatic wakefield :
 
 Linear Landau damping test case : Electrostatic field energy and Plasma electron kinetic energy versus time :
 
-![Linear Landau damping test case : Electrostatic field energy and plasma electrons kinetic energy area densities time evolution of the linearly Landau damped electron plasma wave initialized according to \autoref{eq:EPW} with $A=10^{-3}$, $k=0.29919930034$ and $\omega_0=1.18$.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
+![Linear Landau damping test case : Electrostatic field energy and plasma electrons kinetic energy area densities time evolution of the linearly Landau damped electron plasma wave propagating in the collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and initialized according to \autoref{eq:EPW} with $A=10^{-3}$, $k=0.29919930034$ and $\omega_0=1.18$.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
 
 Non Linear Landau damping test case : Plasma electrons phase-space :
 
-![Non Linear Landau damping test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=68)$ participating in the non-linear Landau damping of the electron plasma wave initialized according to \autoref{eq:EPW} with $A=10^{-1}$, $k=0.29919930034$ and $\omega_0=1.18$.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
+![Non Linear Landau damping test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=68)$ participating in the non-linear Landau damping of the electron plasma wave propagating in the collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and  and initialized according to \autoref{eq:EPW} with $A=10^{-1}$, $k=0.29919930034$ and $\omega_0=1.18$.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
 
 Two stream instability test case : Plasma electrons phase-space :
 
