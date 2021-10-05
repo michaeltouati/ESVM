@@ -8,8 +8,8 @@
 ##   Code units :                                                    ##
 ## - the Debye length $\lambda_D$ for space,                         ##
 ## - inverse of Langmuir electron angular frequency                  ##
-##   $1/omega_{p_e}$ for time                                        ##
-## (- Electron thermal velocity $v_T$ for velocities )               ##
+##   $1/omega_{p_e}$ for times                                       ##
+## - Electron thermal velocity $v_T$ for velocities                  ##
 ## - elementary charge $e$ for electrical charges                    ##
 ##                                                                   ##
 ##  Written by Dr Michaël J TOUATI - CLPU - 2020 - mtouati@clpu.es   ##
@@ -31,8 +31,6 @@
 ##                                                                   ##
 ##                 Plasma properties - immobile ions                 ##
 ##               ( Do not affect simulation results! )               ##
-##                                                                   ##
-##                                                                   ##
 ## T  = electron temperature in eV                                   ##
 ##                                                                   ##
 ## Z  = atomic number of fully ionized immobile ions                 ##
@@ -43,9 +41,9 @@
 #
 #T  1000.
 #
-#Z  13
+#Z  1
 #
-#ni 1.e22
+#ni 1.e19
 #
 #######################################################################
 ##                                                                   ##
@@ -65,23 +63,23 @@
 ##                                                                   ##
 #######################################################################
 #
-#x_min  -10.5
+#x_min   -51. 
 #
-#x_max   10.5
+#x_max    51.  
 #
-#d_x     0.05
+#d_x     0.5
 #
-#vx_min   -6.
+#vx_min   -40.
 #
-#vx_max    6.
+#vx_max    40.
 #
-#d_vx    0.01
+#d_vx    0.1
 #
 #######################################################################
 ##                                                                   ##          
 ##                         Simulation times                          ##
 ##                                                                   ##    
-## cfl      = CFL parameter (must be 0 < cfl < 1)                    ##
+## cfl      = CFL parameter (must be < 1)                            ##
 ##                                                                   ##    
 ## L_t      = Simulation time duration                               ##
 ##                                                                   ##
@@ -89,11 +87,11 @@
 ##                                                                   ##
 #######################################################################
 #
-#cfl       9.e-1
+#cfl      9.e-1
 #
-#L_t     200.
+#L_t     20.
 #
-#dt_diag   1.  
+#dt_diag 0.25  
 #
 #######################################################################
 ##                                                                   ##
@@ -131,7 +129,7 @@
 ##                                                                   ##
 ## perturb = 0 for no perturbation,                                  ##
 ##           1 for the electrostatic wakefield test case,            ##
-##           2 for the (non)linear Landau damping test case or       ##
+##           2 for the linear Landau damping test case or            ##
 ##           3 for the two stream instability test case              ##
 ##                                                                   ##
 ## A       = perturbation amplitude                                  ##
@@ -144,13 +142,13 @@
 ##                                                                   ##
 #######################################################################
 #
-#perturb  2  
+#perturb  3  
 #
 #A        1.e-1
 #
-#k        0.29919930034
+#k        0.06159985595
 #
-#omega_0  1.18
+#omega_0  0.06159985595
 #
-#vd       0.
+#vd       10.
 #
