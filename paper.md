@@ -282,7 +282,7 @@ and
 \cr  \Leftrightarrow & X \displaystyle \left ( x,\,t\right)                                                               &=& \displaystyle \int_{\iota R - \infty}^{\iota R + \infty} & \displaystyle \frac{d \omega}{2 \pi}  & \displaystyle \sum_{p=-\infty}^\infty &   & \widehat{\widehat{\text{X}}}_p^{(+)} \displaystyle \left ( \omega \right ) &  \exp{ \displaystyle \left [ + \iota \displaystyle \left ( \omega t - k_p x \right ) \right ] }
 \end{array}
 \end{equation}
-where the integral in the complex $\omega$-plane is taken along a straight line $\omega = \iota R$. By multiplying (\autoref{eq:linearized_vlasov1d1v}) and (\autoref{eq:linearized_gauss}) by $ \exp{ \displaystyle \left [ - \iota \displaystyle \left ( \omega t - k_p x \right ) \right ]  } / L_x $ and by integrating them from $x=-\infty$ to $x=\infty$ and from $t=0$ to $t = \infty$, we obtain respectively 
+where the integral in the complex $\omega$-plane is taken along a straight line $\omega = \iota R$. By multiplying \autoref{eq:linearized_vlasov1d1v} and \autoref{eq:linearized_gauss} by $\exp{ \displaystyle \left [ - \iota \displaystyle \left ( \omega t - k_p x \right ) \right ]  } / L_x$ and by integrating them from $x=-\infty$ to $x=\infty$ and from $t=0$ to $t = \infty$, we obtain respectively 
 \begin{equation}
   \label{eq:Eq1}
   \widehat{\widehat{\delta \text{f} }}_{e,p}^{(+)} =  \displaystyle \frac{1}{\iota \displaystyle \left ( \omega - k_p v_x \right )} \displaystyle \left [ \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right )  + \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_e^{(0)}}{d v_x} \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \right ]
