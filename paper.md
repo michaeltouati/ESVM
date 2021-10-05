@@ -246,7 +246,8 @@ f_e \displaystyle \left ( x,v_x,t=0\right ) = f_e^{(0)} \displaystyle \left ( x,
 \end{equation}
 by adding a small perturbation 
 \begin{equation}
-\delta f_{e}\displaystyle \left ( x,v_x,t=0 \right ) = \delta f_{e,+}\displaystyle \left ( x,v_x,t=0 \right ) + \delta f_{e,-}\displaystyle \left ( x,v_x,t=0 \right )
+  \label{eq:perturbation}
+  \delta f_{e}\displaystyle \left ( x,v_x,t=0 \right ) = \delta f_{e,+}\displaystyle \left ( x,v_x,t=0 \right ) + \delta f_{e,-}\displaystyle \left ( x,v_x,t=0 \right )
 \end{equation}
 on each beam of the form 
 \begin{equation}
@@ -254,7 +255,7 @@ on each beam of the form
 \end{equation}
 at the simulation start $t=0$ with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ (parameter $k$ in the input-deck) and $v_\text{d}$ can be modified by the user. 
 
-Assuming during the simulation, one can linearize up to the first order the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM. They read
+Assuming the perturbation \autoref{eq:perturbation} compared to the equilibrium distribution \autoref{eq:EDF} during the simulation, one can linearize up to the first order the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM. They read
 \begin{equation}
   \label{eq:linearized_vlasov1d1v}
   \displaystyle \frac{\partial \delta f_e }{ \partial t} + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x \delta f_e \right ) - \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_e^{(0)}}{d v_x} \delta E_x= 0
