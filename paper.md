@@ -282,7 +282,28 @@ and
 \cr  \Leftrightarrow & X \displaystyle \left ( x,\,t\right)                                                               &=& \displaystyle \int_{\iota R - \infty}^{\iota R + \infty} & \displaystyle \frac{d \omega}{2 \pi}  & \displaystyle \sum_{p=-\infty}^\infty &   & \widehat{\widehat{\text{X}}}_p^{(+)} \displaystyle \left ( \omega \right ) &  \exp{ \displaystyle \left [ + \iota \displaystyle \left ( \omega t - k_p x \right ) \right ] }
 \end{array}
 \end{equation}
-where the integral in the complex $\omega$-plane is taken along a straight line $\omega = \iota R$.
+where the integral in the complex $\omega$-plane is taken along a straight line $\omega = \iota R$. By multiplying (\autoref{eq:linearized_vlasov1d1v}) and (\autoref{eq:linearized_gauss}) by $ \exp{ \displaystyle \left [ - \iota \displaystyle \left ( \omega t - k_p x \right ) \right ]  } / L_x $ and by integrating them from $x=-\infty$ to $x=\infty$ and from $t=0$ to $t = \infty$, we obtain respectively 
+\begin{equation}
+  \label{eq:Eq1}
+  \widehat{\widehat{\delta \text{f} }}_{e,p}^{(+)} =  \displaystyle \frac{1}{\iota \displaystyle \left ( \omega - k_p v_x \right )} \displaystyle \left [ \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right )  + \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_e^{(0)}}{d v_x} \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \right ]
+\end{equation}
+with
+\begin{equation}
+  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) = \alpha_p A \displaystyle \frac{ Z n_i / 2}{ \displaystyle \sqrt{2 \pi {v_\text{th}}^2 } } \displaystyle \left \{  \exp{ \displaystyle \left [ - \displaystyle \frac{ {\displaystyle \left ( v_x - v_\text{d} \right )}^2 }{ 2 {v_\text{th}}^2 }\right ] } - \exp{ \displaystyle \left [ - \displaystyle \frac{ {\displaystyle \left ( v_x + v_\text{d} \right )}^2 }{ 2 {v_\text{th}}^2 }\right ] }  \right \}
+\end{equation}
+where
+\begin{equation}
+  \alpha_p = \displaystyle \left \{
+  \begin{array}{lll}
+      \mp 1 / 2 \iota &\text{if} & p = \pm 1
+  \cr 0 &\text{else}&
+  \end{array} \right .
+\end{equation}
+and
+\begin{equation}
+  \label{eq:Eq2}
+   \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} = \displaystyle \frac{4 \pi e}{\iota k_p} \displaystyle \int_{-\infty}^\infty \widehat{\widehat{ \delta \text{f}}}_{e,p}^{(+)}  \displaystyle \left ( \omega,\,v_x \right ) d v_x.
+\end{equation}
 
 # Perspectives
 
