@@ -225,9 +225,9 @@ propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the
   \cr E_x (x,t) &=& E_x^{(0)} (x,t) &+& \delta E_x (x,t)
   \end{array} \right . \, \mathrm{with}\, \left | \delta f_e (x,v_x,t) \right | \ll f_e^{(0)} (x,v_x,t)
 \end{equation}
-keeps being respected during the linear stage of the simulation. 
+keeps being respected during the linear stage of the simulation. Except for 3) where the non-linear theory should be considered, the methodology used to check ESVM simulation results is very similar so that only analytical estimates used to check the ESVM simulation results of the provided academic case 4) are detailed here. The user can check the provided academic case simulation results 1), 2) and 3) by directly comparing the ESVM simulation results with the analytical estimates provided in @Decyk:1987 and in the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969, respectively. 
 
-Since the methodology is very similar, only analytical estimates used to check the ESVM simulation results of the provided academic case 4) are detailed here. The user can check the provided academic case simulation results 1), 2) and 3) by directly comparing the ESVM simulation results with the analytical estimates provided in @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969, respectively. 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $\pm v_d$ with same standard velocity deviation $v_{T_e}$
+4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $\pm v_d$ with same standard velocity deviation $v_{T_e}$
 \begin{equation}
   \label{eq:EDF}
   f_e^{(0)} \displaystyle \left ( x,v_x,t\right ) = f_{e,+}^{(0)} \displaystyle \left (x,v_x,t \right ) + f_{e,-}^{(0)} \displaystyle \left (x,v_x,t \right )
@@ -263,7 +263,7 @@ Assuming the perturbation \autoref{eq:perturbation} remains small compared to th
 and
 \begin{equation}
   \label{eq:linearized_gauss}
-  \displaystyle \frac{ \partial \delta E_x}{ \partial x } = - 4 \pi e \displaystyle \int_{-\infty}^\infty \delta f_e  \displaystyle \left ( x,\,v_x,\,t \right ) d v_x,
+  \displaystyle \frac{ \partial \delta E_x}{ \partial x } = - 4 \pi e \displaystyle \int_{-\infty}^\infty \delta f_e \, d v_x,
 \end{equation}
 up to the first order. In order to estimate the linearly growing electrostatic field $\delta E_x (x,t)$ in this ESVM simulation with imposed periodic boundary conditions, we may use a one-sided Fourier transformation in time (thus equivalent to a Laplace transform) and a Fourier series expansion in space for such a $L_x$-periodic initial condition problem. We will note
 \begin{equation}
@@ -337,12 +337,12 @@ that leads to the simpler dispersion relation
   \label{eq:plasma_electrical_permittivity_limit}
   \epsilon \displaystyle \left ( \omega,\,k \right ) \underset{v_d \gg v_{T_e}}{=} 0 \Leftrightarrow 1 - \displaystyle \frac{ {\omega_{p}}^2 }{ 2 } \displaystyle \left [  \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega - k v_d \right )}^2 } + \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega + k v_d \right )}^2 } \right ] = 0
 \end{equation}
-retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order. In this limit, dispersion relation provides four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber
+retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order. In this limit, the dispersion relation \autoref{eq:plasma_electrical_permittivity_limit} provides four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber
 \begin{equation}
   \label{eq:critical_wavenumber}
   k_c = \displaystyle \frac{\omega_{p}}{ v_d }.
 \end{equation}
-It means that the whole plasma remain stable on space scales smaller than $\lambda_c = 2 \pi / k_c$. However, in the case where $k < k_c$, we find in addition to the two real poles
+It means that the whole plasma remain stable on space scales smaller than $\lambda_c = 2 \pi / k_c$. However, in the case where $k_p < k_c$ we are interested in, we find in addition to the two real poles
 \begin{equation}
   \label{eq:pure_real_poles}
   \omega_{1/2} \displaystyle \left ( k < k_c \right )= \pm \omega_0 \displaystyle \left ( k \right )
@@ -409,6 +409,6 @@ Two stream instability test case :
 
 ![Two stream instability test case : Plasma electrons phase-space.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
 
-![Two stream instability test case : Plots of $\delta = \delta \displaystyle \left ( k \right )$ and $\omega_0 = \omega_0 \displaystyle \left ( k \right )$..\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Theory/poles.png)
+![Two stream instability test case : Plots of the stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} as a function of the spatial angular frequency mode $k$.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Theory/poles.png)
 
 # References
