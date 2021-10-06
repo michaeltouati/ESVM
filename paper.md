@@ -194,7 +194,7 @@ Performing the same reasoning when discretizing also the velocity space $\underl
 \end{equation}
 is a sufficient CFL stability condition for all numerical schemes implemented in ESVM to be stable.
 
-# Provided academic cases
+# ESVM Plasma Physics academic case simulations
 
 Four well-known Plasma Physics academic cases are provided with ESVM :
 1) the emission of an electrostatic wakefield by a Gaussian electron; cf. \autoref{fig:electrostatic-wakefield}
