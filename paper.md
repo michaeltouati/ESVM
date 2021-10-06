@@ -227,7 +227,7 @@ propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the
 \end{equation}
 keeps being respected during the linear stage of the simulation. Except for 3) where the non-linear theory should be considered, the methodology used to check ESVM simulation results is very similar so that only analytical estimates used to check the ESVM simulation results of the provided academic case 4) are detailed here. The user can check the provided academic case simulation results 1), 2) and 3) by directly comparing the ESVM simulation results with the analytical estimates provided in @Decyk:1987 and in the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969, respectively. 
 
-4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $\pm v_d$ with same standard velocity deviation $v_{T_e}$
+The provided Plasma Physics academic case 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $\pm v_d$ with same standard velocity deviation $v_{T_e}$
 \begin{equation}
   \label{eq:EDF}
   f_e^{(0)} \displaystyle \left ( x,v_x,t\right ) = f_{e,+}^{(0)} \displaystyle \left (x,v_x,t \right ) + f_{e,-}^{(0)} \displaystyle \left (x,v_x,t \right )
