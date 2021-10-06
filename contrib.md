@@ -2,33 +2,45 @@ Written by Michael J TOUATI - https://github.com/michaeltouati
 
 # Contribute to ESVM 
 
-1) download ESVM from https://github.com/michaeltouati/ESVM or type on your terminal : 
+1) download ESVM from https://github.com/michaeltouati/ESVM or type directly on your terminal : 
 
+```sh
 git clone https://github.com/michaeltouati/ESVM.git
+```
 
 2) If it's been a long time you did the step 1., make sure you have the latest ESVM updates by typing : 
 
+```sh
 git pull
+```
 
 3) Once you've have modified the ESVM source file(s) to fix a bug or propose a new feature, type from your local ESVM directory : 
 
+```sh
 make clean_all 
+```
 
 4) Type then : 
 
+```sh
 git add . 
+```
 
 if you've added new files
 
 5) Type : 
 
+```sh
 git commit -m "MY COMMIT MESSAGE" -m -a 
+```
 
 describing the more clear and concise as possible the goal of the contribution in "MY COMMIT MESSAGE"
 
 6) Ask for the merge of your local ESVM branch to the main branch by typing : 
 
+```sh
 git push
+```
 
 # Report issues or problems with ESVM 
 
