@@ -1,13 +1,6 @@
-Written by Michael J TOUATI - CLPU - mtouati@clpu.es
+Written by Michael J TOUATI - @michaeltouati on GitHub
 
-ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 90 code 
-parallelized using OpenMP allowing for using many different numerical advection schemes 
-as well as two numerical methods for solving the coupled Maxwell equations 
-in order to adapt the simulation to specific Plasma Physics problems.
-
-In order to :
-
-1) Compiling the code
+# Compiling the code
 
 Modify the makefile as a function of the wished compilation options and the compilers installed on your computer and then type :
 
@@ -24,7 +17,7 @@ The tests consist in performing a series of 'diff file1 file2' where :
 * file2 is the terminal output of the corresponding simulation also located in test-cases/Test/ 
 concerning the simulation of a drifting plasma at Maxwell-Boltzmann equilibrium.
 
-2) Running a simulation
+# Running a simulation
 
 Fill the wished input-deck (all parameters are described inside) and type :
 
@@ -34,7 +27,7 @@ The resulting simulation parameters can be checked by typing
 
 make check
 
-3) Plotting the simulation results
+# Plotting the simulation results
 
 All simulation results are stored in text files located in the folder 'results'. 
 Python scripts allowing to extract and plot the simulation results are located in the folder 'sources'.
@@ -48,7 +41,7 @@ make extract_logfe
 
 The resulting plots will be located in the folder 'figures'.
 
-4) Cleaning the directory
+# Cleaning the directory
 
 If you want to remove from the ESVM directory :
 
