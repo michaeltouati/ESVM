@@ -8,17 +8,17 @@ git clone https://github.com/michaeltouati/ESVM.git
 
 git pull
 
-4) Once you've have modified the ESVM source file(s) to fix a bug or propose a new feature(s), type from your local ESVM directory : 
+3) Once you've have modified the ESVM source file(s) to fix a bug or propose a new feature(s), type from your local ESVM directory : 
 
 make clean_all 
 
-5) Type then : 
+4) Type then : 
 
 git add . 
 
 if you've added new files
 
-6) Type : 
+5) Type : 
 
 git commit -m "MY COMMIT MESSAGE" -m -a 
 
