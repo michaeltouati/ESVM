@@ -261,7 +261,9 @@ on each beam of the form
 \begin{equation}
 \delta f_{e,\pm} \displaystyle \left ( x,v_x,t=0 \right ) = \pm A \sin{\displaystyle \left ( k_1 x \right )  } f_{e,\pm}^{(0)} \displaystyle \left ( x,v_x,t=0 \right )
 \end{equation}
-at the simulation start $t=0$. Assuming the perturbation \autoref{eq:perturbation} remains small compared to the equilibrium distribution \autoref{eq:EDF} during the simulation, one can linearize the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM. They read
+at the simulation start $t=0$ with $A = 0.1$, $k_1 = 2 \pi / L_x$ where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ (parameter $k$ in the input-deck) and $v_\text{d}$ should be modified by the user. 
+
+In order to estimate the linearly growing electrostatic field $\delta E_x (x,t)$ in this ESVM simulation, one can linearize the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM assuming the perturbation \autoref{eq:perturbation} remains small compared to the equilibrium distribution \autoref{eq:EDF} during the simulation. They read
 \begin{equation}
   \label{eq:linearized_vlasov1d1v}
   \displaystyle \frac{\partial \delta f_e }{ \partial t} + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x \delta f_e \right ) - \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_e^{(0)}}{d v_x} \delta E_x= 0
@@ -271,7 +273,7 @@ and
   \label{eq:linearized_gauss}
   \displaystyle \frac{ \partial \delta E_x}{ \partial x } = - 4 \pi e \displaystyle \int_{-\infty}^\infty \delta f_e \, d v_x,
 \end{equation}
-up to the first order. In order to estimate the linearly growing electrostatic field $\delta E_x (x,t)$ in this ESVM simulation with imposed periodic boundary conditions, we may use a one-sided Fourier transformation in time (thus equivalent to a Laplace transform) and a Fourier series expansion in space for such a $L_x$-periodic initial condition problem. We will note
+up to the first order. Considering periodic boundary conditions, we may use a one-sided Fourier transformation in time (thus equivalent to a Laplace transform) and a Fourier series expansion in space for such a $L_x$-periodic initial condition problem. We will note
 \begin{equation}
   \label{eq:Fourier_series}
   \widehat{\text{X}}_p \displaystyle \left ( t \right ) = \displaystyle \frac{1}{L_x} \displaystyle \int_{0}^{L_x}  X \displaystyle \left ( x,\,t\right) \exp{ \displaystyle \left (+ \iota k_p x \right )  } d x \Leftrightarrow
@@ -444,9 +446,76 @@ corresponds to space-charge oscillations of stationary electrostatic plasma wave
   \cr \delta E_{\text{ins}}  \displaystyle \left ( x,\,t \right )       &\underset{k_1 v_d \ll \omega_{p}}{\sim} &  2 A & E_0 &\displaystyle \frac{k_1 v_d}{\omega_{p}} & \sinh{ \displaystyle \left ( k_1 v_d t \right ) } & \sin{ \displaystyle \left ( k_1 x \right ) }
 \end{array} \right .
 \end{equation}
-corresponding to the exponentially growing electrostatic field due to the two-stream instability. These latter growing electrical charge, current density and electrostatic field \autoref{eq:my_analytical_solutions} can directly be compared with the ESVM simulation result. We can check that if $A = 0$ or $v_d = 0$, all quantities cancel. That confirms that, contrary to PIC codes, the two counter-propagating electron beams would continue their propagation without any modification if we do not impose an initial perturbation on which the instability will grow in ESVM.
-
- with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ (parameter $k$ in the input-deck) and $v_\text{d}$ can be modified by the user. 
+corresponding to the exponentially growing electrostatic field due to the two-stream instability. These latter growing electron density, current density and electrostatic field perturbations \autoref{eq:my_analytical_solutions} can directly be compared with the ESVM simulation result. We can also check that if $A = 0$ or $v_d = 0$, all quantities cancel. That confirms that, contrary to PIC codes, the two counter-propagating electron beams would continue their propagation without any modification if we do not impose an initial perturbation on which the instability will grow in ESVM. We can now consider the orbit $\displaystyle \left ( x_\ell,\,v_{\ell} \right )$ of one beam electron $\ell \in \displaystyle \left [ 1,\,N_e \right ]$ with an arbitrary initial velocity $v_\ell \displaystyle \left ( t = 0 \right ) = v_0 $ in the beam velocity distribution function and an initial position $x_\ell \displaystyle \left ( t = 0 \right ) = x_0$ close to $x = 0$ such that $ k_1 x_0 \ll 1 $. At the early stage of the instability, the growing electrostatic field component $\delta E_\text{ins}$ is still too small compared to the stationary plasma wave $\delta E_\text{osc}$ oscillating in time at the Langmuir electron angular frequency $\omega_{p}$. On such time scale $\omega_{p} t \sim 1$, the beam electrons are consequently mainly affected by this electrostatic field component
+\begin{equation}
+  m_e \displaystyle \frac{d v_\ell }{d t } = - e \delta  E_{\text{osc}} \displaystyle \left ( x_\ell \displaystyle \left ( t \right ),\,t\right )
+\end{equation}
+and their trajectory is thus given by 
+\begin{equation}
+  \displaystyle \frac{d^2 x_\ell }{ d t^2 } + {\omega_{p,e}}^2 \displaystyle \left ( \displaystyle \frac{A}{2} \displaystyle \frac{k_1 v_d}{\omega_{p,e}}  \right ) \sin{\displaystyle \left ( \omega_{p,e} t \right )} x_\ell \displaystyle \left ( t \right ) = 0,
+\end{equation}
+assuming that $k_1 x_\ell \displaystyle \left ( t \right ) \ll 1$ remains valid at every time $t>0$ if it is valid at $t = 0$ such that $\forall t,\, \sin{ \displaystyle \left [ k_1 x_\ell \displaystyle \left ( t \right ) \right ] } \sim k_1 x_\ell \displaystyle \left ( t \right )$. Recognizing the Mathieu Equation 
+\begin{equation}
+  \label{eq:mathieu}
+  \displaystyle \frac{d^2 x_\ell }{ d u^2 } + \displaystyle \left [ a - 2 q \cos{\displaystyle \left ( 2 u \right )} \right ] x_\ell \displaystyle \left ( u \right ) = 0 
+\end{equation}
+with $a = 0$ and $q = - A k_1 v_d / \omega_{p} $ by doing the change of variable $u \left ( t\right )= \left ( - \pi / 4 \right ) + \left  ( \omega_{p,e} t / 2 \right ) $, we deduce
+\begin{equation}
+  \label{trajectory_01}
+  k_1 x_\ell \displaystyle \left ( t \right ) = k_1 x_c c_{e,0} \displaystyle \left [ q,\,u \left ( t\right ) \right ] +  k_1 x_s s_{e,0} \displaystyle \left [ q,\,u \left ( t\right ) \right ]
+\end{equation}
+and
+\begin{equation}
+  \label{eq:trajectory_02}
+  v_\ell \displaystyle \left ( t \right ) = \displaystyle \frac{v_d}{2} \displaystyle \frac{\omega_{p} }{ k_1 v_d} \displaystyle \left \{ k_1 x_c c'_{e,0} \displaystyle \left [ q,\,u \left ( t\right )  \right ] +  k_1 x_s s'_{e,0} \displaystyle \left [ q,\,u \left ( t\right ) \right ] \right \}
+\end{equation}
+with
+\begin{equation}
+  \displaystyle \left \{ \begin{array}{lll}
+     k_1 x_c  &=& + \displaystyle \frac{ s'_{e,0} \displaystyle \left ( q,\,-\pi/4 \right ) k_1 x_0 - s_{e,0} \displaystyle \left ( q,\,-\pi/4 \right )  \displaystyle \left ( 2 k_1 v_d /  \omega_{p} \right ) \displaystyle \left ( v_0 / v_d \right )}{ c_{e,0} \displaystyle \left ( q,\,-\pi/4 \right ) s'_{e,0} \displaystyle \left ( q,\,-\pi/4 \right ) - c'_{e,0} \displaystyle \left ( q,\,-\pi/4 \right ) s_{e,0} \displaystyle \left ( q,\,-\pi/4 \right ) }
+  \cr k_1 x_s &= & - \displaystyle \frac{ c'_{e,0} \displaystyle \left ( q,\,-\pi/4 \right )   k_1 x_0 - c_{e,0} \displaystyle \left ( q,\,-\pi/4 \right )  \displaystyle \left ( 2 k_1 v_d /  \omega_{p} \right ) \displaystyle \left ( v_0 / v_d \right )}{ c_{e,0} \displaystyle \left ( q,\,-\pi/4 \right )  s'_{e,0} \displaystyle \left ( q,\,-\pi/4 \right ) - c'_{e,0} \displaystyle \left ( q,\,-\pi/4 \right )  s_{e,0} \displaystyle \left ( q,\,-\pi/4 \right ) }
+  \end{array} \right . ,
+\end{array}
+accounting for the initial conditions at $t = 0$. Here, $c_{e,a} \displaystyle \left ( q,\,u\right )$ and $s_{e,a} \displaystyle \left ( q,\,u\right )$ are respectively the even and odd solutions of Mathieu Equation \autoref{eq:mathieu} and $c'_{e,a} \displaystyle \left ( q,\,u\right )$ and $s'_{e,a} \displaystyle \left ( q,\,u\right )$ their first order derivatives. According to \autoref{eq:trajectory_01} and \autoref{eq:trajectory_02} , the beam electron trajectories in space are only slightly modified compared to their ballistic initial trajectory $x_0 + v_0 t$, their velocities oscillates around their initial value $v_0$ with amplitudes increasing with time. As a consequence, each beam velocity dispersion slightly increases with its propagation distance until the growing component of the electrostatic field $\delta E_\text{ins}$ becomes greater than $\delta E_\text{osc}$. When this occurs, the equation of motion
+\begin{equation}
+  m_e \displaystyle \frac{d v_\ell }{d t } = - e \delta E_{\text{ins}} \displaystyle \left ( x_\ell \displaystyle \left ( t \right ),\,t\right )
+\end{equation}
+gives
+\begin{equation}
+  \label{eq:energy_conservation}
+  \displaystyle \frac{1}{2}  {\displaystyle \left ( \displaystyle \frac{ v_\ell \displaystyle \left ( t \right ) }{v_d} \right ) }^2 - \displaystyle \frac{1}{2}  {\displaystyle \left ( \displaystyle \frac{ v_0 }{v_d} \right ) }^2 = - 2 A {k_1} \displaystyle \int_0^t v_\ell \displaystyle \left ( t \right ) \sin{ \displaystyle \left [ k_1 x_\ell \displaystyle \left ( t \right ) \right ] } \sinh{ \displaystyle \left ( k_1 v_d  t  \right ) }  d t
+\end{equation}
+and
+\begin{equation}
+  \label{eq:equation_of_motion}
+  \displaystyle \frac{d^2 x_\ell}{d t^2} + 2 k_1 {v_d}^2 \sinh{ \displaystyle \left ( k_1 v_d  t  \right ) } \sin{ \displaystyle \left [ k_1 x_\ell \displaystyle \left ( t \right ) \right ] } = 0.
+\end{equation}
+The energy conservation Equation \autoref{eq:energy_conservation} shows that, at the early stage of the instability, electrons having a positive velocity $v_\ell \displaystyle \left ( t \right ) > 0$ at a location $0 < x_\ell \displaystyle \left ( t \right ) < L_x / 2$ as well as electrons having a negative velocity $v_\ell \displaystyle \left ( t \right ) < 0$ at a location $- L_x / 2 < x_\ell \displaystyle \left ( t \right ) < 0$ are losing energy contrary to electrons having a negative velocity $v_\ell \displaystyle \left ( t \right ) < 0$ at a location $0 < x_\ell \displaystyle \left ( t \right ) < L_x / 2$ or electrons having a positive velocity $v_\ell \displaystyle \left ( t \right ) > 0$ at a location $- L_x / 2 < x_\ell \displaystyle \left ( t \right ) < 0$ that are earning energy. In order to determine such an electron trajectory according to its equation of motion \autoref{eq:equation_of_motion}, one can assume in addition that $k_1 x_\ell \displaystyle \left ( t \right ) \ll 1$ remains valid at every time $t>0$ if it is valid at $t = 0$ such that $\forall t,\, \sin{ \displaystyle \left [ k_1 x_\ell \displaystyle \left ( t \right ) \right ] } \sim k_1 x_\ell \displaystyle \left ( t \right )$. Also, one can consider time scales of the order of electrostatic plasma oscillations ${\omega_{p}}^{-1}$ so that we may consider $\sinh{ \displaystyle \left ( k_1 v_d  t  \right ) } \sim \exp{ \displaystyle \left ( k_1 v_d  t  \right ) } / 2$. In this case, \autoref{eq:equation_of_motion}) simplifies into
+\begin{equation}
+  \displaystyle \frac{d^2 x_\ell}{d t^2} +  {\displaystyle \left ( k_1 v_d \right )}^2 \exp{ \displaystyle \left ( k_1 v_d  t  \right ) } x_\ell \displaystyle \left ( t \right ) = 0.
+\end{equation}
+Recognizing the differential Bessel Equation by doing the change of variable $\text{v} \left ( t \right ) = \exp{\displaystyle \left ( k_1 v_d  t \right )}$
+\begin{equation}
+  \displaystyle \frac{d^2 x_\ell}{d \text{v}^2} + \displaystyle \frac{1}{\text{v}} \displaystyle \frac{d x_\ell}{d \text{v}} +  \displaystyle \frac{1}{\text{v}} x_\ell \displaystyle \left ( \text{v} \right ) = 0,
+\end{equation}
+the beam electron trajectories can be found readily. They read
+\begin{equation}
+  \label{eq:trajectory_1}
+  k_1 x_\ell \displaystyle \left ( t \right ) = k_1 x_J J_0\displaystyle \left ( 2 \sqrt{\text{v}\left ( t\right )} \right ) + k_1 x_Y Y_0\displaystyle \left ( 2 \sqrt{\text{v}\left ( t\right )} \right )
+\end{equation}
+and
+\begin{equation}
+  \label{eq:trajectory_2}
+  v_\ell \displaystyle \left ( t \right ) = - v_\text{d} \displaystyle \left [ k_1 x_J J_1\displaystyle \left ( 2 \sqrt{\text{v}\left ( t\right )} \right )  + k_1 x_Y Y_1\displaystyle \left ( 2 \sqrt{\text{v}\left ( t\right )} \right ) \right ] \sqrt{\text{v}\left ( t\right )}
+\end{equation}
+with
+\begin{equation}
+  \displaystyle \left \{ \begin{array}{lll}
+     k_1 x_J  &=& + \displaystyle \frac{ Y_1 \displaystyle \left ( 2 \right ) k_1 x_0 + Y_0  \displaystyle \left ( 2 \right ) \displaystyle \left ( v_0 /  v_d \right ) }{ J_0  \displaystyle \left ( 2 \right ) Y_1  \displaystyle \left ( 2 \right ) - J_1  \displaystyle \left ( 2 \right ) Y_0  \displaystyle \left ( 2 \right ) }
+  \cr k_1 x_Y &= & - \displaystyle \frac{ J_1  \displaystyle \left ( 2 \right ) k_1 x_0 + J_0  \displaystyle \left ( 2 \right )  \displaystyle \left ( v_0 /  v_d \right ) }{ J_0  \displaystyle \left ( 2 \right ) Y_1  \displaystyle \left ( 2 \right ) - J_1  \displaystyle \left ( 2 \right ) Y_0  \displaystyle \left ( 2 \right ) }
+  \end{array} \right . ,
+\end{equation}
+accounting for the initial conditions at $t=0$. Here, $J_\mu$ and $Y_\mu$ are the Bessel functions of the first and second kind of order $\mu$ respectively. Some of these beam electron orbits are plotted in \autoref{fig:electron_orbits}. We can see that the beam electrons are looping around the phase-space center $\left ( x,\,v \right ) = \left ( 0,\,0 \right )$ with a velocity amplitude increasing with their initial spatial distance from $x=0$ in agreement with the ESVM simulation.
 
 # Perspectives
 
@@ -486,5 +555,7 @@ Two stream instability test case :
 ![Two stream instability test case : Stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} as a function of the spatial angular frequency mode $k$.\label{fig:poles}](test-cases/Two-Stream-Instability/figures-Theory/poles.png)
 
 ![Two stream instability test case : Integration contour used to evaluate the the Cauchy principal value of the integral \autoref{Inversion_Formula}.\label{fig:integration_contour}](test-cases/Two-Stream-Instability/figures-Theory/integration_contour.png)
+
+![Two stream instability test case : Some beam electron orbits according to \autoref{eq:trajectory_1} and \autoref{eq:trajectory_2}.\label{fig:electron_orbits}](test-cases/Two-Stream-Instability/figures-Theory/electron_orbits.png)
 
 # References
