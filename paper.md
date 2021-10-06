@@ -414,6 +414,7 @@ that finally gives according to the Fourier series expansion \autoref{eq:Fourier
 It is planned in a near future to :
 - provide another Plasma Physics academic simulation about one BGK (from the name of its founder I. B. Bernstein, J. M. Greene and M. D. Kruskal) non linear solution @BernsteinGreenKruskal:1957
 - provide a second Plasma Physics academic simulation about Plasma wave echo @Gould:1967
+- implement non-equally spaced phase-space cells
 - implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes @Liu:1994
 - compute the plasma ion Vlasov equation to allow for the ions to be mobile 
 - extend the code to relativistic electromagnetic 2D-2V and 1D-3V phase-space electromagnetic plasma simulations
