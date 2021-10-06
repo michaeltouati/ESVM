@@ -517,7 +517,7 @@ with
 \end{equation}
 accounting for the initial conditions at $t=0$. Here, $J_\mu$ and $Y_\mu$ are the Bessel functions of the first and second kind of order $\mu$ respectively. Some of these beam electron orbits are plotted in \autoref{fig:electron_orbits}. We can see that the beam electrons are looping around the phase-space center $\left ( x,\,v \right ) = \left ( 0,\,0 \right )$ with a velocity amplitude increasing with their initial spatial distance from $x=0$ in agreement with the ESVM simulation \autoref{fig:two-stream-instability}.
 
-# Perspectives
+# ESVM Perspectives
 
 It is planned in a near future to :
 - provide another Plasma Physics academic simulation about one BGK (from the name of its finder I. B. Bernstein, J. M. Greene and M. D. Kruskal) non linear solution @BernsteinGreenKruskal:1957
@@ -525,7 +525,7 @@ It is planned in a near future to :
 - implement non-equally spaced phase-space cells
 - implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes @Liu:1994
 - compute the plasma ion Vlasov equation to allow for the ions to be mobile 
-- extend the code to relativistic electromagnetic 2D-2V and 1D-3V phase-space electromagnetic plasma simulations : ESVM $\Rightarrow $EMVM (open source Electromagnetic Vlasov-Maxwell code)
+- extend the code to relativistic electromagnetic 2D-2V and 1D-3V phase-space electromagnetic plasma simulations : ESVM $\Rightarrow$ EMVM (open source Electromagnetic Vlasov-Maxwell code)
 - store the simulation results in hdf5 files instead of text files
 - implement its MPI parallelization
 - implement its vectorization
