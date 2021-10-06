@@ -433,7 +433,7 @@ The first term in the square brackets
 \begin{equation}
 \displaystyle \left \{ \begin{array}{llrccr}
 \delta n_{\text{osc}} \displaystyle \left ( x,\,t \right ) &\underset{k_1 v_d \ll \omega_{p}}{\sim}& - \displaystyle \frac{A}{2} & Z n_i \displaystyle \frac{ k_1 v_d }{ \omega_{p} } & \sin{ \displaystyle \left ( \omega_{p} t \right ) }   & \cos{\displaystyle \left ( k_1 x \right )} 
-\cr \delta v_{\text{osc}} \displaystyle \left ( x,\,t \right ) &\underset{k_1 v_d \ll \omega_{p}}{\sim}& - \displaystyle \frac{A}{2} & v_d & \cos{ \displaystyle \left ( \omega_{p} t \right ) }   & \sin{\displaystyle \left ( k_1 x \right )}
+\cr \delta v_{\text{osc}} \displaystyle \left ( x,\,t \right ) &\underset{k_1 v_d \ll \omega_{p}}{\sim}& - \displaystyle \frac{A}{2} & v_d & \displaystyle \left ( \cos{ \displaystyle \left ( \omega_{p} t \right ) } - 1 \right )   & \sin{\displaystyle \left ( k_1 x \right )}
 \cr  \delta E_{\text{osc}} \displaystyle \left ( x,\,t \right ) &\underset{k_1 v_d \ll \omega_{p}}{\sim}&  \displaystyle \frac{A}{2} & E_0 & \sin{ \displaystyle \left ( \omega_{p} t \right ) } & \sin{ \displaystyle \left ( k_1 x \right ) }
 \end{array} \right .
 \end{equation}
@@ -442,7 +442,7 @@ corresponds to space-charge oscillations of stationary electrostatic plasma wave
   \label{eq:my_analytical_solutions}
   \displaystyle \left \{ \begin{array}{llrcccr}
      \delta n_\text{ins} \displaystyle \left ( x,\,t \right ) & \underset{k_1 v_d \ll \omega_{p}}{\sim} & - 2 A &Z n_i &{\displaystyle \left ( \displaystyle \frac{ k_1 v_d }{ \omega_{p} } \right )}^2 & \sinh{ \displaystyle \left ( k_1 v_d t \right ) } & \cos{\displaystyle \left ( k_1 x \right )}
-  \cr \delta v_\text{ins} \displaystyle \left ( x,\,t \right ) & \underset{k_1 v_d \ll \omega_{p}}{\sim} & - 2 A & v_d &{\displaystyle\left ( \displaystyle \frac{k_1 v_d}{\omega_{p}} \right )}^2  &  \cosh{ \displaystyle \left ( k_1 v_d t \right ) }    & \sin{\displaystyle \left ( k_1 x \right )} 
+  \cr \delta v_\text{ins} \displaystyle \left ( x,\,t \right ) & \underset{k_1 v_d \ll \omega_{p}}{\sim} & - 2 A & v_d &{\displaystyle\left ( \displaystyle \frac{k_1 v_d}{\omega_{p}} \right )}^2  & \displaystyle \left ( \cosh{ \displaystyle \left ( k_1 v_d t \right ) } - 1 \right )   & \sin{\displaystyle \left ( k_1 x \right )} 
   \cr \delta E_{\text{ins}}  \displaystyle \left ( x,\,t \right )       &\underset{k_1 v_d \ll \omega_{p}}{\sim} &  2 A & E_0 &\displaystyle \frac{k_1 v_d}{\omega_{p}} & \sinh{ \displaystyle \left ( k_1 v_d t \right ) } & \sin{ \displaystyle \left ( k_1 x \right ) }
 \end{array} \right .
 \end{equation}
