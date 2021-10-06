@@ -307,7 +307,7 @@ and
 \end{equation}
 Injecting \autoref{eq:Eq1} in \autoref{eq:Eq2}, we obtain the Fourier components of the electrostatic fields
 \begin{equation}
-  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) &=& \displaystyle \frac{4\pi e}{ {k_p}^2 \epsilon \displaystyle \left ( \omega,\,k_p\right )} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) }{v_x - \omega / k_p } d v_x
+  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) = \displaystyle \frac{4\pi e}{ {k_p}^2 \epsilon \displaystyle \left ( \omega,\,k_p\right )} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) }{v_x - \omega / k_p } d v_x
 \end{equation}
 where the plasma electrical permittivity reads
 \begin{equation}
@@ -319,6 +319,55 @@ depending on the plasma dispersion function
   \label{eq:plasma_dispersion_function}
   F \displaystyle \left ( \zeta \right ) = \zeta \mathcal{Z} \displaystyle \left ( \zeta \right ) \text{ and } \mathcal{Z} \displaystyle \left ( \zeta \right ) = \displaystyle \frac{ 1 }{ \sqrt{\pi} } \displaystyle \int_{-\infty}^\infty \displaystyle \frac{ \exp{ \displaystyle \left ( - z^2 \right ) } }{ z - \zeta } d z.
 \end{equation}
+
+Since we are interested in the particular case where $v_d \gg v_{T_e}$, we always have the condition 
+\begin{equation}
+  \label{eq:assumption}
+  \displaystyle \left | \displaystyle \frac{\omega}{k} \pm v_\text{d} \right | \gg v_\text{th} \sqrt{2}
+\end{equation}
+that is fulfilled for any given spatial frequency mode $k$. We thus may use the asymptotic limit
+\begin{equation}
+  F \displaystyle \left ( \zeta \right ) \underset{|\zeta| \gg 1 }{=}  \iota  \zeta \sqrt{\pi}  \exp{ \displaystyle \left ( - \zeta^2 \right ) }  - 1 - \displaystyle \frac{ 1 }{ 2 \zeta^2} - \displaystyle \frac{ 3 }{ 4 \zeta^4} + ...
+\end{equation}
+that leads to the simpler dispersion relation 
+\begin{equation}
+  \label{eq:plasma_electrical_permittivity_limit}
+  \epsilon \displaystyle \left ( \omega,\,k\right ) \underset{v_\text{d} \gg v_\text{th}}{=} 0 ≤Leftrightarrow 1 - \displaystyle \frac{ {\omega_{p,e}}^2 }{ 2 } \displaystyle \left [  \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega - k v_\text{d} \right )}^2 } + \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega + k v_\text{d} \right )}^2 } \right ] = 0
+\end{equation}
+retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order. In this limit, dispersion relation thus provides \autoref{eq:plasma_electrical_permittivity_limit} four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber
+\begin{equation}
+  \label{eq:critical_wavenumber}
+  k_c = \displaystyle \frac{\omega_{p,e}}{ v_\text{d} }.
+\end{equation}
+It means that the whole plasma remain stable on space scales smaller than $\lambda_c = 2 \pi / k_c$. However, in the case where $k < k_c$, we find in addition to the two real poles
+\begin{equation}
+  \label{eq:pure_real_poles}
+  \omega_{1/2} \displaystyle \left ( k < k_c \right )= \pm \omega_0 \displaystyle \left ( k \right )
+\end{equation}
+where
+\begin{equation}
+  \label{eq:pure_real_poles}
+  \omega_0 \displaystyle \left ( k \right ) = \omega_{p,e} \displaystyle \sqrt{ {\displaystyle \left ( \displaystyle \frac{ k v_\text{d} }{ \omega_{p,e} } \right )}^2 + \displaystyle \frac{1}{2} \displaystyle \left ( 1 + \displaystyle \sqrt{ 1 + 8 {\displaystyle \left ( \displaystyle \frac{ k v_\text{d} }{ \omega_{p,e} } \right )}^2 } \right ) } \underset{ k v_d \ll   \omega_{p,e} }{\sim} \omega_{p,e},
+\end{equation}
+two another pure imaginary conjugate poles
+\begin{equation}
+  \label{eq:pure_imaginary_poles}
+  \omega_{3/4} \displaystyle \left ( k < k_c \right )=  \pm \iota \delta \displaystyle \left ( k \right ).
+\end{equation}
+It means that the two counter-propagating electron beams streaming throught the immobile plasma ions is unstable on space scales greater than $\lambda_c$ and that the instability grows exponentially at the rate
+\begin{equation}
+  \label{eq:growth_rate}
+  \delta \displaystyle \left ( k \right ) = \omega_{p,e} \displaystyle \sqrt{  \displaystyle \frac{1}{2} \displaystyle \left ( \displaystyle \sqrt{ 1 + 8 {\displaystyle \left ( \displaystyle \frac{ k v_\text{d} }{ \omega_{p,e} } \right )}^2 } - 1 \right ) - {\displaystyle \left ( \displaystyle \frac{ k v_\text{d} }{ \omega_{p,e} } \right )}^2 }  \underset{ k v_d \ll   \omega_{p,e} }{\sim} \displaystyle \left | k \right | v_d.
+\end{equation}
+
+\begin{equation}
+  \begin{array}{lcl}
+  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) &=& \displaystyle \frac{4\pi e}{ {k_p}^2 \epsilon \displaystyle \left ( \omega,\,k_p\right )} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) }{v_x - \omega / k_p } d v_x
+  \cr &=& \alpha_p \displaystyle \frac{A}{ 2 \sqrt{2} } \displaystyle \frac{m_e v_\text{th}}{ e } \displaystyle \frac{ \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p - v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) - \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p + v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) {\displaystyle \left ( k_p \lambda_\text{D}\right ) }^2 }
+  \cr &\underset{v_\text{d} \gg v_\text{th}}{\sim}& - \alpha_p A \displaystyle \frac{m_e v_\text{d}}{ e } \displaystyle \frac{  {\omega_{p,e}}^2  }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) \displaystyle \left ( \omega - k_p v_d \right ) \displaystyle \left ( \omega + k_p v_d \right )  } 
+  \end{array}
+\end{equation}
+retaining the main terms in the series expansions of the dispersion function $\mathcal{Z}$ up to the second order.
 
  with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ (parameter $k$ in the input-deck) and $v_\text{d}$ can be modified by the user. 
 
