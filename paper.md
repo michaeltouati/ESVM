@@ -135,7 +135,7 @@ The code units consist in the commonly used electrostatic units : the electron m
 
 # ESVM numerical stability
 
-The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to be Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_e}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_e}$ and also sufficiently small to capture the desired Physics. The CFL stability criterium (from the name of its finder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) is implemented inside the code in such a way that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step reads
+The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to be Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_e}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_e}$ and also sufficiently small to capture the desired Physics. The CFL stability condition (from the name of its finder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) is implemented inside the code in such a way that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step reads
 \begin{equation}
 \underline{\Delta t}_n = \mathrm{cfl} \times F^n(\underline{\Delta x}, \underline{\Delta v}_x ) < F^n(\underline{\Delta x}, \underline{\Delta v}_x)
 \end{equation}
@@ -187,12 +187,12 @@ for each term $p$ of the series. It implies the numerical scheme is stable,
 \begin{equation}
   \mathrm{meaning} \,\displaystyle \left | \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{ \widehat{\underline{f_e}}^{n} (\underline{k}^p) } \right | < 1,\,\mathrm{if}\,\underline{\Delta t}_n < \displaystyle \frac{ \underline{\Delta x} }{ \underline{v_x} } .
 \end{equation}
-Performing the same reasoning when discretizing also the velocity space $\underline{v_x}^\ell = \underline{v_{x,\mathrm{min}}} + (\ell-1 ) \underline{\Delta v}_x$ with $N_{v_x} = 1 + (\underline{v_{x,\mathrm{max}}}-\underline{v_{x,\mathrm{min}}}) / \underline{\Delta v}_x$ velocity grid points and considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in the velocity space for computing the Vlasov equation \autoref{eq:vlasov1d1v} with each numerical scheme implemented in ESVM, one finds (sometimes empirically when it is too much complex analytically) that
+Performing the same reasoning when discretizing also the velocity space $\underline{v_x}^\ell = \underline{v_{x,\mathrm{min}}} + (\ell-1 ) \underline{\Delta v}_x$ with $N_{v_x} = 1 + (\underline{v_{x,\mathrm{max}}}-\underline{v_{x,\mathrm{min}}}) / \underline{\Delta v}_x$ velocity grid points and considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in the velocity space for computing the Vlasov equation \autoref{eq:vlasov1d1v} with each numerical scheme implemented in ESVM, one finds (sometimes empirically when it is too difficult analytically) that
 \begin{equation}
   \label{CFL}
   F^n(\underline{\Delta x}, \underline{\Delta v}_x) = \displaystyle \frac{1/2}{ \displaystyle \frac{ \underset{\ell \in [1,N_{v_x}]}{\mathrm{max}}\{ \underline{v}_x^\ell \} }{ \underline{\Delta x} } + \displaystyle \frac{ \underset{i \in [1,N_x]}{\mathrm{max}}\{ \underline{E}_x^{n,i} \} }{ \underline{\Delta v}_x } }.
 \end{equation}
-is a sufficient condition for all numerical schemes implemented in ESVM to be stable.
+is a sufficient CFL stability condition for all numerical schemes implemented in ESVM to be stable.
 
 # Provided academic cases
 
@@ -343,7 +343,7 @@ that leads to the simpler dispersion relation
   \label{eq:plasma_electrical_permittivity_limit}
   \epsilon \displaystyle \left ( \omega,\,k \right ) \underset{v_d \gg v_{T_e}}{=} = 1 - \displaystyle \frac{ {\omega_{p}}^2 }{ 2 } \displaystyle \left [  \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega - k v_d \right )}^2 } + \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega + k v_d \right )}^2 } \right ] = 0
 \end{equation}
-retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order \autoref{eq:plasma_dispersion_function_2ndorder}. In this limit, the dispersion relation \autoref{eq:plasma_electrical_permittivity_limit} provides four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber $k_c = \omega_{p} / v_d$. It means that the whole plasma remain stable on space scales smaller than $\lambda_c = 2 \pi / k_c$. However, in the case where $k_p < k_c$ considered here, we find in addition to the two real poles
+retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order \autoref{eq:plasma_dispersion_function_2ndorder}. In this limit, the dispersion relation \autoref{eq:plasma_electrical_permittivity_limit} provides four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber $k_c = \omega_{p} / v_d$. It means that the two counter-propagating electron beams remain stable on space scales smaller than $\lambda_c = 2 \pi / k_c$. However, in the case where $k_p < k_c$ considered here, we find in addition to the two real poles
 \begin{equation}
   \label{eq:pure_real_poles}
   \omega_{1/2} \displaystyle \left ( k < k_c \right )= \pm \omega_0 \displaystyle \left ( k \right )
@@ -392,6 +392,59 @@ that finally gives according to the Fourier series expansion \autoref{eq:Fourier
   \cr                                              &+& A & \displaystyle \frac{E_0}{2} & \displaystyle \frac{ {\omega_{p}} }{ \omega_0 \displaystyle \left ( k_1 \right ) } & \displaystyle \frac{ {\omega_0 \displaystyle \left ( k_1 \right )}^2 - {\displaystyle \left ( k_1 v_d\right )}^2 }{  {\delta \displaystyle \left ( k_1 \right )}^2 + {\omega_0 \displaystyle \left ( k_1 \right )}^2 } & \sin{ \displaystyle \left [ \omega_0 \displaystyle \left ( k_1 \right ) t \right ] } \sin{\displaystyle \left ( k_1 x \right )}.
   \end{array}
 \end{equation}
+
+Knowing the electrostatic field \autoref{eq:electrostatic_field}, we may also deduce the perturbed distribution function according to \autoref{eq:linearized_Vlasov1d1v}. It reads 
+\begin{equation}
+  \begin{array}{lll}
+  { \delta f}_{e} \displaystyle \left ( x,\, v_x,\,t \right )  &=&  \delta f_{e} \displaystyle \left ( x,\, v_x,\,t=0\right )  + \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_{e}^{(0)}}{d v_x}  \displaystyle \left ( v_x \right ) \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau
+  \cr &=& f_{e,+}^{(0)}  \displaystyle \left ( v_x \right ) \displaystyle \left [ + A \sin{ \displaystyle \left ( k_1 x \right ) } + \displaystyle \frac{ v_d - v_x  }{ {v_{T_e}^2 }} \displaystyle \frac{e}{m_e} \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau  \right ]
+  \cr &+& f_{e,-}^{(0)}  \displaystyle \left ( v_x \right ) \displaystyle \left [ - A \sin{ \displaystyle \left ( k_1 x \right ) } -  \displaystyle \frac{ v_d + v_x  }{ {v_{T_e}^2 }} \displaystyle \frac{e}{m_e} \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau  \right ].
+  \end{array}
+\end{equation}
+In the limit $k_p v_d \ll \omega_{p}$, they simplify into
+\begin{equation}
+ \delta E_x \displaystyle \left ( x,\,t \right ) \underset{k_1 v_d \ll \omega_{p}}{\sim}  A \displaystyle \frac{E_0}{2}  \displaystyle \left [  \sin{ \displaystyle \left ( \omega_{p} t \right ) } + 4 \displaystyle \frac{k_1 v_d}{\omega_{p}}  \sinh{ \displaystyle \left ( k_1 v_d t \right ) }  \right ] \sin{ \displaystyle \left ( k_1 x \right ) }
+\end{equation}
+and 
+\begin{equation}
+\begin{array}{lcll}
+      & & & \displaystyle \frac{e}{m_e} \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau  
+ \cr &\underset{k_1 v_d \ll \omega_{p}}{\sim}&  A \displaystyle \frac{ v_d}{ 1 - {\displaystyle \left ( \displaystyle \frac{ k_1 v_x }{ \omega_{p} } \right )}^2  } & \displaystyle \left \{ \displaystyle \frac{k_1 v_x }{ \omega_p } \sin{ \displaystyle \left ( \omega_{p} t \right ) } \;\;\; \cos{ \displaystyle \left ( k_1 x \right ) } - \displaystyle \left [ \cos{ \displaystyle \left ( \omega_{p} t \right ) } \;\,\;- 1 \right ]  \sin{ \displaystyle \left ( k_1 x \right ) } \right \}
+ \cr &+& A  \displaystyle \frac{ v_d }{ 1 +  {\displaystyle \left ( \displaystyle \frac{ v_x }{ v_d} \right )}^2 } & \displaystyle \left \{ - \displaystyle \frac{ v_x }{ v_d } \, \sinh{ \displaystyle \left (k_1 v_d t \right ) } \cos{ \displaystyle \left ( k_1 x \right ) } + \displaystyle \left [ \cosh{ \displaystyle \left ( k_1 v_d  t \right ) } - 1 \right ] \sin{ \displaystyle \left ( k_1 x \right ) } \right \}.
+ \end{array}
+\end{equation}
+We thus deduce in this limit
+\begin{equation}
+\begin{array}{lcl}
+\delta n_e \displaystyle \left ( x,\, t \right ) &=& \displaystyle \int_{-\infty}^\infty \delta f_e \displaystyle\left ( x,\,v_x,\,t \right ) d v_x
+\cr &\underset{k_1 v_d \ll \omega_{p}}{\sim}& - \displaystyle \frac{A}{2} Z n_i \displaystyle \frac{ k_1 v_d }{ \omega_{p} }  \displaystyle \left [ \sin{ \displaystyle \left ( \omega_{p} t \right ) } + 4 \displaystyle \frac{k_1 v_d}{\omega_{p}}  \sinh{ \displaystyle \left ( k_1 v_d t \right ) } \right ] \cos{\displaystyle \left ( k_1 x \right )}
+\end{array}
+\end{equation}
+and 
+\begin{equation}
+\begin{array}{lcl}
+\delta v_e \displaystyle \left ( x,\, t \right ) &=& \displaystyle \frac{1}{Z n_i} \displaystyle \int_{-\infty}^\infty v_x \delta f_e \displaystyle\left ( x,\,v_x,\,t \right ) d v_x 
+\cr &\underset{k_1 v_d \ll \omega_{p}}{\sim}& - \displaystyle \frac{A}{2} v_d \displaystyle \left \{ \displaystyle \left [ \cos{ \displaystyle \left ( \omega_{p} t \right ) } - 1 \right ] + {\displaystyle\left ( 2 \displaystyle \frac{k_1 v_d}{\omega_{p}} \right )}^2 \displaystyle \left [ \cosh{ \displaystyle \left ( k_1 v_d t \right ) } - 1 \right ] \right \} \sin{\displaystyle \left ( k_1 x \right )}.
+\end{array}
+\end{equation}
+The first term in the square brackets
+\begin{equation}
+\displaystyle \left \{ \begin{array}{llrccr}
+\delta n_{\text{osc}} \displaystyle \left ( x,\,t \right ) &\underset{k_1 v_d \ll \omega_{p}}{\sim}& - \displaystyle \frac{A}{2} & Z n_i \displaystyle \frac{ k_1 v_d }{ \omega_{p} } & \sin{ \displaystyle \left ( \omega_{p} t \right ) }   & \cos{\displaystyle \left ( k_1 x \right )} 
+\cr \delta v_{\text{osc}} \displaystyle \left ( x,\,t \right ) &\underset{k_1 v_d \ll \omega_{p}}{\sim}& - \displaystyle \frac{A}{2} & v_d & \cos{ \displaystyle \left ( \omega_{p} t \right ) }   & \sin{\displaystyle \left ( k_1 x \right )}
+\cr  \delta E_{\text{osc}} \displaystyle \left ( x,\,t \right ) &\underset{k_1 v_d \ll \omega_{p}}{\sim}&  \displaystyle \frac{A}{2} & E_0 & \sin{ \displaystyle \left ( \omega_{p} t \right ) } & \sin{ \displaystyle \left ( k_1 x \right ) }
+\end{array} \right .
+\end{equation}
+corresponds to space-charge oscillations of stationary electrostatic plasma waves excited by the perturbation imposed on each electron beam. We are rather interested here in the second term in the square brackets
+\begin{equation}
+  \label{eq:my_analytical_solutions}
+  \displaystyle \left \{ \begin{array}{llrcccr}
+     \delta n_\text{ins} \displaystyle \left ( x,\,t \right ) & \underset{k_1 v_d \ll \omega_{p}}{\sim} & - 2 A &Z n_i &{\displaystyle \left ( \displaystyle \frac{ k_1 v_d }{ \omega_{p} } \right )}^2 & \sinh{ \displaystyle \left ( k_1 v_d t \right ) } & \cos{\displaystyle \left ( k_1 x \right )}
+  \cr \delta v_\text{ins} \displaystyle \left ( x,\,t \right ) & \underset{k_1 v_d \ll \omega_{p}}{\sim} & - 2 A & v_d &{\displaystyle\left ( \displaystyle \frac{k_1 v_d}{\omega_{p}} \right )}^2  &  \cosh{ \displaystyle \left ( k_1 v_d t \right ) }    & \sin{\displaystyle \left ( k_1 x \right )} 
+  \cr \delta E_{\text{ins}}  \displaystyle \left ( x,\,t \right )       &\underset{k_1 v_d \ll \omega_{p}}{\sim} &  2 A & E_0 &\displaystyle \frac{k_1 v_d}{\omega_{p}} & \sinh{ \displaystyle \left ( k_1 v_d t \right ) } & \sin{ \displaystyle \left ( k_1 x \right ) }
+\end{array} \right .
+\end{equation}
+corresponding to the exponentially growing electrostatic field due to the two-stream instability. These growing electrical charge, current density and electrostatic field \autoref{my_analytical_solutions} can directly be compared with the ESVM simulation result. We can check that if $A = 0$ or $v_d = 0$, all quantities cancel. That confirms that, contrary to PIC codes, the two counter-propagating electron beams would continue their propagation without any modification if we do not impose an initial perturbation on which the instability will grow in ESVM.
 
  with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ (parameter $k$ in the input-deck) and $v_\text{d}$ can be modified by the user. 
 
