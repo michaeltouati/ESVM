@@ -360,14 +360,7 @@ It means that the two counter-propagating electron beams streaming throught the 
   \delta \displaystyle \left ( k \right ) = \omega_{p,e} \displaystyle \sqrt{  \displaystyle \frac{1}{2} \displaystyle \left ( \displaystyle \sqrt{ 1 + 8 {\displaystyle \left ( \displaystyle \frac{ k v_\text{d} }{ \omega_{p,e} } \right )}^2 } - 1 \right ) - {\displaystyle \left ( \displaystyle \frac{ k v_\text{d} }{ \omega_{p,e} } \right )}^2 }  \underset{ k v_d \ll   \omega_{p,e} }{\sim} \displaystyle \left | k \right | v_d.
 \end{equation}
 
-\begin{equation}
-  \begin{array}{lcl}
-  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) &=& \displaystyle \frac{4\pi e}{ {k_p}^2 \epsilon \displaystyle \left ( \omega,\,k_p\right )} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) }{v_x - \omega / k_p } d v_x
-  \cr &=& \alpha_p \displaystyle \frac{A}{ 2 \sqrt{2} } \displaystyle \frac{m_e v_\text{th}}{ e } \displaystyle \frac{ \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p - v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) - \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p + v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) {\displaystyle \left ( k_p \lambda_\text{D}\right ) }^2 }
-  \cr &\underset{v_\text{d} \gg v_\text{th}}{\sim}& - \alpha_p A \displaystyle \frac{m_e v_\text{d}}{ e } \displaystyle \frac{  {\omega_{p,e}}^2  }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) \displaystyle \left ( \omega - k_p v_d \right ) \displaystyle \left ( \omega + k_p v_d \right )  } 
-  \end{array}
-\end{equation}
-retaining the main terms in the series expansions of the dispersion function $\mathcal{Z}$ up to the second order.
+
 
  with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ (parameter $k$ in the input-deck) and $v_\text{d}$ can be modified by the user. 
 
