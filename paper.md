@@ -312,7 +312,10 @@ Injecting \autoref{eq:Eq1} in \autoref{eq:Eq2}, we obtain the Fourier components
 where the plasma electrical permittivity reads
 \begin{equation}
   \label{eq:plasma_electrical_permittivity}
-  \epsilon \displaystyle \left ( \omega,\,k \right )   =  1 - \displaystyle \frac{4 \pi e^2}{m_e k^2} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{ 1 }{ v_x - \omega / k } \displaystyle \frac{ d f_e^{(0)} }{ d v_x } d v_x =  1 + \displaystyle \frac{1}{ {\displaystyle \left ( k \lambda_\text{D} \right )}^2} \displaystyle \left \{ 1 + \displaystyle \frac{1}{2} \displaystyle \left [ F \displaystyle \left ( \displaystyle \frac{ \omega / k - v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) +  F \displaystyle \left ( \displaystyle \frac{ \omega / k + v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) \right ] \right \}
+  \begin{array}{lll}
+  \epsilon \displaystyle \left ( \omega,\,k \right )   &=&  1 - \displaystyle \frac{4 \pi e^2}{m_e k^2} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{ 1 }{ v_x - \omega / k } \displaystyle \frac{ d f_e^{(0)} }{ d v_x } d v_x
+  \cr                                                  &=&  1 + \displaystyle \frac{1}{ {\displaystyle \left ( k \lambda_\text{D} \right )}^2} \displaystyle \left \{ 1 + \displaystyle \frac{1}{2} \displaystyle \left [ F \displaystyle \left ( \displaystyle \frac{ \omega / k - v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) +  F \displaystyle \left ( \displaystyle \frac{ \omega / k + v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) \right ] \right \}
+\end{array}
 \end{equation}
 depending on the plasma dispersion function 
 \begin{equation}
