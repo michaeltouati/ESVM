@@ -1,4 +1,4 @@
-Written by Michael J TOUATI - @michaeltouati on GitHub
+Written by Michael J TOUATI - https://github.com/michaeltouati
 
 # Compiling the code
 
