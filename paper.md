@@ -154,24 +154,24 @@ the electron distribution function finite volume at the spatial location $\under
 of plasma electrons along the spatial $\underline{x}$-axis in the phase-space, the numerical scheme reads
 \begin{equation}
   \label{eq:LaxWendroff}
-  {\left [ \displaystyle \frac{\underline{f_e}^{n+1} - \underline{f_e}^{n} }{ \underline{\Delta t} } \right ]}^i + \underline{v_x} {\left [ \displaystyle \frac{\underline{F_x}^{i+1/2} - \underline{F_x}^{i-1/2} }{ \underline{\Delta x} } \right ]}^n = 0
+  {\left [ \displaystyle \frac{\underline{f_e}^{n+1} - \underline{f_e}^{n} }{ \underline{\Delta t}_n } \right ]}^i + \underline{v_x} {\left [ \displaystyle \frac{\underline{F_x}^{i+1/2} - \underline{F_x}^{i-1/2} }{ \underline{\Delta x} } \right ]}^n = 0
 \end{equation}
 where the plasma electron fluxes across the volume sections located at $\underline{x}_{i\pm1/2}$ are given by
 \begin{equation}
   \label{eq:LaxWendroff_fluxes_plus}
-  \underline{F_x}^{n,i+1/2} = \displaystyle \frac{\underline{f_e}^{n,i+1} + \underline{f_e}^{n,i}}{2} - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x}} \displaystyle \frac{\underline{f_e}^{n,i+1} - \underline{f_e}^{n,i}}{2}
+  \underline{F_x}^{n,i+1/2} = \displaystyle \frac{\underline{f_e}^{n,i+1} + \underline{f_e}^{n,i}}{2} - \displaystyle \frac{\underline{v_x} \underline{\Delta t}_n}{\underline{\Delta x}} \displaystyle \frac{\underline{f_e}^{n,i+1} - \underline{f_e}^{n,i}}{2}
 \end{equation}
 and
 \begin{equation}
   \label{eq:LaxWendroff_fluxes_minus}
-  \underline{F_x} ^{n,i-1/2} = \displaystyle \frac{\underline{f_e}^{n,i} + \underline{f_e}^{n,i-1}}{2} - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x}} \displaystyle \frac{\underline{f_e}^{n,i} - \underline{f_e}^{n,i-1}}{2}.
+  \underline{F_x} ^{n,i-1/2} = \displaystyle \frac{\underline{f_e}^{n,i} + \underline{f_e}^{n,i-1}}{2} - \displaystyle \frac{\underline{v_x} \underline{\Delta t}_n }{\underline{\Delta x}} \displaystyle \frac{\underline{f_e}^{n,i} - \underline{f_e}^{n,i-1}}{2}.
 \end{equation}
 According to the Taylor expansion of $\underline{f_e}^{n,i+i}$, $\underline{f_e}^{n,i-i}$ and $\underline{f_e}^{n+1,i}$ close to $(\underline{x}_i,\underline{t}_n)$ up to the third order in space and time, one can check the Lax-Wendroff numerical consistency error is indeed of second order :
 \begin{equation}
   \label{eq:LaxWendroff_error}
   \begin{array}{lll}
-  \underline{\epsilon}^{n,i} &=& {\left [ \displaystyle \frac{\underline{f_e}^{n+1} - \underline{f_e}^{n} }{ \underline{\Delta t} } \right ]}^i + \underline{v_x} {\left [ \displaystyle \frac{\underline{F_x}^{i+1/2} - \underline{F_x}^{i-1/2} }{ \underline{\Delta x} } \right ]}^n - \displaystyle \left (  {\left . \displaystyle \frac{\partial \underline{f_e} }{\partial \underline{t}} \right |}^{n,i} + \underline{v_x}  {\left . \displaystyle \frac{\partial \underline{f_e} }{\partial \underline{x}} \right |}^{n,i} \right )
-  \cr &=& \displaystyle \frac{ {\underline{\Delta t}}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{t}^3} \right |}^{n,i}  + \underline{v_x} \displaystyle \frac{ {\underline{\Delta x}}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{x}^3} \right |}^{n,i} + O\left ( {\underline{\Delta t}}^3 + {\underline{\Delta x}}^3 + \underline{\Delta t} {\underline{\Delta x}}^2\right ).
+  \underline{\epsilon}^{n,i} &=& {\left [ \displaystyle \frac{\underline{f_e}^{n+1} - \underline{f_e}^{n} }{ \underline{\Delta t}_n } \right ]}^i + \underline{v_x} {\left [ \displaystyle \frac{\underline{F_x}^{i+1/2} - \underline{F_x}^{i-1/2} }{ \underline{\Delta x} } \right ]}^n - \displaystyle \left (  {\left . \displaystyle \frac{\partial \underline{f_e} }{\partial \underline{t}} \right |}^{n,i} + \underline{v_x}  {\left . \displaystyle \frac{\partial \underline{f_e} }{\partial \underline{x}} \right |}^{n,i} \right )
+  \cr &=& \displaystyle \frac{ {\underline{\Delta t}_n}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{t}^3} \right |}^{n,i}  + \underline{v_x} \displaystyle \frac{ {\underline{\Delta x}}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{x}^3} \right |}^{n,i} + O\left ( {\underline{\Delta t}_n}^3 + {\underline{\Delta x}}^3 + \underline{\Delta t}_n {\underline{\Delta x}}^2\right ).
   \end{array}
 \end{equation}
 By using the Von Neumann stability analysis, assuming periodic boundary conditions for simplicity and noting
@@ -181,17 +181,13 @@ By using the Von Neumann stability analysis, assuming periodic boundary conditio
 \end{equation}
 with $\iota^2=-1$, $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$ the discrete Fourier mode, one gets by injecting \autoref{eq:VonNeumann} in \autoref{eq:LaxWendroff}
 \begin{equation}
-\displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{  \widehat{\underline{f_e}}^{n} (\underline{k}^p) } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } \iota \sin{\left ( \underline{k}^p \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( \underline{k}^p \underline{\Delta x} \right )}   -1 \right ]
+\displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{  \widehat{\underline{f_e}}^{n} (\underline{k}^p) } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}_n}{\underline{\Delta x} } \iota \sin{\left ( \underline{k}^p \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t}_n }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( \underline{k}^p \underline{\Delta x} \right )}   -1 \right ]
 \end{equation}
 for each term $p$ of the series. It implies the numerical scheme is stable, meaning 
 \begin{equation}
-  | \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{ \widehat{\underline{f_e}}^{n} (\underline{k}^p) } | < 1,
+  \displaystyle \left | \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{ \widehat{\underline{f_e}}^{n} (\underline{k}^p) } \right | < 1,\,\mathrm{if}\,\underline{\Delta t}_n < \displaystyle \frac{ \underline{\Delta x} }{ \underline{v_x} } .
 \end{equation}
-if
-\begin{equation}
-  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } < 1 \Rightarrow {\displaystyle \left | \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{ \widehat{\underline{f_e}}^{n} (\underline{k}^p) } \right |}^2 < 1.
-\end{equation}
-Performing the same reasoning when discretizing also the velocity space \small{$\underline{v}_{x}^\ell = \underline{v}_{x,\mathrm{min}} + (\ell-1 ) \underline{\Delta v}_x$} with \small{$N_{v_x} = 1 + (\underline{v}_{x,\mathrm{max}}-\underline{v}_{x,\mathrm{min}}) / \underline{\Delta v}_x$} velocity grid points and considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in the velocity space for computing the Vlasov equation \autoref{eq:vlasov1d1v} with each numerical scheme  implemented in ESVM, one finds (sometimes empirically when it is too much complex analytically) that
+Performing the same reasoning when discretizing also the velocity space $v_{x}^\ell = v_{x,\mathrm{min}} + (\ell-1 ) \Delta v_x$ with $N_{v_x} = 1 + (v_{x,\mathrm{max}}-v_{x,\mathrm{min}}) / \Delta v_x$} velocity grid points and considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in the velocity space for computing the Vlasov equation \autoref{eq:vlasov1d1v} with each numerical scheme  implemented in ESVM, one finds (sometimes empirically when it is too much complex analytically) that
 \begin{equation}
   \label{CFL}
   F^n(\underline{\Delta x}, \underline{\Delta v}_x) = \displaystyle \frac{1/2}{ \displaystyle \frac{ \underset{\ell \in [1,N_{v_x}]}{\mathrm{max}}\{ \underline{v}_x^\ell \} }{ \underline{\Delta x} } + \displaystyle \frac{ \underset{i \in [1,N_x]}{\mathrm{max}}\{ \underline{E}_x^{n,i} \} }{ \underline{\Delta v}_x } }.
