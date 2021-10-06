@@ -393,7 +393,7 @@ that finally gives according to the Fourier series expansion \autoref{eq:Fourier
   \end{array}
 \end{equation}
 
-Knowing the electrostatic field \autoref{eq:electrostatic_field}, we may also deduce the perturbed distribution function according to \autoref{eq:linearized_Vlasov1d1v}. It reads 
+Knowing the electrostatic field \autoref{eq:electrostatic_field}, we may also deduce the perturbed distribution function according to \autoref{eq:linearized_vlasov1d1v}. It reads 
 \begin{equation}
   \begin{array}{lll}
   { \delta f}_{e} \displaystyle \left ( x,\, v_x,\,t \right )  &=&  \delta f_{e} \displaystyle \left ( x,\, v_x,\,t=0\right )  + \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_{e}^{(0)}}{d v_x}  \displaystyle \left ( v_x \right ) \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau
@@ -407,7 +407,7 @@ In the limit $k_p v_d \ll \omega_{p}$, they simplify into
 \end{equation}
 and 
 \begin{equation}
-\begin{array}{lcll}
+\begin{array}{llll}
       & & & \displaystyle \frac{e}{m_e} \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau  
  \cr &\underset{k_1 v_d \ll \omega_{p}}{\sim}&  A \displaystyle \frac{ v_d}{ 1 - {\displaystyle \left ( \displaystyle \frac{ k_1 v_x }{ \omega_{p} } \right )}^2  } & \displaystyle \left \{ \displaystyle \frac{k_1 v_x }{ \omega_p } \sin{ \displaystyle \left ( \omega_{p} t \right ) } \;\;\; \cos{ \displaystyle \left ( k_1 x \right ) } - \displaystyle \left [ \cos{ \displaystyle \left ( \omega_{p} t \right ) } \;\,\;- 1 \right ]  \sin{ \displaystyle \left ( k_1 x \right ) } \right \}
  \cr &+& A  \displaystyle \frac{ v_d }{ 1 +  {\displaystyle \left ( \displaystyle \frac{ v_x }{ v_d} \right )}^2 } & \displaystyle \left \{ - \displaystyle \frac{ v_x }{ v_d } \, \sinh{ \displaystyle \left (k_1 v_d t \right ) } \cos{ \displaystyle \left ( k_1 x \right ) } + \displaystyle \left [ \cosh{ \displaystyle \left ( k_1 v_d  t \right ) } - 1 \right ] \sin{ \displaystyle \left ( k_1 x \right ) } \right \}.
@@ -415,17 +415,17 @@ and
 \end{equation}
 We thus deduce in this limit
 \begin{equation}
-\begin{array}{lcl}
-\delta n_e \displaystyle \left ( x,\, t \right ) &=& \displaystyle \int_{-\infty}^\infty \delta f_e \displaystyle\left ( x,\,v_x,\,t \right ) d v_x
-\cr &\underset{k_1 v_d \ll \omega_{p}}{\sim}& - \displaystyle \frac{A}{2} Z n_i \displaystyle \frac{ k_1 v_d }{ \omega_{p} }  \displaystyle \left [ \sin{ \displaystyle \left ( \omega_{p} t \right ) } + 4 \displaystyle \frac{k_1 v_d}{\omega_{p}}  \sinh{ \displaystyle \left ( k_1 v_d t \right ) } \right ] \cos{\displaystyle \left ( k_1 x \right )}
-\end{array}
+  \begin{array}{lcl}
+  \delta n_e \displaystyle \left ( x,\, t \right ) &=& \displaystyle \int_{-\infty}^\infty \delta f_e \displaystyle\left ( x,\,v_x,\,t \right ) d v_x
+  \cr &\underset{k_1 v_d \ll \omega_{p}}{\sim}& - \displaystyle \frac{A}{2} Z n_i \displaystyle \frac{ k_1 v_d }{ \omega_{p} }  \displaystyle \left [ \sin{ \displaystyle \left ( \omega_{p} t \right ) } + 4 \displaystyle \frac{k_1 v_d}{\omega_{p}}  \sinh{ \displaystyle \left ( k_1 v_d t \right ) } \right ] \cos{\displaystyle \left ( k_1 x \right )}
+  \end{array}
 \end{equation}
 and 
 \begin{equation}
-\begin{array}{lcl}
-\delta v_e \displaystyle \left ( x,\, t \right ) &=& \displaystyle \frac{1}{Z n_i} \displaystyle \int_{-\infty}^\infty v_x \delta f_e \displaystyle\left ( x,\,v_x,\,t \right ) d v_x 
-\cr &\underset{k_1 v_d \ll \omega_{p}}{\sim}& - \displaystyle \frac{A}{2} v_d \displaystyle \left \{ \displaystyle \left [ \cos{ \displaystyle \left ( \omega_{p} t \right ) } - 1 \right ] + {\displaystyle\left ( 2 \displaystyle \frac{k_1 v_d}{\omega_{p}} \right )}^2 \displaystyle \left [ \cosh{ \displaystyle \left ( k_1 v_d t \right ) } - 1 \right ] \right \} \sin{\displaystyle \left ( k_1 x \right )}.
-\end{array}
+  \begin{array}{lcl}
+  \delta v_e \displaystyle \left ( x,\, t \right ) &=& \displaystyle \frac{1}{Z n_i} \displaystyle \int_{-\infty}^\infty v_x \delta f_e \displaystyle\left ( x,\,v_x,\,t \right ) d v_x 
+  \cr &\underset{k_1 v_d \ll \omega_{p}}{\sim}& - \displaystyle \frac{A}{2} v_d \displaystyle \left [ \displaystyle \left ( \cos{ \displaystyle \left ( \omega_{p} t \right ) } - 1 \right ) + {\displaystyle\left ( 2 \displaystyle \frac{k_1 v_d}{\omega_{p}} \right )}^2 \displaystyle \left ( \cosh{ \displaystyle \left ( k_1 v_d t \right ) } - 1 \right ) \right ] \sin{\displaystyle \left ( k_1 x \right )}.
+  \end{array}
 \end{equation}
 The first term in the square brackets
 \begin{equation}
@@ -444,7 +444,7 @@ corresponds to space-charge oscillations of stationary electrostatic plasma wave
   \cr \delta E_{\text{ins}}  \displaystyle \left ( x,\,t \right )       &\underset{k_1 v_d \ll \omega_{p}}{\sim} &  2 A & E_0 &\displaystyle \frac{k_1 v_d}{\omega_{p}} & \sinh{ \displaystyle \left ( k_1 v_d t \right ) } & \sin{ \displaystyle \left ( k_1 x \right ) }
 \end{array} \right .
 \end{equation}
-corresponding to the exponentially growing electrostatic field due to the two-stream instability. These growing electrical charge, current density and electrostatic field \autoref{my_analytical_solutions} can directly be compared with the ESVM simulation result. We can check that if $A = 0$ or $v_d = 0$, all quantities cancel. That confirms that, contrary to PIC codes, the two counter-propagating electron beams would continue their propagation without any modification if we do not impose an initial perturbation on which the instability will grow in ESVM.
+corresponding to the exponentially growing electrostatic field due to the two-stream instability. These latter growing electrical charge, current density and electrostatic field \autoref{eq:my_analytical_solutions} can directly be compared with the ESVM simulation result. We can check that if $A = 0$ or $v_d = 0$, all quantities cancel. That confirms that, contrary to PIC codes, the two counter-propagating electron beams would continue their propagation without any modification if we do not impose an initial perturbation on which the instability will grow in ESVM.
 
  with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ (parameter $k$ in the input-deck) and $v_\text{d}$ can be modified by the user. 
 
