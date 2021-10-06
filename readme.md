@@ -55,7 +55,7 @@ make clean_figures
 
 - the directory results/ containing all simulation result data files, type :
 
-clean_results
+make clean_results
 
 - the three previous ones, type :
 
