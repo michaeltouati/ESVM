@@ -55,7 +55,7 @@ Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes
 
 # Statement of need
 
-`ESVM` has been developed in order to adapt simulations to specific Plasma Physics problems by chosing the more adequate finite volume numerical advection scheme in order to compute the Vlasov equation phase-space advection derivatives and to chose between computing the Maxwell-Gauss equation or the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step, only. The code aims at beeing used by the open-source Highly Parallel Computing (HPC) Plasma Physics community ranging from under or post-graduate students to teachers and researchers who usually use Particle-In-Cell (PIC) codes @Dawson:1962 to study collisionless plasmas. Indeed, the PIC method may prohibit the study of Plasma Physical processes on large time scales and/or for very dense collisionless plasmas due to the statistical and numerical fluctuations of the computed quantities imposed by the use of a finite number of macroparticles. Also, plasma instabilities naturally develop in PIC codes, seeded by the available fluctuations spatial spectrum k-vector for which the instability growth rate is maximum and some small amplitude Plasma Physical processes may be hidden under the fluctuactions level. Compared to the many open source PIC code such as @Derouillat:2018 and semi-Lagrangian codes such as @Debuyl:2014, there is no open source finite volume Vlasov codes in the literature that are not based on an expansion method such as @Tzoufras:2011 @Touati:2014 or @Joglekar:2020. In addition, since the Vlasov equation is a conservation equation of the number of particle in the phase-space, using a finite volume method in order to compute the Vlasov equation presents the advantage of allowing for the use of numerical schemes that are numerically flux conserving and/or that ensure the distribution function positivity compared to other numerical methods; cf. Figure \autoref{fig:two-stream-instability}. ESVM has already been used during courses for under and post-graduate students about the "numerical tools for laser-plasma interaction Physics" and it is currently used for theoretical Plasma Physics investigations.
+`ESVM` has been developed in order to adapt simulations to specific Plasma Physics problems by chosing the more adequate finite volume numerical advection scheme in order to compute the Vlasov equation phase-space advection derivatives and to chose between computing the Maxwell-Gauss equation or the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step, only. The code aims at beeing used by the open-source Highly Parallel Computing (HPC) Plasma Physics community ranging from under or post-graduate students to teachers and researchers who usually use Particle-In-Cell (PIC) codes @Dawson:1962 to study collisionless plasmas. Indeed, the PIC method may prohibit the study of Plasma Physical processes on large time scales and/or for very dense collisionless plasmas due to the statistical and numerical fluctuations of the computed quantities imposed by the use of a finite number of macroparticles. Also, plasma instabilities naturally develop in PIC codes, seeded by the available fluctuations spatial spectrum k-vector for which the instability growth rate is maximum and some small amplitude Plasma Physical processes may be hidden under the fluctuactions level. Compared to the many open source PIC code such as @Derouillat:2018 and semi-Lagrangian codes such as @Debuyl:2014, there is no open source finite volume Vlasov codes in the literature that are not based on an expansion method such as @Tzoufras:2011 @Touati:2014 or @Joglekar:2020. In addition, since the Vlasov equation is a conservation equation of the number of particle in the phase-space, using a finite volume method in order to compute the Vlasov equation presents the advantage of allowing for the use of numerical schemes that are numerically flux conserving and/or that ensure the distribution function positivity compared to other numerical methods. ESVM has already been used during courses for under and post-graduate students about the "numerical tools for laser-plasma interaction Physics" and it is currently used for theoretical Plasma Physics investigations.
 
 # Equations computed by ESVM
 
@@ -207,17 +207,21 @@ For each academic case, an example of input deck is provided together with the c
   \cr E_x^{(0)} (x,t=0) &=& 0
   \end{array} \right .
 \end{equation}
-that is perturbed with a small perturbation 
+that is perturbed :
+- with a small perturbation 
 \begin{equation}
    \label{eq:Gaussian_electron}
   \delta f_e (x,v_x,t=0)= A \displaystyle \frac{ Z n_i }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] },
 \end{equation}
-consisting in a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a standard deviation $\delta x = \lambda_{\mathrm{Debye}} / 4$ and drifting at a velocity $v_d$ with a standard deviation $\delta v = v_{T_e} / 40$ at the simulation start $t=0$ for 1), and with a small perturbation consisting in a small amplitude electron plasma wave
+consisting in a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a standard deviation $\delta x = \lambda_{\mathrm{Debye}} / 4$ and drifting at a velocity $v_d$ with a standard deviation $\delta v = v_{T_e} / 40$ at the simulation start $t=0$ for 1), and 
+- with a small perturbation consisting in a small amplitude electron plasma wave
 \begin{equation}
   \label{eq:EPW}
   \delta E_x (x,t < \delta t) = A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
 \end{equation}
-propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3). Only the perturbation amplitudes $A < 1$ for 1), 2) and 3), the perturbation drift velocity  $v_d > v_{T_e}$ for 1) and the perturbation temporal and spatial angular frequencies $\omega_0$ and $k$ for 2) and 3) should be modified by the user when filling the input-deck in such a way that
+propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3). 
+
+Only the perturbation amplitudes $A < 1$ for 1), 2) and 3), the perturbation drift velocity  $v_d > v_{T_e}$ for 1) and the perturbation temporal and spatial angular frequencies $\omega_0$ and $k$ for 2) and 3) should be modified by the user when filling the input-deck in such a way that
 \begin{equation}
   \displaystyle \left \{
   \begin{array}{lllll}
@@ -225,7 +229,7 @@ propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the
   \cr E_x (x,t) &=& E_x^{(0)} (x,t) &+& \delta E_x (x,t)
   \end{array} \right . \, \mathrm{with}\, \left | \delta f_e (x,v_x,t) \right | \ll f_e^{(0)} (x,v_x,t)
 \end{equation}
-keeps being respected during the linear stage of the simulation. Except for 3) where the non-linear theory should be considered, the methodology used to check ESVM simulation results is very similar so that only analytical estimates used to check the ESVM simulation results of the provided academic case 4) are detailed here. The user can check the provided academic case simulation results 1), 2) and 3) by directly comparing the ESVM simulation results with the analytical estimates provided in @Decyk:1987 and in the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969, respectively. 
+keeps being respected during the linear stage of the simulation. Except for non-linear Plasma Physics processes such as 3) for which the non-linear theory should be considered, the methodology that can be used to check any ESVM simulation results is always the same. Only analytical estimates used to check the ESVM simulation results of the provided academic case 4) are consequently detailed here in order to highlight it. The user can check the provided academic case simulation results 1), 2) and 3) by directly comparing the ESVM simulation results with the analytical estimates provided in @Decyk:1987 and in the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969, respectively. 
 
 The provided Plasma Physics academic case 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $\pm v_d$ with same standard velocity deviation $v_{T_e}$
 \begin{equation}
@@ -307,13 +311,17 @@ and
 \end{equation}
 Injecting \autoref{eq:Eq1} in \autoref{eq:Eq2}, we obtain the Fourier components of the electrostatic fields
 \begin{equation}
-  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) = \displaystyle \frac{4\pi e}{ {k_p}^2 \epsilon \displaystyle \left ( \omega,\,k_p\right )} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) }{v_x - \omega / k_p } d v_x
+  \label{eq:Eq3}
+  \begin{array}{lcl}
+  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) &=& \displaystyle \frac{4\pi e}{ {k_p}^2 \epsilon \displaystyle \left ( \omega,\,k_p\right )} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) }{v_x - \omega / k_p } d v_x
+  \cr &=& \alpha_p \displaystyle \frac{A}{ 2 \sqrt{2} } \displaystyle \frac{m_e v_{T_e}}{ e } \displaystyle \frac{ \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p - v_d }{ v_{T_e} \sqrt{2} } \right ) - \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p + v_d }{ v_{T_e} \sqrt{2} } \right ) }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) {\displaystyle \left ( k_p \lambda_\mathrm{Debye}\right ) }^2 }
+  \end{array}
 \end{equation}
 where the plasma electrical permittivity reads
 \begin{equation}
   \label{eq:plasma_electrical_permittivity}
   \begin{array}{lll}
-  \epsilon \displaystyle \left ( \omega,\,k \right )   &=&  1 - \displaystyle \frac{4 \pi e^2}{m_e {k}^2} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{ 1 }{ v_x - \omega / k_p } \displaystyle \frac{ d f_e^{(0)} }{ d v_x } d v_x
+  \epsilon \displaystyle \left ( \omega,\,k \right )   &=&  1 - \displaystyle \frac{4 \pi e^2}{m_e {k}^2} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{ 1 }{ v_x - \omega / k } \displaystyle \frac{ d f_e^{(0)} }{ d v_x } d v_x
   \cr                                                  &=&  1 + \displaystyle \frac{1}{ {\displaystyle \left ( k \lambda_{\mathrm{Debye}} \right )}^2} \displaystyle \left \{ 1 + \displaystyle \frac{1}{2} \displaystyle \left [ F \displaystyle \left ( \displaystyle \frac{ \omega / k - v_d }{ v_{T_e} \sqrt{2} } \right ) +  F \displaystyle \left ( \displaystyle \frac{ \omega / k + v_d }{ v_{T_e} \sqrt{2} } \right ) \right ] \right \}
 \end{array}
 \end{equation}
@@ -362,16 +370,37 @@ It means that the two counter-propagating electron beams streaming throught the 
   \label{eq:growth_rate}
   \delta \displaystyle \left ( k \right ) = \omega_{p} \displaystyle \sqrt{  \displaystyle \frac{1}{2} \displaystyle \left ( \displaystyle \sqrt{ 1 + 8 {\displaystyle \left ( \displaystyle \frac{ k v_d }{ \omega_{p} } \right )}^2 } - 1 \right ) - {\displaystyle \left ( \displaystyle \frac{ k v_d }{ \omega_{p} } \right )}^2 }  \underset{ k v_d \ll   \omega_{p} }{\sim} \displaystyle \left | k \right | v_d.
 \end{equation}
-The stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} are plotted in  \autoref{fig:two-stream-instability}.
+The stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} are plotted in  \autoref{fig:poles}.
 
+Retaining the main terms in the series expansions of $\mathcal{Z}$ up to the second order in \autoref{eq:Eq3}, the Fourier components of the electrostatic fields simplify into
 \begin{equation}
-  \begin{array}{lcl}
-  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) &=& \displaystyle \frac{4\pi e}{ {k_p}^2 \epsilon \displaystyle \left ( \omega,\,k_p\right )} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) }{v_x - \omega / k_p } d v_x
-  \cr &=& \alpha_p \displaystyle \frac{A}{ 2 \sqrt{2} } \displaystyle \frac{m_e v_\text{th}}{ e } \displaystyle \frac{ \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p - v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) - \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p + v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) {\displaystyle \left ( k_p \lambda_\text{D}\right ) }^2 }
-  \cr &\underset{v_\text{d} \gg v_\text{th}}{\sim}& - \alpha_p A \displaystyle \frac{m_e v_\text{d}}{ e } \displaystyle \frac{  {\omega_{p,e}}^2  }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) \displaystyle \left ( \omega - k_p v_d \right ) \displaystyle \left ( \omega + k_p v_d \right )  } 
+  \label{eq:electrostatic_field_Fourier_modes}
+  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) = \underset{v_d \gg v_{T_e}}{\sim} - \alpha_p A \displaystyle \frac{m_e v_d}{ e } \displaystyle \frac{  {\omega_{p}}^2  }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) \displaystyle \left ( \omega - k_p v_d \right ) \displaystyle \left ( \omega + k_p v_d \right )  }.
+\end{equation}
+The poles of the Fourier components of the electrostatic fields \autoref{eq:electrostatic_field_Fourier_modes} are thus $\pm k_p v_d $ plus the ones of the plasma electrical permittivity (\autoref{eq:plasma_electrical_permittivity_limit}); Equations \ref{eq:pure_real_poles} and (\autoref{eq:pure_imaginary_poles}). We can know determine the time dependance of the spatial Fourier components of the growing electrostatic field
+\begin{equation}
+  \label{Inversion_Formula}
+  \widehat{\delta \text{E}}_{x,p} \displaystyle \left ( t \right ) = \displaystyle \frac{1}{2 \pi} \displaystyle \int_{\iota R - \infty}^{\iota R + \infty} \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right )  \exp{\displaystyle \left ( + \iota \omega t \right )} d \omega
+\end{equation} 
+by using the residue theorem with the contour illustrated in \autoref{fig:integration_contour} in order to evaluate the Cauchy principal value of this integral. Since the function $ \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right )  \exp{\displaystyle \left ( + \iota \omega t \right )} $ is an analytic function of $\omega$ defined in the whole complex plane, we moved  the contour of integration usually taken slightly above the real axis into the lower half-plane sufficiently far beneath the pole $- \iota \delta$ and passing round this pole and round the other poles lying above it in such a way that it doesn't cross any of the poles of the function. We thus obtain
+\begin{equation}
+  \begin{array}{llllccll}
+  \widehat{\delta \text{E}}_{x,p} \displaystyle \left ( t \right ) &=&  A & E_0 & \alpha_p &\displaystyle \frac{ \omega_{p} }{ \delta \displaystyle \left ( k_p \right ) }      &\displaystyle \frac{ {\delta \displaystyle \left ( k_p \right )}^2 + {\displaystyle \left ( k_p v_d\right )}^2 }{ {\delta \displaystyle \left ( k_p \right )}^2 + {\omega_0 \displaystyle \left ( k_p \right )}^2 } &  \sinh{ \displaystyle \left [ \delta \displaystyle \left ( k_p \right ) t \right ] }  
+\cr                                                                                      &+&  A  &\displaystyle \frac{E_0 }{2} &  \alpha_p&\displaystyle \frac{ \omega_{p} }{ \omega_0 \displaystyle \left ( k_p \right ) } &\displaystyle \frac{ { \omega_0 \displaystyle \left ( k_p \right ) }^2 - {\displaystyle \left ( k_p v_d\right )}^2 }{ {\delta \displaystyle \left ( k_p \right )}^2 + {\omega_0 \displaystyle \left ( k_p \right )}^2 } & \sin{ \displaystyle \left [ \omega_0 \displaystyle \left ( k_p \right ) t \right ] }                                                                                
   \end{array}
 \end{equation}
-retaining the main terms in the series expansions of the dispersion function $\mathcal{Z}$ up to the second order.
+with
+\begin{equation}
+E_0 = \displaystyle \frac{m_e v_d \omega_{p}}{e}
+\end{equation}
+that finally gives according to the Fourier series expansion (\autoref{eq:Fourier_series})
+\begin{equation}
+  \label{eq:electrostatic_field}
+  \begin{array}{llcccll}
+   \delta E_x \displaystyle \left ( x,\,t \right ) &=& A & E_0 &\displaystyle \frac{ {\omega_{p}} }{ \delta \displaystyle \left ( k_1 \right ) } & \displaystyle \frac{ {\delta \displaystyle \left ( k_1 \right )}^2 + {\displaystyle \left ( k_1 v_d\right )}^2 }{  {\delta \displaystyle \left ( k_1 \right )}^2 + {\omega_0 \displaystyle \left ( k_1 \right )}^2 } &\sinh{ \displaystyle \left [ \delta \displaystyle \left ( k_1 \right ) t \right ] } \sin{\displaystyle \left ( k_1 x \right )}
+  \cr                                              &+& A & \displaystyle \frac{E_0}{2} & \displaystyle \frac{ {\omega_{p}} }{ \omega_0 \displaystyle \left ( k_1 \right ) } & \displaystyle \frac{ {\omega_0 \displaystyle \left ( k_1 \right )}^2 - {\displaystyle \left ( k_1 v_d\right )}^2 }{  {\delta \displaystyle \left ( k_1 \right )}^2 + {\omega_0 \displaystyle \left ( k_1 \right )}^2 } & \sin{ \displaystyle \left [ \omega_0 \displaystyle \left ( k_1 \right ) t \right ] } \sin{\displaystyle \left ( k_1 x \right )}.
+  \end{array}
+\end{equation}
 
  with $A = 0.1$, $k_1 = 2 \pi / L_x < k_c = \omega_p / v_\text{d}$ and where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ is the simulation box size. $A$, $k_1$ (parameter $k$ in the input-deck) and $v_\text{d}$ can be modified by the user. 
 
@@ -409,6 +438,8 @@ Two stream instability test case :
 
 ![Two stream instability test case : Plasma electrons phase-space.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
 
-![Two stream instability test case : Plots of the stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} as a function of the spatial angular frequency mode $k$.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Theory/poles.png)
+![Two stream instability test case : Plots of the stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} as a function of the spatial angular frequency mode $k$.\label{fig:poles}](test-cases/Two-Stream-Instability/figures-Theory/poles.png)
+
+![Two stream instability test case : Plots of the stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} as a function of the spatial angular frequency mode $k$.\label{fig:integration_contour}](test-cases/Two-Stream-Instability/figures-Theory/integration_contour.png)
 
 # References
