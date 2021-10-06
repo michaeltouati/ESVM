@@ -198,8 +198,8 @@ is a sufficient condition for all numerical schemes implemented in ESVM to be st
 
 Four well-known Plasma Physics academic cases are provided with ESVM :
 1) the emission of an electrostatic wakefield by a Gaussian electron; cf. \autoref{fig:electrostatic-wakefield}
-2) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
-3) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and 
+2) the linear Landau damping of an electron plasma wave; cf. \autoref{fig:linear-landau-damping}, 
+3) the non-linear Landau damping of an electron plasma wave; cf. \autoref{fig:non-linear-landau-damping} and 
 4) the two-stream instability of two counter-propagating symmetric Gaussian electron beams; cf. \autoref{fig:two-stream-instability}.
 
 For each academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. For 1), 2) and 3), the simulation is initialized assuming a non-drifting collisionless plasma at Maxwell-Boltzmann equilibrium 
@@ -221,7 +221,7 @@ consisting in a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mat
 - with a small perturbation consisting in a small amplitude electron plasma wave
 \begin{equation}
   \label{eq:EPW}
-  \delta E_x (x,t < \delta t) = A \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
+  \delta E_x (x,t < \delta t) = A \displaystyle \frac{m_e \omega_p v_{T_e}}{e} \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
 \end{equation}
 propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3). 
 
@@ -261,9 +261,7 @@ on each beam of the form
 \begin{equation}
 \delta f_{e,\pm} \displaystyle \left ( x,v_x,t=0 \right ) = \pm A \sin{\displaystyle \left ( k_1 x \right )  } f_{e,\pm}^{(0)} \displaystyle \left ( x,v_x,t=0 \right )
 \end{equation}
-at the simulation start $t=0$.
-
-Assuming the perturbation \autoref{eq:perturbation} remains small compared to the equilibrium distribution \autoref{eq:EDF} during the simulation, one can linearize the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM. They read
+at the simulation start $t=0$. Assuming the perturbation \autoref{eq:perturbation} remains small compared to the equilibrium distribution \autoref{eq:EDF} during the simulation, one can linearize the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM. They read
 \begin{equation}
   \label{eq:linearized_vlasov1d1v}
   \displaystyle \frac{\partial \delta f_e }{ \partial t} + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x \delta f_e \right ) - \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_e^{(0)}}{d v_x} \delta E_x= 0
@@ -279,11 +277,7 @@ up to the first order. In order to estimate the linearly growing electrostatic f
   \widehat{\text{X}}_p \displaystyle \left ( t \right ) = \displaystyle \frac{1}{L_x} \displaystyle \int_{0}^{L_x}  X \displaystyle \left ( x,\,t\right) \exp{ \displaystyle \left (+ \iota k_p x \right )  } d x \Leftrightarrow
  X \displaystyle \left ( x,\,t \right ) = \displaystyle \sum_{p=-\infty}^\infty \widehat{\text{X}}_p \displaystyle \left ( t \right) \exp{ \displaystyle \left (- \iota k_p x \right ) }
 \end{equation}
-with
-\begin{equation}
-  \forall p \in \mathbb{Z},\, k_p = 2 \pi \displaystyle \frac{p}{L_x},
-\end{equation}
-and
+with $\forall p \in \mathbb{Z},\, k_p = 2 \pi p / L_x$ and
 \begin{equation}
   \begin{array}{lrllclcrl}
                              & \widehat{\widehat{\text{X}}}_p^{(+)} \displaystyle \left ( \omega \right ) &=& \displaystyle \int_{0}^\infty                                                 & d t                                                    &                                                   &     & \widehat{\text{X}}_p \displaystyle \left ( t\right) & \exp{ \displaystyle \left ( - \iota \omega t \right ) }
@@ -334,7 +328,6 @@ depending on the plasma dispersion function @FriedComte:1961
   \label{eq:plasma_dispersion_function}
   F \displaystyle \left ( \zeta \right ) = \zeta \mathcal{Z} \displaystyle \left ( \zeta \right ) \text{ and } \mathcal{Z} \displaystyle \left ( \zeta \right ) = \displaystyle \frac{ 1 }{ \sqrt{\pi} } \displaystyle \int_{-\infty}^\infty \displaystyle \frac{ \exp{ \displaystyle \left ( - z^2 \right ) } }{ z - \zeta } d z.
 \end{equation}
-
 Since we are interested in the particular case where $v_d \gg v_{T_e}$, we always have the condition 
 \begin{equation}
   \label{eq:assumption}
@@ -350,12 +343,7 @@ that leads to the simpler dispersion relation
   \label{eq:plasma_electrical_permittivity_limit}
   \epsilon \displaystyle \left ( \omega,\,k \right ) \underset{v_d \gg v_{T_e}}{=} = 1 - \displaystyle \frac{ {\omega_{p}}^2 }{ 2 } \displaystyle \left [  \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega - k v_d \right )}^2 } + \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega + k v_d \right )}^2 } \right ] = 0
 \end{equation}
-retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order \autoref{eq:plasma_dispersion_function_2ndorder}. In this limit, the dispersion relation \autoref{eq:plasma_electrical_permittivity_limit} provides four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber
-\begin{equation}
-  \label{eq:critical_wavenumber}
-  k_c = \displaystyle \frac{\omega_{p}}{ v_d }.
-\end{equation}
-It means that the whole plasma remain stable on space scales smaller than $\lambda_c = 2 \pi / k_c$. However, in the case where $k_p < k_c$ considered here, we find in addition to the two real poles
+retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order \autoref{eq:plasma_dispersion_function_2ndorder}. In this limit, the dispersion relation \autoref{eq:plasma_electrical_permittivity_limit} provides four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber $k_c = \omega_{p} / v_d$. It means that the whole plasma remain stable on space scales smaller than $\lambda_c = 2 \pi / k_c$. However, in the case where $k_p < k_c$ considered here, we find in addition to the two real poles
 \begin{equation}
   \label{eq:pure_real_poles}
   \omega_{1/2} \displaystyle \left ( k < k_c \right )= \pm \omega_0 \displaystyle \left ( k \right )
@@ -375,9 +363,7 @@ It means that the two counter-propagating electron beams streaming throught the 
   \label{eq:growth_rate}
   \delta \displaystyle \left ( k \right ) = \omega_{p} \displaystyle \sqrt{  \displaystyle \frac{1}{2} \displaystyle \left ( \displaystyle \sqrt{ 1 + 8 {\displaystyle \left ( \displaystyle \frac{ k v_d }{ \omega_{p} } \right )}^2 } - 1 \right ) - {\displaystyle \left ( \displaystyle \frac{ k v_d }{ \omega_{p} } \right )}^2 }  \underset{ k v_d \ll   \omega_{p} }{\sim} \displaystyle \left | k \right | v_d.
 \end{equation}
-The stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} are plotted in  \autoref{fig:poles}.
-
-Retaining the main terms in the series expansions of $\mathcal{Z}$ up to the second order in \autoref{eq:Eq3} according to \autoref{eq:plasma_dispersion_function_2ndorder}, the Fourier components of the electrostatic fields simplify into
+The stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} are plotted in  \autoref{fig:poles}. Retaining the main terms in the series expansions of $\mathcal{Z}$ up to the second order in \autoref{eq:Eq3} according to \autoref{eq:plasma_dispersion_function_2ndorder}, the Fourier components of the electrostatic fields simplify into
 \begin{equation}
   \label{eq:electrostatic_field_Fourier_modes}
   \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) \underset{v_d \gg v_{T_e}}{\sim} - \alpha_p A \displaystyle \frac{m_e v_d}{ e } \displaystyle \frac{  {\omega_{p}}^2  }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) \displaystyle \left ( \omega - k_p v_d \right ) \displaystyle \left ( \omega + k_p v_d \right )  }.
