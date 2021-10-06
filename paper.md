@@ -460,7 +460,7 @@ assuming that $k_1 x_\ell \displaystyle \left ( t \right ) \ll 1$ remains valid 
 \end{equation}
 with $a = 0$ and $q = - A k_1 v_d / \omega_{p}$ by doing the change of variable $u \left ( t\right )= \left ( - \pi / 4 \right ) + \left  ( \omega_{p,e} t / 2 \right )$, we deduce
 \begin{equation}
-  \label{trajectory_01}
+  \label{eq:trajectory_01}
   k_1 x_\ell \displaystyle \left ( t \right ) = k_1 x_c c_{e,0} \displaystyle \left [ q,\,u \left ( t\right ) \right ] +  k_1 x_s s_{e,0} \displaystyle \left [ q,\,u \left ( t\right ) \right ]
 \end{equation}
 and
