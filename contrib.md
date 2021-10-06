@@ -4,11 +4,11 @@
 
 git clone https://github.com/michaeltouati/ESVM.git
 
-2) In case, it's been a long time you did the step 1), make sure you have the latest updates by typing : 
+2) If it's been a long time you did the step 1., make sure you have the latest ESVM updates by typing : 
 
 git pull
 
-3) Once you've have modified the ESVM source file(s) to fix a bug or propose a new feature(s), type from your local ESVM directory : 
+3) Once you've have modified the ESVM source file(s) to fix a bug or propose a new feature, type from your local ESVM directory : 
 
 make clean_all 
 
@@ -22,9 +22,9 @@ if you've added new files
 
 git commit -m "MY COMMIT MESSAGE" -m -a 
 
-describing the more clear and concise as possible the goal of the push in "MY COMMIT MESSAGE"
+describing the more clear and concise as possible the goal of the contribution in "MY COMMIT MESSAGE"
 
-6) Ask for the merge of your local ESVM branch by typing : 
+6) Ask for the merge of your local ESVM branch to the main branch by typing : 
 
 git push
 
