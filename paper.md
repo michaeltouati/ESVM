@@ -525,10 +525,10 @@ It is planned in a near future to :
 - implement non-equally spaced phase-space cells
 - implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes @Liu:1994
 - compute the plasma ion Vlasov equation to allow for the ions to be mobile 
-- extend the code to relativistic electromagnetic 2D-2V and 1D-3V phase-space electromagnetic plasma simulations
+- extend the code to relativistic electromagnetic 2D-2V and 1D-3V phase-space electromagnetic plasma simulations : ESVM $\Rightarrow $EMVM (open source Electromagnetic Vlasov-Maxwell code)
+- store the simulation results in hdf5 files instead of text files
 - implement its MPI parallelization
 - implement its vectorization
-- store the simulation results in hdf5 files instead of text files
 - implement the Perfectly Matched Layer (PML) technique @Berenger:1994 to absorb the electromagnetic fields at the spatial simulation box boundaries
 - implement a relativistic BGK (from the name of its finder P. L. Bhatnagar, E. P. Gross  and M. Krook) collision operator @BhatnagarGrossKrook:1954
 - implement the Belyaev-Budker relativistic collision operator @BelaievBudker:1957 using the Braams-Karney relativistic extension of Rosenbluth potentials @BraamsKarney:1987
