@@ -1,11 +1,32 @@
 # Contribute to ESVM 
 
-1) download ESVM from https://github.com/michaeltouati/ESVM or type on your terminal : git clone https://github.com/michaeltouati/ESVM.git
-2) In case, it's been a long time you did the step 1), make sure you have the latest updates by typing : git pull
-4) Once you've have modified the ESVM source file(s) to fix a bug or propose a new feature(s), type from your local ESVM directory : make clean_all 
-5) Type then : git add . if you've added new files
-6) Type : git commit -m "MY COMMIT MESSAGE" -m -a describing the more clear and concise as possible the goal of the push in "MY COMMIT MESSAGE"
-6) Ask for the merge of your local ESVM branch by typing : git push
+1) download ESVM from https://github.com/michaeltouati/ESVM or type on your terminal : 
+
+git clone https://github.com/michaeltouati/ESVM.git
+
+2) In case, it's been a long time you did the step 1), make sure you have the latest updates by typing : 
+
+git pull
+
+4) Once you've have modified the ESVM source file(s) to fix a bug or propose a new feature(s), type from your local ESVM directory : 
+
+make clean_all 
+
+5) Type then : 
+
+git add . 
+
+if you've added new files
+
+6) Type : 
+
+git commit -m "MY COMMIT MESSAGE" -m -a 
+
+describing the more clear and concise as possible the goal of the push in "MY COMMIT MESSAGE"
+
+6) Ask for the merge of your local ESVM branch by typing : 
+
+git push
 
 # Report issues or problems with ESVM 
 
@@ -16,10 +37,15 @@ If the bug persists or is related to another problem, follow these steps :
 4) Describe the bug the more clear and concise as possible in the title starting the title starting with "Bug :"
 5) Describe with the more details as possible the bug and
 6) Click on 'Submit new issue'
+
 OS: [e.g. Ubuntu 20,04]
+
 Fortran compiler [e.g. gfortran 11.2.0]
+
 Python version [e.g. Python 3.7.11]
+
 Matplotlib Python package version [e.g. 3.4.3]
+
 Numpy Python package version [e.g., 1.21.2]
 
 # Seek support to add a new feature in ESVM
