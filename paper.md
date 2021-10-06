@@ -177,11 +177,11 @@ According to the Taylor expansion of $\underline{f_e}^{n,i+i}$, $\underline{f_e}
 By using the Von Neumann stability analysis, assuming periodic boundary conditions for simplicity and noting
 \begin{equation}
   \label{eq:VonNeumann}
-   \widehat{\underline{f_e}}^n(\underline{k}^p) = \displaystyle \frac{1}{ N_x } \displaystyle \sum_{i=1}^{N_x} \underline{f_e}^{i,n} \exp{\left (-  j \underline{k}^p \underline{x}_i \right )} \Leftrightarrow \underline{f_e}^{n,i}  = \displaystyle \sum_{p=1}^{N_x} \widehat{\underline{f_e}}^n(\underline{k}^p)  \exp{\left ( j \underline{k}^p \underline{x}_i \right )}
+   \widehat{\underline{f_e}}^n(\underline{k}^p) = \displaystyle \frac{1}{ N_x } \displaystyle \sum_{i=1}^{N_x} \underline{f_e}^{i,n} \exp{\left (- \iota \underline{k}^p \underline{x}_i \right )} \Leftrightarrow \underline{f_e}^{n,i}  = \displaystyle \sum_{p=1}^{N_x} \widehat{\underline{f_e}}^n(\underline{k}^p)  \exp{\left ( \iota \underline{k}^p \underline{x}_i \right )}
 \end{equation}
-with $j^2=-1$, $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$ the discrete Fourier mode, one gets by injecting \autoref{eq:VonNeumann} in \autoref{eq:LaxWendroff}
+with $\iota^2=-1$, $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$ the discrete Fourier mode, one gets by injecting \autoref{eq:VonNeumann} in \autoref{eq:LaxWendroff}
 \begin{equation}
-\displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{  \widehat{\underline{f_e}}^{n} (\underline{k}^p) } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } j \sin{\left ( \underline{k}^p \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( \underline{k}^p \underline{\Delta x} \right )}   -1 \right ]
+\displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{  \widehat{\underline{f_e}}^{n} (\underline{k}^p) } =  1 - \displaystyle \frac{\underline{v_x} \underline{\Delta t}}{\underline{\Delta x} } \iota \sin{\left ( \underline{k}^p \underline{\Delta x} \right )} + { \left (  \displaystyle \frac{ \underline{v_x} \underline{\Delta t} }{ \underline{\Delta x} } \right )}^2 \left [ \cos{\left ( \underline{k}^p \underline{\Delta x} \right )}   -1 \right ]
 \end{equation}
 for each term $p$ of the series. It implies the numerical scheme is stable, meaning $| \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) /   \widehat{\underline{f_e}}^{n} (\underline{k}^p) | < 1$, if ${| \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) /   \widehat{\underline{f_e}}^{n} (\underline{k}^p) |}^2 < 1$ and consequently if $\underline{v_x} \underline{\Delta t} / \underline{\Delta x} <1$. Performing the same reasoning when discretizing also the velocity space $\underline{v}_{x}^\ell = \underline{v}_{x,\mathrm{min}} + (\ell-1 ) \underline{\Delta v}_x$ with $N_{v_x} = 1 + (\underline{v}_{x,\mathrm{max}}-\underline{v}_{x,\mathrm{min}}) / \underline{\Delta v}_x$ velocity grid points and considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in the velocity space for computing the Vlasov equation \autoref{eq:vlasov1d1v} with each numerical scheme  implemented in ESVM, one finds (sometimes empirically when it is too much complex analytically) that
 \begin{equation}
@@ -240,11 +240,11 @@ with
 \begin{equation}
   f_{e,\pm}^{(0)} \displaystyle \left (x,v_x,t\right ) = \displaystyle \frac{Z n_i / 2}{\sqrt{2 \pi {v_{T_e}}^2} } \exp{ \displaystyle \left [ - \displaystyle \frac{ {\left ( v_x \mp v_d \right )}^2 }{ 2 {v_{T_e}}^2 } \right ] }
 \end{equation}
-that is a solution of the Vlasov Equation (\autoref{eq:vlasov1d1v}) and that doesn't produce any electrostatic fields 
+that is a solution of the Vlasov Equation \autoref{eq:vlasov1d1v} and that doesn't produce any electrostatic fields 
 \begin{equation}
   E_x^{(0)}(x,t)  = 0
 \end{equation}
-according to Maxwell-Gauss Equation \autoref{eq:gauss}. If one computes the Vlasov-Maxwell set of Equations $\{$(\autoref{eq:vlasov1d1v}), (\autoref{eq:gauss})$\}$ exactly, initializing it with the two-stream equilibrium distribution function (\autoref{eq:EDF}) without any perturbation, the counter-propagating electron beams would continue their propagation through the immobile plasma ions without any modification. In order to observe the two-stream instability, 
+according to Maxwell-Gauss Equation \autoref{eq:gauss}. If one computes the Vlasov-Maxwell set of Equations $\{$\autoref{eq:vlasov1d1v}, \autoref{eq:gauss}$\}$ exactly, initializing it with the two-stream equilibrium distribution function \autoref{eq:EDF} without any perturbation, the counter-propagating electron beams would continue their propagation through the immobile plasma ions without any modification. In order to observe the two-stream instability, 
 \begin{equation}
 f_e \displaystyle \left ( x,v_x,t=0\right ) = f_e^{(0)} \displaystyle \left ( x,v_x,t=0 \right ) + \delta f_{e} \displaystyle \left ( x,v_x,t=0 \right ),
 \end{equation}
@@ -338,19 +338,20 @@ Since we are interested in the particular case where $v_d \gg v_{T_e}$, we alway
 \end{equation}
 that is fulfilled for any given spatial frequency mode $k_p$. We thus may use the asymptotic limit
 \begin{equation}
+  \label{eq:plasma_dispersion_function_2ndorder}
   F \displaystyle \left ( \zeta \right ) \underset{|\zeta| \gg 1 }{=}  \iota  \zeta \sqrt{\pi}  \exp{ \displaystyle \left ( - \zeta^2 \right ) }  - 1 - \displaystyle \frac{ 1 }{ 2 \zeta^2} - \displaystyle \frac{ 3 }{ 4 \zeta^4} + O \displaystyle \left ( \displaystyle \frac{ 1 }{ \zeta^6 } \right )
 \end{equation}
 that leads to the simpler dispersion relation 
 \begin{equation}
   \label{eq:plasma_electrical_permittivity_limit}
-  \epsilon \displaystyle \left ( \omega,\,k \right ) \underset{v_d \gg v_{T_e}}{=} 0 \Leftrightarrow 1 - \displaystyle \frac{ {\omega_{p}}^2 }{ 2 } \displaystyle \left [  \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega - k v_d \right )}^2 } + \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega + k v_d \right )}^2 } \right ] = 0
+  \epsilon \displaystyle \left ( \omega,\,k \right ) \underset{v_d \gg v_{T_e}}{=} = 1 - \displaystyle \frac{ {\omega_{p}}^2 }{ 2 } \displaystyle \left [  \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega - k v_d \right )}^2 } + \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega + k v_d \right )}^2 } \right ] = 0
 \end{equation}
-retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order. In this limit, the dispersion relation \autoref{eq:plasma_electrical_permittivity_limit} provides four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber
+retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order \autoref{eq:plasma_dispersion_function_2ndorder}. In this limit, the dispersion relation \autoref{eq:plasma_electrical_permittivity_limit} provides four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber
 \begin{equation}
   \label{eq:critical_wavenumber}
   k_c = \displaystyle \frac{\omega_{p}}{ v_d }.
 \end{equation}
-It means that the whole plasma remain stable on space scales smaller than $\lambda_c = 2 \pi / k_c$. However, in the case where $k_p < k_c$ we are interested in, we find in addition to the two real poles
+It means that the whole plasma remain stable on space scales smaller than $\lambda_c = 2 \pi / k_c$. However, in the case where $k_p < k_c$ considered here, we find in addition to the two real poles
 \begin{equation}
   \label{eq:pure_real_poles}
   \omega_{1/2} \displaystyle \left ( k < k_c \right )= \pm \omega_0 \displaystyle \left ( k \right )
@@ -365,24 +366,24 @@ two another pure imaginary conjugate poles
   \label{eq:pure_imaginary_poles}
   \omega_{3/4} \displaystyle \left ( k < k_c \right )=  \pm \iota \delta \displaystyle \left ( k \right ).
 \end{equation}
-It means that the two counter-propagating electron beams streaming throught the immobile plasma ions is unstable on space scales greater than $\lambda_c$ and that this two-stream instability grows exponentially at the rate
+It means that the two counter-propagating electron beams streaming throught the immobile plasma ions are unstable on space scales greater than $\lambda_c$ and that this two-stream instability grows exponentially at the rate
 \begin{equation}
   \label{eq:growth_rate}
   \delta \displaystyle \left ( k \right ) = \omega_{p} \displaystyle \sqrt{  \displaystyle \frac{1}{2} \displaystyle \left ( \displaystyle \sqrt{ 1 + 8 {\displaystyle \left ( \displaystyle \frac{ k v_d }{ \omega_{p} } \right )}^2 } - 1 \right ) - {\displaystyle \left ( \displaystyle \frac{ k v_d }{ \omega_{p} } \right )}^2 }  \underset{ k v_d \ll   \omega_{p} }{\sim} \displaystyle \left | k \right | v_d.
 \end{equation}
 The stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} are plotted in  \autoref{fig:poles}.
 
-Retaining the main terms in the series expansions of $\mathcal{Z}$ up to the second order in \autoref{eq:Eq3}, the Fourier components of the electrostatic fields simplify into
+Retaining the main terms in the series expansions of $\mathcal{Z}$ up to the second order in \autoref{eq:Eq3} according to \autoref{eq:plasma_dispersion_function_2ndorder}, the Fourier components of the electrostatic fields simplify into
 \begin{equation}
   \label{eq:electrostatic_field_Fourier_modes}
-  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) = \underset{v_d \gg v_{T_e}}{\sim} - \alpha_p A \displaystyle \frac{m_e v_d}{ e } \displaystyle \frac{  {\omega_{p}}^2  }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) \displaystyle \left ( \omega - k_p v_d \right ) \displaystyle \left ( \omega + k_p v_d \right )  }.
+  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) \underset{v_d \gg v_{T_e}}{\sim} - \alpha_p A \displaystyle \frac{m_e v_d}{ e } \displaystyle \frac{  {\omega_{p}}^2  }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) \displaystyle \left ( \omega - k_p v_d \right ) \displaystyle \left ( \omega + k_p v_d \right )  }.
 \end{equation}
-The poles of the Fourier components of the electrostatic fields \autoref{eq:electrostatic_field_Fourier_modes} are thus $\pm k_p v_d$ plus the ones of the plasma electrical permittivity (\autoref{eq:plasma_electrical_permittivity_limit}); Equations \ref{eq:pure_real_poles} and (\autoref{eq:pure_imaginary_poles}). We can know determine the time dependance of the spatial Fourier components of the growing electrostatic field
+The poles of the Fourier components of the electrostatic fields \autoref{eq:electrostatic_field_Fourier_modes} are thus $\pm k_p v_d$ plus the ones of the plasma electrical permittivity \autoref{eq:plasma_electrical_permittivity_limit} given by Equations \ref{eq:pure_real_poles} and \autoref{eq:pure_imaginary_poles}. We can know determine the time dependance of the spatial Fourier components of the growing electrostatic field
 \begin{equation}
   \label{Inversion_Formula}
   \widehat{\delta \text{E}}_{x,p} \displaystyle \left ( t \right ) = \displaystyle \frac{1}{2 \pi} \displaystyle \int_{\iota R - \infty}^{\iota R + \infty} \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right )  \exp{\displaystyle \left ( + \iota \omega t \right )} d \omega
 \end{equation} 
-by using the residue theorem with the contour illustrated in \autoref{fig:integration_contour} in order to evaluate the Cauchy principal value of this integral. Since the function $\widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right )  \exp{\displaystyle \left ( + \iota \omega t \right )}$  is an analytic function of $\omega$ defined in the whole complex plane, we moved the contour of integration usually taken slightly above the real axis into the lower half-plane sufficiently far beneath the pole $- \iota \delta$ and passing round this pole and round the other poles lying above it in such a way that it doesn't cross any of the poles of the function. We thus obtain
+by using the residue theorem with the contour illustrated in \autoref{fig:integration_contour} in order to evaluate the Cauchy principal value of this integral. Since the function $\small{\widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right )  \exp{\displaystyle \left ( + \iota \omega t \right )}}$  is an analytic function of $\omega$ defined in the whole complex plane, we moved the contour of integration usually taken slightly above the real axis into the lower half-plane sufficiently far beneath the pole $- \iota \delta$ and passing round this pole and round the other poles lying above it in such a way that it doesn't cross any of the poles of the function. We thus obtain
 \begin{equation}
   \begin{array}{llllccll}
   \widehat{\delta \text{E}}_{x,p} \displaystyle \left ( t \right ) &=&  A & E_0 & \alpha_p &\displaystyle \frac{ \omega_{p} }{ \delta \displaystyle \left ( k_p \right ) }      &\displaystyle \frac{ {\delta \displaystyle \left ( k_p \right )}^2 + {\displaystyle \left ( k_p v_d\right )}^2 }{ {\delta \displaystyle \left ( k_p \right )}^2 + {\omega_0 \displaystyle \left ( k_p \right )}^2 } &  \sinh{ \displaystyle \left [ \delta \displaystyle \left ( k_p \right ) t \right ] }  
@@ -393,7 +394,7 @@ with
 \begin{equation}
 E_0 = \displaystyle \frac{m_e v_d \omega_{p}}{e}
 \end{equation}
-that finally gives according to the Fourier series expansion (\autoref{eq:Fourier_series})
+that finally gives according to the Fourier series expansion \autoref{eq:Fourier_series}
 \begin{equation}
   \label{eq:electrostatic_field}
   \begin{array}{llcccll}
@@ -438,8 +439,8 @@ Two stream instability test case :
 
 ![Two stream instability test case : Plasma electrons phase-space.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
 
-![Two stream instability test case : Plots of the stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} as a function of the spatial angular frequency mode $k$.\label{fig:poles}](test-cases/Two-Stream-Instability/figures-Theory/poles.png)
+![Two stream instability test case : Stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} as a function of the spatial angular frequency mode $k$.\label{fig:poles}](test-cases/Two-Stream-Instability/figures-Theory/poles.png)
 
-![Two stream instability test case : Plots of the stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} as a function of the spatial angular frequency mode $k$.\label{fig:integration_contour}](test-cases/Two-Stream-Instability/figures-Theory/integration_contour.png)
+![Two stream instability test case : Integration contour used to evaluate the the Cauchy principal value of the integral \autoref{Inversion_Formula}.\label{fig:integration_contour}](test-cases/Two-Stream-Instability/figures-Theory/integration_contour.png)
 
 # References
