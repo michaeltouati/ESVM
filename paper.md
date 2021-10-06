@@ -196,7 +196,7 @@ Four well-known Plasma Physics academic cases are provided with ESVM :
 1) the emission of an electrostatic wakefield by a Gaussian electron; cf. \autoref{fig:electrostatic-wakefield}
 2) the linear Landau damping of an electrostatic wave; cf. \autoref{fig:linear-landau-damping}, 
 3) the non-linear Landau damping of an electrostatic wave; cf. \autoref{fig:non-linear-landau-damping} and 
-4) the two-stream instability of two counter-propagating Gaussian electron beams; cf. \autoref{fig:two-stream-instability}.
+4) the two-stream instability of two counter-propagating symmetric Gaussian electron beams; cf. \autoref{fig:two-stream-instability}.
 
 For each academic case, an example of input deck is provided together with the corresponding simulation result plots that the code typically generates. For 1), 2) and 3), the simulation is initialized assuming a non-drifting collisionless plasma at Maxwell-Boltzmann equilibrium 
 \begin{equation}
@@ -227,7 +227,7 @@ propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the
 \end{equation}
 keeps being respected during the linear stage of the simulation. 
 
-The user can check the provided academic case simulation results 1), 2) and 3) with @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969, respectively. Only analytical estimates used to check the provided academic case simulation result 4) are detailed here. 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $v_d$ with same standard velocity deviation $v_{T_e}$
+Since the methodology is very similar, only analytical estimates used to check the ESVM simulation results of the provided academic case 4) are detailed here. The user can check the provided academic case simulation results 1), 2) and 3) by directly comparing the ESVM simulation results with the analytical estimates provided in @Decyk:1987 and the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969, respectively. 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $\pm v_d$ with same standard velocity deviation $v_{T_e}$
 \begin{equation}
   \label{eq:EDF}
   f_e^{(0)} \displaystyle \left ( x,v_x,t\right ) = f_{e,+}^{(0)} \displaystyle \left (x,v_x,t \right ) + f_{e,-}^{(0)} \displaystyle \left (x,v_x,t \right )
@@ -244,7 +244,7 @@ according to Maxwell-Gauss Equation \autoref{eq:gauss}. If one computes the Vlas
 \begin{equation}
 f_e \displaystyle \left ( x,v_x,t=0\right ) = f_e^{(0)} \displaystyle \left ( x,v_x,t=0 \right ) + \delta f_{e} \displaystyle \left ( x,v_x,t=0 \right ),
 \end{equation}
-instead by adding a small perturbation 
+is initialized instead by adding a small perturbation 
 \begin{equation}
   \label{eq:perturbation}
   \delta f_{e}\displaystyle \left ( x,v_x,t=0 \right ) = \delta f_{e,+}\displaystyle \left ( x,v_x,t=0 \right ) + \delta f_{e,-}\displaystyle \left ( x,v_x,t=0 \right )
@@ -265,7 +265,7 @@ and
   \label{eq:linearized_gauss}
   \displaystyle \frac{ \partial \delta E_x}{ \partial x } = - 4 \pi e \displaystyle \int_{-\infty}^\infty \delta f_e  \displaystyle \left ( x,\,v_x,\,t \right ) d v_x,
 \end{equation}
-up to the first order. Considering periodic boundary conditions, we may use a one-sided Fourier transformation in time (thus equivalent to a Laplace transform) and a Fourier series expansion in space for such a $L_x$-periodic initial condition problem. We will note
+up to the first order. In order to estimate the linearly growing electrostatic field $\delta E_x (x,t)$ in this ESVM simulation with imposed periodic boundary conditions, we may use a one-sided Fourier transformation in time (thus equivalent to a Laplace transform) and a Fourier series expansion in space for such a $L_x$-periodic initial condition problem. We will note
 \begin{equation}
   \label{eq:Fourier_series}
   \widehat{\text{X}}_p \displaystyle \left ( t \right ) = \displaystyle \frac{1}{L_x} \displaystyle \int_{0}^{L_x}  X \displaystyle \left ( x,\,t\right) \exp{ \displaystyle \left (+ \iota k_p x \right )  } d x \Leftrightarrow
@@ -290,7 +290,7 @@ where the integral in the complex $\omega$-plane is taken along a straight line 
 \end{equation}
 with
 \begin{equation}
-  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) = \alpha_p A \displaystyle \frac{ Z n_i / 2}{ \displaystyle \sqrt{2 \pi {v_\text{th}}^2 } } \displaystyle \left \{  \exp{ \displaystyle \left [ - \displaystyle \frac{ {\displaystyle \left ( v_x - v_\text{d} \right )}^2 }{ 2 {v_\text{th}}^2 }\right ] } - \exp{ \displaystyle \left [ - \displaystyle \frac{ {\displaystyle \left ( v_x + v_\text{d} \right )}^2 }{ 2 {v_\text{th}}^2 }\right ] }  \right \}
+  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) = \alpha_p A \displaystyle \frac{ Z n_i / 2}{ \displaystyle \sqrt{2 \pi {v_{T_e}}^2 } } \displaystyle \left \{  \exp{ \displaystyle \left [ - \displaystyle \frac{ {\displaystyle \left ( v_x - v_d \right )}^2 }{ 2 {v_{T_e}}^2 }\right ] } - \exp{ \displaystyle \left [ - \displaystyle \frac{ {\displaystyle \left ( v_x + v_d \right )}^2 }{ 2 {v_{T_e}}^2 }\right ] }  \right \}
 \end{equation}
 where
 \begin{equation}
@@ -313,11 +313,11 @@ where the plasma electrical permittivity reads
 \begin{equation}
   \label{eq:plasma_electrical_permittivity}
   \begin{array}{lll}
-  \epsilon \displaystyle \left ( \omega,\,k \right )   &=&  1 - \displaystyle \frac{4 \pi e^2}{m_e k^2} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{ 1 }{ v_x - \omega / k } \displaystyle \frac{ d f_e^{(0)} }{ d v_x } d v_x
-  \cr                                                  &=&  1 + \displaystyle \frac{1}{ {\displaystyle \left ( k \lambda_\text{D} \right )}^2} \displaystyle \left \{ 1 + \displaystyle \frac{1}{2} \displaystyle \left [ F \displaystyle \left ( \displaystyle \frac{ \omega / k - v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) +  F \displaystyle \left ( \displaystyle \frac{ \omega / k + v_\text{d} }{ v_\text{th} \sqrt{2} } \right ) \right ] \right \}
+  \epsilon \displaystyle \left ( \omega,\,k \right )   &=&  1 - \displaystyle \frac{4 \pi e^2}{m_e {k}^2} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{ 1 }{ v_x - \omega / k_p } \displaystyle \frac{ d f_e^{(0)} }{ d v_x } d v_x
+  \cr                                                  &=&  1 + \displaystyle \frac{1}{ {\displaystyle \left ( k \lambda_{\mathrm{Debye}} \right )}^2} \displaystyle \left \{ 1 + \displaystyle \frac{1}{2} \displaystyle \left [ F \displaystyle \left ( \displaystyle \frac{ \omega / k - v_d }{ v_{T_e} \sqrt{2} } \right ) +  F \displaystyle \left ( \displaystyle \frac{ \omega / k + v_d }{ v_{T_e} \sqrt{2} } \right ) \right ] \right \}
 \end{array}
 \end{equation}
-depending on the plasma dispersion function 
+depending on the plasma dispersion function @FriedComte:1961
 \begin{equation}
   \label{eq:plasma_dispersion_function}
   F \displaystyle \left ( \zeta \right ) = \zeta \mathcal{Z} \displaystyle \left ( \zeta \right ) \text{ and } \mathcal{Z} \displaystyle \left ( \zeta \right ) = \displaystyle \frac{ 1 }{ \sqrt{\pi} } \displaystyle \int_{-\infty}^\infty \displaystyle \frac{ \exp{ \displaystyle \left ( - z^2 \right ) } }{ z - \zeta } d z.
@@ -326,21 +326,21 @@ depending on the plasma dispersion function
 Since we are interested in the particular case where $v_d \gg v_{T_e}$, we always have the condition 
 \begin{equation}
   \label{eq:assumption}
-  \displaystyle \left | \displaystyle \frac{\omega}{k} \pm v_\text{d} \right | \gg v_\text{th} \sqrt{2}
+  \displaystyle \left | \displaystyle \frac{\omega}{k_p} \pm v_d \right | \gg v_{T_e} \sqrt{2}
 \end{equation}
-that is fulfilled for any given spatial frequency mode $k$. We thus may use the asymptotic limit
+that is fulfilled for any given spatial frequency mode $k_p$. We thus may use the asymptotic limit
 \begin{equation}
-  F \displaystyle \left ( \zeta \right ) \underset{|\zeta| \gg 1 }{=}  \iota  \zeta \sqrt{\pi}  \exp{ \displaystyle \left ( - \zeta^2 \right ) }  - 1 - \displaystyle \frac{ 1 }{ 2 \zeta^2} - \displaystyle \frac{ 3 }{ 4 \zeta^4} + ...
+  F \displaystyle \left ( \zeta \right ) \underset{|\zeta| \gg 1 }{=}  \iota  \zeta \sqrt{\pi}  \exp{ \displaystyle \left ( - \zeta^2 \right ) }  - 1 - \displaystyle \frac{ 1 }{ 2 \zeta^2} - \displaystyle \frac{ 3 }{ 4 \zeta^4} + O \displaystyle \left ( \displaystyle \frac{ 1 }{ \zeta^6 } \right )
 \end{equation}
 that leads to the simpler dispersion relation 
 \begin{equation}
   \label{eq:plasma_electrical_permittivity_limit}
-  \epsilon \displaystyle \left ( \omega,\,k\right ) \underset{v_\text{d} \gg v_\text{th}}{=} 0 ≤Leftrightarrow 1 - \displaystyle \frac{ {\omega_{p,e}}^2 }{ 2 } \displaystyle \left [  \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega - k v_\text{d} \right )}^2 } + \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega + k v_\text{d} \right )}^2 } \right ] = 0
+  \epsilon \displaystyle \left ( \omega,\,k \right ) \underset{v_d \gg v_{T_e}}{=} 0 \Leftrightarrow 1 - \displaystyle \frac{ {\omega_{p}}^2 }{ 2 } \displaystyle \left [  \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega - k v_d \right )}^2 } + \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega + k v_d \right )}^2 } \right ] = 0
 \end{equation}
-retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order. In this limit, dispersion relation thus provides \autoref{eq:plasma_electrical_permittivity_limit} four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber
+retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order. In this limit, dispersion relation provides four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber
 \begin{equation}
   \label{eq:critical_wavenumber}
-  k_c = \displaystyle \frac{\omega_{p,e}}{ v_\text{d} }.
+  k_c = \displaystyle \frac{\omega_{p}}{ v_d }.
 \end{equation}
 It means that the whole plasma remain stable on space scales smaller than $\lambda_c = 2 \pi / k_c$. However, in the case where $k < k_c$, we find in addition to the two real poles
 \begin{equation}
@@ -349,19 +349,20 @@ It means that the whole plasma remain stable on space scales smaller than $\lamb
 \end{equation}
 where
 \begin{equation}
-  \label{eq:pure_real_poles}
-  \omega_0 \displaystyle \left ( k \right ) = \omega_{p,e} \displaystyle \sqrt{ {\displaystyle \left ( \displaystyle \frac{ k v_\text{d} }{ \omega_{p,e} } \right )}^2 + \displaystyle \frac{1}{2} \displaystyle \left ( 1 + \displaystyle \sqrt{ 1 + 8 {\displaystyle \left ( \displaystyle \frac{ k v_\text{d} }{ \omega_{p,e} } \right )}^2 } \right ) } \underset{ k v_d \ll   \omega_{p,e} }{\sim} \omega_{p,e},
+  \label{eq:omega0}
+  \omega_0 \displaystyle \left ( k \right ) = \omega_{p} \displaystyle \sqrt{ {\displaystyle \left ( \displaystyle \frac{ k v_d }{ \omega_{p} } \right )}^2 + \displaystyle \frac{1}{2} \displaystyle \left ( 1 + \displaystyle \sqrt{ 1 + 8 {\displaystyle \left ( \displaystyle \frac{ k v_d }{ \omega_{p} } \right )}^2 } \right ) } \underset{ k v_d \ll   \omega_{p} }{\sim} \omega_{p},
 \end{equation}
 two another pure imaginary conjugate poles
 \begin{equation}
   \label{eq:pure_imaginary_poles}
   \omega_{3/4} \displaystyle \left ( k < k_c \right )=  \pm \iota \delta \displaystyle \left ( k \right ).
 \end{equation}
-It means that the two counter-propagating electron beams streaming throught the immobile plasma ions is unstable on space scales greater than $\lambda_c$ and that the instability grows exponentially at the rate
+It means that the two counter-propagating electron beams streaming throught the immobile plasma ions is unstable on space scales greater than $\lambda_c$ and that this two-stream instability grows exponentially at the rate
 \begin{equation}
   \label{eq:growth_rate}
-  \delta \displaystyle \left ( k \right ) = \omega_{p,e} \displaystyle \sqrt{  \displaystyle \frac{1}{2} \displaystyle \left ( \displaystyle \sqrt{ 1 + 8 {\displaystyle \left ( \displaystyle \frac{ k v_\text{d} }{ \omega_{p,e} } \right )}^2 } - 1 \right ) - {\displaystyle \left ( \displaystyle \frac{ k v_\text{d} }{ \omega_{p,e} } \right )}^2 }  \underset{ k v_d \ll   \omega_{p,e} }{\sim} \displaystyle \left | k \right | v_d.
+  \delta \displaystyle \left ( k \right ) = \omega_{p} \displaystyle \sqrt{  \displaystyle \frac{1}{2} \displaystyle \left ( \displaystyle \sqrt{ 1 + 8 {\displaystyle \left ( \displaystyle \frac{ k v_d }{ \omega_{p} } \right )}^2 } - 1 \right ) - {\displaystyle \left ( \displaystyle \frac{ k v_d }{ \omega_{p} } \right )}^2 }  \underset{ k v_d \ll   \omega_{p} }{\sim} \displaystyle \left | k \right | v_d.
 \end{equation}
+The stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} are plotted in  \autoref{fig:two-stream-instability}.
 
 \begin{equation}
   \begin{array}{lcl}
