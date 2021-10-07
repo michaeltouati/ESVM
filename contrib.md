@@ -22,7 +22,7 @@ If the bug persists or if it is related to another problem, follow these steps :
 4) Describe the bug the more clear and concise as possible in the title starting with "Bug :"
 5) Describe with the more details as possible the bug providing the more pieces of information as possible (input-deck, terminal output and/or screeshot) and more importantly, specify your environment :
 
-OS: [e.g. Ubuntu 20,04]
+OS: [e.g. Ubuntu 20.04]
 
 Fortran compiler [e.g. gfortran 11.2.0]
 
