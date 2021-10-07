@@ -57,13 +57,15 @@ Please, try to keep the code Fortran 90 standard compliant by :
 - etc ...
 
 3. If you've added parameters in the input-deck and updated the source file input.f90, please add their descriptions 
-`##                                                                   ##
+```javascript
+##                                                                   ##
 ## T  = electron temperature in eV                                   ##
 ##                                                                   ##`
 in the input-deck following the same style:
 `#
 #T  1000.
-#`
+#
+```
 4. Create a directory "my-new-feature" test-cases/Tests/"my-new-feature" by adding :
   1. a typical input deck that uses your new feature with:
 - `#N_th 1` OpenMP threads, 
@@ -72,13 +74,15 @@ in the input-deck following the same style:
 - test case parameters `#perturb  0` and `#vd 1.`
 for the test to be fast  
   2. a section in the makefile such as
-`test_absorbing :
+```javascript
+test_absorbing :
 	@echo -n 'Absorbing bound. cond. : '
 	@cp test-cases/Tests/Boundary-conditions/Absorbing/input-deck .
 	@./esvm > test.output
 	@diff test.output test-cases/Tests/Boundary-conditions/Absorbing/output; \
     TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \`
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+```
 that has been written to check 
 if a new solver, a new boundary condition or... is added and make sure it passes the tests by typing on your terminal from your local branch cloned or downloaded from your forked branch:
 ```sh
