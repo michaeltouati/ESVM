@@ -6,7 +6,7 @@ Hans Bethe once said : “We need science education to produce scientists, but w
 
 But Richard P. Feynmann also added : “Physics is like sex: sure, it may give some practical results, but that's not why we do it.”
 
-Being fully in agreement with Richard P. feynman while following the advice of Hans Bethe, it seemed to me natural to develop ESVM with Github in order to try to understand the complexity of plasmas, numerical analysis and High Parallel Computing (HPC) and to make it accessible to the largest public as possible at the same time.
+Being fully in agreement with Richard P. feynman while following the advice of Hans Bethe, it seemed to me natural to develop ESVM with Github in order to try to understand the complexity of plasmas, numerical analysis and High Parallel Computing (HPC) and make accessible this small piece of Modern Physics knowledge to the largest public as possible at the same time.
 
 Here can be found how to :
 - Report or fix a bug
