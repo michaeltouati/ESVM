@@ -1,6 +1,6 @@
 # Contributing to ESVM
 
-First of all, thank you very much for your interest in contributing to ESVM! 
+First of all, thank you very much for your interest in contributing to [ESVM](https://github.com/michaeltouati/ESVM)! 
 
 Hans Bethe once said : “We need science education to produce scientists, but we need it equally to create literacy in the public. Man has a fundamental urge to comprehend the world about him, and science gives today the only world picture which we can consider as valid. It gives an understanding of the inside of the atom and of the whole universe, or the peculiar properties of the chemical substances and of the manner in which genes duplicate in biology. An educated layman can, of course, not contribute to science, but can enjoy and participate in many scientific discoveries which as constantly made. Such participation was quite common in the 19th century, but has unhappily declined. Literacy in science will enrich a person's life.”
 
