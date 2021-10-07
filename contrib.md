@@ -32,7 +32,7 @@ If you want to propose a new feature for ESVM, follow these steps :
 1) Go to 'Issues' on the ESVM main repository branch [issues](https://github.com/michaeltouati/ESVM/issues)
 2) Click on 'New issue'
 4) Describe the new feature request the more clear and concise as possible in the title starting with "Feature request :"
-5) Describe with the more details as possible the new feature request and
+5) Describe with the more details as possible the new feature requested and
 6) Click on 'Submit new issue'
 
 We'll discuss about it.
