@@ -131,11 +131,11 @@ in order to check the energy conservation in the simulation.
 
 # ESVM units
 
-The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = v_{T_{e,0}} / \omega_{p}$ and the constant electron density $n_0 = Z n_i$ for spatial densities. $v_{T_{e,0}}$ is therefore an important unit parameter of normalization since it fixes indirectly the space unit. It can be defined more generally as the plasma electron velocity distribution standard deviation if the plasma is not initialized at Maxwell-Boltzmann thermodynamic equilibrium; cf. \autoref{eq:internal_energy}. Injecting these units in the equations computed by the code, one deduces the resulting normalized electrostatic field and electron distribution function that consequently reads $\underline{E_x} = e E_x / m_e \omega_{p} v_{T_{e,0}}$ and $\underline{f_e} = f_e v_{T_{e,0}} / n_0$, respectively.
+The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = v_{T_{e_0}} / \omega_{p}$ and the constant electron density $n_0 = Z n_i$ for spatial densities. $v_{T_{e_0}}$ is therefore an important unit parameter of normalization since it fixes indirectly the space unit. It can be defined more generally as the initial plasma electron velocity distribution standard deviation if the plasma is not initialized at Maxwell-Boltzmann thermodynamic equilibrium; cf. \autoref{eq:internal_energy}. Injecting these units in the equations computed by the code, one deduces the resulting normalized electrostatic field and electron distribution function that consequently reads $\underline{E_x} = e E_x / m_e \omega_{p} v_{T_{e_0}}$ and $\underline{f_e} = f_e v_{T_{e_0}} / n_0$, respectively.
 
 # ESVM numerical stability
 
-The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to be Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_{e,0}}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_{e,0}}$ and also sufficiently small to capture the desired Physics. The CFL stability condition (from the name of its finder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) is implemented inside the code in such a way that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step reads
+The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to be Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_{e_0}}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_{e_0}}$ and also sufficiently small to capture the desired Physics. The CFL stability condition (from the name of its finder R. Courant, K. Friedrichs and H. Lewy @Courant:1928) is implemented inside the code in such a way that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step reads
 \begin{equation}
 \underline{\Delta t}_n = \mathrm{cfl} \times F^n(\underline{\Delta x}, \underline{\Delta v}_x ) < F^n(\underline{\Delta x}, \underline{\Delta v}_x)
 \end{equation}
@@ -207,7 +207,7 @@ For each academic case, an example of input deck is provided together with the c
   \label{eq:MaxwellBoltzmannEquilibrium}
   \displaystyle \left \{
   \begin{array}{lll}
-      f_e^{(0)} (x,v_x,t=0) &=& \displaystyle \frac{Z n_i}{ \displaystyle \sqrt{ 2 \pi {v_{T_{e,0}}}^2 } } \exp{ \displaystyle \left [ - \displaystyle \frac{ {v_x}^2 }{ 2 {v_{T_{e,0}}}^2 } \right ] }
+      f_e^{(0)} (x,v_x,t=0) &=& \displaystyle \frac{Z n_i}{ \displaystyle \sqrt{ 2 \pi {v_{T_{e_0}}}^2 } } \exp{ \displaystyle \left [ - \displaystyle \frac{ {v_x}^2 }{ 2 {v_{T_{e_0}}}^2 } \right ] }
   \cr E_x^{(0)} (x,t=0) &=& 0
   \end{array} \right .
 \end{equation}
@@ -217,15 +217,15 @@ that is perturbed :
    \label{eq:Gaussian_electron}
   \delta f_e (x,v_x,t=0)= A \displaystyle \frac{ Z n_i }{ 2 \pi \delta x \delta v } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(x-x_d)}^2 }{ 2 {\delta x}^2 } \right ] } \exp{ \displaystyle \left [ - \displaystyle \frac{ {(v_x-v_d)}^2 }{ 2 {\delta v}^2 } \right ] },
 \end{equation}
-consisting in a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a standard deviation $\delta x = \lambda_{\mathrm{Debye}} / 4$ and drifting at a velocity $v_d$ with a standard deviation $\delta v = v_{T_{e,0}} / 40$ at the simulation start $t=0$ for 1), and 
+consisting in a Gaussian electron located at $x_d = x_{\mathrm{min}} + ( x_{\mathrm{max}}-x_{\mathrm{min}} )/8$ with a standard deviation $\delta x = \lambda_{\mathrm{Debye}} / 4$ and drifting at a velocity $v_d$ with a standard deviation $\delta v = v_{T_{e_0}} / 40$ at the simulation start $t=0$ for 1), and 
 - with a small perturbation consisting in a small amplitude electron plasma wave
 \begin{equation}
   \label{eq:EPW}
-  \delta E_x (x,t < \delta t) = A \displaystyle \frac{m_e \omega_p v_{T_{e,0}}}{e} \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
+  \delta E_x (x,t < \delta t) = A \displaystyle \frac{m_e \omega_p v_{T_{e_0}}}{e} \sin{ \displaystyle \left ( \omega_0 t - k x \right ) }
 \end{equation}
 propagating during a short time interval $\delta t = 6 \pi / \omega_0$ after the simulation start $t=0$ for 2) and 3). 
 
-Only the perturbation amplitudes $A < 1$ for 1), 2) and 3), the perturbation drift velocity  $v_d > v_{T_{e,0}}$ for 1) and the perturbation temporal and spatial angular frequencies $\omega_0$ and $k$ for 2) and 3) should be modified by the user when filling the input-deck in such a way that
+Only the perturbation amplitudes $A < 1$ for 1), 2) and 3), the perturbation drift velocity  $v_d > v_{T_{e_0}}$ for 1) and the perturbation temporal and spatial angular frequencies $\omega_0$ and $k$ for 2) and 3) should be modified by the user when filling the input-deck in such a way that
 \begin{equation}
   \displaystyle \left \{
   \begin{array}{lllll}
@@ -235,14 +235,14 @@ Only the perturbation amplitudes $A < 1$ for 1), 2) and 3), the perturbation dri
 \end{equation}
 keeps being respected during the linear stage of the simulation. Except for non-linear Plasma Physics processes such as 3) for which the non-linear theory should be considered, the methodology that can be used to check any ESVM simulation results is always the same. Only analytical estimates used to check the ESVM simulation results of the provided academic case 4) are consequently detailed here in order to highlight it. The user can check the provided academic case simulation results 1), 2) and 3) by directly comparing the ESVM simulation results with the analytical estimates provided in @Decyk:1987 and in the reference texbooks @LandauLifshitz:1981 and @GaleevSagdeev:1969, respectively. 
 
-The provided Plasma Physics academic case 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $\pm v_d$ with same standard velocity deviation $v_{T_{e,0}}$
+The provided Plasma Physics academic case 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $\pm v_d$ with same standard velocity deviation $v_{T_{e_0}}$
 \begin{equation}
   \label{eq:EDF}
   f_e^{(0)} \displaystyle \left ( x,v_x,t\right ) = f_{e,+}^{(0)} \displaystyle \left (x,v_x,t \right ) + f_{e,-}^{(0)} \displaystyle \left (x,v_x,t \right )
 \end{equation}
 with
 \begin{equation}
-  f_{e,\pm}^{(0)} \displaystyle \left (x,v_x,t\right ) = \displaystyle \frac{Z n_i / 2}{\sqrt{2 \pi {v_{T_{e,0}}}^2} } \exp{ \displaystyle \left [ - \displaystyle \frac{ {\left ( v_x \mp v_d \right )}^2 }{ 2 {v_{T_{e,0}}}^2 } \right ] }
+  f_{e,\pm}^{(0)} \displaystyle \left (x,v_x,t\right ) = \displaystyle \frac{Z n_i / 2}{\sqrt{2 \pi {v_{T_{e_0}}}^2} } \exp{ \displaystyle \left [ - \displaystyle \frac{ {\left ( v_x \mp v_d \right )}^2 }{ 2 {v_{T_{e_0}}}^2 } \right ] }
 \end{equation}
 that is a solution of the Vlasov Equation \autoref{eq:vlasov1d1v} and that doesn't produce any electrostatic fields 
 \begin{equation}
@@ -295,7 +295,7 @@ where the integral in the complex $\omega$-plane is taken along a straight line 
 \end{equation}
 with
 \begin{equation}
-  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) = \alpha_p A \displaystyle \frac{ Z n_i / 2}{ \displaystyle \sqrt{2 \pi {v_{T_{e,0}}}^2 } } \displaystyle \left \{  \exp{ \displaystyle \left [ - \displaystyle \frac{ {\displaystyle \left ( v_x - v_d \right )}^2 }{ 2 {v_{T_{e,0}}}^2 }\right ] } - \exp{ \displaystyle \left [ - \displaystyle \frac{ {\displaystyle \left ( v_x + v_d \right )}^2 }{ 2 {v_{T_{e,0}}}^2 }\right ] }  \right \}
+  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) = \alpha_p A \displaystyle \frac{ Z n_i / 2}{ \displaystyle \sqrt{2 \pi {v_{T_{e_0}}}^2 } } \displaystyle \left \{  \exp{ \displaystyle \left [ - \displaystyle \frac{ {\displaystyle \left ( v_x - v_d \right )}^2 }{ 2 {v_{T_{e_0}}}^2 }\right ] } - \exp{ \displaystyle \left [ - \displaystyle \frac{ {\displaystyle \left ( v_x + v_d \right )}^2 }{ 2 {v_{T_{e_0}}}^2 }\right ] }  \right \}
 \end{equation}
 where
 \begin{equation}
@@ -315,7 +315,7 @@ Injecting \autoref{eq:Eq1} in \autoref{eq:Eq2}, we obtain the Fourier components
   \label{eq:Eq3}
   \begin{array}{lcl}
   \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) &=& \displaystyle \frac{4\pi e}{ {k_p}^2 \epsilon \displaystyle \left ( \omega,\,k_p\right )} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{  \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right ) }{v_x - \omega / k_p } d v_x
-  \cr &=& \alpha_p \displaystyle \frac{A}{ 2 \sqrt{2} } \displaystyle \frac{m_e v_{T_{e,0}}}{ e } \displaystyle \frac{ \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p - v_d }{ v_{T_{e,0}} \sqrt{2} } \right ) - \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p + v_d }{ v_{T_{e,0}} \sqrt{2} } \right ) }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) {\displaystyle \left ( k_p \lambda_\mathrm{Debye}\right ) }^2 }
+  \cr &=& \alpha_p \displaystyle \frac{A}{ 2 \sqrt{2} } \displaystyle \frac{m_e v_{T_{e_0}}}{ e } \displaystyle \frac{ \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p - v_d }{ v_{T_{e_0}} \sqrt{2} } \right ) - \mathcal{Z}  \displaystyle \left ( \displaystyle \frac{ \omega / k_p + v_d }{ v_{T_{e_0}} \sqrt{2} } \right ) }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) {\displaystyle \left ( k_p \lambda_\mathrm{Debye}\right ) }^2 }
   \end{array}
 \end{equation}
 where the plasma electrical permittivity reads
@@ -323,7 +323,7 @@ where the plasma electrical permittivity reads
   \label{eq:plasma_electrical_permittivity}
   \begin{array}{lll}
   \epsilon \displaystyle \left ( \omega,\,k \right )   &=&  1 - \displaystyle \frac{4 \pi e^2}{m_e {k}^2} \displaystyle \int_{-\infty}^\infty \displaystyle \frac{ 1 }{ v_x - \omega / k } \displaystyle \frac{ d f_e^{(0)} }{ d v_x } d v_x
-  \cr                                                  &=&  1 + \displaystyle \frac{1}{ {\displaystyle \left ( k \lambda_{\mathrm{Debye}} \right )}^2} \displaystyle \left \{ 1 + \displaystyle \frac{1}{2} \displaystyle \left [ F \displaystyle \left ( \displaystyle \frac{ \omega / k - v_d }{ v_{T_{e,0}} \sqrt{2} } \right ) +  F \displaystyle \left ( \displaystyle \frac{ \omega / k + v_d }{ v_{T_{e,0}} \sqrt{2} } \right ) \right ] \right \}
+  \cr                                                  &=&  1 + \displaystyle \frac{1}{ {\displaystyle \left ( k \lambda_{\mathrm{Debye}} \right )}^2} \displaystyle \left \{ 1 + \displaystyle \frac{1}{2} \displaystyle \left [ F \displaystyle \left ( \displaystyle \frac{ \omega / k - v_d }{ v_{T_{e_0}} \sqrt{2} } \right ) +  F \displaystyle \left ( \displaystyle \frac{ \omega / k + v_d }{ v_{T_{e_0}} \sqrt{2} } \right ) \right ] \right \}
 \end{array}
 \end{equation}
 depending on the plasma dispersion function @FriedComte:1961
@@ -331,10 +331,10 @@ depending on the plasma dispersion function @FriedComte:1961
   \label{eq:plasma_dispersion_function}
   F \displaystyle \left ( \zeta \right ) = \zeta \mathcal{Z} \displaystyle \left ( \zeta \right ) \text{ and } \mathcal{Z} \displaystyle \left ( \zeta \right ) = \displaystyle \frac{ 1 }{ \sqrt{\pi} } \displaystyle \int_{-\infty}^\infty \displaystyle \frac{ \exp{ \displaystyle \left ( - z^2 \right ) } }{ z - \zeta } d z.
 \end{equation}
-Since $v_d \gg v_{T_{e,0}}$ in this ESVM simulation, we have the condition 
+Since $v_d \gg v_{T_{e_0}}$ in this ESVM simulation, we have the condition 
 \begin{equation}
   \label{eq:assumption}
-  \displaystyle \left | \displaystyle \frac{\omega}{k_p} \pm v_d \right | \gg v_{T_{e,0}} \sqrt{2}
+  \displaystyle \left | \displaystyle \frac{\omega}{k_p} \pm v_d \right | \gg v_{T_{e_0}} \sqrt{2}
 \end{equation}
 that is fulfilled for any given spatial frequency mode $k_p$ and one thus may use the asymptotic limit
 \begin{equation}
@@ -344,7 +344,7 @@ that is fulfilled for any given spatial frequency mode $k_p$ and one thus may us
 that leads to the simpler dispersion relation 
 \begin{equation}
   \label{eq:plasma_electrical_permittivity_limit}
-  \epsilon \displaystyle \left ( \omega,\,k \right ) \underset{v_d \gg v_{T_{e,0}}}{=} 1 - \displaystyle \frac{ {\omega_{p}}^2 }{ 2 } \displaystyle \left [  \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega - k v_d \right )}^2 } + \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega + k v_d \right )}^2 } \right ] = 0
+  \epsilon \displaystyle \left ( \omega,\,k \right ) \underset{v_d \gg v_{T_{e_0}}}{=} 1 - \displaystyle \frac{ {\omega_{p}}^2 }{ 2 } \displaystyle \left [  \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega - k v_d \right )}^2 } + \displaystyle \frac{ 1 }{ {\displaystyle \left ( \omega + k v_d \right )}^2 } \right ] = 0
 \end{equation}
 retaining only the main term in the series expansion of the dispersion function \autoref{eq:plasma_dispersion_function} up to the second order \autoref{eq:plasma_dispersion_function_2ndorder}. In this limit, the dispersion relation \autoref{eq:plasma_electrical_permittivity_limit} provides four pure real solutions $\displaystyle \left \{ \omega_1\displaystyle \left ( k \right ),\,\omega_2\displaystyle \left ( k \right ),\,\omega_3\displaystyle \left ( k \right ),\,\omega_4\displaystyle \left ( k \right )  \right \} \in \mathbb{R}^4$ for wavenumber $k$ greater or equal than the critical wavenumber $\omega_{p} / v_d$. It means that the two counter-propagating electron beams remain stable on space scales smaller than $2 \pi v_d /\omega_{p}$. However, in the case where $k_p < \omega_{p} / v_d$ considered here, one finds in addition to the two real poles
 \begin{equation}
@@ -369,7 +369,7 @@ It means that the two counter-propagating electron beams streaming throught the 
 The stable electron plasma waves angular frequency \autoref{eq:omega0} and the two stream instability growth rate \autoref{eq:growth_rate} are plotted in  \autoref{fig:poles} as a function of the angular spatial frequency mode $k$. Retaining the main terms in the series expansions of $\mathcal{Z}$ up to the second order in \autoref{eq:Eq3} according to \autoref{eq:plasma_dispersion_function_2ndorder}, the Fourier components of the electrostatic field Laplace transform  simplify into
 \begin{equation}
   \label{eq:electrostatic_field_Fourier_modes}
-  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) \underset{v_d \gg v_{T_{e,0}}}{\sim} - \alpha_p A \displaystyle \frac{m_e v_d}{ e } \displaystyle \frac{  {\omega_{p}}^2  }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) \displaystyle \left ( \omega - k_p v_d \right ) \displaystyle \left ( \omega + k_p v_d \right )  }.
+  \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) \underset{v_d \gg v_{T_{e_0}}}{\sim} - \alpha_p A \displaystyle \frac{m_e v_d}{ e } \displaystyle \frac{  {\omega_{p}}^2  }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) \displaystyle \left ( \omega - k_p v_d \right ) \displaystyle \left ( \omega + k_p v_d \right )  }.
 \end{equation}
 The poles of the Fourier components of the electrostatic fields \autoref{eq:electrostatic_field_Fourier_modes} are thus $\pm k_p v_d$ plus the ones of the plasma electrical permittivity \autoref{eq:plasma_electrical_permittivity_limit} given by Equations \ref{eq:pure_real_poles} and \autoref{eq:pure_imaginary_poles}. We can know determine the time dependance of the spatial Fourier components of the growing electrostatic field
 \begin{equation}
@@ -399,8 +399,8 @@ Knowing the electrostatic field \autoref{eq:electrostatic_field}, one may also d
 \begin{equation}
   \begin{array}{lll}
   { \delta f}_{e} \displaystyle \left ( x,\, v_x,\,t \right )  &=&  \delta f_{e} \displaystyle \left ( x,\, v_x,\,t=0\right )  + \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_{e}^{(0)}}{d v_x}  \displaystyle \left ( v_x \right ) \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau
-  \cr &=& f_{e,+}^{(0)}  \displaystyle \left ( v_x \right ) \displaystyle \left [ + A \sin{ \displaystyle \left ( k_1 x \right ) } + \displaystyle \frac{ v_d - v_x  }{ {v_{T_{e,0}}^2 }} \displaystyle \frac{e}{m_e} \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau  \right ]
-  \cr &+& f_{e,-}^{(0)}  \displaystyle \left ( v_x \right ) \displaystyle \left [ - A \sin{ \displaystyle \left ( k_1 x \right ) } -  \displaystyle \frac{ v_d + v_x  }{ {v_{T_{e,0}}^2 }} \displaystyle \frac{e}{m_e} \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau  \right ].
+  \cr &=& f_{e,+}^{(0)}  \displaystyle \left ( v_x \right ) \displaystyle \left [ + A \sin{ \displaystyle \left ( k_1 x \right ) } + \displaystyle \frac{ v_d - v_x  }{ {v_{T_{e_0}}^2 }} \displaystyle \frac{e}{m_e} \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau  \right ]
+  \cr &+& f_{e,-}^{(0)}  \displaystyle \left ( v_x \right ) \displaystyle \left [ - A \sin{ \displaystyle \left ( k_1 x \right ) } -  \displaystyle \frac{ v_d + v_x  }{ {v_{T_{e_0}}^2 }} \displaystyle \frac{e}{m_e} \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau  \right ].
   \end{array}
 \end{equation}
 In the limit $k_p v_d \ll \omega_{p}$, they simplify into
