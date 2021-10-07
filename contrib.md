@@ -42,15 +42,15 @@ We'll discuss about it.
 ESVM uses the [Fork and pull model](https://docs.github.com/en/github/collaborating-with-pull-requests/getting-started/about-collaborative-development-models).
 In order to fix a bug or submit a new feature in ESVM, follow these steps:
 
-1. Fork the repo and create your own branch from [ESVM 'main' branch](https://github.com/michaeltouati/ESVM).
-2. Add your code.
+1) Fork the repo and create your own branch from [ESVM 'main' branch](https://github.com/michaeltouati/ESVM).
+2) Add your code.
 
 Please, try to keep the code Fortran 90 standard compliant by : 
 - respecting 2 spaces for indentation rather than tabs
 - not using object oriented Fortran 2003 features
 - etc ...
 
-3. If you've added parameters in the input-deck and updated the source file input.f90, please add their descriptions 
+3) If you've added parameters in the input-deck and updated the source file input.f90, please add their descriptions 
 ```javascript
 ##                                                                   ##
 ## T  = electron temperature in eV                                   ##
@@ -62,14 +62,14 @@ in the input-deck following the same style:
 #T  1000.
 #
 ```
-4. Create a directory "my-new-feature" test-cases/Tests/"my-new-feature" by adding :
-  1. a typical input deck that uses your new feature with:
+4) Create a directory "my-new-feature" test-cases/Tests/"my-new-feature" by adding :
+ 1) a typical input deck that uses your new feature with:
 - `#N_th 1` OpenMP threads, 
 - discretized phase-space parameters `#x_min 0.`, `#x_max 5.`, `#d_x 0.25`, `#vx_min -5.`, `#vx_max 5.`, `#d_vx 0.1`
 - simulation time parameters `#cfl 9.e-1`, `#L_t 5.`, `#dt_diag 0.25` and
 - test case parameters `#perturb  0` and `#vd 1.`
 for the test to be fast  
-  2. a section in the makefile such as
+ 2) a section in the makefile such as
 ```javascript
 test_absorbing :
 	@echo -n 'Absorbing bound. cond. : '
@@ -84,11 +84,11 @@ if a new solver, a new boundary condition or... is added and make sure it passes
 ```sh
 make test
 ```
-5. Ensure the code compiles with all compiler debugging options:
+5) Ensure the code compiles with all compiler debugging options:
 - `-g -traceback -fopenmp -r8 -std90 -fpe0 -debug all -debug-parameters all -C ` for the INTEL compiler ifort
 - `-fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow` for the GNU compiler gfortran
 
-6. Issue that pull request!
+6) Issue that pull request!
 
 # License
 When you submit code changes, your submissions are understood to be under the same [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html) that covers ESVM. 
