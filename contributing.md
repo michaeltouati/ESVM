@@ -87,15 +87,16 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 	test_donor_cell test_Lax_Wendroff test_Beam_Warming test_Fromm \
 	test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2 test_my-new-feature test_end
 ```
-and ake sure your added code passes the tests by typing on your terminal:
+
+5) Make sure your code passes the tests by typing on your terminal:
 ```sh
 make test
 ```
-5) Ensure the code compiles with all compiler debugging options:
+6) Ensure the code compiles with all compiler debugging options:
 - `-g -traceback -fopenmp -r8 -std90 -fpe0 -debug all -debug-parameters all -C ` for the INTEL compiler ifort
 - `-fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow` for the GNU compiler gfortran
 
-6) Issue that pull request!
+7) Issue that pull request!
 
 # License
 When you submit code changes, your submissions are understood to be under the same [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html) that covers ESVM. 
