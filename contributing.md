@@ -93,7 +93,7 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 make test
 ```
 6) Ensure the code compiles with all compiler debugging options:
-- `-g -traceback -fopenmp -r8 -std90 -fpe0 -debug all -debug-parameters all -C ` for the INTEL compiler ifort
+- `-g -traceback -fopenmp -r8 -std90 -fpe0 -debug all -debug-parameters all -C` for the INTEL compiler ifort
 - `-fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow` for the GNU compiler gfortran
 
 7) Issue that pull request!
