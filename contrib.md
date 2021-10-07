@@ -8,19 +8,19 @@ But Richard P. Feynmann also added : “Physics is like sex: sure, it may give s
 
 Being fully in agreement with Richard P. feynman while following the advice of Hans Bethe, it seemed to me natural to develop ESVM with Github in order to try to understand the complexity of plasmas, numerical analysis and High Parallel Computing (HPC) and make accessible this small piece of Modern Physics knowledge to the largest public as possible at the same time.
 
-Here can be found how to :
-- Report or fix a bug
-- Propose or submit a new feature
+# Report a bug you faced when compiling or using 
 
-# Report a bug using Github's [issues](https://github.com/michaeltouati/ESVM/issues)
-
-For problems related with plotting, please make sure first that LaTeX, dvipng and ghostscript are each working and on your PATH for the Matplotlib Python package to be able to render tex fonts.
-If the bug persists or is related to another problem, follow these steps :
-1) Go to 'Issues' on the ESVM main repository branch
+For problems related with plotting, please make sure :
+1) LaTeX, dvipng and ghostscript are each working and on your PATH for the Matplotlib Python package to be able to render tex fonts
+2) you're using the main repository branch [ESVM](https://github.com/michaeltouati/ESVM) by typing on your terminal from your local ESVM
+```sh
+git pull
+```
+If the bug persists or if it is related to another problem, follow these steps :
+1) Go to 'Issues' on the ESVM main repository branch [issues](https://github.com/michaeltouati/ESVM/issues)
 2) Click on 'New issue'
-4) Describe the bug the more clear and concise as possible in the title starting the title starting with "Bug :"
-5) Describe with the more details as possible the bug and
-6) Click on 'Submit new issue'
+4) Describe the bug the more clear and concise as possible in the title starting with "Bug :"
+5) Describe with the more details as possible the bug providing the more pieces of information as possible (input-deck, terminal output and/or screeshot) and more importantly, specify your environment :
 
 OS: [e.g. Ubuntu 20,04]
 
@@ -28,35 +28,66 @@ Fortran compiler [e.g. gfortran 11.2.0]
 
 Python version [e.g. Python 3.7.11]
 
-Matplotlib Python package version [e.g. 3.4.3]
+Matplotlib Python package version [e.g., Matplotlib 3.4.3]
 
-Numpy Python package version [e.g., 1.21.2]
+Numpy Python package version [e.g., Numpy 1.21.2]
 
-# Propose a new feature using Github's [issues](https://github.com/michaeltouati/ESVM/issues)
+# Propose a new feature
 
 If you want to propose a new feature for ESVM, follow these steps :
-1) Go to 'Issues' on the ESVM main repository branch
+1) Go to 'Issues' on the ESVM main repository branch [issues](https://github.com/michaeltouati/ESVM/issues)
 2) Click on 'New issue'
-4) Describe the new feature request the more clear and concise as possible in the title starting "Feature request :"
+4) Describe the new feature request the more clear and concise as possible in the title starting with "Feature request :"
 5) Describe with the more details as possible the new feature request and
 6) Click on 'Submit new issue'
 
+We'll discuss about it.
+
 # Fix a bug or submit a new feature
 
-ESVM Uses the Fork and pull model [Github Flow](https://guides.github.com/introduction/flow/index.html).
+ESVM Uses the [Fork and pull model](https://docs.github.com/en/github/collaborating-with-pull-requests/getting-started/about-collaborative-development-models).
 In order to fix a bug or submit a new feature in ESVM, follow these steps:
 
-1. Fork the repo and create your branch from [ESVM 'main' branch](https://github.com/michaeltouati/ESVM).
-2. If you've added code that should be tested, add tests.
+1. Fork the repo and create your own branch from [ESVM 'main' branch](https://github.com/michaeltouati/ESVM).
+2. Add your code.
 
 Please, try to keep the code Fortran 90 standard compliant by : 
 - respecting 2 spaces for indentation rather than tabs
 - not using object oriented Fortran 2003 features
 - etc ...
 
-3. If you've added parameters in the input-deck, please add their descriptions in the input-deck following the same style.
-4. Ensure the code compiles with all compiler debugging options 
-5. Ensure the code passes the provided tests and add a test if a new solver, a new boundary condition or... is added.
+3. If you've added parameters in the input-deck and updated the source file input.f90, please add their descriptions 
+`##                                                                   ##
+## T  = electron temperature in eV                                   ##
+##                                                                   ##`
+in the input-deck following the same style:
+`#
+#T  1000.
+#`
+4. Create a directory "my-new-feature" test-cases/Tests/"my-new-feature" by adding :
+  1. a typical input deck that uses your new feature with:
+- `#N_th 1` OpenMP threads, 
+- discretized phase-space parameters `#x_min 0.`, `#x_max 5.`, `#d_x 0.25`, `#vx_min -5.`, `#vx_max 5.`, `#d_vx 0.1`
+- simulation time parameters `#cfl 9.e-1`, `#L_t 5.`, `#dt_diag 0.25` and
+- test case parameters `#perturb  0` and `#vd 1.`
+for the test to be fast  
+  2. a section in the makefile such as
+`test_absorbing :
+	@echo -n 'Absorbing bound. cond. : '
+	@cp test-cases/Tests/Boundary-conditions/Absorbing/input-deck .
+	@./esvm > test.output
+	@diff test.output test-cases/Tests/Boundary-conditions/Absorbing/output; \
+    TST=$$?;\
+    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \`
+that has been written to check 
+if a new solver, a new boundary condition or... is added and make sure it passes the tests by typing on your terminal from your local branch cloned or downloaded from your forked branch:
+```sh
+make test
+```
+5. Ensure the code compiles with all compiler debugging options:
+- `-g -traceback -fopenmp -r8 -std90 -fpe0 -debug all -debug-parameters all -C ` for the INTEL compiler ifort
+- `-fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow` for the GNU compiler gfortran
+
 6. Issue that pull request!
 
 # License
