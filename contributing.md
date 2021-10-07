@@ -50,7 +50,7 @@ Please, try to keep the code Fortran 90 standard compliant by :
 - not using object oriented Fortran 2003 features
 - etc ...
 
-3) If you've added parameters in the input-deck and updated the source file input.f90, please add their descriptions 
+3) If you've added new parameters in the input-deck and updated the source file input.f90, please add their descriptions 
 ```sh
 ##                                                                   ##
 ## T  = electron temperature in eV                                   ##
@@ -62,7 +62,7 @@ in the input-deck following the same style:
 #T  1000.
 #
 ```
-4) Create a directory my-new-feature/ in test-cases/Tests/ by adding a typical input deck inside that uses your new feature with:
+4) If you've added a new feature 'my-new-feature', create a directory my-new-feature/ in test-cases/Tests/ by adding a typical input deck inside that uses your new feature with:
 - `#N_th 1` OpenMP threads, 
 - discretized phase-space parameters `#x_min 0.`, `#x_max 5.`, `#d_x 0.25`, `#vx_min -5.`, `#vx_max 5.`, `#d_vx 0.1`
 - simulation time parameters `#cfl 9.e-1`, `#L_t 5.`, `#dt_diag 0.25` and
