@@ -10,13 +10,7 @@ Being fully in agreement with Richard P. feynman while firmly believing in the r
 
 # Report a bug
 
-For problems related with plotting, please make sure :
-1) LaTeX, dvipng and ghostscript are each working and on your PATH for the Matplotlib Python package to be able to render tex fonts
-2) you're using the main repository branch [ESVM](https://github.com/michaeltouati/ESVM) by typing on your terminal from your local ESVM
-```sh
-git pull
-```
-If the bug persists or if it is related to another problem, follow these steps :
+For problems related with plotting, please make sure first LaTeX, dvipng and ghostscript are each working and on your PATH for the Matplotlib Python package to be able to render tex fonts. If the bug persists or if it is related to another problem, follow these steps :
 1) Go to 'Issues' on the ESVM main repository branch [issues](https://github.com/michaeltouati/ESVM/issues)
 2) Click on 'New issue'
 4) Describe the bug the more clear and concise as possible in the title starting with "Bug :"
