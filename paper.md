@@ -41,7 +41,7 @@ bibliography: paper.bib
 
 # Summary
 
-ESVM (ElectroStatic Vlasov-Maxwell) is a single species 1D-1V Vlasov-Maxwell Fortran 90 code parallelized with OpenMP that allows for the study of collisionless plasmas. Many finite volume numerical advection schemes @Godunov:1959 are implemented in the code in order to discretize the Vlasov equation, namely :
+ESVM (ElectroStatic Vlasov-Maxwell) is a single species 1D-1V Vlasov-Maxwell Fortran 90 code parallelized with OpenMP that allows for the study of collisionless plasmas. Many finite volume numerical advection schemes [@Godunov:1959] are implemented in the code in order to discretize the Vlasov equation, namely :
 - the donor-cell scheme i.e. the downwind / upwind scheme @Courant:1952 depending on the advection direction in each phase-space cell, 
 - the Lax-Wendroff scheme @LaxWendroff:1960, 
 - the Fromm scheme @Fromm:1968,
@@ -536,19 +536,11 @@ It is planned in a near future to :
 
 # Figures
 
-Electrostatic wakefield test case :
-
 ![Electrostatic wakefield test case : Electrostatic wakefield $E_x(x,t)$ emitted by a Gaussian electron propagating in a collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and initialized according to \autoref{eq:Gaussian_electron} with $A=0.1$ and $\underline{v_d}=5$.\label{fig:electrostatic-wakefield}](test-cases/Wakefield-Emission/figures-Poisson/Ex.png){ width=100% }
-
-Linear Landau damping test case :
 
 ![Linear Landau damping test case : Total electrostatic field energy and plasma electrons kinetic energy time evolution of the linearly Landau damped electron plasma wave propagating in the collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and initialized according to \autoref{eq:EPW} with $A=10^{-3}$, $\underline{k}=0.29919930034$ and $\underline{\omega}_0=1.18$.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy_log.png){ width=100% }
 
-Non Linear Landau damping test case :
-
 ![Non Linear Landau damping test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=68)$ in the non-linear Landau damping of the electron plasma wave propagating in the collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and and initialized according to \autoref{eq:EPW} with $A=10^{-1}$, $\underline{k}=0.29919930034$ and $\underline{\omega_0}=1.18$.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/fe_log/fe_log_69.png){ width=100% }
-
-Two stream instability test case :
 
 ![Two stream instability test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=19.99)$ in the two-stream instability of two counter-propagating electron beams initialized according to \autoref{eq:perturbed_beams} with $A=10^{-1}$, $\underline{k}=0.06159985595$ ($\underline{x_{\mathrm{min}}}=-\underline{x_{\mathrm{max}}}=51$) and $\underline{v_d}=10$.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Poisson/fe/fe_81.png){ width=100% }
 
