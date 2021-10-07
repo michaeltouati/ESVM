@@ -16,7 +16,7 @@ module constants
   !                                         Mathematical constants
   !=======================================================================================
 
-  real(PR),parameter,public :: pi = 3.14159
+  real(PR),parameter,public :: pi = 3.14159_PR
 
   !=======================================================================================
   !                                         Physical_constants constants
