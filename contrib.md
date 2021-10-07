@@ -60,9 +60,11 @@ Please, try to keep the code Fortran 90 standard compliant by :
 ```javascript
 ##                                                                   ##
 ## T  = electron temperature in eV                                   ##
-##                                                                   ##`
+##                                                                   ##
+```
 in the input-deck following the same style:
-`#
+```javascript
+#
 #T  1000.
 #
 ```
@@ -80,8 +82,8 @@ test_absorbing :
 	@cp test-cases/Tests/Boundary-conditions/Absorbing/input-deck .
 	@./esvm > test.output
 	@diff test.output test-cases/Tests/Boundary-conditions/Absorbing/output; \
-    TST=$$?;\
-    if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+	TST=$$?;\
+	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 ```
 that has been written to check 
 if a new solver, a new boundary condition or... is added and make sure it passes the tests by typing on your terminal from your local branch cloned or downloaded from your forked branch:
