@@ -63,13 +63,13 @@ in the input-deck following the same style:
 #
 ```
 4) Create a directory "my-new-feature" test-cases/Tests/"my-new-feature" by adding :
- 1) a typical input deck that uses your new feature with:
+ 4)1) a typical input deck that uses your new feature with:
 - `#N_th 1` OpenMP threads, 
 - discretized phase-space parameters `#x_min 0.`, `#x_max 5.`, `#d_x 0.25`, `#vx_min -5.`, `#vx_max 5.`, `#d_vx 0.1`
 - simulation time parameters `#cfl 9.e-1`, `#L_t 5.`, `#dt_diag 0.25` and
 - test case parameters `#perturb  0` and `#vd 1.`
 for the test to be fast  
- 2) a section in the makefile such as
+ 4)2) a section in the makefile such as
 ```javascript
 test_absorbing :
 	@echo -n 'Absorbing bound. cond. : '
