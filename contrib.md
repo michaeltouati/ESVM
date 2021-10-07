@@ -8,7 +8,7 @@ But Richard P. Feynmann also added : “Physics is like sex: sure, it may give s
 
 Being fully in agreement with Richard P. feynman while firmly believing in the recommendations of Hans Bethe, it seemed to me natural to develop ESVM with Github in order to try to understand the complexity of plasmas, numerical analysis and High Parallel Computing (HPC) and make accessible this small piece of Modern Physics knowledge to the largest public as possible at the same time.
 
-# Report a bug you faced when compiling or using 
+# Report a bug
 
 For problems related with plotting, please make sure :
 1) LaTeX, dvipng and ghostscript are each working and on your PATH for the Matplotlib Python package to be able to render tex fonts
