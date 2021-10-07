@@ -544,9 +544,9 @@ It is planned in a near future to :
 
 ![Two stream instability test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=19.99)$ in the two-stream instability of two counter-propagating electron beams initialized according to \autoref{eq:perturbed_beams} with $A=10^{-1}$, $\underline{k}=0.06159985595$ ($\underline{x_{\mathrm{min}}}=-\underline{x_{\mathrm{max}}}=51$) and $\underline{v_d}=10$.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Poisson/fe/fe_81.png){ width=100% }
 
-![Two stream instability test case : Stable electron plasma waves angular frequency \autoref{eq:omega0} and the two-stream instability growth rate \autoref{eq:growth_rate} as a function of the spatial angular frequency mode $k$.\label{fig:poles}](test-cases/Two-Stream-Instability/figures-Theory/poles.png){ width=100% }
+![Two stream instability test case : Stable electron plasma waves angular frequency \autoref{eq:omega0} and the two-stream instability growth rate \autoref{eq:growth_rate} as a function of the spatial angular frequency mode $k$.\label{fig:poles}](test-cases/Two-Stream-Instability/figures-Theory/poles.png){ width=50% }
 
-![Two stream instability test case : Integration contour used to evaluate the the Cauchy principal value of the integral \autoref{Inversion_Formula}.\label{fig:integration_contour}](test-cases/Two-Stream-Instability/figures-Theory/integration_contour.png){ width=100% }
+![Two stream instability test case : Integration contour used to evaluate the the Cauchy principal value of the integral \autoref{Inversion_Formula}.\label{fig:integration_contour}](test-cases/Two-Stream-Instability/figures-Theory/integration_contour.png){ width=50% }
 
 ![Two stream instability test case : Some beam electron orbits according to analytical estimates \autoref{eq:trajectory_1} and \autoref{eq:trajectory_2}.\label{fig:electron_orbits}](test-cases/Two-Stream-Instability/figures-Theory/electron_orbits.png){ width=100% }
 
