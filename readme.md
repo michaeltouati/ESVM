@@ -35,23 +35,21 @@ make check
 
 # Plotting the simulation results
 
-All simulation results are stored in text files located in the folder 'results'. 
-Python scripts allowing to extract and plot the simulation results are located in the folder 'sources'.
+All simulation results are stored in files located in the folder 'results'. 
+Python scripts allowing to extract and plot the simulation results are located in the folder 'sources/extract'.
 They can be used by simply typing :
 
 ```sh
 make extract
 ```
 
-If you want to plot 1D1V distribution function phase-space density maps at each dumped time iteration in logarithmic scale, just type :
+If you want to plot the 1D1V distribution function phase-space density maps in logarithmic scale, just type :
 
 ```sh
 make extract_logfe  
 ```
 
-The resulting plots will be located in the folder 'figures'.
-
-You can also plot separately during the simulation run :
+The resulting plots will be located in the folder 'figures'. You can also plot separately during the simulation run :
 - the energy plots by typing :
 ```sh
 make extract_energy  
