@@ -542,15 +542,15 @@ Electrostatic wakefield test case :
 
 Linear Landau damping test case :
 
-![Linear Landau damping test case : Total electrostatic field energy and plasma electrons kinetic energy time evolution of the linearly Landau damped electron plasma wave propagating in the collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and initialized according to \autoref{eq:EPW} with $A=10^{-3}$, $\underline{k}=0.29919930034$ and $\underline{\omega}_0=1.18$.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy.png)
+![Linear Landau damping test case : Total electrostatic field energy and plasma electrons kinetic energy time evolution of the linearly Landau damped electron plasma wave propagating in the collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and initialized according to \autoref{eq:EPW} with $A=10^{-3}$, $\underline{k}=0.29919930034$ and $\underline{\omega}_0=1.18$.\label{fig:linear-landau-damping}](test-cases/Linear-Landau-Damping/figures-Poisson/energy_log.png)
 
 Non Linear Landau damping test case :
 
-![Non Linear Landau damping test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=68)$ in the non-linear Landau damping of the electron plasma wave propagating in the collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and and initialized according to \autoref{eq:EPW} with $A=10^{-1}$, $\underline{k}=0.29919930034$ and $\underline{\omega_0}=1.18$.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/f_log/f_log_69.png)
+![Non Linear Landau damping test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=68)$ in the non-linear Landau damping of the electron plasma wave propagating in the collisionless plasma at Maxwell-Boltzmann equilibrium \autoref{eq:MaxwellBoltzmannEquilibrium} and and initialized according to \autoref{eq:EPW} with $A=10^{-1}$, $\underline{k}=0.29919930034$ and $\underline{\omega_0}=1.18$.\label{fig:non-linear-landau-damping}](test-cases/Non-Linear-Landau-Damping/figures-Poisson/fe_log/fe_log_69.png)
 
 Two stream instability test case :
 
-![Two stream instability test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=19.99)$ in the two-stream instability of two counter-propagating electron beams initialized according to \autoref{eq:perturbed_beams} with $A=10^{-1}$, $\underline{k}=0.06159985595$ ($\underline{x_{\mathrm{min}}}=-\underline{x_{\mathrm{max}}}=51$) and $\underline{v_d}=10$.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Poisson/f/f_81.png)
+![Two stream instability test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=19.99)$ in the two-stream instability of two counter-propagating electron beams initialized according to \autoref{eq:perturbed_beams} with $A=10^{-1}$, $\underline{k}=0.06159985595$ ($\underline{x_{\mathrm{min}}}=-\underline{x_{\mathrm{max}}}=51$) and $\underline{v_d}=10$.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/figures-Poisson/fe/fe_81.png)
 
 ![Two stream instability test case : Stable electron plasma waves angular frequency \autoref{eq:omega0} and the two-stream instability growth rate \autoref{eq:growth_rate} as a function of the spatial angular frequency mode $k$.\label{fig:poles}](test-cases/Two-Stream-Instability/figures-Theory/poles.png)
 
