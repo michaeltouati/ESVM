@@ -45,7 +45,7 @@ In order to fix a bug or submit a new feature in ESVM, follow these steps:
 1) Fork the repo and create your own branch from [ESVM 'main' branch](https://github.com/michaeltouati/ESVM).
 2) Add your code.
 
-Please, try to keep the code Fortran 90 standard compliant by : 
+Please, keep the code Fortran 90 standard compliant by : 
 - respecting 2 spaces for indentation rather than tabs
 - not using object oriented Fortran 2003 features
 - etc ...
