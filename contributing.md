@@ -99,4 +99,4 @@ make test
 7) Issue that pull request!
 
 # License
-When you submit code changes, your submissions are understood to be under the same [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html) that covers ESVM. 
+When you submit code changes, your submissions are understood to be under the same [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html) that covers [ESVM](https://github.com/michaeltouati/ESVM). 
