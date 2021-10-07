@@ -71,7 +71,7 @@ for the test to be fast and a text file entitled output containing the terminal 
 ```sh
 test_my-new-feature :
 	@echo '--------------------------------'
-	@echo '           New feature          '
+	@echo '           New features         '
 	@echo '--------------------------------'
 	@echo '                                '
 	@echo -n 'my-new-feature : '
