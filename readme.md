@@ -43,7 +43,7 @@ They can be used by simply typing :
 make extract
 ```
 
-If you want to plot the distribution function phase-space in logarithmic scale, just type :
+If you want to plot 1D1V distribution function phase-space density maps at each dumped time iteration in logarithmic scale, just type :
 
 ```sh
 make extract_logfe  
@@ -51,16 +51,20 @@ make extract_logfe
 
 The resulting plots will be located in the folder 'figures'.
 
-You can also plot separately DURING THE SIMULATION RUN the energy plots, the hydrodynamic moments space-time density maps, the hydrodynamic moments scalar plots or the 1D1V distribution function phase-space density maps by typing respectively:
+You can also plot separately during the simulation run :
+- the energy plots by typing :
 ```sh
 make extract_energy  
 ```
+- the hydrodynamic moments space-time density maps by typing :
 ```sh
 make extract_hydro2D  
 ```
+- the hydrodynamic moments scalar plots by typing : 
 ```sh
 make extract_hydro1D
 ```
+- or the 1D1V distribution function phase-space density maps by typing :
 ```sh
 make extract_fe 
 ```
