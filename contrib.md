@@ -39,7 +39,7 @@ We'll discuss about it.
 
 # Fix a bug or submit a new feature
 
-ESVM Uses the [Fork and pull model](https://docs.github.com/en/github/collaborating-with-pull-requests/getting-started/about-collaborative-development-models).
+ESVM uses the [Fork and pull model](https://docs.github.com/en/github/collaborating-with-pull-requests/getting-started/about-collaborative-development-models).
 In order to fix a bug or submit a new feature in ESVM, follow these steps:
 
 1. Fork the repo and create your own branch from [ESVM 'main' branch](https://github.com/michaeltouati/ESVM).
