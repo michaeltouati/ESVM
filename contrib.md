@@ -71,7 +71,7 @@ for the test to be fast and a text file entitled output containing the terminal 
 ```sh
 test_my-new-feature :
 	@echo '--------------------------------'
-	@echo '         Maxwell solver         '
+	@echo '           New feature          '
 	@echo '--------------------------------'
 	@echo '                                '
 	@echo -n 'my-new-feature : '
