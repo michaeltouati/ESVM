@@ -51,6 +51,20 @@ make extract_logfe
 
 The resulting plots will be located in the folder 'figures'.
 
+You can also plot separately DURING THE SIMULATION RUN the energy plots, the hydrodynamic moments space-time density maps, the hydrodynamic moments scalar plots or the 1D1V distribution function phase-space density maps by typing respectively:
+```sh
+make extract_energy  
+```
+```sh
+make extract_hydro2D  
+```
+```sh
+make extract_hydro1D
+```
+```sh
+make extract_fe 
+```
+
 # Cleaning the directory
 
 If you want to remove from the ESVM directory :
