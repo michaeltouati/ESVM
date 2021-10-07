@@ -44,9 +44,9 @@ If you want to propose a new feature for ESVM, follow these steps :
 # Fix a bug or submit a new feature
 
 ESVM Uses the Fork and pull model [Github Flow](https://guides.github.com/introduction/flow/index.html).
-Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
+In order to fix a bug or submit a new feature in ESVM, follow these steps:
 
-1. Fork the repo and create your branch from `master`.
+1. Fork the repo and create your branch from [ESVM 'main' branch](https://github.com/michaeltouati/ESVM).
 2. If you've added code that should be tested, add tests.
 
 Please, try to keep the code Fortran 90 standard compliant by : 
@@ -54,14 +54,10 @@ Please, try to keep the code Fortran 90 standard compliant by :
 - not using object oriented Fortran 2003 features
 - etc ...
 
-3. If you've added parameters in the input-deck, please add their description in the input-deck following the same style.
-4. Ensure the code compiles in debug mode 
-5. Ensure the code pass the provided tests and add a test if a new solver, a new boundary condition, etc... is added.
+3. If you've added parameters in the input-deck, please add their descriptions in the input-deck following the same style.
+4. Ensure the code compiles with all compiler debugging options 
+5. Ensure the code passes the provided tests and add a test if a new solver, a new boundary condition or... is added.
 6. Issue that pull request!
 
-# Any contributions you make will be under the GNU General Public License v3.0
-
-When you submit code changes, your submissions are understood to be under the same [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html) that covers ESVM. 
-
 # License
-By contributing, you agree that your contributions will be licensed under its GNU General Public License v3.0.
+When you submit code changes, your submissions are understood to be under the same [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html) that covers ESVM. 
