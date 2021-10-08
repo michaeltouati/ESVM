@@ -1,3 +1,5 @@
+## Written by Dr Michaël J TOUATI - Dec. 2015
+
 “Physics is like sex: sure, it may give some practical results, but that's not why we do it.”-Richard P. Feynman
 
 “We need science education to produce scientists, but we need it equally to create literacy in the public. Man has a fundamental urge to comprehend the world about him, and science gives today the only world picture which we can consider as valid. It gives an understanding of the inside of the atom and of the whole universe, or the peculiar properties of the chemical substances and of the manner in which genes duplicate in biology. An educated layman can, of course, not contribute to science, but can enjoy and participate in many scientific discoveries which as constantly made. Such participation was quite common in the 19th century, but has unhappily declined. Literacy in science will enrich a person's life.”-Hans Bethe
@@ -85,15 +87,46 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 	test_new-features_start test_my-new-feature test_end
 ```
 
-5) Make sure your code passes all the tests by typing on your terminal:
+5) Please, mention your contribution following the same style at the beginning of the comments of :
+- the modified source file
+```
+!! Initial commit written by Dr Michaël J TOUATI - Dec. 2015
+!! my-new-feature or my-bug-fix commit by my-name - my-add-date
+```
+- makefile if 4)
+```sh
+## Initial commit written by Dr Michaël J TOUATI - Dec. 2015
+## my-new-feature commit by my-name - my-add-date
+```
+- input deck if 3)
+```sh
+##   Initial commit written by Dr Michaël J TOUATI - Dec. 2015       ##
+##   my-new-feature commit by my-name - my-add-date    ##
+```
+- at the beginning of the comments of an added source file
+```
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!                                                                   !!
+!!             ElectroStatic Vlasov-Maxwell (ESVM) code              !!
+!!                                                                   !!
+!! Initial commit written by commit by my-name - my-add-date         !!
+!!                                                                   !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+```
+- or Python script
+```
+# Initial commit written by Michael J Touati
+# my-new-feature or my-bug-fix commit by my-name - my-add-date
+```
+6) Make sure your code passes all the tests by typing on your terminal:
 ```sh
 make test
 ```
-6) Ensure the code compiles with the following compiler debugging options:
+7) Ensure the code compiles with the following compiler debugging options:
 - `-g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C` for the INTEL compiler ifort
 - `-fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow` for the GNU compiler gfortran
 
-7) Issue that pull request!
+8) Issue that pull request!
 
 # License
 When you submit code changes, your submissions are understood to be under the same [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) that covers [ESVM](https://github.com/michaeltouati/ESVM). 
