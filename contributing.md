@@ -4,68 +4,67 @@
 
 # Contributing to ESVM
 
-Thank you very much for your interest in contributing to [ESVM](https://github.com/michaeltouati/ESVM). Being fully in agreement with Richard P. Feynmann while firmly believing in the recommendations of Hans Bethe, it seemed to me natural to develop [ESVM](https://github.com/michaeltouati/ESVM) with Github in order to try to understand the complexity of plasmas, numerical analysis and High Parallel Computing (HPC) and make accessible this small piece of Modern Physics knowledge to the largest public as possible at the same time.
+Thank you very much for your interest in contributing to [ESVM](https://github.com/michaeltouati/ESVM). Sharing Richard P. Feynmann enthusiasm to study Mother Nature Physics laws (and to play drum too 😄) while also deeply convinced by this Hans Bethe statement, it seemed to me natural to develop [ESVM](https://github.com/michaeltouati/ESVM) with Github in order to try to understand the complexity of plasmas, numerical analysis and High Parallel Computing (HPC) and to make accessible this small piece of Modern theoretical and computational Physics knowledge to the largest Public as possible at the same time.
+In the following can be found how to :
+- report a bug you faced when compiling or using [ESVM](https://github.com/michaeltouati/ESVM)
+- propose new features that would make [ESVM](https://github.com/michaeltouati/ESVM) better
+- fix a bug or submit a new feature
 
 # Report a bug
 
-For problems related with plotting, please make sure first LaTeX, dvipng and ghostscript are each working and on your PATH for the Matplotlib Python package to be able to render tex fonts. If the bug persists or if it is related to another problem, follow these steps :
-1) Go to 'Issues' on the ESVM main repository branch [issues](https://github.com/michaeltouati/ESVM/issues)
+For problems related with plotting, please make sure first LaTeX, dvipng and ghostscript softwares are each working and on your PATH for the Matplotlib Python package to be able to render tex fonts. If the bug persists or if it is related to another problem, follow these steps :
+1) Go to ['Issues'](https://github.com/michaeltouati/ESVM/issues) on the [ESVM master branch](https://github.com/michaeltouati/ESVM) 
 2) Click on 'New issue'
-4) Describe the bug the more clear and concise as possible in the title starting with "Bug :"
-5) Describe with with great details the bug providing the more pieces of information as possible (input-deck, terminal output and/or screenshot) and more importantly, specify your environment :
-
-OS: [e.g., Ubuntu 20.04]
-
-Fortran compiler [e.g., gfortran 11.2.0]
-
-Python version [e.g., Python 3.7.11]
-
-Matplotlib Python package version [e.g., Matplotlib 3.4.3]
-
-Numpy Python package version [e.g., Numpy 1.21.2]
+4) Describe the bug the more "clear and concise" as possible in the title starting with "Bug :"
+5) Describe with details the bug providing the more pieces of information as possible such as input-deck, terminal output and/or screenshot, etc... but more importantly, your environment :
+- OS: [e.g., Ubuntu 20.04]
+- Fortran compiler [e.g., gfortran 11.2.0]
+- Python version [e.g., Python 3.7.11]
+- Matplotlib Python package version [e.g., Matplotlib 3.4.3]
+- Numpy Python package version [e.g., Numpy 1.21.2]
+6) Click on 'Submit new issue'
 
 # Propose a new feature
 
-If you want to propose a new feature for ESVM, follow these steps :
-1) Go to 'Issues' on the ESVM main repository branch [issues](https://github.com/michaeltouati/ESVM/issues)
+If you want to propose a new feature in [ESVM](https://github.com/michaeltouati/ESVM), follow these steps :
+1) Go to ['Issues'](https://github.com/michaeltouati/ESVM/issues) on the [ESVM master branch](https://github.com/michaeltouati/ESVM)
 2) Click on 'New issue'
-4) Describe the new feature request the more clear and concise as possible in the title starting with "Feature request :"
-5) Describe with the more details as possible the requested feature and
+4) Describe the new feature request the more "clear and concise" as possible in the title starting with "Feature request :"
+5) Describe with details the requested feature and
 6) Click on 'Submit new issue'
 
 It will be a pleasure to discuss about it.
 
 # Fix a bug or submit a new feature
 
-ESVM uses the [Fork and pull model](https://docs.github.com/en/github/collaborating-with-pull-requests/getting-started/about-collaborative-development-models).
-In order to fix a bug or submit a new feature in ESVM, follow these steps:
+[ESVM](https://github.com/michaeltouati/ESVM) uses the [Fork and pull model](https://docs.github.com/en/github/collaborating-with-pull-requests/getting-started/about-collaborative-development-models). In order to fix a bug or to submit a new feature that you've added in [ESVM](https://github.com/michaeltouati/ESVM), follow these steps:
 
 1) Fork the repo and create your own branch from [ESVM 'main' branch](https://github.com/michaeltouati/ESVM).
-2) Add your code.
-
-Please, keep the code Fortran 90 standard compliant by : 
+2) Add your code. Please, keep the code Fortran 90 standard compliant by : 
 - respecting 2 spaces for indentation rather than tabs
 - not using object oriented Fortran 2003 features
+- not forgetting to deallocate arrays
 - etc ...
-
-3) If you've added new parameters in the input-deck and updated the source file input.f90, please add their descriptions 
+3) If you've added a new feature that needs new simulation parameters in the [input-deck](https://github.com/michaeltouati/ESVM/blob/main/input-deck) and updated correspondingly the source file [input.f90](https://github.com/michaeltouati/ESVM/blob/main/sources/input.f90), please add their descriptions in the [input-deck](https://github.com/michaeltouati/ESVM/blob/main/input-deck) following the same style
 ```sh
 ##                                                                   ##
 ## T  = electron temperature in eV                                   ##
 ##                                                                   ##
-```
-in the input-deck following the same style:
-```sh
+#######################################################################
 #
 #T  1000.
 #
 ```
-4) If you've added a new feature 'my-new-feature', create a directory my-new-feature/ in test-cases/Tests/ by adding a typical input deck inside that uses your new feature with:
+4) If you've added a new feature, let's call it 'my-new-feature', create a directory my-new-feature/ in test-cases/Tests/ and add a typical input deck inside that uses your new feature with:
 - `#N_th 1` OpenMP threads, 
 - discretized phase-space parameters `#x_min 0.`, `#x_max 5.`, `#d_x 0.25`, `#vx_min -5.`, `#vx_max 5.`, `#d_vx 0.1`
 - simulation time parameters `#cfl 9.e-1`, `#L_t 5.`, `#dt_diag 0.25` and
 - test case parameters `#perturb  0` and `#vd 1.`
-for the test to be fast and a text file entitled output containing the terminal output generated by the the corresponding ESVM simulation run using your new feature. Finally, add a section in the makefile such as
+(for the test to be fast) and a text file entitled output containing the terminal output generated by the the corresponding [input.f90](https://github.com/michaeltouati/ESVM/blob/main/sources/input.f90) simulation run using your new feature. For this, you can type on the terminal :
+```sh
+./esvm > output
+```
+to generate such a file. Finally, add a section in the makefile such as
 ```sh
 test_my-new-feature :
 	@echo '--------------------------------'
@@ -86,11 +85,11 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 	test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2 test_my-new-feature test_end
 ```
 
-5) Make sure your code passes the tests by typing on your terminal:
+5) Make sure your code passes all the tests by typing on your terminal:
 ```sh
 make test
 ```
-6) Ensure the code compiles with all compiler debugging options:
+6) Ensure the code compiles with the following compiler debugging options:
 - `-g -traceback -fopenmp -r8 -std90 -fpe0 -debug all -debug-parameters all -C` for the INTEL compiler ifort
 - `-fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow` for the GNU compiler gfortran
 
