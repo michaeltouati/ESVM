@@ -3,7 +3,7 @@ title: 'ESVM : An Open-source Electrostatic Vlasov-Maxwell Code'
 tags:
   - Fortran 95
   - OpenMP
-  - Python
+  - Python 3
   - Electrostatic 
   - Collisionless
   - Plasma
