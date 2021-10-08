@@ -2,7 +2,7 @@
 !!                                                                   !!
 !!             ElectroStatic Vlasov-Maxwell (ESVM) code              !!
 !!                                                                   !!
-!!                  Written by Dr Michaël J TOUATI                   !!
+!! Initial commit written by Dr Michaël J TOUATI - Dec. 2015         !!
 !!                                                                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !

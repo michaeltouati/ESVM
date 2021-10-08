@@ -2,7 +2,7 @@
 !!                                                                   !!
 !!             ElectroStatic Vlasov-Maxwell (ESVM) code              !!
 !!                                                                   !!
-!!                  Written by Dr Michaël J TOUATI                   !!
+!! Initial commit written by Dr Michaël J TOUATI - Dec. 2015         !!
 !!                                                                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -152,54 +152,54 @@ subroutine read_init_parameters
   end if
 
   if ((b < 1.) .or. (b > 2.)) then
-    print*,'The Van Leer schemes parameter b must bt 0 < b < 2!'
+    print*,'the Van Leer schemes parameter b must be 1 < b < 2!'
     stop
   end if
 
-  write (*,*)'-----------------------------------------'
-  write (*,*)'Recapitulation of simulation parameters :'
-  write (*,*)'-----------------------------------------'
-  write (*,*)'* Number of OpenMP threads :'
-  write (*,'(A,1I4)')'N_th    = ',N_th
-  write (*,*)'-----------------------------------------'
-  write (*,*)'* Plasma properties (immobile ions)'
-  write (*,'(A,1E22.14)')'T       = ',T
-  write (*,'(A,1E22.14)')'Z       = ',Z
-  write (*,'(A,1E22.14)')'ni      = ',ni
-  write (*,*)'-----------------------------------------'
-  write (*,*)'* 1D-1V phase-space : '
-  write (*,'(A,1E22.14)')'x_min   = ',x_min
-  write (*,'(A,1E22.14)')'x_max   = ',x_max
-  write (*,'(A,1E22.14)')'d_x     = ',d_x
-  write (*,'(A,1E22.14)')'vx_min  = ',vx_min
-  write (*,'(A,1E22.14)')'vx_max  = ',vx_max
-  write (*,'(A,1E22.14)')'d_vx    = ',d_vx
-  write (*,*)'-----------------------------------------'
-  write (*,*)'* Simulation properties : '
-  write (*,'(A,1E22.14)')'cfl     = ',cfl
-  write (*,'(A,1E22.14)')'L_t     = ',L_t
-  write (*,'(A,1E22.14)')'dt_diag = ',dt_diag
-  write (*,'(A,1I3)')'maxwell = ',maxwell
-  write (*,'(A,1I3)')'b_cond  = ',b_cond
-  write (*,'(A,1I3)')'scheme  = ',scheme
-  write (*,'(A,1E22.14)')'b       = ',b
-  write (*,*)'-----------------------------------------'
-  write (*,*)'* Perturbation properties : '
-  write (*,'(A,1I3)')'perturb = ',perturb
+  write(*,*)'-----------------------------------------'
+  write(*,*)'Recapitulation of simulation parameters :'
+  write(*,*)'-----------------------------------------'
+  write(*,*)'* Number of OpenMP threads :'
+  write(*,'(A,1I4)')' N_th    = ',N_th
+  write(*,*)'-----------------------------------------'
+  write(*,*)'* Plasma properties (immobile ions)'
+  write(*,'(A,1E22.14)')' T       = ',T
+  write(*,'(A,1E22.14)')' Z       = ',Z
+  write(*,'(A,1E22.14)')' ni      = ',ni
+  write(*,*)'-----------------------------------------'
+  write(*,*)'* 1D-1V phase-space : '
+  write(*,'(A,1E22.14)')' x_min   = ',x_min
+  write(*,'(A,1E22.14)')' x_max   = ',x_max
+  write(*,'(A,1E22.14)')' d_x     = ',d_x
+  write(*,'(A,1E22.14)')' vx_min  = ',vx_min
+  write(*,'(A,1E22.14)')' vx_max  = ',vx_max
+  write(*,'(A,1E22.14)')' d_vx    = ',d_vx
+  write(*,*)'-----------------------------------------'
+  write(*,*)'* Simulation properties : '
+  write(*,'(A,1E22.14)')' cfl     = ',cfl
+  write(*,'(A,1E22.14)')' L_t     = ',L_t
+  write(*,'(A,1E22.14)')' dt_diag = ',dt_diag
+  write(*,'(A,1I3)')' maxwell = ',maxwell
+  write(*,'(A,1I3)')' b_cond  = ',b_cond
+  write(*,'(A,1I3)')' scheme  = ',scheme
+  write(*,'(A,1E22.14)')' b       = ',b
+  write(*,*)'-----------------------------------------'
+  write(*,*)'* Perturbation properties : '
+  write(*,'(A,1I3)')' perturb = ',perturb
   if (perturb .ne. 0) then
-    write (*,'(A,1E22.14)')'A       = ',A
-    write (*,'(A,1E22.14)')'k       = ',k
-    write (*,'(A,1E22.14)')'omega_0 = ',omega_0
-    write (*,'(A,1E22.14)')'vd      = ',vd
+    write(*,'(A,1E22.14)')' A       = ',A
+    write(*,'(A,1E22.14)')' k       = ',k
+    write(*,'(A,1E22.14)')' omega_0 = ',omega_0
+    write(*,'(A,1E22.14)')' vd      = ',vd
   end if
-  write (*,*)'-----------------------------------------'
-  write (*,*)'* Deduced parameters : '
-  write (*,'(A,1I7)')'N_x     = ',N_x
-  write (*,'(A,1I7)')'N_vx    = ',N_vx
-  write (*,'(A,1E22.14)')'n0(/cm3)= ',n0
-  write (*,'(A,1E22.14)')'Te(K)   = ',Te
-  write (*,*)'-----------------------------------------' 
-  write (*,*) ' '
+  write(*,*)'-----------------------------------------'
+  write(*,*)'* Deduced parameters : '
+  write(*,'(A,1I7)')' N_x     = ',N_x
+  write(*,'(A,1I7)')' N_vx    = ',N_vx
+  write(*,'(A,1E22.14)')' n0(/cm3)= ',n0
+  write(*,'(A,1E22.14)')' Te(K)   = ',Te
+  write(*,*)'-----------------------------------------' 
+  write(*,*) ' '
 end subroutine read_init_parameters
 
 subroutine get_str(str)

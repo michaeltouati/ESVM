@@ -2,7 +2,7 @@
 !!                                                                   !!
 !!             ElectroStatic Vlasov-Maxwell (ESVM) code              !!
 !!                                                                   !!
-!!                  Written by Dr Michaël J TOUATI                   !!
+!! Initial commit written by Dr Michaël J TOUATI - Dec. 2015         !!
 !!                                                                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -22,24 +22,24 @@ module constants
   !                                         Physical_constants constants
   !=======================================================================================
   
-  real(PR),parameter,public :: mu   = 1.6605E-24_PR           ! Atomic mass unit [g]
-  real(PR),parameter,public :: mp   = 1.6726E-24_PR           ! Proton mass unit [g]
-  real(PR),parameter,public :: me   = 9.1094E-28_PR           ! Electron mass [g] 
-  real(PR),parameter,public :: e    = 4.8032E-10_PR           ! Elementary charge [statcoulomb]
-  real(PR),parameter,public :: c    = 2.9979E10_PR            ! Speed of light in vacuum [cm/s]  
-  real(PR),parameter,public :: kb   = 1.3807E-16_PR           ! Boltzmann constant [erg/K]
-  real(PR),parameter,public :: h    = 6.6261E-27_PR           ! Placnk constant [erg.s]
-  real(PR),parameter,public :: hbar = h / (2*pi)
+  real(PR),parameter,public :: mu    = 1.6605E-24_PR           ! Atomic mass unit [g]
+  real(PR),parameter,public :: mp    = 1.6726E-24_PR           ! Proton mass unit [g]
+  real(PR),parameter,public :: me    = 9.1094E-28_PR           ! Electron mass [g] 
+  real(PR),parameter,public :: e     = 4.8032E-10_PR           ! Elementary charge [statcoulomb]
+  real(PR),parameter,public :: c     = 2.9979E10_PR            ! Speed of light in vacuum [cm/s]  
+  real(PR),parameter,public :: kb    = 1.3807E-16_PR           ! Boltzmann constant [erg/K]
+  real(PR),parameter,public :: h     = 6.6261E-27_PR           ! Placnk constant [erg.s]
+  real(PR),parameter,public :: hbar  = h / (2*pi)
   real(PR),parameter,public :: alpha = 1._PR / 137.035999_PR  ! Fine Structure constant []
 
   !=======================================================================================
   !                                        Conversion factors
   !=======================================================================================
 
-  real(PR),parameter,public   :: eV = 1.6022E-19_PR / 1.3807E-23_PR       ! 1 eV = 11604 K
-  real(PR), parameter, public :: fs = 1.E-15_PR
+  real(PR),parameter,public   :: eV      = 1.6022E-19_PR / 1.3807E-23_PR       ! 1 eV = 11604 K
+  real(PR), parameter, public :: fs      = 1.E-15_PR
   real(PR), parameter, public :: microns = 1.E-4_PR
-  real(PR), parameter, public :: Joules = 1.E7_PR                         ! 1 J in erg
+  real(PR), parameter, public :: Joules  = 1.E7_PR                         ! 1 J in erg
 
   !=======================================================================================
   !                                      Advection schemes

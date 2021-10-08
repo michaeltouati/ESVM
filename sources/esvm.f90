@@ -2,7 +2,7 @@
 !!                                                                   !!
 !!             ElectroStatic Vlasov-Maxwell (ESVM) code              !!
 !!                                                                   !!
-!!                  Written by Dr Michaël J TOUATI                   !!
+!! Initial commit written by Dr Michaël J TOUATI - Dec. 2015         !!
 !!                                                                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !
@@ -78,13 +78,7 @@ do while (time.lt.L_t)
                 & f_n(i-2,l), f_n(i-1,l), f_n(i,l), f_n(i+1,l), f_n(i+2,l), &
                 & flux_im1, flux_ip1)
       f_np1(i,l) = f_n(i,l) - (d_t * (flux_ip1 - flux_im1) / d_x)  
-    end do
-  end do
-  !$omp END PARALLEL DO
-  !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(l,i,flux_im1,flux_ip1) COLLAPSE(2)
-  do l=1,N_vx,1
-    do i = 1,N_x,1
+      !
       call fluxes(scheme,-E_x_n(i), f_max, d_t, d_vx,&
                 & f_n(i,l-2), f_n(i,l-1), f_n(i,l), f_n(i,l+1), f_n(i,l+2), &
                 & flux_im1, flux_ip1)

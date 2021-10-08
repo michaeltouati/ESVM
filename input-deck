@@ -16,7 +16,7 @@
 ## - Debye screening length                                          ##
 ##   $\lambda_\mathrm{Debye}=v_{T_{e_0}}/omega_p$ for space          ##
 ##                                                                   ##
-##   Initial commit written by Dr Michaël J TOUATI - Dec. 2015       ##
+##   Written by Dr Michaël J TOUATI                                  ##
 ##                                                                   ##
 #######################################################################
 #
@@ -29,13 +29,12 @@
 ##                                                                   ##
 #######################################################################
 #
-#N_th 1 
+#N_th 0 
 #
 #######################################################################
 ##                                                                   ##
 ##                 Plasma properties - immobile ions                 ##
-##               ( Do not affect simulation result!  )               ##
-##                                                                   ##
+##               ( Do not affect simulation results! )               ##
 ## T  = electron temperature in eV                                   ##
 ##                                                                   ##
 ## Z  = atomic number of fully ionized immobile ions                 ##
@@ -48,9 +47,7 @@
 #
 #Z  1
 #
-#ni 1.e21
-#
-#v0    0.
+#ni 1.e19
 #
 #######################################################################
 ##                                                                   ##
@@ -70,15 +67,15 @@
 ##                                                                   ##
 #######################################################################
 #
-#x_min    0. 
+#x_min   -51. 
 #
-#x_max    5.  
+#x_max    51.  
 #
-#d_x     0.25
+#d_x     0.5
 #
-#vx_min   -5.
+#vx_min   -40.
 #
-#vx_max    5.
+#vx_max    40.
 #
 #d_vx    0.1
 #
@@ -96,13 +93,13 @@
 #
 #cfl      9.e-1
 #
-#L_t     5.
+#L_t     20.
 #
 #dt_diag 0.25  
 #
 #######################################################################
 ##                                                                   ##
-##        BOUNDARY CONDITIONS AND NUMERICAL ADVECTION SCHEMES        ##
+##             Boundary conditions and numerical schemes             ##
 ##                                                                   ##
 ## maxwell = 1 for Maxwell-Ampere solver                             ##
 ##                 (Poisson is computed at the 1st iteration only)   ##
@@ -131,7 +128,7 @@
 #
 #######################################################################
 ##                                                                   ##
-##       Test cases for code validation and teaching pourpose        ##
+##                     Plasma Physics academic cases                 ##
 ##    see esvm.pdf file for the meaning of perturbation parameters   ##
 ##                                                                   ##
 ## perturb = 0 for no perturbation,                                  ##
@@ -149,13 +146,13 @@
 ##                                                                   ##
 #######################################################################
 #
-#perturb  0  
+#perturb  3  
 #
 #A        1.e-1
 #
-#k        0.07853981633
+#k        0.06159985595
 #
-#omega_0  0.07853981633
+#omega_0  0.06159985595
 #
-#vd       1.
+#vd       10.
 #

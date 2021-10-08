@@ -2,7 +2,7 @@
 !!                                                                   !!
 !!             ElectroStatic Vlasov-Maxwell (ESVM) code              !!
 !!                                                                   !!
-!!                  Written by Dr Michaël J TOUATI                   !!
+!! Initial commit written by Dr Michaël J TOUATI - Dec. 2015         !!
 !!                                                                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -123,42 +123,31 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
     else
       write(2,'(4E23.15)') time, x(i), n_e(i)
     end if
-  end do
-  !
-  do i = 1,N_x,1
+   !
     if (abs(E_x_n(i)).lt.zero) then
       write(3,'(4E23.15)') time, x(i), zero
     else
       write(3,'(4E23.15)') time, x(i), E_x_n(i)
     end if
-  end do
-  !
-  do i = 1,N_x,1
+   !
     if (abs(j_e(i)).lt.zero) then
       write(4,'(4E23.15)') time, x(i), zero
     else
       write(4,'(4E23.15)') time, x(i), j_e(i)
     end if
-  end do
-  !
-  do i = 1,N_x,1
+   !
     if (abs(v_e(i)).lt.zero) then
       write(5,'(4E23.15)') time, x(i), zero
     else
       write(5,'(4E23.15)') time, x(i), v_e(i)
     end if
-  end do
-  !
-  do i = 1,N_x,1
+   !
     if (abs(vT_e(i)).lt.zero) then
       write(7,'(4E23.15)') time, x(i), zero
     else
       write(7,'(4E23.15)') time, x(i), vT_e(i)
     end if
-  end do
-  !
-  do i = 1,N_x,1
-    !
+   !
     if (abs(phi_n(i)).lt.zero) then
       write(11,'(4E23.15)') time, x(i), zero
     else
