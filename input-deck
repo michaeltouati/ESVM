@@ -1,21 +1,20 @@
-
 #######################################################################
 ##                                                                   ##
-##          1D-1V ElectroStatic Vlasov-Maxwell (ESVM) code           ##
+##             ElectroStatic Vlasov-Maxwell (ESVM) code              ##
 ##                                                                   ##
 ##                            INPUT DECK                             ##  
 ##                                                                   ##
 ##   Code units :                                                    ##
 ## - elementary charge $e$ for electrical charges,                   ##
 ## - electron mass $m_e$ for masses,                                 ##
-## - Initial average plasma electron density $n_0 = Z n_i$ with $Z$  ##
-##   the plasma ion atomic number and $n_i$ their fixed density,     ##
+## - initial average plasma electron density $n_0=Zn_i$ with $Z$ and ##
+##   $n_i$ the plasma ion atomic number and density for densities,   ##
 ## - inverse of Langmuir plasma electron angular frequency           ##
 ##   $1/omega_p = \sqrt{me / 4 pi n_0 e^2}$ for times,               ##
-## - Initial plasma electron thermal velocity (standard deviation)   ##
+## - initial plasma electron thermal velocity (standard deviation)   ##
 ##   $v_{T_{e_0}}$ for velocities and                                ##
 ## - Debye screening length                                          ##
-##   $\lambda_\mathrm{Debye}=v_{T_{e_0}}/omega_p $ for space         ##
+##   $\lambda_\mathrm{Debye}=v_{T_{e_0}}/omega_p$ for space          ##
 ##                                                                   ##
 ##   Written by Dr Michaël J TOUATI                                  ##
 ##                                                                   ##
@@ -52,7 +51,7 @@
 #
 #######################################################################
 ##                                                                   ##
-##          1D - 1V Phase-space simulation box properties            ##
+##        Plasma electron phase-space simulation box properties      ##
 ##                                                                   ##
 ## x_min  = lower spatial simulation box boundary                    ##
 ##                                                                   ##
@@ -129,7 +128,7 @@
 #
 #######################################################################
 ##                                                                   ##
-##                             Test cases                            ##
+##                     Plasma Physics academic cases                 ##
 ##    see esvm.pdf file for the meaning of perturbation parameters   ##
 ##                                                                   ##
 ## perturb = 0 for no perturbation,                                  ##
