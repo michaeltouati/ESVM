@@ -28,6 +28,10 @@ and type :
 ```sh
 ./esvm
 ```
+or
+```sh
+make run
+```
 to execute the simulation.
 
 # Plotting the simulation results
