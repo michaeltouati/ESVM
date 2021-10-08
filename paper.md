@@ -1,7 +1,7 @@
 ---
 title: 'ESVM : An Open-source Electrostatic Vlasov-Maxwell Code'
 tags:
-  - Fortran 90
+  - Fortran 95
   - OpenMP
   - Python
   - Electrostatic 
@@ -41,7 +41,7 @@ bibliography: paper.bib
 
 # Summary
 
-ESVM (ElectroStatic Vlasov-Maxwell) is a single species 1D-1V Vlasov-Maxwell Fortran 90 code parallelized with OpenMP that allows for the study of collisionless plasmas. Many finite volume numerical advection schemes [@Godunov:1959] are implemented in the code in order to discretize the Vlasov equation, namely :
+ESVM (ElectroStatic Vlasov-Maxwell) is a single species 1D-1V Vlasov-Maxwell Fortran 95 code parallelized with OpenMP that allows for the study of collisionless plasmas. Many finite volume numerical advection schemes [@Godunov:1959] are implemented in the code in order to discretize the Vlasov equation, namely :
 - the donor-cell scheme i.e. the downwind / upwind scheme [@Courant:1952] depending on the advection direction in each phase-space cell, 
 - the Lax-Wendroff scheme [@LaxWendroff:1960], 
 - the Fromm scheme [@Fromm:1968],
