@@ -310,7 +310,7 @@ test_end :
 	@rm -rf results/
 	@mv input-deck-old input-deck
 
-test : test_start test_ampere test_poisson test_openMP test_periodic test_absorbing \
-	   test_donor_cell test_Lax_Wendroff test_Beam_Warming test_Fromm \
-	   test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2 test_end
+test :  test_start test_ampere test_poisson test_openMP test_periodic test_absorbing \
+	test_donor_cell test_Lax_Wendroff test_Beam_Warming test_Fromm \
+	test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2 test_end
 
