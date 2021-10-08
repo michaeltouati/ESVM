@@ -1,12 +1,10 @@
+“Physics is like sex: sure, it may give some practical results, but that's not why we do it.”-Richard P. Feynman
+
+“We need science education to produce scientists, but we need it equally to create literacy in the public. Man has a fundamental urge to comprehend the world about him, and science gives today the only world picture which we can consider as valid. It gives an understanding of the inside of the atom and of the whole universe, or the peculiar properties of the chemical substances and of the manner in which genes duplicate in biology. An educated layman can, of course, not contribute to science, but can enjoy and participate in many scientific discoveries which as constantly made. Such participation was quite common in the 19th century, but has unhappily declined. Literacy in science will enrich a person's life.”-Hans Bethe
+
 # Contributing to ESVM
 
-First of all, thank you very much for your interest in contributing to [ESVM](https://github.com/michaeltouati/ESVM)! 
-
-Hans Bethe once said : “We need science education to produce scientists, but we need it equally to create literacy in the public. Man has a fundamental urge to comprehend the world about him, and science gives today the only world picture which we can consider as valid. It gives an understanding of the inside of the atom and of the whole universe, or the peculiar properties of the chemical substances and of the manner in which genes duplicate in biology. An educated layman can, of course, not contribute to science, but can enjoy and participate in many scientific discoveries which as constantly made. Such participation was quite common in the 19th century, but has unhappily declined. Literacy in science will enrich a person's life.”
-
-But Richard P. Feynman also added : “Physics is like sex: sure, it may give some practical results, but that's not why we do it.”
-
-Being fully in agreement with Richard P. Feynmann while firmly believing in the recommendations of Hans Bethe, it seemed to me natural to develop [ESVM](https://github.com/michaeltouati/ESVM) with Github in order to try to understand the complexity of plasmas, numerical analysis and High Parallel Computing (HPC) and make accessible this small piece of Modern Physics knowledge to the largest public as possible at the same time.
+Thank you very much for your interest in contributing to [ESVM](https://github.com/michaeltouati/ESVM). Being fully in agreement with Richard P. Feynmann while firmly believing in the recommendations of Hans Bethe, it seemed to me natural to develop [ESVM](https://github.com/michaeltouati/ESVM) with Github in order to try to understand the complexity of plasmas, numerical analysis and High Parallel Computing (HPC) and make accessible this small piece of Modern Physics knowledge to the largest public as possible at the same time.
 
 # Report a bug
 
