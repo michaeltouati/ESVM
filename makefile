@@ -26,13 +26,13 @@
 ################
 ################
 
-F90 = gfortran
+# F90 = gfortran
 
 ##########
 # openMP #
 ##########
 
-OPTS = -fopenmp -fdefault-real-8 -O3
+# OPTS = -fopenmp -fdefault-real-8 -O3
 
 #########
 # debug #
