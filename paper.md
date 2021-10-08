@@ -530,17 +530,19 @@ accounting for the initial conditions at $t=0$. Here, $J_\mu$ and $Y_\mu$ are th
 
 It is planned in a near future to :
 - provide another Plasma Physics academic simulation about one BGK (from the name of its finder I. B. Bernstein, J. M. Greene and M. D. Kruskal) non linear solution [@BernsteinGreenKruskal:1957]
-- provide a second Plasma Physics academic simulation about Plasma wave echo [@Gould:1967]
+- provide another Plasma Physics academic simulation about Plasma wave echo [@Gould:1967]
 - implement non-equally spaced phase-space cells
 - implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes [@Liu:1994]
 - compute the plasma ion Vlasov equation to allow for the ions to be mobile 
-- extend the code to relativistic electromagnetic 2D-2V and 1D-3V phase-space electromagnetic plasma simulations : ESVM $\Rightarrow$ EMVM (open source ElectroMagnetic Vlasov-Maxwell code)
-- store the simulation results in hdf5 files instead of text files
 - implement its MPI parallelization
 - implement its vectorization
+- store the simulation results in hdf5 files instead of text files
+- extend the code to the relativistic regime : ESVM $\Rightarrow$ RESVM for open source Relativistic ElectroStatic Vlasov-Maxwell code
+- implement a BGK (from the name of its finder P. L. Bhatnagar, E. P. Gross  and M. Krook) collision operator [@BhatnagarGrossKrook:1954]
+- extend the code to 1D-2V and 1D-3V phase-space electrostatic plasma simulations
+- implement the Landau [@Landau:1936] and Belyaev-Budker [@BelaievBudker:1957] relativistic collision operators using the Rosenbluth potentials [@Rosenbluth:1957] and their relativistic Braams-Karney extension [@BraamsKarney:1987] : (R)ESVM $\Rightarrow$ (R)EMVFPM for open source (Relativistic) ElectroMagnetic Vlasov-Fokker-Planck-Maxwell code
+- extend the code to electromagnetic 2D-1V, 2D-2V and 2D-3V phase-space electrostatic electromagnetic plasma simulations : (R)ESVM $\Rightarrow$ (R)EMVM2 and (R)EMVFPM2 for open source (Relativistic) ElectroMagnetic Vlasov-Maxwell and Vlasov-Fokker-Planck-Maxwell in 2D codes
 - implement the Perfectly Matched Layer (PML) technique [@Berenger:1994] to absorb the electromagnetic fields at the spatial simulation box boundaries
-- implement a relativistic BGK (from the name of its finder P. L. Bhatnagar, E. P. Gross  and M. Krook) collision operator [@BhatnagarGrossKrook:1954]
-- implement the Belyaev-Budker relativistic collision operator [@BelaievBudker:1957] using the Braams-Karney relativistic extension of Rosenbluth potentials [@BraamsKarney:1987] : EMVM $\Rightarrow$ EMVFPBBM (open source ElectroMagnetic Vlasov-Fokker-Planck-Belyaev-Budker-Maxwell code)
 - deploy the code to GPU architectures.
 
 # Figures
