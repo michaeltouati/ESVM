@@ -67,22 +67,22 @@ It will be a pleasure to discuss about it.
 to generate such a file. Finally, add a section in the makefile such as
 ```sh
 test_my-new-feature :
-	@echo '--------------------------------'
-	@echo '           New features         '
-	@echo '--------------------------------'
-	@echo '                                '
-	@echo -n 'my-new-feature : '
+	@echo -n 'my-new-feature         : '
 	@cp test-cases/Tests/my-new-feature/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/my-new-feature/output; \
-	TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/MUSCL2/output | head -n -3 > file2
+	@diff file1 file2; \
+	TST=$$?; \
+	rm file1; rm file2; \
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 ```
 that should be written if a new solver, a new boundary condition or... is added. Finally, add your test 
 ```sh
 test :  test_start test_ampere test_poisson test_openMP test_periodic test_absorbing \
 	test_donor_cell test_Lax_Wendroff test_Beam_Warming test_Fromm \
-	test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2 test_my-new-feature test_end
+	test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2 \
+	test_new-features_start test_my-new-feature test_end
 ```
 
 5) Make sure your code passes all the tests by typing on your terminal:
