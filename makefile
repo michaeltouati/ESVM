@@ -32,13 +32,13 @@ F90 = gfortran
 # openMP #
 ##########
 
-# OPTS = -fopenmp -fdefault-real-8 -O3
+OPTS = -fopenmp -fdefault-real-8 -O3
 
 #########
 # debug #
 #########
 
-OPTS = -fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow
+# OPTS = -fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow
 
 #####################################
 #####################################
@@ -101,7 +101,7 @@ check-input-deck : $(OBJTS_CHK)
 	@rm *.o
 
 check : check-input-deck
-	./check-input-deck
+	@./check-input-deck
 	@rm check-input-deck
 
 ###############
@@ -111,7 +111,7 @@ check : check-input-deck
 ###############
 
 run :
-	./esvm
+	@./esvm
 
 ################
 ################
@@ -120,28 +120,23 @@ run :
 ################
 
 clean :
-	rm -rf *.o *.mod esvm
+	@rm -rf sources/extract/__pycache__ 
+	@rm -f *.o *.mod esvm
 
 clean_figures :
-	rm -rf figures
+	@rm -rf figures
 
 clean_results :
-	rm -rf results
+	@rm -rf results
 
 clean_all :
-	rm -rf *.o *.mod esvm results figures
+	@rm -rf *.o *.mod esvm results figures
 
 ################
 ################
 ##  PLOTTING  ##
 ################
 ################
-
-extract : $(SRC_PATH_PY)extract.py
-	@python3 $(SRC_PATH_PY)extract.py
-
-extract_hydro1D : $(SRC_PATH_PY)extract_hydro1D.py
-	@python3 $(SRC_PATH_PY)extract_hydro1D.py
 
 extract_energy : $(SRC_PATH_PY)extract_energy.py
 	@python3 $(SRC_PATH_PY)extract_energy.py
@@ -152,8 +147,16 @@ extract_hydro2D : $(SRC_PATH_PY)extract_hydro2D.py
 extract_fe : $(SRC_PATH_PY)extract_fe.py
 	@python3 $(SRC_PATH_PY)extract_fe.py
 
+extract_hydro1D : $(SRC_PATH_PY)extract_hydro1D.py
+	@python3 $(SRC_PATH_PY)extract_hydro1D.py
+
 extract_logfe : $(SRC_PATH_PY)extract_logfe.py
 	@python3 $(SRC_PATH_PY)extract_logfe.py
+
+extract :   extract_energy   \
+			extract_hydro2D  \
+			extract_fe       \
+			extract_hydro1D
 
 #############
 #############

@@ -9,6 +9,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 from matplotlib import mlab, cm
+import library as lib
 
 ####################
 # Input parameters #
@@ -29,58 +30,26 @@ font = {'family': 'non-serif',
 cmap_fe = 'Blues'
 #cmap_fe = 'jet'
 
-#############################
-# Create figures/ directory #
-#############################
+##########
+# Script #
+##########
 
 dir= os.path.dirname("figures/")
 if not os.path.exists(dir):
     os.mkdir(dir)
 
-##########################################
-# Find the number of spatial grid points # 
-# (Nvx,Nx) by reading 'results/fe.dat'   #
-##########################################
+print('------------------------------------------------------')
+print('1D1V plasma electron distribution function phase-space')
+print('------------------------------------------------------')
+print(' ')
 
-print('Search for the number of phase-space cells:')
-t0  = []
-v0  = []
-file = open('results/fe.dat', 'r')
-line = file.readline()
-line = line.strip()
-array = line.split()
-t0.append(float(array[0]))
-v0.append(float(array[1]))
-counter = 0
-for line in file:
-    line      = line.strip()
-    array     = line.split()
-    t0.append(float(array[0]))
-    v0.append(float(array[1]))
-    counter = counter + 1
-    if v0[counter]!=v0[counter-1]:
-        Nx = counter
-        break
-for line in file:
-    line      = line.strip()
-    array     = line.split()
-    t0.append(float(array[0]))
-    counter = counter + 1
-    if t0[counter]!=t0[counter-1]:
-        NvxNx = counter
-        break
-file.close()
-Nvx = int(NvxNx / Nx)
-
+print('Search for the number of phase-space cells :')
+[Nx,Nvx] = lib.search_Nx_Nvx('results/fe.dat')
 print('* found Nx  = '+str(Nx) +' space cells')
 print('* found Nvx = '+str(Nvx)+' velocity cells')
 print(' ')
 
-#######################################################
-# 1D1V plasma electron distribution function colormap #
-#######################################################
-
-print('1D1V plasma electron distribution function phase-space colormap plot')
+print('Density plot at :')
 filename = 'results/fe.dat'
 N1 = Nvx
 N2 = Nx
@@ -112,7 +81,7 @@ for line in file:
     counter = counter + 1
     if counter % N3 == 0:
         time = int(100.*float(array[0]))/100.
-        print(' t (/omega_p) = '+str(time))
+        print('* t (/omega_p) = '+str(time))
         N = int(counter / N3)
         val=max(abs(np.amax(p[(N-1)*N3:N*N3])),abs(np.amin(p[(N-1)*N3:N*N3])))
         if (val != 0):

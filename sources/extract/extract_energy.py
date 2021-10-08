@@ -9,6 +9,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 from matplotlib import mlab, cm
+import library as lib
 
 ####################
 # Input parameters #
@@ -21,44 +22,28 @@ font = {'family': 'non-serif',
         'size': 16,
         }
 
-#############################
-# Create figures/ directory #
-#############################
+##########
+# Script #
+##########
 
 dir= os.path.dirname("figures/")
 if not os.path.exists(dir):
     os.mkdir(dir)
 
-#################################
-# functions used in this script #
-#################################
-
-def extract_energy_file(file_name):
-    t0 = []
-    u0 = []
-    file = open(file_name,'r')
-    for line in file:
-        line      = line.strip()
-        array     = line.split()
-        t0.append(float(array[0]))
-        u0.append(float(array[1]))
-    file.close()
-    return [t0,u0]
-
-###############################
-# Total energies scalar plots #
-###############################
-
+print('--------------------------')
 print('Total energies scalar plot')
+print('--------------------------')
+print(' ')
+
 # total plasma electron kinetic energy 
-[tk,uk0] = extract_energy_file('results/UK.dat')
+[tk,uk0] = lib.extract_energy_file('results/UK.dat')
 t = tk
 # total plasma electron internal energy
-[tt,ut0] = extract_energy_file('results/UT.dat')
+[tt,ut0] = lib.extract_energy_file('results/UT.dat')
 if len(tt) < len(t):
     t = tt
 # total electrostatic energy
-[te,ue0] = extract_energy_file('results/UE.dat')
+[te,ue0] = lib.extract_energy_file('results/UE.dat')
 if len(te) < len(t):
     t = te
 #
