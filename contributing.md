@@ -90,8 +90,8 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 5) Please, mention your contribution following the same style at the beginning of :
 - the modified Fortran source file
 ```
-!! Initial commit written by Dr Michaël J TOUATI - Dec. 2015
-!! my-new-feature or my-bug-fix commit by my-name - my-add-date
+!! Initial commit written by Dr Michaël J TOUATI - Dec. 2015         !!
+!! my-new-feature or my-bug-fix commit by my-name - my-add-date.     !!
 ```
 - the modified Python 3 script
 ```
@@ -101,7 +101,7 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 - input deck if 3.
 ```sh
 ##   Initial commit written by Dr Michaël J TOUATI - Dec. 2015       ##
-##   my-new-feature commit by my-name - my-add-date    ##
+##   my-new-feature commit by my-name - my-add-date                  ##
 ```
 - makefile if 4.
 ```sh
