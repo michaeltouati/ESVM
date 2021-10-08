@@ -118,7 +118,7 @@ call CLOSE_DIAG()
 !
 call cpu_time(timer_finish)
 !
-write (*,*)'==========================='
-print '("Total simulation time duration = ",f6.3," seconds.")',timer_finish-timer_start
+write (*,*)'=============================================='
+write (*,'(A,1E11.3,A)')" Total simulation time duration = ",timer_finish-timer_start," s"
 !
 end program ESVM

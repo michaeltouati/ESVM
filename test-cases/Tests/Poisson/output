@@ -36,236 +36,236 @@ n0(/cm3)=   0.10000000000000E+22
 Te(K)   =   0.11604258709350E+08
  -----------------------------------------
   
- ===========================
-time (/omega_p) =  0.000E+00
-Number of iteration :      1
- ===========================
+ ============================
+ time (/omega_p) =  0.000E+00
+ Number of iteration :      1
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.225E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.225E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.270E+00
-Number of iteration :     13
- ===========================
+ ============================
+ time (/omega_p) =  0.270E+00
+ Number of iteration :     13
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.212E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.212E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.517E+00
-Number of iteration :     24
- ===========================
+ ============================
+ time (/omega_p) =  0.517E+00
+ Number of iteration :     24
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.187E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.187E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.765E+00
-Number of iteration :     35
- ===========================
+ ============================
+ time (/omega_p) =  0.765E+00
+ Number of iteration :     35
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.166E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.166E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.101E+01
-Number of iteration :     46
- ===========================
+ ============================
+ time (/omega_p) =  0.101E+01
+ Number of iteration :     46
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.157E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.157E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.126E+01
-Number of iteration :     57
- ===========================
+ ============================
+ time (/omega_p) =  0.126E+01
+ Number of iteration :     57
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.159E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.159E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.151E+01
-Number of iteration :     68
- ===========================
+ ============================
+ time (/omega_p) =  0.151E+01
+ Number of iteration :     68
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.165E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.165E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.175E+01
-Number of iteration :     79
- ===========================
+ ============================
+ time (/omega_p) =  0.175E+01
+ Number of iteration :     79
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.168E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.168E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.200E+01
-Number of iteration :     90
- ===========================
+ ============================
+ time (/omega_p) =  0.200E+01
+ Number of iteration :     90
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.166E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.166E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.227E+01
-Number of iteration :    102
- ===========================
+ ============================
+ time (/omega_p) =  0.227E+01
+ Number of iteration :    102
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.160E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.160E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.252E+01
-Number of iteration :    113
- ===========================
+ ============================
+ time (/omega_p) =  0.252E+01
+ Number of iteration :    113
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.155E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.155E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.277E+01
-Number of iteration :    124
- ===========================
+ ============================
+ time (/omega_p) =  0.277E+01
+ Number of iteration :    124
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.151E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.151E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.301E+01
-Number of iteration :    135
- ===========================
+ ============================
+ time (/omega_p) =  0.301E+01
+ Number of iteration :    135
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.326E+01
-Number of iteration :    146
- ===========================
+ ============================
+ time (/omega_p) =  0.326E+01
+ Number of iteration :    146
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.351E+01
-Number of iteration :    157
- ===========================
+ ============================
+ time (/omega_p) =  0.351E+01
+ Number of iteration :    157
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.376E+01
-Number of iteration :    168
- ===========================
+ ============================
+ time (/omega_p) =  0.376E+01
+ Number of iteration :    168
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.400E+01
-Number of iteration :    179
- ===========================
+ ============================
+ time (/omega_p) =  0.400E+01
+ Number of iteration :    179
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.425E+01
-Number of iteration :    190
- ===========================
+ ============================
+ time (/omega_p) =  0.425E+01
+ Number of iteration :    190
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.452E+01
-Number of iteration :    202
- ===========================
+ ============================
+ time (/omega_p) =  0.452E+01
+ Number of iteration :    202
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.477E+01
-Number of iteration :    213
- ===========================
+ ============================
+ time (/omega_p) =  0.477E+01
+ Number of iteration :    213
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-time (/omega_p) =  0.499E+01
-Number of iteration :    223
- ===========================
+ ============================
+ time (/omega_p) =  0.499E+01
+ Number of iteration :    223
+ ============================
   
-Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
-Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
- ------------------------------------------------------
-Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2 / 2) =   0.262E+01
+ Electric energy (n0 Debye^3 me vTe0^2 / 2) =   0.150E-09
+ --------------------------------------------------------
+ Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
- ===========================
-Simulation time duration =  9.335 seconds.
+ ==============================================
+ Total simulation time duration =   0.135E+02 s

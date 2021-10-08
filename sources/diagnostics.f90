@@ -93,19 +93,19 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   real(PR)                                            :: U_tot
   integer                                             :: l, i
   !
-  write (*,*)'==========================='
-  write (*,'(A,1E11.3)')'time (/omega_p) =',time 
-  write (*,'(A,1I7)')'Number of iteration :',N_t
-  write (*,*)'==========================='
-  write (*,*)' '
-  if (test_positivity.eqv..true.) write (*,*)'the distribution function became negative'
-  write (*,'(A,1E11.3)')'Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) = ', U_K
-  write (*,'(A,1E11.3)')'Thermal energy  (n0 Debye^3 me vTe0^2 / 2) = ', U_T
-  write (*,'(A,1E11.3)')'Electric energy (n0 Debye^3 me vTe0^2 / 2) = ', U_E
-  write (*,*)'------------------------------------------------------'
+  write(*,*)'============================'
+  write(*,'(A,1E11.3)')' time (/omega_p) =',time 
+  write(*,'(A,1I7)')' Number of iteration :',N_t
+  write(*,*)'============================'
+  write(*,*)' '
+  if (test_positivity.eqv..true.) write(*,*)'the distribution function became negative'
+  write(*,'(A,1E11.3)')' Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) = ', U_K
+  write(*,'(A,1E11.3)')' Thermal energy  (n0 Debye^3 me vTe0^2 / 2) = ', U_T
+  write(*,'(A,1E11.3)')' Electric energy (n0 Debye^3 me vTe0^2 / 2) = ', U_E
+  write(*,*)'--------------------------------------------------------'
   U_tot = U_K + U_T + U_E 
-  write (*,'(A,1E11.3)')'Total energy    (n0 Debye^3 me vTe0^2 / 2) = ', U_tot
-  write (*,*)' '
+  write(*,'(A,1E11.3)')' Total energy    (n0 Debye^3 me vTe0^2 / 2) = ', U_tot
+  write(*,*)' '
   !
   do l=1,N_vx,1
     do i = 1,N_x,1

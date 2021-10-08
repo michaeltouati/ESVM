@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Written by Dr Michaël J TOUATI
+mv input-deck input-deck-old
 cp test-cases/Tests/Ampere/input-deck . && ./esvm > output && cp output test-cases/Tests/Ampere/ 
 cp test-cases/Tests/Poisson/input-deck . && ./esvm > output && cp output test-cases/Tests/Poisson/ 
 cp test-cases/Tests/OpenMP/input-deck . && ./esvm > output && cp output test-cases/Tests/OpenMP/ 
@@ -15,3 +16,5 @@ cp test-cases/Tests/Non-linear-advection-schemes/Van-Leer/input-deck . && ./esvm
 cp test-cases/Tests/Non-linear-advection-schemes/MUSCL1/input-deck . && ./esvm > output && cp output test-cases/Tests/Non-linear-advection-schemes/MUSCL1/ 
 cp test-cases/Tests/Non-linear-advection-schemes/MUSCL2/input-deck . && ./esvm > output && cp output test-cases/Tests/Non-linear-advection-schemes/MUSCL2/ 
 rm -f output
+rm -f input-deck
+mv input-deck-old input-deck
