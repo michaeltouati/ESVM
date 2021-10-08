@@ -6,7 +6,7 @@
 #############
 #############
 
-F90 = ifort
+# F90 = ifort
 
 ##########
 # openMP #
@@ -18,7 +18,7 @@ F90 = ifort
 # debug #
 #########
 
-OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C 
+# OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C 
 
 ################
 ################
@@ -26,13 +26,13 @@ OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all 
 ################
 ################
 
-# F90 = gfortran
+F90 = gfortran
 
 ##########
 # openMP #
 ##########
 
-# OPTS = -fopenmp -fdefault-real-8 -O3
+OPTS = -fopenmp -fdefault-real-8 -O3
 
 #########
 # debug #
@@ -178,7 +178,7 @@ test_start :
 	@echo ' * file2 the terminal output of '
 	@echo '   the corresponding simulation '
 	@echo '   performed by the developper  '
-	@echo '   located in test-cases/Tests/  '
+	@echo '   located in test-cases/Tests/ '
 	@echo ' concerning a drifting plasma   '
 	@echo ' simulation at Maxwell-Boltzmann'
 	@echo ' equilibrium                    ' 
@@ -192,16 +192,22 @@ test_ampere :
 	@echo -n 'Maxwell-Ampere solver  : '
 	@cp test-cases/Tests/Ampere/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Ampere/output; \
-    TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Ampere/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
     if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_poisson :
 	@echo -n 'Maxwell-Poisson solver : '
 	@cp test-cases/Tests/Poisson/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Poisson/output; \
-    TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Poisson/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
     if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_openMP :
@@ -212,8 +218,11 @@ test_openMP :
 	@echo -n 'OpenMP parallelization : '
 	@cp test-cases/Tests/OpenMP/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/OpenMP/output; \
-    TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/OpenMP/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
     if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_periodic :
@@ -224,16 +233,22 @@ test_periodic :
 	@echo -n 'Periodic bound. cond.  : '
 	@cp test-cases/Tests/Boundary-conditions/Periodic/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Boundary-conditions/Periodic/output; \
-    TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Boundary-conditions/Periodic/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
     if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_absorbing :
 	@echo -n 'Absorbing bound. cond. : '
 	@cp test-cases/Tests/Boundary-conditions/Absorbing/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Boundary-conditions/Absorbing/output; \
-    TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Boundary-conditions/Absorbing/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
     if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_donor_cell :
@@ -244,32 +259,44 @@ test_donor_cell :
 	@echo -n 'Donor cell solver      : '
 	@cp test-cases/Tests/Linear-advection-schemes/Donor-cell/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Linear-advection-schemes/Donor-cell/output; \
-    TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Donor-cell/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
     if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_Lax_Wendroff :
 	@echo -n 'Lax-Wendroff solver    : '
 	@cp test-cases/Tests/Linear-advection-schemes/Lax-Wendroff/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Linear-advection-schemes/Lax-Wendroff/output; \
-    TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Lax-Wendroff/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
     if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_Beam_Warming :
 	@echo -n 'Beam-Warming solver    : '
 	@cp test-cases/Tests/Linear-advection-schemes/Beam-Warming/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Linear-advection-schemes/Beam-Warming/output; \
-	TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Beam-Warming/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_Fromm :
 	@echo -n 'Fromm solver           : '
 	@cp test-cases/Tests/Linear-advection-schemes/Fromm/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Linear-advection-schemes/Fromm/output; \
-	TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Fromm/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_minmod :
@@ -280,47 +307,61 @@ test_minmod :
 	@echo -n 'Minmod solver          : '
 	@cp test-cases/Tests/Non-linear-advection-schemes/Minmod/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Non-linear-advection-schemes/Minmod/output; \
-	TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/Minmod/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_superbee :
 	@echo -n 'Superbee solver        : '
 	@cp test-cases/Tests/Non-linear-advection-schemes/Superbee/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Non-linear-advection-schemes/Superbee/output; \
-	TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/Superbee/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_Van_Leer :
 	@echo -n 'Van Leer (b=1.5) solver: '
 	@cp test-cases/Tests/Non-linear-advection-schemes/Van-Leer/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Non-linear-advection-schemes/Van-Leer/output; \
-	TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/Van-Leer/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_MUSCL1 :
 	@echo -n 'MUSCL 1 solver         : '
 	@cp test-cases/Tests/Non-linear-advection-schemes/MUSCL1/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Non-linear-advection-schemes/MUSCL1/output; \
-	TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/MUSCL1/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_MUSCL2 :
 	@echo -n 'MUSCL 2 solver         : '
 	@cp test-cases/Tests/Non-linear-advection-schemes/MUSCL2/input-deck .
 	@./esvm > test.output
-	@diff test.output test-cases/Tests/Non-linear-advection-schemes/MUSCL2/output; \
-	TST=$$?;\
+	@tail -n +0 test.output | head -n -3 > file1
+	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/MUSCL2/output | head -n -3 > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
-test_new-feature :
+test_new-features_start :
 	@echo '--------------------------------'
 	@echo '          New Feature           '
 	@echo '--------------------------------'
-	@echo '                                '
 
 test_end :
 	@rm -f test.output
@@ -330,5 +371,4 @@ test_end :
 test :  test_start test_ampere test_poisson test_openMP test_periodic test_absorbing \
 		test_donor_cell test_Lax_Wendroff test_Beam_Warming test_Fromm \
 		test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2 \
-		test_new-feature test_end
-
+		test_new-features_start test_end
