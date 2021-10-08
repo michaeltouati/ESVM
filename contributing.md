@@ -108,7 +108,7 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 ## Initial commit written by Dr Michaël J TOUATI - Dec. 2015
 ## my-new-feature commit by my-name - my-add-date
 ```
-- or at the beginning of an added source file
+- or at the beginning of a new source file
 ```
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!                                                                   !!
