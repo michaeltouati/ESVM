@@ -40,12 +40,12 @@ It will be a pleasure to discuss about it.
 [ESVM](https://github.com/michaeltouati/ESVM) uses the [Fork and pull model](https://docs.github.com/en/github/collaborating-with-pull-requests/getting-started/about-collaborative-development-models). In order to fix a bug or to submit a new feature that you've added in [ESVM](https://github.com/michaeltouati/ESVM), follow these steps:
 
 1) Fork the repo and create your own branch from [ESVM 'main' branch](https://github.com/michaeltouati/ESVM).
-2) Add your code. Please, keep the code Fortran 90 standard compliant by : 
+2) Add your code. Please, keep the code Fortran 95 standard compliant by : 
 - respecting 2 spaces for indentation rather than tabs
 - not using object oriented Fortran 2003 features
 - not forgetting to deallocate arrays
 - etc ...
-3) If you've added a new feature that needs new simulation parameters in the [input-deck](https://github.com/michaeltouati/ESVM/blob/main/input-deck) and updated correspondingly the source file [input.f90](https://github.com/michaeltouati/ESVM/blob/main/sources/input.f90), please add their descriptions in the [input-deck](https://github.com/michaeltouati/ESVM/blob/main/input-deck) following the same style
+3) If you've added a new feature that needs new simulation parameters in the [input-deck](https://github.com/michaeltouati/ESVM/blob/main/input-deck) and updated correspondingly the source file [input.f95](https://github.com/michaeltouati/ESVM/blob/main/sources/input.f95), please add their descriptions in the [input-deck](https://github.com/michaeltouati/ESVM/blob/main/input-deck) following the same style
 ```sh
 ##                                                                   ##
 ## T  = electron temperature in eV                                   ##
@@ -90,7 +90,7 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 make test
 ```
 6) Ensure the code compiles with the following compiler debugging options:
-- `-g -traceback -fopenmp -r8 -std90 -fpe0 -debug all -debug-parameters all -C` for the INTEL compiler ifort
+- `-g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C` for the INTEL compiler ifort
 - `-fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow` for the GNU compiler gfortran
 
 7) Issue that pull request!
