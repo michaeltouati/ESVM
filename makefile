@@ -104,6 +104,15 @@ check : check-input-deck
 	./check-input-deck
 	@rm check-input-deck
 
+###############
+###############
+##  RUNNING  ##
+###############
+###############
+
+run :
+	./esvm
+
 ################
 ################
 ##  CLEANING  ##
@@ -307,12 +316,19 @@ test_MUSCL2 :
 	TST=$$?;\
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
+test_new-feature :
+	@echo '--------------------------------'
+	@echo '          New Feature           '
+	@echo '--------------------------------'
+	@echo '                                '
+
 test_end :
 	@rm -f test.output
 	@rm -rf results/
 	@mv input-deck-old input-deck
 
 test :  test_start test_ampere test_poisson test_openMP test_periodic test_absorbing \
-	test_donor_cell test_Lax_Wendroff test_Beam_Warming test_Fromm \
-	test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2 test_end
+		test_donor_cell test_Lax_Wendroff test_Beam_Warming test_Fromm \
+		test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2 \
+		test_new-feature test_end
 
