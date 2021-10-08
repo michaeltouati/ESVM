@@ -87,7 +87,7 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 	test_new-features_start test_my-new-feature test_end
 ```
 
-5) Please, mention your contribution following the same style at the beginning of the comments of :
+5) Please, mention your contribution following the same style at the beginning of :
 - the modified Fortran source file
 ```
 !! Initial commit written by Dr Michaël J TOUATI - Dec. 2015
@@ -95,7 +95,7 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 ```
 - the modified Python 3 script
 ```
-# Initial commit written by Michael J Touati
+# Initial commit written by Michaël J Touati
 # my-new-feature or my-bug-fix commit by my-name - my-add-date
 ```
 - input deck if 3.
