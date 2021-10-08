@@ -1,8 +1,8 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!                                                                   !!
-!!          1D-1V ElectroStatic Vlasov-Maxwell (ESV) code            !!
+!!             ElectroStatic Vlasov-Maxwell (ESVM) code              !!
 !!                                                                   !!
-!!  Written by Dr Michaël J TOUATI - CLPU - 2020 - mtouati@clpu.es   !!
+!!                  Written by Dr Michaël J TOUATI                   !!
 !!                                                                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !
@@ -27,6 +27,8 @@ real(PR)                              :: f_max, flux_im1, flux_ip1
 real(PR), dimension(:), allocatable   :: dU_K, dU_T, dU_E 
 real(PR)                              :: U_K, U_T, U_E 
 logical                               :: test_positivity, save_results
+real(PR)                              :: timer_start, timer_finish
+call cpu_time(timer_start)
 !
 call system('mkdir -p results')
 !
@@ -113,5 +115,10 @@ end do
 deallocate(x,vx,f_n,f_np1,n_e,j_e,v_e,vT_e,E_x_n,E_x_np1)
 !
 call CLOSE_DIAG()
+!
+call cpu_time(timer_finish)
+!
+write (*,*)'==========================='
+print '("Simulation time duration = ",f6.3," seconds.")',timer_finish-timer_start
 !
 end program ESVM

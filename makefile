@@ -6,7 +6,7 @@
 #############
 #############
 
-# F90 = ifort
+F90 = ifort
 
 ##########
 # openMP #
@@ -18,7 +18,7 @@
 # debug #
 #########
 
-# OPTS = -g -traceback -fopenmp -r8 -std90 -fpe0 -debug all -debug-parameters all -C 
+OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C 
 
 ################
 ################

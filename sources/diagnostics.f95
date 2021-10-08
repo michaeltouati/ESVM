@@ -1,8 +1,8 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!                                                                   !!
-!!          1D-1V ElectroStatic Vlasov-Maxwell (ESV) code            !!
+!!             ElectroStatic Vlasov-Maxwell (ESVM) code              !!
 !!                                                                   !!
-!!  Written by Dr Michaël J TOUATI - CLPU - 2020 - mtouati@clpu.es   !!
+!!                  Written by Dr Michaël J TOUATI                   !!
 !!                                                                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -98,7 +98,7 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   write (*,'(A,1I7)')'Number of iteration :',N_t
   write (*,*)'==========================='
   write (*,*)' '
-  if (test_positivity.eqv..true.) print*, 'the distribution function became negative'
+  if (test_positivity.eqv..true.) write (*,*)'the distribution function became negative'
   write (*,'(A,1E11.3)')'Kinetic energy  (n0 Debye^3 me vTe0^2 / 2) = ', U_K
   write (*,'(A,1E11.3)')'Thermal energy  (n0 Debye^3 me vTe0^2 / 2) = ', U_T
   write (*,'(A,1E11.3)')'Electric energy (n0 Debye^3 me vTe0^2 / 2) = ', U_E

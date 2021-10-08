@@ -1,17 +1,17 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!                                                                   !!
-!!          1D-1V ElectroStatic Vlasov-Maxwell (ESV) code            !!
+!!             ElectroStatic Vlasov-Maxwell (ESVM) code              !!
 !!                                                                   !!
-!!  Written by Dr Michaël J TOUATI - CLPU - 2020 - mtouati@clpu.es   !!
+!!                  Written by Dr Michaël J TOUATI                   !!
 !!                                                                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-program CHECK_INPUT_DECK
-!
-use acuracy
-use constants
-use input
-!
-call read_init_parameters()
-!
-end program CHECK_INPUT_DECK
+
+module acuracy
+  
+  implicit none
+  
+  ! Double Floatting Point Format :
+ 
+  integer, parameter :: PR = 8
+  
+end module acuracy

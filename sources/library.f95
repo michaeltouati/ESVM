@@ -1,8 +1,8 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!                                                                   !!
-!!          1D-1V ElectroStatic Vlasov-Maxwell (ESV) code            !!
+!!             ElectroStatic Vlasov-Maxwell (ESVM) code              !!
 !!                                                                   !!
-!!  Written by Dr Michaël J TOUATI - CLPU - 2020 - mtouati@clpu.es   !!
+!!                  Written by Dr Michaël J TOUATI                   !!
 !!                                                                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
