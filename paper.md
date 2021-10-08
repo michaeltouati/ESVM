@@ -127,7 +127,8 @@ respectively as well as the total energy area density
 \begin{equation}
   U_{\mathrm{tot}} (t_d) = U_{T_e} (t_d)+ U_{K_e} (t_d) + U_{E_x} (t_d)
 \end{equation}
-in order to check the energy conservation in the simulation. The user can initialize an initial plasma electron population at Maxwell-Boltzmann equilibrium drifting at the velocty $v_d$ 
+in order to check the energy conservation in the simulation. The user can initialize :
+- an initial plasma electron population at Maxwell-Boltzmann equilibrium drifting at the velocty $v_d$ 
 \begin{equation}
   \label{eq:driftingMaxwellBoltzmannEquilibrium}
   \displaystyle \left \{
@@ -136,7 +137,9 @@ in order to check the energy conservation in the simulation. The user can initia
   \cr E_x (x,t=0) &=& 0
   \end{array} \right .
 \end{equation}
-by no imposing any perturbation parameter or simulating well known Plasma Physics process; cf section **ESVM Plasma Physics academic case simulations**. Finally, new Plasma Physics processes can easily be added in the ESVM Fortran 90 subroutine ```fortran INIT_SIMU```.
+by no imposing any perturbation parameter or 
+- a well known Plasma Physics process; cf. section **ESVM Plasma Physics academic case simulations**. 
+- Finally, specific Plasma Physics simulations can easily be added in ESVM by implementing them in the Fortran 90 `subroutine INIT_SIMU` of the library.f90 source file.
 
 # ESVM units
 
@@ -529,21 +532,21 @@ accounting for the initial conditions at $t=0$. Here, $J_\mu$ and $Y_\mu$ are th
 # ESVM Perspectives
 
 It is planned in a near future to :
-- provide another Plasma Physics academic simulation about one BGK (from the name of its finder I. B. Bernstein, J. M. Greene and M. D. Kruskal) non linear solution [@BernsteinGreenKruskal:1957]
-- provide another Plasma Physics academic simulation about Plasma wave echo [@Gould:1967]
-- implement non-equally spaced phase-space cells
-- implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes [@Liu:1994]
-- compute the plasma ion Vlasov equation to allow for the ions to be mobile 
-- implement its MPI parallelization
-- implement its vectorization
-- store the simulation results in hdf5 files instead of text files
-- extend the code to the relativistic regime : ESVM $\Rightarrow$ RESVM for open source Relativistic ElectroStatic Vlasov-Maxwell code
-- implement a BGK (from the name of its finder P. L. Bhatnagar, E. P. Gross  and M. Krook) collision operator [@BhatnagarGrossKrook:1954]
-- extend the code to 1D-2V and 1D-3V phase-space electrostatic plasma simulations
-- implement the Landau [@Landau:1936] and Belyaev-Budker [@BelaievBudker:1957] relativistic collision operators using the Rosenbluth potentials [@Rosenbluth:1957] and their relativistic Braams-Karney extension [@BraamsKarney:1987] : (R)ESVM $\Rightarrow$ (R)EMVFPM for open source (Relativistic) ElectroMagnetic Vlasov-Fokker-Planck-Maxwell code
-- extend the code to electromagnetic 2D-1V, 2D-2V and 2D-3V phase-space electrostatic electromagnetic plasma simulations : (R)ESVM $\Rightarrow$ (R)EMVM2 and (R)EMVFPM2 for open source (Relativistic) ElectroMagnetic Vlasov-Maxwell and Vlasov-Fokker-Planck-Maxwell in 2D codes
-- implement the Perfectly Matched Layer (PML) technique [@Berenger:1994] to absorb the electromagnetic fields at the spatial simulation box boundaries
-- deploy the code to GPU architectures.
+1) provide another Plasma Physics academic simulation about one BGK (from the name of its finder I. B. Bernstein, J. M. Greene and M. D. Kruskal) non linear electron plasma wave [@BernsteinGreenKruskal:1957]
+2) provide another Plasma Physics academic simulation about Plasma wave echo [@Gould:1967]
+3) implement non-equally spaced phase-space cells
+4) implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes [@Liu:1994]
+5) compute the plasma ion Vlasov equation to allow for the ions to be mobile 
+6) implement MPI parallelization
+7) implement vectorization
+8) store the simulation results in hdf5 files instead of text files
+9) extend the code to the relativistic regime : ESVM $\Rightarrow$ RESVM for open source Relativistic ElectroStatic Vlasov-Maxwell code
+10) implement a BGK (from the name of its finder P. L. Bhatnagar, E. P. Gross  and M. Krook) collision operator [@BhatnagarGrossKrook:1954]
+11) extend the code to 1D-2V and 1D-3V phase-space electrostatic plasma simulations
+12) implement the Landau [@Landau:1936] and Belaiev-Budker [@BelaievBudker:1957] relativistic collision operators using the Rosenbluth potentials [@Rosenbluth:1957] and their relativistic Braams-Karney extension [@BraamsKarney:1987] : (R)ESVM $\Rightarrow$ (R)EMVFPM for open source (Relativistic) ElectroMagnetic Vlasov-Fokker-Planck-Maxwell code
+13) extend the code to electromagnetic 2D-1V, 2D-2V and 2D-3V phase-space electrostatic electromagnetic plasma simulations : (R)ESVM $\Rightarrow$ (R)EMVM2 and (R)EMVFPM2 for open source (Relativistic) ElectroMagnetic Vlasov-Maxwell and Vlasov-Fokker-Planck-Maxwell in 2D codes
+14) implement the Perfectly Matched Layer (PML) technique [@Berenger:1994] to absorb the electromagnetic fields at the spatial simulation box boundaries
+15) deploy the code to GPU architectures.
 
 # Figures
 
