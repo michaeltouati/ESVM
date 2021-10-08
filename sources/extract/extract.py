@@ -1,7 +1,7 @@
 # -----------------------------------------------
 # SIMULATION RESULTS PLOTTING FOR 1D1V ESVM SIMU  
 # -----------------------------------------------
-# Written by Michael J Touati
+# Initial commit written by Michael J Touati
 
 import os
 import numpy as np
