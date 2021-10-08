@@ -32,13 +32,13 @@ F90 = gfortran
 # openMP #
 ##########
 
-OPTS = -fopenmp -fdefault-real-8 -O3
+# OPTS = -fopenmp -fdefault-real-8 -O3
 
 #########
 # debug #
 #########
 
-# OPTS = -fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow
+OPTS = -fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow
 
 #####################################
 #####################################
@@ -192,8 +192,8 @@ test_ampere :
 	@echo -n 'Maxwell-Ampere solver  : '
 	@cp test-cases/Tests/Ampere/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Ampere/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Ampere/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -203,8 +203,8 @@ test_poisson :
 	@echo -n 'Maxwell-Poisson solver : '
 	@cp test-cases/Tests/Poisson/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Poisson/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Poisson/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -218,8 +218,8 @@ test_openMP :
 	@echo -n 'OpenMP parallelization : '
 	@cp test-cases/Tests/OpenMP/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/OpenMP/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/OpenMP/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -233,8 +233,8 @@ test_periodic :
 	@echo -n 'Periodic bound. cond.  : '
 	@cp test-cases/Tests/Boundary-conditions/Periodic/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Boundary-conditions/Periodic/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Boundary-conditions/Periodic/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -244,8 +244,8 @@ test_absorbing :
 	@echo -n 'Absorbing bound. cond. : '
 	@cp test-cases/Tests/Boundary-conditions/Absorbing/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Boundary-conditions/Absorbing/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Boundary-conditions/Absorbing/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -259,8 +259,8 @@ test_donor_cell :
 	@echo -n 'Donor cell solver      : '
 	@cp test-cases/Tests/Linear-advection-schemes/Donor-cell/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Donor-cell/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Donor-cell/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -270,8 +270,8 @@ test_Lax_Wendroff :
 	@echo -n 'Lax-Wendroff solver    : '
 	@cp test-cases/Tests/Linear-advection-schemes/Lax-Wendroff/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Lax-Wendroff/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Lax-Wendroff/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -281,8 +281,8 @@ test_Beam_Warming :
 	@echo -n 'Beam-Warming solver    : '
 	@cp test-cases/Tests/Linear-advection-schemes/Beam-Warming/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Beam-Warming/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Beam-Warming/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -292,8 +292,8 @@ test_Fromm :
 	@echo -n 'Fromm solver           : '
 	@cp test-cases/Tests/Linear-advection-schemes/Fromm/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Fromm/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Linear-advection-schemes/Fromm/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -307,8 +307,8 @@ test_minmod :
 	@echo -n 'Minmod solver          : '
 	@cp test-cases/Tests/Non-linear-advection-schemes/Minmod/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/Minmod/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/Minmod/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -318,8 +318,8 @@ test_superbee :
 	@echo -n 'Superbee solver        : '
 	@cp test-cases/Tests/Non-linear-advection-schemes/Superbee/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/Superbee/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/Superbee/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -329,8 +329,8 @@ test_Van_Leer :
 	@echo -n 'Van Leer (b=1.5) solver: '
 	@cp test-cases/Tests/Non-linear-advection-schemes/Van-Leer/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/Van-Leer/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/Van-Leer/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -340,8 +340,8 @@ test_MUSCL1 :
 	@echo -n 'MUSCL 1 solver         : '
 	@cp test-cases/Tests/Non-linear-advection-schemes/MUSCL1/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/MUSCL1/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/MUSCL1/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
@@ -351,8 +351,8 @@ test_MUSCL2 :
 	@echo -n 'MUSCL 2 solver         : '
 	@cp test-cases/Tests/Non-linear-advection-schemes/MUSCL2/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/MUSCL2/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/MUSCL2/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
     TST=$$?; \
     rm file1; rm file2; \
