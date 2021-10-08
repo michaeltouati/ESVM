@@ -8,8 +8,8 @@
 ##   Code units :                                                    ##
 ## - the Debye length $\lambda_D$ for space,                         ##
 ## - inverse of Langmuir electron angular frequency                  ##
-##   $1/omega_{p_e}$ for times                                       ##
-## - Electron thermal velocity $v_T$ for velocities                  ##
+##   $1/omega_{p_e}$ for time                                        ##
+## (- Electron thermal velocity $v_T$ for velocities )               ##
 ## - elementary charge $e$ for electrical charges                    ##
 ##                                                                   ##
 ##  Written by Dr Michaël J TOUATI - CLPU - 2020 - mtouati@clpu.es   ##
@@ -25,12 +25,13 @@
 ##                                                                   ##
 #######################################################################
 #
-#N_th 1 
+#N_th 0 
 #
 #######################################################################
 ##                                                                   ##
 ##                 Plasma properties - immobile ions                 ##
-##               ( Do not affect simulation result!  )               ##
+##               ( Do not affect simulation results! )               ##
+##                                                                   ##
 ##                                                                   ##
 ## T  = electron temperature in eV                                   ##
 ##                                                                   ##
@@ -42,11 +43,9 @@
 #
 #T  1000.
 #
-#Z  1
+#Z  13
 #
-#ni 1.e21
-#
-#v0    0.
+#ni 1.e22
 #
 #######################################################################
 ##                                                                   ##
@@ -66,23 +65,23 @@
 ##                                                                   ##
 #######################################################################
 #
-#x_min    0. 
+#x_min  -10.5
 #
-#x_max    5.  
+#x_max   10.5
 #
-#d_x     0.25
+#d_x     0.05
 #
-#vx_min   -5.
+#vx_min   -6.
 #
-#vx_max    5.
+#vx_max    6.
 #
-#d_vx    0.1
+#d_vx    0.01
 #
 #######################################################################
 ##                                                                   ##          
 ##                         Simulation times                          ##
 ##                                                                   ##    
-## cfl      = CFL parameter (must be < 1)                            ##
+## cfl      = CFL parameter (must be 0 < cfl < 1)                    ##
 ##                                                                   ##    
 ## L_t      = Simulation time duration                               ##
 ##                                                                   ##
@@ -90,11 +89,11 @@
 ##                                                                   ##
 #######################################################################
 #
-#cfl      9.e-1
+#cfl       9.e-1
 #
-#L_t     5.
+#L_t     200.
 #
-#dt_diag 0.25  
+#dt_diag   1.  
 #
 #######################################################################
 ##                                                                   ##
@@ -117,11 +116,11 @@
 ##                                                                   ##
 #######################################################################
 #
-#maxwell 1
+#maxwell 2
 #
 #b_cond 2
 #
-#scheme 9
+#scheme 6
 #
 #b      2.
 #
@@ -132,7 +131,7 @@
 ##                                                                   ##
 ## perturb = 0 for no perturbation,                                  ##
 ##           1 for the electrostatic wakefield test case,            ##
-##           2 for the linear Landau damping test case or            ##
+##           2 for the (non)linear Landau damping test case or       ##
 ##           3 for the two stream instability test case              ##
 ##                                                                   ##
 ## A       = perturbation amplitude                                  ##
@@ -145,13 +144,13 @@
 ##                                                                   ##
 #######################################################################
 #
-#perturb  0  
+#perturb  2  
 #
 #A        1.e-1
 #
-#k        0.07853981633
+#k        0.29919930034
 #
-#omega_0  0.07853981633
+#omega_0  1.18
 #
-#vd       1.
+#vd       0.
 #
