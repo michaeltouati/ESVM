@@ -544,7 +544,7 @@ It is planned in a near future to :
 10) implement a BGK (from the name of its finder P. L. Bhatnagar, E. P. Gross  and M. Krook) collision operator [@BhatnagarGrossKrook:1954]
 11) extend the code to 1D-2V and 1D-3V phase-space electrostatic plasma simulations
 12) implement the Landau [@Landau:1936] and Belaiev-Budker [@BelaievBudker:1957] relativistic collision operators using the Rosenbluth potentials [@Rosenbluth:1957] and their relativistic Braams-Karney extension [@BraamsKarney:1987] : (R)ESVM $\Rightarrow$ (R)EMVFPM for open source (Relativistic) ElectroMagnetic Vlasov-Fokker-Planck-Maxwell code
-13) extend the code to electromagnetic 2D-1V, 2D-2V and 2D-3V phase-space electrostatic electromagnetic plasma simulations : (R)ESVM $\Rightarrow$ (R)EMVM2 and (R)EMVFPM2 for open source (Relativistic) ElectroMagnetic Vlasov-Maxwell and Vlasov-Fokker-Planck-Maxwell in 2D codes
+13) extend the code to electromagnetic 2D-1V, 2D-2V and 2D-3V phase-space electrostatic electromagnetic plasma simulations : (R)ESVM/(R)EMVM $\Rightarrow$ (R)ESVM2/(R)EMVM2 and (R)ESVFPM2/(R)EMVFPM2 for open source (Relativistic) ElectroStatic/ElectroMagnetic Vlasov-Maxwell and Vlasov-Fokker-Planck-Maxwell in 2D
 14) implement the Perfectly Matched Layer (PML) technique [@Berenger:1994] to absorb the electromagnetic fields at the spatial simulation box boundaries
 15) deploy the code to GPU architectures.
 
