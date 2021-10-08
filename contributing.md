@@ -72,8 +72,8 @@ test_my-new-feature :
 	@echo -n 'my-new-feature         : '
 	@cp test-cases/Tests/my-new-feature/input-deck .
 	@./esvm > test.output
-	@tail -n +0 test.output | head -n -3 > file1
-	@tail -n +0 test-cases/Tests/Non-linear-advection-schemes/MUSCL2/output | head -n -3 > file2
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/my-new-feature/output | tail -r | tail -n +4 | tail -r > file2
 	@diff file1 file2; \
 	TST=$$?; \
 	rm file1; rm file2; \
