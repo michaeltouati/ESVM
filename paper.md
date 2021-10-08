@@ -127,7 +127,16 @@ respectively as well as the total energy area density
 \begin{equation}
   U_{\mathrm{tot}} (t_d) = U_{T_e} (t_d)+ U_{K_e} (t_d) + U_{E_x} (t_d)
 \end{equation}
-in order to check the energy conservation in the simulation.
+in order to check the energy conservation in the simulation. The user can initialize an initial plasma electron population at Maxwell-Boltzmann equilibrium drifting at the velocty $v_d$ 
+\begin{equation}
+  \label{eq:driftingMaxwellBoltzmannEquilibrium}
+  \displaystyle \left \{
+  \begin{array}{lll}
+      f_e (x,v_x,t=0) &=& \displaystyle \frac{Z n_i}{ \displaystyle \sqrt{ 2 \pi {v_{T_{e_0}}}^2 } } \exp{ \displaystyle \left [ - \displaystyle \frac{ {\left ( v_x - v_d \right ) }^2 }{ 2 {v_{T_{e_0}}}^2 } \right ] }
+  \cr E_x (x,t=0) &=& 0
+  \end{array} \right .
+\end{equation}
+by no imposing any perturbation parameter or simulating well known Plasma Physics process; cf section **ESVM Plasma Physics academic case simulations**. Finally, new Plasma Physics processes can easily be added in the ESVM Fortran 90 subroutine ```fortran INIT_SIMU```.
 
 # ESVM units
 
