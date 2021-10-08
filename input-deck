@@ -6,13 +6,18 @@
 ##                            INPUT DECK                             ##  
 ##                                                                   ##
 ##   Code units :                                                    ##
-## - the Debye length $\lambda_D$ for space,                         ##
-## - inverse of Langmuir electron angular frequency                  ##
-##   $1/omega_{p_e}$ for times                                       ##
-## - Electron thermal velocity $v_T$ for velocities                  ##
-## - elementary charge $e$ for electrical charges                    ##
+## - elementary charge $e$ for electrical charges,                   ##
+## - electron mass $m_e$ for masses,                                 ##
+## - Initial average plasma electron density $n_0 = Z n_i$ with $Z$  ##
+##   the plasma ion atomic number and $n_i$ their fixed density,     ##
+## - inverse of Langmuir plasma electron angular frequency           ##
+##   $1/omega_p = \sqrt{me / 4 pi n_0 e^2}$ for times,               ##
+## - Initial plasma electron thermal velocity (standard deviation)   ##
+##   $v_{T_{e_0}}$ for velocities and                                ##
+## - Debye screening length                                          ##
+##   $\lambda_\mathrm{Debye}=v_{T_{e_0}}/omega_p $ for space         ##
 ##                                                                   ##
-##  Written by Dr Michaël J TOUATI - CLPU - 2020 - mtouati@clpu.es   ##
+##   Written by Dr Michaël J TOUATI                                  ##
 ##                                                                   ##
 #######################################################################
 #
@@ -95,7 +100,7 @@
 #
 #######################################################################
 ##                                                                   ##
-##        BOUNDARY CONDITIONS AND NUMERICAL ADVECTION SCHEMES        ##
+##             Boundary conditions and numerical schemes             ##
 ##                                                                   ##
 ## maxwell = 1 for Maxwell-Ampere solver                             ##
 ##                 (Poisson is computed at the 1st iteration only)   ##
@@ -124,7 +129,7 @@
 #
 #######################################################################
 ##                                                                   ##
-##       Test cases for code validation and teaching pourpose        ##
+##                             Test cases                            ##
 ##    see esvm.pdf file for the meaning of perturbation parameters   ##
 ##                                                                   ##
 ## perturb = 0 for no perturbation,                                  ##
