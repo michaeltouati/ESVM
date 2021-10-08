@@ -139,7 +139,7 @@ in order to check the energy conservation in the simulation. The user can initia
 \end{equation}
 by no imposing any perturbation parameter or 
 - a well known Plasma Physics process; cf. section **ESVM Plasma Physics academic case simulations**. 
-- Finally, specific Plasma Physics simulations can easily be added in ESVM by implementing them in the Fortran 95 `subroutine INIT_SIMU` of the library.f95 source file.
+- Finally, specific Plasma Physics simulations can easily be added in ESVM by implementing them in the Fortran 95 `subroutine INIT_SIMU` of the library.f90 source file.
 
 # ESVM units
 
