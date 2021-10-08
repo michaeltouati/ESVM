@@ -88,22 +88,27 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 ```
 
 5) Please, mention your contribution following the same style at the beginning of the comments of :
-- the modified source file
+- the modified Fortran source file
 ```
 !! Initial commit written by Dr Michaël J TOUATI - Dec. 2015
 !! my-new-feature or my-bug-fix commit by my-name - my-add-date
 ```
-- makefile if 4)
-```sh
-## Initial commit written by Dr Michaël J TOUATI - Dec. 2015
-## my-new-feature commit by my-name - my-add-date
+- the modified Python 3 script
 ```
-- input deck if 3)
+# Initial commit written by Michael J Touati
+# my-new-feature or my-bug-fix commit by my-name - my-add-date
+```
+- input deck if 3.
 ```sh
 ##   Initial commit written by Dr Michaël J TOUATI - Dec. 2015       ##
 ##   my-new-feature commit by my-name - my-add-date    ##
 ```
-- at the beginning of the comments of an added source file
+- makefile if 4.
+```sh
+## Initial commit written by Dr Michaël J TOUATI - Dec. 2015
+## my-new-feature commit by my-name - my-add-date
+```
+- or at the beginning of an added source file
 ```
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!                                                                   !!
@@ -112,11 +117,6 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 !! Initial commit written by commit by my-name - my-add-date         !!
 !!                                                                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-```
-- or Python script
-```
-# Initial commit written by Michael J Touati
-# my-new-feature or my-bug-fix commit by my-name - my-add-date
 ```
 6) Make sure your code passes all the tests by typing on your terminal:
 ```sh
