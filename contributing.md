@@ -14,7 +14,7 @@ For problems related with plotting, please make sure first LaTeX, dvipng and gho
 1) Go to 'Issues' on the ESVM main repository branch [issues](https://github.com/michaeltouati/ESVM/issues)
 2) Click on 'New issue'
 4) Describe the bug the more clear and concise as possible in the title starting with "Bug :"
-5) Describe with the more details as possible the bug providing the more pieces of information as possible (input-deck, terminal output and/or screeshot) and more importantly, specify your environment :
+5) Describe with with great details the bug providing the more pieces of information as possible (input-deck, terminal output and/or screenshot) and more importantly, specify your environment :
 
 OS: [e.g., Ubuntu 20.04]
 
