@@ -28,7 +28,7 @@ For problems related with plotting, please make sure first LaTeX, dvipng and gho
 
 # Propose a new feature
 
-If you want to propose a new feature in [ESVM](https://github.com/michaeltouati/ESVM), follow these steps :
+If you want to propose a new feature in [ESVM](https://github.com/michaeltouati/ESVM) that is not already in the perspectives of the code mentioned in the last section of the documentation [esvm.pdf](https://github.com/michaeltouati/ESVM/blob/main/esvm.pdf), follow these steps :
 1) Go to ['Issues'](https://github.com/michaeltouati/ESVM/issues) on the [ESVM master branch](https://github.com/michaeltouati/ESVM)
 2) Click on 'New issue'
 4) Describe the new feature request the more "clear and concise" as possible in the title starting with "Feature request :"
