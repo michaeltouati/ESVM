@@ -383,7 +383,7 @@ The stable electron plasma waves angular frequency \autoref{eq:omega0} and the t
   \label{eq:electrostatic_field_Fourier_modes}
   \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right ) \underset{v_d \gg v_{T_{e_0}}}{\sim} - \alpha_p A \displaystyle \frac{m_e v_d}{ e } \displaystyle \frac{  {\omega_{p}}^2  }{ \epsilon \displaystyle \left ( \omega,\,k_p\right ) \displaystyle \left ( \omega - k_p v_d \right ) \displaystyle \left ( \omega + k_p v_d \right )  }.
 \end{equation}
-The poles of the Fourier components of the electrostatic fields \autoref{eq:electrostatic_field_Fourier_modes} are thus $\pm k_p v_d$ plus the ones of the plasma electrical permittivity \autoref{eq:plasma_electrical_permittivity_limit} given by Equations \ref{eq:pure_real_poles} and \autoref{eq:pure_imaginary_poles}. We can know determine the time dependance of the spatial Fourier components of the growing electrostatic field
+The poles of the Fourier components of the electrostatic fields \autoref{eq:electrostatic_field_Fourier_modes} are thus $\pm k_p v_d$ plus the ones of the plasma electrical permittivity \autoref{eq:plasma_electrical_permittivity_limit} given by Equations \ref{eq:pure_real_poles} and \autoref{eq:pure_imaginary_poles}. We can know determine the time dependence of the spatial Fourier components of the growing electrostatic field
 \begin{equation}
   \label{Inversion_Formula}
   \widehat{\delta \text{E}}_{x,p} \displaystyle \left ( t \right ) = \displaystyle \frac{1}{2 \pi} \displaystyle \int_{\iota R - \infty}^{\iota R + \infty} \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \displaystyle \left ( \omega \right )  \exp{\displaystyle \left ( + \iota \omega t \right )} d \omega
