@@ -6,19 +6,19 @@
 #############
 #############
 
-# F90 = ifort
+F90 = ifort
 
 ##########
 # openMP #
 ##########
 
-# OPTS = -fopenmp -r8 -O3
+OPTS = -fopenmp -r8 -O3
 
 #########
 # debug #
 #########
 
-# OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C 
+OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C 
 
 ################
 ################
@@ -26,13 +26,13 @@
 ################
 ################
 
-F90 = gfortran
+# F90 = gfortran
 
 ##########
 # openMP #
 ##########
 
-OPTS = -fopenmp -fdefault-real-8 -O3
+# OPTS = -fopenmp -fdefault-real-8 -O3
 
 #########
 # debug #
@@ -170,27 +170,27 @@ RESET=$(shell tput sgr0)
 
 test_start : 
 	@mv input-deck input-deck-old
-	@echo '--------------------------------'
-	@echo '        TESTS DESCRIPTION       '
-	@echo '--------------------------------'
-	@echo '                                '
-	@echo 'The tests consist in performing '
-	@echo ' diff file1 file2 where :       '
-	@echo ' * file1 is the test simulation '
-	@echo '   terminal output              '
-	@echo ' * file2 the terminal output of '
-	@echo '   the corresponding simulation '
-	@echo '   performed by the developper  '
-	@echo '   located in test-cases/Tests/ '
-	@echo ' concerning a drifting plasma   '
-	@echo ' simulation at Maxwell-Boltzmann'
-	@echo ' equilibrium                    ' 
-	@echo '                                '
+	@echo '---------------------------------'
+	@echo '        TESTS DESCRIPTION        '
+	@echo '---------------------------------'
+	@echo '                                 '
+	@echo 'The tests consist in performing  '
+	@echo ' diff file1 file2 where :        '
+	@echo ' * file1 is the test simulation  '
+	@echo '   terminal output               '
+	@echo ' * file2 the terminal output of  '
+	@echo '   the corresponding simulation  '
+	@echo '   performed by the developper   '
+	@echo '   located in test-cases/Tests/  '
+	@echo ' concerning a drifting plasma    '
+	@echo ' simulation at Maxwell-Boltzmann '
+	@echo ' equilibrium                     ' 
+	@echo '                                 '
 
 test_ampere :
-	@echo '--------------------------------'
-	@echo '         Maxwell solver         '
-	@echo '--------------------------------'
+	@echo '---------------------------------'
+	@echo '          Maxwell solver         '
+	@echo '---------------------------------'
 	@echo '                                '
 	@echo -n 'Maxwell-Ampere solver  : '
 	@cp test-cases/Tests/Ampere/input-deck .
@@ -214,9 +214,9 @@ test_poisson :
     if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_openMP :
-	@echo '--------------------------------'
-	@echo '            OpenMP              '
-	@echo '--------------------------------'
+	@echo '---------------------------------'
+	@echo '             OpenMP              '
+	@echo '---------------------------------'
 	@echo '                                '
 	@echo -n 'OpenMP parallelization : '
 	@cp test-cases/Tests/OpenMP/input-deck .
@@ -229,9 +229,9 @@ test_openMP :
     if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_periodic :
-	@echo '--------------------------------'
-	@echo '      Boundary conditions       '
-	@echo '--------------------------------'
+	@echo '---------------------------------'
+	@echo '       Boundary conditions       '
+	@echo '---------------------------------'
 	@echo '                                '
 	@echo -n 'Periodic bound. cond.  : '
 	@cp test-cases/Tests/Boundary-conditions/Periodic/input-deck .
@@ -255,9 +255,9 @@ test_absorbing :
     if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_donor_cell :
-	@echo '--------------------------------'
-	@echo '    Linear advection solvers    '
-	@echo '--------------------------------'
+	@echo '---------------------------------'
+	@echo '     Linear advection solvers    '
+	@echo '---------------------------------'
 	@echo '                                '
 	@echo -n 'Donor cell solver      : '
 	@cp test-cases/Tests/Linear-advection-schemes/Donor-cell/input-deck .
@@ -303,9 +303,9 @@ test_Fromm :
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
 test_minmod :
-	@echo '--------------------------------'
-	@echo '  Non-linear advection solvers  '
-	@echo '--------------------------------'
+	@echo '---------------------------------'
+	@echo '   Non-linear advection solvers  '
+	@echo '---------------------------------'
 	@echo '                                '
 	@echo -n 'Minmod solver          : '
 	@cp test-cases/Tests/Non-linear-advection-schemes/Minmod/input-deck .
@@ -361,10 +361,47 @@ test_MUSCL2 :
     rm file1; rm file2; \
 	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
 
+test_Landau :
+	@echo '---------------------------------'
+	@echo '  Plasma Physics academic cases  '
+	@echo '---------------------------------'
+	@echo '                                '
+	@echo -n 'Landau damping         : '
+	@cp test-cases/Tests/Landau/input-deck .
+	@./esvm > test.output
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Landau/output | tail -r | tail -n +4 | tail -r > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
+	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+
+test_wakefield :
+	@echo -n 'Electrostatic wakefield: '
+	@cp test-cases/Tests/Wakefield/input-deck .
+	@./esvm > test.output
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Wakefield/output | tail -r | tail -n +4 | tail -r > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
+	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+
+test_two-stream-instability :
+	@echo -n 'Two-stream instability : '
+	@cp test-cases/Tests/Two-stream-instability/input-deck .
+	@./esvm > test.output
+	@tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1
+	@tail -n +0 test-cases/Tests/Two-stream-instability/output | tail -r | tail -n +4 | tail -r > file2
+	@diff file1 file2; \
+    TST=$$?; \
+    rm file1; rm file2; \
+	if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; echo ' '; \
+
 test_new-features_start :
-	@echo '--------------------------------'
-	@echo '          New Feature           '
-	@echo '--------------------------------'
+	@echo '---------------------------------'
+	@echo '           New Feature           '
+	@echo '---------------------------------'
 
 test_end :
 	@rm -f test.output
@@ -374,4 +411,5 @@ test_end :
 test :  test_start test_ampere test_poisson test_openMP test_periodic test_absorbing \
 		test_donor_cell test_Lax_Wendroff test_Beam_Warming test_Fromm \
 		test_minmod test_superbee test_Van_Leer test_MUSCL1 test_MUSCL2 \
+		test_Landau test_wakefield test_two-stream-instability \
 		test_new-features_start test_end

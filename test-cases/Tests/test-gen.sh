@@ -15,6 +15,9 @@ cp test-cases/Tests/Non-linear-advection-schemes/Superbee/input-deck . && ./esvm
 cp test-cases/Tests/Non-linear-advection-schemes/Van-Leer/input-deck . && ./esvm > output && cp output test-cases/Tests/Non-linear-advection-schemes/Van-Leer/ 
 cp test-cases/Tests/Non-linear-advection-schemes/MUSCL1/input-deck . && ./esvm > output && cp output test-cases/Tests/Non-linear-advection-schemes/MUSCL1/ 
 cp test-cases/Tests/Non-linear-advection-schemes/MUSCL2/input-deck . && ./esvm > output && cp output test-cases/Tests/Non-linear-advection-schemes/MUSCL2/ 
+cp test-cases/Tests/Landau/input-deck . && ./esvm > output && cp output test-cases/Tests/Landau/ 
+cp test-cases/Tests/Wakefield/input-deck . && ./esvm > output && cp output test-cases/Tests/Wakefield/ 
+cp test-cases/Tests/Two-stream-instability/input-deck . && ./esvm > output && cp output test-cases/Tests/Two-stream-instability/ 
 rm -f output
 rm -f input-deck
 mv input-deck-old input-deck
