@@ -123,7 +123,7 @@ and
   \label{eq:total_electrostatic_energy}
   U_{E_x} (t_d) = {\lambda_{\mathrm{Debye}}}^2 \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} \displaystyle \frac{{E_x (x,t_d)}^2}{8 \pi} \, d x,
 \end{equation}
-respectively as well as the total energy area density
+respectively as well as the total energy
 \begin{equation}
   U_{\mathrm{tot}} (t_d) = U_{T_e} (t_d)+ U_{K_e} (t_d) + U_{E_x} (t_d)
 \end{equation}
