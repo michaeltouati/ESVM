@@ -121,7 +121,7 @@ def plot_1D_hydro_quantity_scalar_plot(N_x, file_name, font_properties, y_label,
                 X[i] = x[(N-1)*N_x+i]
                 P[i] = p[(N-1)*N_x+i]
             time = int(100.*float(array[0]))/100.
-            print('  * t (/omega_p) = '+str(time))
+            print('   * t (/omega_p) = '+str(time))
             fig=plt.figure()
             plt.rc('text', usetex=True)
             plt.plot(X, P, linewidth=2, color = 'black')

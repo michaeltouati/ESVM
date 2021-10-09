@@ -30,10 +30,10 @@ dir= os.path.dirname("figures/")
 if not os.path.exists(dir):
     os.mkdir(dir)
 
-print('--------------------------')
-print('Total energies scalar plot')
-print('--------------------------')
-print(' ')
+print(' --------------------------')
+print(' Total energies scalar plot')
+print(' --------------------------')
+print('  ')
 
 # total plasma electron kinetic energy 
 [tk,uk0] = lib.extract_energy_file('results/UK.dat')
@@ -57,6 +57,8 @@ for i in range(0,len(t)):
     ue.append(ue0[i])
     utot.append(ue[i]+ut[i]+uk[i])
 #
+print(' Scalar plot :')
+print(' * Total kinetic and electrostatic energies')
 fig=plt.figure()
 plt.rc('text', usetex=True)
 plt.semilogy(t, uk,'green',linewidth=2,label=r'$U_{K_e}$')
@@ -72,6 +74,7 @@ plt.yticks(fontsize=16)
 fig.savefig('figures/energy_log.png',bbox_inches='tight')
 plt.close(fig)
 # in log scale
+print(' * All total energies in log. scale')
 fig=plt.figure()
 plt.rc('text', usetex=True)
 plt.plot(t, uk,'green',linewidth=2,label=r'$U_{K_e}$')
@@ -84,4 +87,4 @@ plt.ylabel(r'$\mathrm{Energy}\,\left (n_0 {\lambda_{\mathrm{Debye}}}^3 m_e {v_{T
 plt.yticks(fontsize=16)
 fig.savefig('figures/energy.png',bbox_inches='tight')
 plt.close(fig)
-print(' ')
+print('  ')

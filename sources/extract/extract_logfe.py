@@ -38,18 +38,18 @@ dir= os.path.dirname("figures/")
 if not os.path.exists(dir):
     os.mkdir(dir)
 
-print('--------------------------------------------------------------------')
-print('1D1V plasma electron distribution function phase-space in log. scale')
-print('--------------------------------------------------------------------')
-print(' ')
+print(' --------------------------------------------------------------------')
+print(' 1D1V plasma electron distribution function phase-space in log. scale')
+print(' --------------------------------------------------------------------')
+print('  ')
 
-print('Search for the number of phase-space cells:')
+print(' Search for the number of phase-space cells:')
 [Nx,Nvx] = lib.search_Nx_Nvx('results/fe.dat')
-print('* found Nx  = '+str(Nx) +' space cells')
-print('* found Nvx = '+str(Nvx)+' velocity cells')
-print(' ')
+print(' * found Nx  = '+str(Nx) +' space cells')
+print(' * found Nvx = '+str(Nvx)+' velocity cells')
+print('  ')
 
-print('Density plot at :')
+print(' Density plot at :')
 filename = 'results/fe.dat'
 N1 = Nvx
 N2 = Nx
@@ -83,7 +83,7 @@ for line in file:
     counter = counter + 1
     if counter % N3 == 0:
         time = int(100.*float(array[0]))/100.
-        print('* t (/omega_p) = '+str(time))
+        print(' * t (/omega_p) = '+str(time))
         N = int(counter / N3)
         for i in range(0,N1):
             for k in range(0,N2):
