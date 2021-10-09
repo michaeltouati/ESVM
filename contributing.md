@@ -125,8 +125,8 @@ make test
 7) Ensure the code compiles with the following compiler debugging options:
 - `-g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C` for the INTEL compiler ifort
 - `-fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow` for the GNU compiler gfortran
-
-8) Issue that pull request!
+8) Make sure the code reproduces all provided Plasma Physics academic cases simulation figures located in the directory test-cases/
+9) Issue that pull request!
 
 # License
 When you submit code changes, your submissions are understood to be under the same [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) that covers [ESVM](https://github.com/michaeltouati/ESVM). 
