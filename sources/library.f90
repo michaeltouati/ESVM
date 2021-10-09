@@ -300,20 +300,25 @@ subroutine AMPERE(N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
   real(PR), dimension(-1:N_x+2), intent(inout) :: E_x_n
   real(PR), dimension(-1:N_x+2), intent(out)   :: E_x_np1, phi_n
   integer                                      :: i
+  real(PR)                                     :: dx2
+  !
   if (N_t.eq.1) then
     call POISSON(d_x, n_e, E_x_n, E_x_np1, phi_n)
   else
+    dx2 = 2._PR*d_x
     !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
     do i=1,N_x,1
-      E_x_np1(i) = E_x_n(i) - (d_t*j_e(i))
+      E_x_np1(i) = E_x_n(i)   - (d_t*j_e(i))
+      phi_n(i)   = phi_n(i-2) - (dx2*E_x_n(i-1))
     end do
     !omp END PARALLEL DO
+    !
     select case (b_cond)
       ! absorbing
       case (1)
         E_x_n(0)     = E_x_n(1)
         E_x_n(-1)    = E_x_n(0)
-        E_x_n(N_x+1) = E_x_np1(N_x)
+        E_x_n(N_x+1) = E_x_n(N_x)
         E_x_n(N_x+2) = E_x_n(N_x+1)
         E_x_np1(0)     = E_x_np1(1)
         E_x_np1(-1)    = E_x_np1(0)
