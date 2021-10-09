@@ -60,7 +60,7 @@ do while (time.lt.L_t)
   ! Landau damping test-case
   if (perturb == 2) then
     if ( time < (6.* pi / omega_0) ) then
-      call DRIVE(d_t, time, x, E_x_n, E_x_np1)
+      call DRIVE(d_t, time, x, E_x_n, E_x_np1, phi_n)
     else 
       call MAXWELL_SOLVER(maxwell, N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
     end if

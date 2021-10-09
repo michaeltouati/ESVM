@@ -165,7 +165,7 @@ subroutine INIT_NEXT_STEP(f_n, f_np1, n_e, j_e, v_e, vT_e, &
   n_e     = 0._PR
   j_e     = 0._PR
   v_e     = 0._PR
-  vT_e     = 0._PR
+  vT_e    = 0._PR
   phi_n   = 0._PR
   E_x_n   = E_x_np1 
   E_x_np1 = 0._PR 
@@ -273,7 +273,7 @@ subroutine POISSON(d_x, n_e, E_x_n, E_x_np1, phi_n)
     case (1)
       E_x_n(0)     = E_x_n(1)
       E_x_n(-1)    = E_x_n(0)
-      E_x_n(N_x+1) = E_x_np1(N_x)
+      E_x_n(N_x+1) = E_x_n(N_x)
       E_x_n(N_x+2) = E_x_n(N_x+1)
       E_x_np1(0)     = E_x_np1(1)
       E_x_np1(-1)    = E_x_np1(0)
@@ -338,27 +338,25 @@ subroutine AMPERE(N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
   end if
 end subroutine AMPERE
 
-subroutine DRIVE(d_t, time, x, E_x_n, E_x_np1)
+subroutine DRIVE(d_t, time, x, E_x_n, E_x_np1, phi_n)
   implicit none
-  real(PR), intent(in)                         :: d_t, time
-  real(PR), dimension(-1:N_x+2), intent(in)    :: x
-  real(PR), dimension(-1:N_x+2), intent(inout) :: E_x_n
-  real(PR), dimension(-1:N_x+2), intent(inout) :: E_x_np1
-  integer                                      :: i
+  real(PR), intent(in)                       :: d_t, time
+  real(PR), dimension(-1:N_x+2), intent(in)  :: x
+  real(PR), dimension(-1:N_x+2), intent(out) :: E_x_n, phi_n
+  real(PR), dimension(-1:N_x+2), intent(out) :: E_x_np1
+  integer                                    :: i
+  real(PR)                                   :: B, ot, ot2
+  !
+  B   = A / k
+  ot  = omega_0 * time
+  ot2 = omega_0 * (time+d_t)
  !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
-  do i=1,N_x
-    E_x_n(i)   = A * sin( (omega_0 *  time     ) - (k*x(i)) )
-    E_x_np1(i) = A * sin( (omega_0 * (time+d_t)) - (k*x(i)) )
+  do i=-1,N_x+2
+    E_x_n(i)   = A * sin( ot - (k*x(i)) )
+    phi_n(i)   = B * cos( ot - (k*x(i)) )
+    E_x_np1(i) = A * sin( ot2 - (k*x(i)) )
   end do
   !omp END PARALLEL DO
-  E_x_n(N_x+1)   = E_x_n(1)
-  E_x_n(N_x+2)   = E_x_n(2)
-  E_x_n(0)       = E_x_n(N_x-1)
-  E_x_n(-1)      = E_x_n(N_x-2)
-  E_x_np1(N_x+1) = E_x_np1(1)
-  E_x_np1(N_x+2) = E_x_np1(2)
-  E_x_np1(0)     = E_x_np1(N_x-1)
-  E_x_np1(-1)    = E_x_np1(N_x-2) 
 end subroutine DRIVE
 
 subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
