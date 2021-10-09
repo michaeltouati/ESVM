@@ -106,33 +106,6 @@ test :  test_start test_ampere test_poisson test_openMP test_periodic test_absor
 ## Initial commit written by Dr Michaël J TOUATI - Dec. 2015
 ## my-new-feature commit by my-name - my-add-date
 ```
-- or at the beginning of a new source file
-```
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!                                                                   !!
-!!             ElectroStatic Vlasov-Maxwell (ESVM) code              !!
-!!                                                                   !!
-!! Copyright © my-add-date my-name                                   !!
-!!                                                                   !!
-!! This file is part of ESVM.                                        !!
-!!                                                                   !!
-!! ESVM is free software: you can redistribute it and/or modify      !!
-!! it under the terms of the GNU General Public License as published !!
-!! by the Free Software Foundation, either version 3 of the License, !!
-!! or (at your option) any later version.                            !!
-!!                                                                   !!
-!! ESVM is distributed in the hope that it will be useful,           !!
-!! but WITHOUT ANY WARRANTY; without even the implied warranty of    !!
-!! MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the     !!
-!! GNU General Public License for more details.                      !!
-!!                                                                   !!
-!! You should have received a copy of the GNU General Public License !!
-!! along with Foobar.  If not, see <https://www.gnu.org/licenses/>.  !!
-!! Initial commit written by Dr Michaël J TOUATI - Dec. 2015         !!
-!!                                                                   !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! Initial commit written by my-name - my-add-date
-```
 6) Make sure your code passes all the tests by typing on your terminal:
 ```sh
 make test
