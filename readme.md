@@ -31,7 +31,7 @@ or
 ```sh
 make run
 ```
-to execute the simulation.
+to run the simulation.
 
 # Plotting the simulation results
 
