@@ -1,10 +1,31 @@
-## Initial commit written by Dr Michaël J TOUATI - Dec. 2015
-##
-#############
-#############
-##  ifort  ##
-#############
-#############
+#######################################################################
+##                                                                   ##
+##             ElectroStatic Vlasov-Maxwell (ESVM) code              ##
+##                                                                   ##
+## Copyright © 2015 Michaël J TOUATI                                 ##
+##                                                                   ##
+## This file is part of ESVM.                                        ##
+##                                                                   ##
+## ESVM is free software: you can redistribute it and/or modify      ##
+## it under the terms of the GNU General Public License as published ##
+## by the Free Software Foundation, either version 3 of the License, ##
+## or (at your option) any later version.                            ##
+##                                                                   ##
+## ESVM is distributed in the hope that it will be useful,           ##
+## but WITHOUT ANY WARRANTY; without even the implied warranty of    ##
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the     ##
+## GNU General Public License for more details.                      ##
+##                                                                   ##
+## You should have received a copy of the GNU General Public License ##
+## along with ESVM. If not, see <https://www.gnu.org/licenses/>.     ##
+##                                                                   ##
+#######################################################################
+## Initial commit written by Michaël J TOUATI - Dec. 2015
+######################
+######################
+##  INTEL Compiler  ##
+######################
+######################
 
 # F90 = ifort
 
@@ -20,11 +41,11 @@
 
 # OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C 
 
-################
-################
-##  gfortran  ##
-################
-################
+####################
+####################
+##  GNU Compiler  ##
+####################
+####################
 
 F90 = gfortran
 
@@ -91,7 +112,7 @@ esvm.o : $(SRC_PATH)esvm.f90
 
 ########################
 ########################
-##  CHECK INPUT DECK  ##
+##  Check input-deck  ##
 ########################
 ########################
 
@@ -106,7 +127,7 @@ check : check-input-deck
 
 ###############
 ###############
-##  RUNNING  ##
+##  Running  ##
 ###############
 ###############
 
@@ -115,7 +136,7 @@ run :
 
 ################
 ################
-##  CLEANING  ##
+##  Cleaning  ##
 ################
 ################
 
@@ -134,7 +155,7 @@ clean_all :
 
 ################
 ################
-##  PLOTTING  ##
+##  Plotting  ##
 ################
 ################
 
@@ -158,11 +179,11 @@ extract :   extract_energy   \
 			extract_fe       \
 			extract_hydro1D
 
-#############
-#############
-##  TESTS  ##
-#############
-#############
+###############
+###############
+##  Testing  ##
+###############
+###############
 
 RED=$(shell tput setaf 1)
 GREEN=$(shell tput setaf 2)
