@@ -45,11 +45,11 @@
 ##                                                                   ##
 #######################################################################
 #
-#T  100.
+#T  1000.
 #
-#Z  1
+#Z  13
 #
-#ni 1.e19
+#ni 1.e22
 #
 #######################################################################
 ##                                                                   ##
@@ -131,11 +131,11 @@
 #######################################################################
 ##                                                                   ##
 ##       Test cases for code validation and teaching pourpose        ##
-##   see esvm.pdf file for the meaning of perturbation parameters    ##
+##    see esvm.pdf file for the meaning of perturbation parameters   ##
 ##                                                                   ##
 ## perturb = 0 for no perturbation,                                  ##
 ##           1 for the electrostatic wakefield test case,            ##
-##           2 for the linear Landau damping test case or            ##
+##           2 for the (non)linear Landau damping test case or       ##
 ##           3 for the two stream instability test case              ##
 ##                                                                   ##
 ## A       = perturbation amplitude                                  ##
@@ -150,7 +150,7 @@
 #
 #perturb  2  
 #
-#A        1.e-3
+#A        1.e-1
 #
 #k        0.29919930034
 #

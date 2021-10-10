@@ -51,7 +51,7 @@ module constants
   !                                        Conversion factors
   !=======================================================================================
 
-  real(PR),parameter,public   :: eV      = 1.6022E-19_PR / 1.3807E-23_PR       ! 1 eV = 11604 K
+  real(PR), parameter, public :: eV     = 1.6022E-19_PR / 1.3807E-23_PR   ! 1 eV = 11604 K
   real(PR), parameter, public :: fs      = 1.E-15_PR
   real(PR), parameter, public :: microns = 1.E-4_PR
   real(PR), parameter, public :: Joules  = 1.E7_PR                         ! 1 J in erg
@@ -60,15 +60,15 @@ module constants
   !                                      Advection schemes
   !=======================================================================================
 
-  real(PR), parameter, public           :: zero = 1.e-14_PR
-  integer, parameter, public            :: L_donor_cell   = 1
-  integer, parameter, public            :: L_Lax_Wendroff = 2
-  integer, parameter, public            :: L_Beam_Warming = 3
-  integer, parameter, public            :: L_Fromm        = 4
-  integer, parameter, public            :: NL_minmod      = 5
-  integer, parameter, public            :: NL_superbee    = 6
-  integer, parameter, public            :: NL_Van_Leer    = 7
-  integer, parameter, public            :: NL_MUSCL1      = 8 
-  integer, parameter, public            :: NL_MUSCL2      = 9
+  real(PR), parameter, public            :: zero = 1.e-14_PR
+  integer , parameter, public            :: L_donor_cell   = 1
+  integer , parameter, public            :: L_Lax_Wendroff = 2
+  integer , parameter, public            :: L_Beam_Warming = 3
+  integer , parameter, public            :: L_Fromm        = 4
+  integer , parameter, public            :: NL_minmod      = 5
+  integer , parameter, public            :: NL_superbee    = 6
+  integer , parameter, public            :: NL_Van_Leer    = 7
+  integer , parameter, public            :: NL_MUSCL1      = 8 
+  integer , parameter, public            :: NL_MUSCL2      = 9
 
 end module constants

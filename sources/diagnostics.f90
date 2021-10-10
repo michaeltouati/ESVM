@@ -29,7 +29,8 @@ use input
 use physics
 
 implicit none
-public  :: INIT_DIAG
+public  :: INIT_DIAG, DIAG_ENERGY
+public  :: DIAG, CLOSE_DIAG
 
 contains
 

@@ -31,7 +31,8 @@ use physics
 implicit none
 public  :: GRID, INIT_VAR, INIT_SIMU
 public  :: DENSITIES, POISSON, AMPERE
-public  :: FLUXES, BOUNDARIES
+public  :: INIT_NEXT_STEP, MAXWELL_SOLVER
+public  :: DRIVE, FLUXES, BOUNDARIES
 private :: slope, minmod, minmod_3, maxmod, theta
 
 contains
@@ -490,26 +491,26 @@ subroutine BOUNDARIES(f_np1)
   end do
 end subroutine BOUNDARIES
 
-  subroutine SOLVE_TRIDIAG(a,b,c,d,x,n)
-    implicit none
-    integer,intent(in)                :: n
-    real(PR),dimension(n),intent(in)  :: a,b,c,d
-    real(PR),dimension(n),intent(out) :: x
-    real(PR),dimension(n)             :: cp,dp
-    real(PR)                          :: m
-    integer                           :: i
-    cp(1) = c(1)/b(1)
-    dp(1) = d(1)/b(1)
-    do i = 2,n,1
-       m = b(i)-(cp(i-1)*a(i))
-       cp(i) = c(i)/m
-       dp(i) = (d(i)-(dp(i-1)*a(i)))/m
-    enddo
-    x(n) = dp(n)
-    do i = n-1, 1, -1
-       x(i) = dp(i)-cp(i)*x(i+1)
-    end do 
-  end subroutine SOLVE_TRIDIAG
+subroutine SOLVE_TRIDIAG(a,b,c,d,x,n)
+  implicit none
+  integer,intent(in)                :: n
+  real(PR),dimension(n),intent(in)  :: a,b,c,d
+  real(PR),dimension(n),intent(out) :: x
+  real(PR),dimension(n)             :: cp,dp
+  real(PR)                          :: m
+  integer                           :: i
+  cp(1) = c(1)/b(1)
+  dp(1) = d(1)/b(1)
+  do i = 2,n,1
+     m = b(i)-(cp(i-1)*a(i))
+     cp(i) = c(i)/m
+     dp(i) = (d(i)-(dp(i-1)*a(i)))/m
+  enddo
+  x(n) = dp(n)
+  do i = n-1, 1, -1
+     x(i) = dp(i)-cp(i)*x(i+1)
+  end do 
+end subroutine SOLVE_TRIDIAG
 
 ! Functions
   
