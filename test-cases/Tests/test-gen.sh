@@ -40,7 +40,7 @@ TEST_DIR+=' Vlasov-nonlinear/MUSCL2'
 TEST_DIR+=' Academic-case/Landau'
 TEST_DIR+=' Academic-case/Wakefield'
 TEST_DIR+=' Academic-case/Two-stream-insta'
-# TEST_DIR+=' New-feature/'
+# TEST_DIR+=' New-features/'
 
 for tst in ${TEST_DIR}; do \
 	cp ${tst}/input-deck . && ../.././esvm > output && cp output ${tst}/ ; \
