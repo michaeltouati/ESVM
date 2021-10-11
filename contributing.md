@@ -69,7 +69,7 @@ and type on your terminal from the directory 'test-cases/Tests'
 ```sh
 ./test-gen.sh
 ```
-It will generate automatically the output files of all tests directly at their correct location. Finally, add in the makefile at the section TESTING (l. 184) the following line
+It will generate automatically the output files of all tests directly at their correct locations. Finally, add in the makefile at the section TESTING (l. 184) the following line
 ```sh
 TEST_DIR += New-feature/my-new-feature
 ```
