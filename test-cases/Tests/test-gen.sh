@@ -46,4 +46,4 @@ for tst in ${TEST_DIR}; do \
 	cp ${tst}/input-deck . && ../.././esvm > output && cp output ${tst}/ ; \
 	echo ${tst}'/output file generated'
 done
-rm -f output input-deck
+rm -rf results/ output input-deck
