@@ -1,4 +1,4 @@
-## Written by Dr Michaël J TOUATI
+## Written by Michaël J TOUATI
 
 # Compiling the code
 
