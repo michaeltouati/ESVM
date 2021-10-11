@@ -65,7 +65,7 @@ for the test to be fast and a text file entitled 'output' containing the termina
 ```sh
 ./esvm > output
 ```
-and mv the output file to the desired location or add in the bash script 'test-gen.sh' located in 'test-cases/Tests' a line
+and move the output file to the desired location or add in the bash script 'test-gen.sh' located in 'test-cases/Tests' a line
 ```sh
 TEST_DIR+=' New-feature/my-new-feature'
 ```
