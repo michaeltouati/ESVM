@@ -1,23 +1,49 @@
 #!/usr/bin/env bash
-# Written by Dr Michaël J TOUATI
-mv input-deck input-deck-old
-cp test-cases/Tests/Ampere/input-deck . && ./esvm > output && cp output test-cases/Tests/Ampere/ 
-cp test-cases/Tests/Poisson/input-deck . && ./esvm > output && cp output test-cases/Tests/Poisson/ 
-cp test-cases/Tests/OpenMP/input-deck . && ./esvm > output && cp output test-cases/Tests/OpenMP/ 
-cp test-cases/Tests/Boundary-conditions/Periodic/input-deck . && ./esvm > output && cp output test-cases/Tests/Boundary-conditions/Periodic/ 
-cp test-cases/Tests/Boundary-conditions/Absorbing/input-deck . && ./esvm > output && cp output test-cases/Tests/Boundary-conditions/Absorbing/
-cp test-cases/Tests/Linear-advection-schemes/Donor-cell/input-deck . && ./esvm > output && cp output test-cases/Tests/Linear-advection-schemes/Donor-cell/ 
-cp test-cases/Tests/Linear-advection-schemes/Lax-Wendroff/input-deck . && ./esvm > output && cp output test-cases/Tests/Linear-advection-schemes/Lax-Wendroff/ 
-cp test-cases/Tests/Linear-advection-schemes/Beam-Warming/input-deck . && ./esvm > output && cp output test-cases/Tests/Linear-advection-schemes/Beam-Warming/ 
-cp test-cases/Tests/Linear-advection-schemes/Fromm/input-deck . && ./esvm > output && cp output test-cases/Tests/Linear-advection-schemes/Fromm/ 
-cp test-cases/Tests/Non-linear-advection-schemes/Minmod/input-deck . && ./esvm > output && cp output test-cases/Tests/Non-linear-advection-schemes/Minmod/ 
-cp test-cases/Tests/Non-linear-advection-schemes/Superbee/input-deck . && ./esvm > output && cp output test-cases/Tests/Non-linear-advection-schemes/Superbee/ 
-cp test-cases/Tests/Non-linear-advection-schemes/Van-Leer/input-deck . && ./esvm > output && cp output test-cases/Tests/Non-linear-advection-schemes/Van-Leer/ 
-cp test-cases/Tests/Non-linear-advection-schemes/MUSCL1/input-deck . && ./esvm > output && cp output test-cases/Tests/Non-linear-advection-schemes/MUSCL1/ 
-cp test-cases/Tests/Non-linear-advection-schemes/MUSCL2/input-deck . && ./esvm > output && cp output test-cases/Tests/Non-linear-advection-schemes/MUSCL2/ 
-cp test-cases/Tests/Landau/input-deck . && ./esvm > output && cp output test-cases/Tests/Landau/ 
-cp test-cases/Tests/Wakefield/input-deck . && ./esvm > output && cp output test-cases/Tests/Wakefield/ 
-cp test-cases/Tests/Two-stream-instability/input-deck . && ./esvm > output && cp output test-cases/Tests/Two-stream-instability/ 
-rm -f output
-rm -f input-deck
-mv input-deck-old input-deck
+#######################################################################
+##                                                                   ##
+##             ElectroStatic Vlasov-Maxwell (ESVM) code              ##
+##                                                                   ##
+## Copyright © 2015 Michaël J TOUATI                                 ##
+##                                                                   ##
+## This file is part of ESVM.                                        ##
+##                                                                   ##
+## ESVM is free software: you can redistribute it and/or modify      ##
+## it under the terms of the GNU General Public License as published ##
+## by the Free Software Foundation, either version 3 of the License, ##
+## or (at your option) any later version.                            ##
+##                                                                   ##
+## ESVM is distributed in the hope that it will be useful,           ##
+## but WITHOUT ANY WARRANTY; without even the implied warranty of    ##
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the     ##
+## GNU General Public License for more details.                      ##
+##                                                                   ##
+## You should have received a copy of the GNU General Public License ##
+## along with ESVM. If not, see <https://www.gnu.org/licenses/>.     ##
+##                                                                   ##
+#######################################################################
+## Initial commit written by Michaël J TOUATI - Dec. 2015
+
+TEST_DIR=' Maxwell/Ampere'
+TEST_DIR+=' Maxwell/Poisson'
+TEST_DIR+=' Parallelization/OpenMP'
+TEST_DIR+=' Boundary-conditions/Periodic'
+TEST_DIR+=' Boundary-conditions/Absorbing'
+TEST_DIR+=' Vlasov-linear/Donor-cell'
+TEST_DIR+=' Vlasov-linear/Lax-Wendroff'
+TEST_DIR+=' Vlasov-linear/Beam-Warming'
+TEST_DIR+=' Vlasov-linear/Fromm'
+TEST_DIR+=' Vlasov-nonlinear/Minmod'
+TEST_DIR+=' Vlasov-nonlinear/Superbee'
+TEST_DIR+=' Vlasov-nonlinear/Van-Leer'
+TEST_DIR+=' Vlasov-nonlinear/MUSCL1'
+TEST_DIR+=' Vlasov-nonlinear/MUSCL2'
+TEST_DIR+=' Academic-case/Landau'
+TEST_DIR+=' Academic-case/Wakefield'
+TEST_DIR+=' Academic-case/Two-stream-insta'
+# TEST_DIR+=' New-feature/'
+
+for tst in ${TEST_DIR}; do \
+	cp ${tst}/input-deck . && ../.././esvm > output && cp output ${tst}/ ; \
+	echo ${tst}'/output file generated'
+done
+rm -f output input-deck
