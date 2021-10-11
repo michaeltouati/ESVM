@@ -1,4 +1,4 @@
-## Written by Dr Michaël J TOUATI
+## Written by Michaël J TOUATI
 
 “Physics is like sex: sure, it may give some practical results, but that's not why we do it.”-Richard P. Feynman
 
