@@ -199,9 +199,9 @@ TEST_DIR += Vlasov-nonlinear/Superbee
 TEST_DIR += Vlasov-nonlinear/Van-Leer
 TEST_DIR += Vlasov-nonlinear/MUSCL1
 TEST_DIR += Vlasov-nonlinear/MUSCL2
-TEST_DIR += Academic-case/Landau
-TEST_DIR += Academic-case/Wakefield
-TEST_DIR += Academic-case/Two-stream-insta
+TEST_DIR += Academic-cases/Landau
+TEST_DIR += Academic-cases/Wakefield
+TEST_DIR += Academic-cases/Two-stream-insta
 # TEST_DIR += New-features/Example
 
 RED  =$(shell tput setaf 1)
