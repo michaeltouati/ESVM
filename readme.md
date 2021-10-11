@@ -68,17 +68,17 @@ make extract_fe
 If you want to remove from the ESVM directory :
 - the compilation files and ESVM executable, type :
 ```sh
-make clean
+make distclean
 ```
 - the directory 'figures' containing all simulation result plots, type :
 ```sh
-make clean_figures
+make figclean
 ```
 - the directory 'results' containing all simulation result data files, type :
 ```sh
-make clean_results
+make resclean
 ```
 - the three previous ones, type :
 ```sh
-make clean_all
+make clean
 ```
