@@ -34,7 +34,8 @@
 #######################################################################
 ##                                                                   ##
 ##                 Plasma properties - immobile ions                 ##
-##               ( Do not affect simulation result!  )               ##
+##               ( Do not affect simulation results! )               ##
+##                                                                   ##
 ##                                                                   ##
 ## T  = electron temperature in eV                                   ##
 ##                                                                   ##
@@ -44,13 +45,11 @@
 ##                                                                   ##
 #######################################################################
 #
-#T  1000.
+#T  100.
 #
 #Z  1
 #
-#ni 1.e21
-#
-#v0    0.
+#ni 1.e19
 #
 #######################################################################
 ##                                                                   ##
@@ -70,13 +69,13 @@
 ##                                                                   ##
 #######################################################################
 #
-#x_min     0. 
+#x_min  -10.5
 #
-#x_max    80.  
+#x_max   10.5
 #
-#d_x     0.25
+#d_x     0.05
 #
-#vx_min   -4.
+#vx_min   -6.
 #
 #vx_max    6.
 #
@@ -86,7 +85,7 @@
 ##                                                                   ##          
 ##                         Simulation times                          ##
 ##                                                                   ##    
-## cfl      = CFL parameter (must be < 1)                            ##
+## cfl      = CFL parameter (must be 0 < cfl < 1)                    ##
 ##                                                                   ##    
 ## L_t      = Simulation time duration                               ##
 ##                                                                   ##
@@ -94,15 +93,15 @@
 ##                                                                   ##
 #######################################################################
 #
-#cfl      9.e-2
+#cfl       9.e-1
 #
-#L_t     14.
+#L_t     200.
 #
-#dt_diag 0.25  
+#dt_diag   1.  
 #
 #######################################################################
 ##                                                                   ##
-##             Boundary conditions and numerical schemes             ##
+##        BOUNDARY CONDITIONS AND NUMERICAL ADVECTION SCHEMES        ##
 ##                                                                   ##
 ## maxwell = 1 for Maxwell-Ampere solver                             ##
 ##                 (Poisson is computed at the 1st iteration only)   ##
@@ -131,12 +130,12 @@
 #
 #######################################################################
 ##                                                                   ##
-##                     Plasma Physics academic cases                 ##
-##    see esvm.pdf file for the meaning of perturbation parameters   ##
+##       Test cases for code validation and teaching pourpose        ##
+##   see esvm.pdf file for the meaning of perturbation parameters    ##
 ##                                                                   ##
 ## perturb = 0 for no perturbation,                                  ##
 ##           1 for the electrostatic wakefield test case,            ##
-##           2 for the (non)linear Landau damping test case or       ##
+##           2 for the linear Landau damping test case or            ##
 ##           3 for the two stream instability test case              ##
 ##                                                                   ##
 ## A       = perturbation amplitude                                  ##
@@ -149,13 +148,13 @@
 ##                                                                   ##
 #######################################################################
 #
-#perturb  1  
+#perturb  2  
 #
-#A        1.e-1
+#A        1.e-3
 #
-#k        0.07853981633
+#k        0.29919930034
 #
-#omega_0  0.07853981633
+#omega_0  1.18
 #
-#vd       5.
+#vd       0.
 #

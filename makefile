@@ -76,9 +76,14 @@ SRCS        = acuracy.f90 constants.f90 physics.f90 input.f90 diagnostics.f90 li
 
 SRCS_CHK    = acuracy.f90 constants.f90 physics.f90 input.f90 input-chk.f90
 
-OBJTS := $(SRCS:%.f90=%.o)
+OBJTS      := $(SRCS:%.f90=%.o)
 
-OBJTS_CHK := acuracy.o constants.o physics.o input.o input-chk.o
+OBJTS_CHK  := acuracy.o constants.o physics.o input.o input-chk.o
+
+#
+
+%.o : $(SRC_PATH)%.f90
+	$(F90) $(OPTS) -c $(SRC_PATH)$*.f90
 
 all : ESVM
 
@@ -86,30 +91,6 @@ ESVM : $(OBJTS)
 	$(F90) $(OPTS) $(OBJTS) -o esvm
 	rm *.mod
 	rm *.o
-
-acuracy.o : $(SRC_PATH)acuracy.f90
-	$(F90) $(OPTS) -c $(SRC_PATH)acuracy.f90
-	
-constants.o : $(SRC_PATH)constants.f90
-	$(F90) $(OPTS) -c $(SRC_PATH)constants.f90
-
-physics.o : $(SRC_PATH)physics.f90
-	$(F90) $(OPTS) -c $(SRC_PATH)physics.f90
-
-input.o : $(SRC_PATH)input.f90
-	$(F90) $(OPTS) -c $(SRC_PATH)input.f90
-
-input-chk.o : $(SRC_PATH)input-chk.f90
-	$(F90) $(OPTS) -c $(SRC_PATH)input-chk.f90
-
-diagnostics.o : $(SRC_PATH)diagnostics.f90
-	$(F90) $(OPTS) -c $(SRC_PATH)diagnostics.f90
-
-library.o : $(SRC_PATH)library.f90
-	$(F90) $(OPTS) -c $(SRC_PATH)library.f90
-	
-esvm.o : $(SRC_PATH)esvm.f90
-	$(F90) $(OPTS) -c $(SRC_PATH)esvm.f90
 
 ########################
 ########################
