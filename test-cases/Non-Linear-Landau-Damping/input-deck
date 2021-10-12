@@ -133,7 +133,7 @@
 ##       Test cases for code validation and teaching pourpose        ##
 ##    see esvm.pdf file for the meaning of perturbation parameters   ##
 ##                                                                   ##
-## perturb = 0 for no perturbation.                                  ##
+## perturb = 0 for no perturbation                                   ##
 ##           1 for the electrostatic wakefield test case             ##
 ##           2 for the (non)linear Landau damping test case          ##
 ##           3 for the two stream instability test case              ##
