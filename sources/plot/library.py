@@ -150,7 +150,15 @@ def plot_1D_hydro_quantity_scalar_plot(N_x, file_name, font_properties, y_label,
             plt.ylabel(y_label, fontdict=font_properties)
             plt.yticks(fontsize=16)
             ex_min = np.amin(p)
+            if (ex_min < 0.) :
+                ex_min = 1.1 * ex_min
+            else :
+                ex_min = 0.9 * ex_min
             ex_max = np.amax(p)
+            if (ex_max > 0.) :
+                ex_max = 1.1 * ex_max
+            else :
+                ex_max = 0.9 * ex_max
             if ( ex_min == ex_max ):
                 if (ex_min == 0.) :
                     ex_min = -1.

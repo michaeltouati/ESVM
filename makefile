@@ -70,7 +70,7 @@ OPTS = -fopenmp -fdefault-real-8 -O3
 
 SRC_PATH    = sources/
 
-SRC_PATH_PY = ${SRC_PATH}/extract/
+SRC_PATH_PY = ${SRC_PATH}/plot/
 
 SRCS        = acuracy.f90 constants.f90 physics.f90 input.f90 diagnostics.f90 library.f90 esvm.f90
 
@@ -159,25 +159,25 @@ clean : distclean figclean resclean
 ################
 ################
 
-extract_energy : $(SRC_PATH_PY)extract_energy.py
-	@python3 $(SRC_PATH_PY)extract_energy.py
+plot_energy : $(SRC_PATH_PY)plot_energy.py
+	@python3 $(SRC_PATH_PY)plot_energy.py
 
-extract_hydro2D : $(SRC_PATH_PY)extract_hydro2D.py
-	@python3 $(SRC_PATH_PY)extract_hydro2D.py
+plot_hydro2D : $(SRC_PATH_PY)plot_hydro2D.py
+	@python3 $(SRC_PATH_PY)plot_hydro2D.py
 
-extract_fe : $(SRC_PATH_PY)extract_fe.py
-	@python3 $(SRC_PATH_PY)extract_fe.py
+plot_fe : $(SRC_PATH_PY)plot_fe.py
+	@python3 $(SRC_PATH_PY)plot_fe.py
 
-extract_hydro1D : $(SRC_PATH_PY)extract_hydro1D.py
-	@python3 $(SRC_PATH_PY)extract_hydro1D.py
+plot_hydro1D : $(SRC_PATH_PY)plot_hydro1D.py
+	@python3 $(SRC_PATH_PY)plot_hydro1D.py
 
-extract_logfe : $(SRC_PATH_PY)extract_logfe.py
-	@python3 $(SRC_PATH_PY)extract_logfe.py
+plot_logfe : $(SRC_PATH_PY)plot_logfe.py
+	@python3 $(SRC_PATH_PY)plot_logfe.py
 
-extract :   extract_energy   \
-			extract_hydro2D  \
-			extract_fe       \
-			extract_hydro1D
+plot :  plot_energy   \
+		plot_hydro2D  \
+		plot_fe       \
+		plot_hydro1D
 
 ###############
 ###############
