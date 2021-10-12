@@ -65,7 +65,7 @@ print(' * found Nx  = '+str(Nx) +' space cells')
 print(' * found Nvx = '+str(Nvx)+' velocity cells')
 print('  ')
 
-print(' 2D space-time density plots:')
+print(' 2D space-time density plot:')
 print(' * 1D elecrostatic field')
 filename = 'results/Ex.dat'
 name     ='figures/Ex'
