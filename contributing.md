@@ -28,7 +28,7 @@ For problems related with plotting, please make sure first LaTeX, dvipng and gho
 
 # Propose a new feature
 
-If you want to propose a new feature in [ESVM](https://github.com/michaeltouati/ESVM) that is not already in the perspectives of the code mentioned in the last section of the documentation [esvm.pdf](https://github.com/michaeltouati/ESVM/blob/main/esvm.pdf), follow these steps :
+If you want to propose a new feature in [ESVM](https://github.com/michaeltouati/ESVM) that is not already in the perspectives of the code mentioned in the last section of the documentation [esvm.pdf](https://github.com/michaeltouati/ESVM/blob/master/esvm.pdf), follow these steps :
 1) Go to ['Issues'](https://github.com/michaeltouati/ESVM/issues) on the [ESVM master branch](https://github.com/michaeltouati/ESVM)
 2) Click on 'New issue'
 4) Describe the new feature request the more "clear and concise" as possible in the title starting with "Feature request :"
@@ -41,14 +41,14 @@ It will be a pleasure to discuss about it.
 
 [ESVM](https://github.com/michaeltouati/ESVM) uses the [Fork and pull model](https://docs.github.com/en/github/collaborating-with-pull-requests/getting-started/about-collaborative-development-models). In order to fix a bug or to submit a new feature that you've added in [ESVM](https://github.com/michaeltouati/ESVM), follow these steps:
 
-1) Fork the repo and create your own branch from [ESVM 'main' branch](https://github.com/michaeltouati/ESVM).
-2) Add your code. Please, keep the code standard compliant with same coding style by at least : 
+1) Fork the repo and create your own branch from the [ESVM 'master' branch](https://github.com/michaeltouati/ESVM).
+2) Add your code. Please, keep the code Fortran 95 standard compliant with same coding style by at least : 
 - respecting 2 spaces for indentation rather than tabs
 - not using object oriented Fortran 2003 features
 - not forgetting to deallocate arrays
 - not using non-allocatable, assumed-shape dummy argument in subroutines for bounds-preservation
 - not using arrays as input/output in functions for bounds-preservation
-3) If you've added a new feature that needs new simulation parameters in the [input-deck](https://github.com/michaeltouati/ESVM/blob/main/input-deck) and updated correspondingly the source file [input.f90](https://github.com/michaeltouati/ESVM/blob/main/sources/input.f90), please add their descriptions in the [input-deck](https://github.com/michaeltouati/ESVM/blob/main/input-deck) following the same style
+3) If you've added a new feature that needs new simulation parameters in the [input-deck](https://github.com/michaeltouati/ESVM/blob/master/input-deck) and updated correspondingly the source file [input.f90](https://github.com/michaeltouati/ESVM/blob/master/sources/input.f90), please add their descriptions in the [input-deck](https://github.com/michaeltouati/ESVM/blob/master/input-deck) following the same style
 ```sh
 ##                                                                   ##
 ## T  = electron temperature in eV                                   ##
