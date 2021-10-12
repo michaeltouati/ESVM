@@ -21,11 +21,28 @@
 ##                                                                   ##
 #######################################################################
 ## Initial commit written by Michaël J TOUATI - Dec. 2015
+import os
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 from matplotlib import mlab, cm
+
+def get_results_dir():
+    file = open('input-deck','r')
+    for line in file:
+        line      = line.strip()
+        array     = line.split()
+        if (array[0] == '#simu') :
+            name = array[1]
+            break
+    file.close()
+    return name
+
+def create_dir(name):
+    dir_name= os.path.dirname(name)
+    if not os.path.exists(dir_name):
+        os.mkdir(dir_name)
 
 def extract_energy_file(file_name):
     t0 = []

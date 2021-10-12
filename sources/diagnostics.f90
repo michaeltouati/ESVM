@@ -38,16 +38,16 @@ contains
 
 subroutine INIT_DIAG()
   implicit none
-  open (unit=1 ,file='results/fe.dat' ,form='formatted',status='unknown')
-  open (unit=2 ,file='results/ne.dat' ,form='formatted',status='unknown')
-  open (unit=3 ,file='results/Ex.dat' ,form='formatted',status='unknown')
-  open (unit=4 ,file='results/je.dat' ,form='formatted',status='unknown')
-  open (unit=5 ,file='results/ve.dat' ,form='formatted',status='unknown')
-  open (unit=7 ,file='results/vTe.dat',form='formatted',status='unknown')
-  open (unit=11,file='results/phi.dat',form='formatted',status='unknown')
-  open (unit=8 ,file='results/UK.dat' ,form='formatted',status='unknown')
-  open (unit=9 ,file='results/UT.dat' ,form='formatted',status='unknown')
-  open (unit=10,file='results/UE.dat' ,form='formatted',status='unknown')
+  open (unit=1 ,file='results/'//trim(simu)//'/fe.dat' ,form='formatted',status='unknown')
+  open (unit=2 ,file='results/'//trim(simu)//'/ne.dat' ,form='formatted',status='unknown')
+  open (unit=3 ,file='results/'//trim(simu)//'/Ex.dat' ,form='formatted',status='unknown')
+  open (unit=4 ,file='results/'//trim(simu)//'/je.dat' ,form='formatted',status='unknown')
+  open (unit=5 ,file='results/'//trim(simu)//'/ve.dat' ,form='formatted',status='unknown')
+  open (unit=7 ,file='results/'//trim(simu)//'/vTe.dat',form='formatted',status='unknown')
+  open (unit=11,file='results/'//trim(simu)//'/phi.dat',form='formatted',status='unknown')
+  open (unit=8 ,file='results/'//trim(simu)//'/UK.dat' ,form='formatted',status='unknown')
+  open (unit=9 ,file='results/'//trim(simu)//'/UT.dat' ,form='formatted',status='unknown')
+  open (unit=10,file='results/'//trim(simu)//'/UE.dat' ,form='formatted',status='unknown')
 end subroutine INIT_DIAG
 
 subroutine DIAG_ENERGY(time, N_x, d_x, n_e, v_e, vT_e, E_x_n, &

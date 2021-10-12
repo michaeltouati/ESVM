@@ -43,11 +43,13 @@ real(PR), dimension(:), allocatable   :: dU_K, dU_T, dU_E
 real(PR)                              :: U_K, U_T, U_E 
 logical                               :: test_positivity, save_results
 real(PR)                              :: timer_start, timer_finish
+!
 call cpu_time(timer_start)
 !
-call system('mkdir -p results')
-!
 call read_init_parameters()
+!
+call system('mkdir -p results')
+call system('mkdir -p results/'//trim(simu))
 !
 allocate(x(-1:N_x+2),vx(-1:N_vx+2))
 allocate(f_n(-1:N_x+2,-1:N_vx+2),f_np1(-1:N_x+2,-1:N_vx+2))

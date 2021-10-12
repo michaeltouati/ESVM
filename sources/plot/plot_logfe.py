@@ -52,9 +52,10 @@ cmap_fe_log = 'nipy_spectral'
 # Script #
 ##########
 
-dir= os.path.dirname("figures/")
-if not os.path.exists(dir):
-    os.mkdir(dir)
+simu_name=lib.get_results_dir()
+
+lib.create_dir('figures/')
+lib.create_dir('figures/'+simu_name+'/')
 
 print(' --------------------------------------------------------------------')
 print(' 1D1V plasma electron distribution function phase-space in log. scale')
@@ -62,23 +63,21 @@ print(' --------------------------------------------------------------------')
 print('  ')
 
 print(' Search for the number of phase-space cells:')
-[Nx,Nvx] = lib.search_Nx_Nvx('results/fe.dat')
+[Nx,Nvx] = lib.search_Nx_Nvx('results/'+simu_name+'/fe.dat')
 print(' * found Nx  = '+str(Nx) +' space cells')
 print(' * found Nvx = '+str(Nvx)+' velocity cells')
 print('  ')
 
 print(' Density plot at :')
-filename = 'results/fe.dat'
+filename = 'results/'+simu_name+'/fe.dat'
 N1 = Nvx
 N2 = Nx
 
 title = r'$\log_{10}{\displaystyle \left ( f_e \left (x,\,v_x,\,t\right)\,(n_0/v_{T_{e_0}}) \right )}$'
 
-subdir= "figures/fe_log"
-os.path.dirname(subdir)
-if not os.path.exists(subdir):
-      os.mkdir(subdir)
-name='figures/fe_log/fe_log_'
+lib.create_dir('figures/'+simu_name+'/logfe/')
+
+name='figures/'+simu_name+'/logfe/logfe_'
 
 N3 = int(N1*N2)
 vx = []

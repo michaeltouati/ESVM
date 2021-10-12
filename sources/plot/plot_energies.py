@@ -44,9 +44,10 @@ font = {'family': 'non-serif',
 # Script #
 ##########
 
-dir= os.path.dirname("figures/")
-if not os.path.exists(dir):
-    os.mkdir(dir)
+simu_name=lib.get_results_dir()
+
+lib.create_dir('figures/')
+lib.create_dir('figures/'+simu_name+'/')
 
 print(' --------------------------')
 print(' Total energies scalar plot')
@@ -54,14 +55,14 @@ print(' --------------------------')
 print('  ')
 
 # total plasma electron kinetic energy 
-[tk,uk0] = lib.extract_energy_file('results/UK.dat')
+[tk,uk0] = lib.extract_energy_file('results/'+simu_name+'/UK.dat')
 t = tk
 # total plasma electron internal energy
-[tt,ut0] = lib.extract_energy_file('results/UT.dat')
+[tt,ut0] = lib.extract_energy_file('results/'+simu_name+'/UT.dat')
 if len(tt) < len(t):
     t = tt
 # total electrostatic energy
-[te,ue0] = lib.extract_energy_file('results/UE.dat')
+[te,ue0] = lib.extract_energy_file('results/'+simu_name+'/UE.dat')
 if len(te) < len(t):
     t = te
 #
@@ -89,7 +90,7 @@ plt.xticks(fontsize=16)
 plt.xlabel(r'$t\,(\omega_p^{-1})$', fontdict=font)
 plt.ylabel(r'$\mathrm{Energy}\,\left (n_0 {\lambda_{\mathrm{Debye}}}^3 m_e {v_{T_{e_0}}}^2 \right )$', fontdict=font)
 plt.yticks(fontsize=16)
-fig.savefig('figures/energy_log.png',bbox_inches='tight')
+fig.savefig('figures/'+simu_name+'/energy_log.png',bbox_inches='tight')
 plt.close(fig)
 # in log scale
 print(' * All total energies in log. scale')
@@ -103,6 +104,6 @@ plt.xticks(fontsize=16)
 plt.xlabel(r'$t\,(\omega_p^{-1})$', fontdict=font)
 plt.ylabel(r'$\mathrm{Energy}\,\left (n_0 {\lambda_{\mathrm{Debye}}}^3 m_e {v_{T_{e_0}}}^2 \right )$', fontdict=font)
 plt.yticks(fontsize=16)
-fig.savefig('figures/energy.png',bbox_inches='tight')
+fig.savefig('figures/'+simu_name+'/energy.png',bbox_inches='tight')
 plt.close(fig)
 print('  ')

@@ -36,32 +36,33 @@ public :: read_init_parameters
 !           (see the file input-deck for their definitions)
 !======================================================================
 
-integer,  public  :: N_th
-real(PR), public  :: T
-real(PR), public  :: Z 
-real(PR), public  :: ni
-real(PR), public  :: x_min
-real(PR), public  :: x_max  
-real(PR), public  :: d_x
-real(PR), public  :: vx_min
-real(PR), public  :: vx_max
-real(PR), public  :: d_vx
-real(PR), public  :: cfl
-real(PR), public  :: L_t
-real(PR), public  :: dt_diag
-integer,  public  :: maxwell
-integer,  public  :: b_cond
-integer,  public  :: scheme
-real(PR), public  :: b
-integer,  public  :: perturb
-real(PR), public  :: A
-real(PR), public  :: k
-real(PR), public  :: omega_0
-real(PR), public  :: vd
-integer,  public  :: N_x
-integer,  public  :: N_vx
-real(PR), public  :: n0
-real(PR), public  :: Te
+character(len=30), public :: simu
+integer,           public :: N_th
+real(PR),          public :: T
+real(PR),          public :: Z
+real(PR),          public :: ni
+real(PR),          public :: x_min
+real(PR),          public :: x_max
+real(PR),          public :: d_x
+real(PR),          public :: vx_min
+real(PR),          public :: vx_max
+real(PR),          public :: d_vx
+real(PR),          public :: cfl
+real(PR),          public :: L_t
+real(PR),          public :: dt_diag
+integer,           public :: maxwell
+integer,           public :: b_cond
+integer,           public :: scheme
+real(PR),          public :: b
+integer,           public :: perturb
+real(PR),          public :: A
+real(PR),          public :: k
+real(PR),          public :: omega_0
+real(PR),          public :: vd
+integer,           public :: N_x
+integer,           public :: N_vx
+real(PR),          public :: n0
+real(PR),          public :: Te
 
 contains
 
@@ -93,6 +94,8 @@ subroutine read_init_parameters
     end do
     
     select case (str(1:istr))
+      case ('#simu')
+        simu=get_char(str(istr+1:))
       case ('#N_th')
         N_th = get_integer(str(istr+1:))
       case ('#T')  
@@ -174,6 +177,8 @@ subroutine read_init_parameters
   write(*,*)'-----------------------------------------'
   write(*,*)'Recapitulation of simulation parameters :'
   write(*,*)'-----------------------------------------'
+  write(*,*)'* Simulation :'
+  write(*,*)'simu   = ',trim(simu)
   write(*,*)'* Number of OpenMP threads :'
   write(*,'(A,1I4)')' N_th    = ',N_th
   write(*,*)'-----------------------------------------'
@@ -248,7 +253,7 @@ end function get_real
 
 function get_char(str)
   character(len=*), intent(in) :: str
-  Character(len=2) :: get_char
+  Character(len=30)            :: get_char
   read (str, *) get_char
   return
 end function get_char
