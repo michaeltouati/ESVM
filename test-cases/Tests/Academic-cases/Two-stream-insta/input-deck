@@ -131,9 +131,9 @@
 ##                     Plasma Physics academic cases                 ##
 ##    see esvm.pdf file for the meaning of perturbation parameters   ##
 ##                                                                   ##
-## perturb = 0 for no perturbation,                                  ##
-##           1 for the electrostatic wakefield test case,            ##
-##           2 for the linear Landau damping test case or            ##
+## perturb = 0 for no perturbation                                   ##
+##           1 for the electrostatic wakefield test case             ##
+##           2 for the (non)linear Landau damping test case          ##
 ##           3 for the two stream instability test case              ##
 ##                                                                   ##
 ## A       = perturbation amplitude                                  ##
