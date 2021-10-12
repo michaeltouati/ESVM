@@ -1,6 +1,8 @@
  -----------------------------------------
  Recapitulation of simulation parameters :
  -----------------------------------------
+ * Simulation :
+ simu   = Two-stream-instability-test
  * Number of OpenMP threads :
  N_th    =    8
  -----------------------------------------
@@ -272,4 +274,4 @@
  Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.517E+04
   
  ==============================================
- Total simulation time duration =   0.428E+00 s
+ Total simulation time duration =   0.471E+00 s

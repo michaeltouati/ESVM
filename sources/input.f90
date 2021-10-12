@@ -178,7 +178,7 @@ subroutine read_init_parameters
   write(*,*)'Recapitulation of simulation parameters :'
   write(*,*)'-----------------------------------------'
   write(*,*)'* Simulation :'
-  write(*,*)'simu   = ',trim(simu)
+  write(*,*)'simu    = ',trim(simu)
   write(*,*)'* Number of OpenMP threads :'
   write(*,'(A,1I4)')' N_th    = ',N_th
   write(*,*)'-----------------------------------------'
@@ -255,6 +255,7 @@ function get_char(str)
   character(len=*), intent(in) :: str
   Character(len=30)            :: get_char
   read (str, *) get_char
+  get_char = adjustl(get_char)
   return
 end function get_char
 

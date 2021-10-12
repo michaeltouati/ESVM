@@ -19,6 +19,7 @@
 ##   Written by Dr Michaël J TOUATI                                  ##
 ##                                                                   ##
 #######################################################################
+#
 #######################################################################
 ##                                                                   ##
 ##                         Simulation name                           ##
@@ -29,7 +30,7 @@
 ##                                                                   ##
 #######################################################################
 #
-#simu Linear-Landau-damping
+#simu Wakefield
 #
 #######################################################################
 ##                                                                   ##
@@ -45,8 +46,7 @@
 #######################################################################
 ##                                                                   ##
 ##                 Plasma properties - immobile ions                 ##
-##               ( Do not affect simulation results! )               ##
-##                                                                   ##
+##               ( Do not affect simulation result!  )               ##
 ##                                                                   ##
 ## T  = electron temperature in eV                                   ##
 ##                                                                   ##
@@ -56,11 +56,13 @@
 ##                                                                   ##
 #######################################################################
 #
-#T  100.
+#T  1000.
 #
 #Z  1
 #
-#ni 1.e19
+#ni 1.e21
+#
+#v0    0.
 #
 #######################################################################
 ##                                                                   ##
@@ -80,13 +82,13 @@
 ##                                                                   ##
 #######################################################################
 #
-#x_min  -10.5
+#x_min     0. 
 #
-#x_max   10.5
+#x_max    80.  
 #
-#d_x     0.05
+#d_x     0.25
 #
-#vx_min   -6.
+#vx_min   -4.
 #
 #vx_max    6.
 #
@@ -96,7 +98,7 @@
 ##                                                                   ##          
 ##                         Simulation times                          ##
 ##                                                                   ##    
-## cfl      = CFL parameter (must be 0 < cfl < 1)                    ##
+## cfl      = CFL parameter (must be < 1)                            ##
 ##                                                                   ##    
 ## L_t      = Simulation time duration                               ##
 ##                                                                   ##
@@ -104,15 +106,15 @@
 ##                                                                   ##
 #######################################################################
 #
-#cfl       9.e-1
+#cfl      9.e-1
 #
-#L_t     200.
+#L_t     14.
 #
-#dt_diag   1.  
+#dt_diag 0.25  
 #
 #######################################################################
 ##                                                                   ##
-##        BOUNDARY CONDITIONS AND NUMERICAL ADVECTION SCHEMES        ##
+##             Boundary conditions and numerical schemes             ##
 ##                                                                   ##
 ## maxwell = 1 for Maxwell-Ampere solver                             ##
 ##                 (Poisson is computed at the 1st iteration only)   ##
@@ -141,8 +143,8 @@
 #
 #######################################################################
 ##                                                                   ##
-##       Test cases for code validation and teaching pourpose        ##
-##   see esvm.pdf file for the meaning of perturbation parameters    ##
+##                     Plasma Physics academic cases                 ##
+##    see esvm.pdf file for the meaning of perturbation parameters   ##
 ##                                                                   ##
 ## perturb = 0 for no perturbation                                   ##
 ##           1 for the electrostatic wakefield test case             ##
@@ -159,13 +161,13 @@
 ##                                                                   ##
 #######################################################################
 #
-#perturb  2  
+#perturb  1  
 #
-#A        1.e-3
+#A        1.e-1
 #
-#k        0.29919930034
+#k        0.07853981633
 #
-#omega_0  1.18
+#omega_0  0.07853981633
 #
-#vd       0.
+#vd       5.
 #

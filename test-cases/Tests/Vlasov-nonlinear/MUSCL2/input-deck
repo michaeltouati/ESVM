@@ -22,6 +22,18 @@
 #
 #######################################################################
 ##                                                                   ##
+##                         Simulation name                           ##
+##                                                                   ##
+## simu = Simulation name                                            ##
+##       (less than 30 characters without spaces / punctuations      ##
+##        except - or _)                                             ##
+##                                                                   ##
+#######################################################################
+#
+#simu MUSCL2
+#
+#######################################################################
+##                                                                   ##
 ##                     Number of OpenMP threads                      ##
 ##                                                                   ##
 ## N_th = Number of threads used by OPEN_MP                          ##

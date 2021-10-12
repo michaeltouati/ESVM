@@ -1,6 +1,8 @@
  -----------------------------------------
  Recapitulation of simulation parameters :
  -----------------------------------------
+ * Simulation :
+ simu   = Landau-test
  * Number of OpenMP threads :
  N_th    =    8
  -----------------------------------------
@@ -272,4 +274,4 @@
  Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.107E+02
   
  ==============================================
- Total simulation time duration =   0.210E+00 s
+ Total simulation time duration =   0.233E+00 s

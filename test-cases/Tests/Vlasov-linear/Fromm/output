@@ -1,6 +1,8 @@
  -----------------------------------------
  Recapitulation of simulation parameters :
  -----------------------------------------
+ * Simulation :
+ simu   = Fromm
  * Number of OpenMP threads :
  N_th    =    1
  -----------------------------------------
@@ -286,4 +288,4 @@
  Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.303E+01
   
  ==============================================
- Total simulation time duration =   0.275E+00 s
+ Total simulation time duration =   0.300E+00 s

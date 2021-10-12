@@ -1,6 +1,8 @@
  -----------------------------------------
  Recapitulation of simulation parameters :
  -----------------------------------------
+ * Simulation :
+ simu   = Poisson
  * Number of OpenMP threads :
  N_th    =    1
  -----------------------------------------
@@ -268,4 +270,4 @@
  Total energy    (n0 Debye^3 me vTe0^2 / 2) =   0.525E+01
   
  ==============================================
- Total simulation time duration =   0.261E+00 s
+ Total simulation time duration =   0.288E+00 s

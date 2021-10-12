@@ -74,7 +74,7 @@ title    = r'$E_x \left ( x,\,t\right )\,(m_e \omega_p v_{T_{e_0}} / e)$'
 lib.plot_1D_hydro_quantity_2Dmap(Nx, filename, font, cmap_Ex, title, name)
 
 print(' * 1D elecrostatic potential')
-filename = 'results/'+simu_name+'/phi.dat'
+filename = 'results/'+simu_name+'/Phi.dat'
 name     ='figures/'+simu_name+'/Phi'
 title    = r'$\Phi \left ( x,\,t\right )\,(m_e {v_{T_{e_0}}}^2 / e)$'
 lib.plot_1D_hydro_quantity_2Dmap(Nx, filename, font, cmap_Ex, title, name)
@@ -101,7 +101,7 @@ lib.plot_1D_hydro_quantity_2Dmap(Nx, filename, font, cmap_je, title, name)
 print(' * 1D plasma electron thermal velocity (standard deviation)')
 filename = 'results/'+simu_name+'/vTe.dat'
 cmap     = 'jet'
-name     ='figures/'+simu_name+'/vte'
+name     ='figures/'+simu_name+'/vTe'
 title    = r'$v_{T_e} \left ( x,\,t\right )\,(v_{T_{e_0}})$'
 lib.plot_1D_hydro_quantity_2Dmap(Nx, filename, font, cmap_vte, title, name)
 print('  ')
