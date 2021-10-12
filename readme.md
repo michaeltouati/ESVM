@@ -43,16 +43,16 @@ make plot
 ```
 to plot all the results. If you want to plot the 1D1V plasma electron distribution function phase-space density maps in logarithmic scale, just type :
 ```sh
-make plot_logfe  
+make plot_logfe
 ```
 The resulting plots will be stored in the folder 'figures'. It can also be plotted separately during the simulation run :
 - the energies scalar plots by typing :
 ```sh
-make plot_energy  
+make plot_energies
 ```
 - the 1D plasma electron hydrodynamic moments space-time density maps by typing :
 ```sh
-make plot_hydro2D  
+make plot_hydro2D
 ```
 - the 1D plasma electron hydrodynamic moments scalar plots by typing : 
 ```sh
@@ -60,7 +60,7 @@ make plot_hydro1D
 ```
 - or the 1D1V plasma electron distribution function phase-space density maps by typing :
 ```sh
-make plot_fe 
+make plot_fe
 ```
 
 # Cleaning the directory
