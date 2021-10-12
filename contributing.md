@@ -76,17 +76,17 @@ TEST_DIR += New-features/my-new-feature
 !! Initial commit written by Michaël J TOUATI - Dec. 2015
 !! my-new-feature or my-bug-fix commit by my-name - my-add-date
 ```
-- the modified Python 3 script
+- the modified Python script
 ```
 # Initial commit written by Michaël J Touati - Dec. 2015
 # my-new-feature or my-bug-fix commit by my-name - my-add-date
 ```
-- input deck if 3.
+- the input deck if 3.
 ```sh
 ##   Initial commit written by Dr Michaël J TOUATI - Dec. 2015       ##
 ##   my-new-feature commit by my-name - my-add-date                  ##
 ```
-- makefile if 4.
+- the makefile if 4.
 ```sh
 ## Initial commit written by Dr Michaël J TOUATI - Dec. 2015
 ## my-new-feature commit by my-name - my-add-date
