@@ -74,11 +74,11 @@ If you want to remove from the ESVM directory :
 ```sh
 make distclean
 ```
-- the directory 'figures' containing all simulation result plots, type :
+- the directory 'figures' containing all simulations results plots, type :
 ```sh
 make figclean
 ```
-- the directory 'results' containing all simulation result data files, type :
+- the directory 'results' containing all simulations results data files, type :
 ```sh
 make resclean
 ```
