@@ -39,28 +39,28 @@ All simulation results are stored in files located in the folder 'results'.
 Python scripts allowing to extract and plot the simulation results are located in the folder 'sources/extract'.
 They can be used by simply typing :
 ```sh
-make extract
+make plot
 ```
 to plot all the results. If you want to plot the 1D1V plasma electron distribution function phase-space density maps in logarithmic scale, just type :
 ```sh
-make extract_logfe  
+make plot_logfe  
 ```
 The resulting plots will be stored in the folder 'figures'. It can also be plotted separately during the simulation run :
 - the energies scalar plots by typing :
 ```sh
-make extract_energy  
+make plot_energy  
 ```
 - the 1D plasma electron hydrodynamic moments space-time density maps by typing :
 ```sh
-make extract_hydro2D  
+make plot_hydro2D  
 ```
 - the 1D plasma electron hydrodynamic moments scalar plots by typing : 
 ```sh
-make extract_hydro1D
+make plot_hydro1D
 ```
 - or the 1D1V plasma electron distribution function phase-space density maps by typing :
 ```sh
-make extract_fe 
+make plot_fe 
 ```
 
 # Cleaning the directory
