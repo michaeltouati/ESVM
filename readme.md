@@ -2,7 +2,7 @@
 
 # Compiling the code
 
-Modify the makefile as a function of the wished compilation options and the compilers installed on your computer and then type :
+Modify the makefile as a function of the wished compilation options and the Fortran compiler installed on your computer and then type :
 
 ```sh
 make
