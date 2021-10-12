@@ -13,9 +13,9 @@ The compilation can be tested by typing
 ```sh
 make test
 ```
-The tests consist in performing a series of 'diff file1 file2' where :
+The tests consist in comparing file1 and file2 where :
 * file1 is one test simulation terminal output performed with an input deck located in the directory 'test-cases/Tests/' and
-* file2 is the terminal output of the corresponding simulation already performed also located in 'test-cases/Tests/'.
+* file2 is the terminal output of the corresponding simulation already performed by the developper located in 'test-cases/Tests/'.
 
 # Running a simulation
 
