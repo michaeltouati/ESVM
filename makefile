@@ -78,19 +78,23 @@ SRCS_CHK    = acuracy.f90 constants.f90 physics.f90 input.f90 input-chk.f90
 
 OBJTS      := $(SRCS:%.f90=%.o)
 
-OBJTS_CHK  := acuracy.o constants.o physics.o input.o input-chk.o
-
-#
+OBJTS_CHK  := $(SRCS_CHK:%.f90=%.o)
 
 %.o : $(SRC_PATH)%.f90
 	$(F90) $(OPTS) -c $(SRC_PATH)$*.f90
 
-all : ESVM
+all : check-input-deck esvm    \
+	  remove-compilation-files
 
-ESVM : $(OBJTS)
+esvm : $(OBJTS)
 	$(F90) $(OPTS) $(OBJTS) -o esvm
-	rm *.mod
-	rm *.o
+
+check-input-deck : $(OBJTS_CHK)
+	$(F90) $(OPTS) $(OBJTS_CHK) -o check-input-deck
+
+remove-compilation-files :
+	@rm *.mod
+	@rm *.o
 
 ########################
 ########################
@@ -98,14 +102,8 @@ ESVM : $(OBJTS)
 ########################
 ########################
 
-check-input-deck : $(OBJTS_CHK)
-	$(F90) $(OPTS) $(OBJTS_CHK) -o check-input-deck
-	@rm *.mod
-	@rm *.o
-
-check : check-input-deck
+check :
 	@./check-input-deck
-	@rm check-input-deck
 
 ###############
 ###############
@@ -124,7 +122,7 @@ run :
 
 distclean :
 	@rm -rf sources/extract/__pycache__ 
-	@rm -f *.o *.mod esvm
+	@rm -f *.o *.mod esvm check-input-deck
 
 figclean :
 	@rm -rf figures

@@ -21,9 +21,13 @@ The tests consist in comparing file1 and file2 where :
 
 Fill the wished input-deck (all parameters are described inside), eventually check them by typing
 ```sh
+./check-input-deck
+```
+or
+```sh
 make check
 ```
-and type :
+and then type :
 ```sh
 ./esvm
 ```
