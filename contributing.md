@@ -100,7 +100,7 @@ make test
 - `-fdefault-real-8 -O -g -fopenmp -Wall -fcheck=all -fbacktrace -std=f95 -fall-intrinsics -ffpe-trap=invalid,zero,overflow` for the GNU compiler gfortran
 8) If 3. and 4., update the tests generator bash script 'test-cases/Tests/test-gen.sh' by adding a command line that corresponds to your new feature to be tested
 ```sh
-cp test-cases/Tests/my-new-feature/input-deck . && ./esvm > output && cp output test-cases/Tests/my-new-feature/ 
+cp test-cases/Tests/New-features/my-new-feature/input-deck . && ./esvm > output && cp output test-cases/Tests/New-features/my-new-feature/
 ```
 10) Issue that pull request!
 
