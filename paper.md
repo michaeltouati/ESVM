@@ -41,8 +41,8 @@ bibliography: paper.bib
 
 # Summary
 
-A plasma is a set of charged particles consisting of electrons and ionized atoms whose quantity is sufficiently large to behave collectively through the long-distance electromagnetic fields they produce. It is thought that more than 99.9% of visible matter in the Universe is in Plasma state. In a collisionless plasma  consisting in an ionized gas composed of electrons moving in between much heavier ions, any electrostatic field is rapidly screened by the plasma electrons over the Debye screening distance [@DebyeHuckel:1923]. When the number of electrons in these Debye spheres can be assumed to be infinite, the plasma electron population is correctly described by the Vlasov equation [@Vlasov:1938] that neglects all correlations between particles such as the binary Coulomb collisions between them. Besides its simplicity, the resulting Vlasov-Maxwell set of equations is extremely rich in Physics and has many applications ranging from Astrophysics and theoretical Plasma Physics to intense laser-matter interaction experiments. ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell standard-compliant Fortran code, parallelized with OpenMP and using Python 3 for post-processing, that allows for the study of these collisionless plasmas. Many finite volume numerical advection schemes [@Godunov:1959] are implemented in order to discretize the Vlasov equation, namely :
-- the donor-cell scheme i.e. the downwind / upwind scheme [@Courant:1952] depending on the advection direction in each phase-space cell, 
+A plasma is a set of charged particles consisting of electrons and ionized atoms whose quantity is sufficiently large to behave collectively through the long-distance electromagnetic fields they produce. It is thought that more than 99.9% of visible matter in the Universe is in Plasma state. In a collisionless plasma  consisting in an ionized gas composed of electrons moving in between much heavier ions, any electrostatic field is rapidly screened by the plasma electrons over the Debye screening distance [@DebyeHuckel:1923]. When the number of electrons in these Debye spheres can be assumed to be infinite, the plasma electron population is correctly described by the Vlasov equation [@Vlasov:1938] that neglects all correlations between particles such as the binary Coulomb collisions between them. Besides its simplicity, the resulting Vlasov-Maxwell set of equations is extremely rich in Physics and has many applications ranging from Astrophysics and theoretical Plasma Physics to intense laser-matter interaction experiments. ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 95  standard-compliant code, parallelized with OpenMP and using Python 3 for post-processing, that allows for the study of these collisionless plasmas. Many finite volume advection schemes [@Godunov:1959] are implemented in order to discretize the Vlasov equation, namely :
+- the donor-cell scheme, i.e. the downwind / upwind scheme [@Courant:1952] depending on the advection direction in each phase-space cell, 
 - the Lax-Wendroff scheme [@LaxWendroff:1960], 
 - the Fromm scheme [@Fromm:1968],
 - the Beam-Warming scheme [@BeamWarming:1976],
@@ -51,11 +51,11 @@ A plasma is a set of charged particles consisting of electrons and ionized atoms
 - the superbee scheme [@Roe:1986] and 
 - two Monotonic Upwind-centered Scheme for Conservation Laws (MUSCL) [@VanLeerV:1977] schemes MUSCL2 [@Crouseilles:2004] and MUSCL1 [@Duclous:2009]. 
 
-Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes, the non-linear second order minmod, superbee, Van Leer and MUSCL schemes make use of a Total Variation Diminishing (TVD) non-linear flux limiter with the price of becoming a first order scheme in some phase-space cells to limit the numerical oscillations. The donor-cell scheme is a first order method and has the pros of limiting such eventual oscillations but the cons of being numerically less consistent and more diffusive. In ESVM, the discretized Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation or equivalently with the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step, only. While the second order Maxwell-Gauss solver needs a computationally expensive inversion of a tridiagonal matrix for the computation of the Poisson equation, the Maxwell-Ampere equation solver makes use of a faster first order numerical scheme (in time). Both absorbing and periodic boundary conditions for both the particles and the fields are implemented. Python scripts, using the Matplotlib and Numpy packages, are provided to automatically extract and plot the stored simulation results. Compilation rules can be easily modified depending on the user compiler preferences using the provided makefile. It is however recommended to compile the code using the double-precision compiler option. Well known Plasma Physics academic cases, tools for testing the compilation and tools for checking the simulation parameters that are specified by the user in the input-deck are provided. 
+Contrary to the linear second order Lax-Wendroff, Fromm and Beam-Warming schemes, the non-linear second order minmod, superbee, Van Leer and MUSCL schemes make use of a Total Variation Diminishing (TVD) non-linear flux limiter with the price of becoming a first order scheme in some phase-space cells to limit the numerical oscillations. The donor-cell scheme is a first order method and has the pros of limiting such eventual oscillations but the cons of being numerically less consistent and more diffusive. In ESVM, the discretized Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation or equivalently with the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step, only. While the second order Maxwell-Gauss solver needs a computationally expensive inversion of a tridiagonal matrix for the computation of the Poisson equation, the Maxwell-Ampere equation solver makes use of a faster first order numerical scheme (in time). Both absorbing and periodic boundary conditions for both the particles and the fields are implemented. Python scripts, using the Matplotlib and Numpy packages, are provided to automatically extract and plot the stored simulation results. Compilation rules can be easily modified in the [makefile](https://github.com/michaeltouati/ESVM/blob/master/makefile) depending on the user compiler preferences. It is however recommended to compile the code using the double-precision compiler option. Well known Plasma Physics academic cases, tools for testing the compilation and tools for checking the simulation parameters specified in the input-deck are provided. 
 
 # Statement of need
 
-`ESVM` has been developed in order to adapt simulations to specific Plasma Physics problems by chosing the more adequate finite volume numerical advection scheme in order to compute the Vlasov equation phase-space advection derivatives and to chose between computing the Maxwell-Gauss equation or the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step, only. The code aims at beeing used by the open-source Highly Parallel Computing (HPC) Plasma Physics community ranging from under or post-graduate students to teachers and researchers who usually use Particle-In-Cell (PIC) codes [@Dawson:1962] to study collisionless plasmas. Indeed, the PIC method may prohibit the study of Plasma Physical processes on large time scales and/or for very dense collisionless plasmas due to the statistical and numerical fluctuations of the computed quantities imposed by the use of a finite number of macroparticles. Also, plasma instabilities naturally develop in PIC codes, seeded by the available fluctuations spatial spectrum k-vector for which the instability growth rate is maximum and some small amplitude Plasma Physical processes may be hidden under the fluctuactions level. Compared to the many open source PIC code such as [@Derouillat:2018] and semi-Lagrangian codes such as [@Debuyl:2014], there is no open source finite volume Vlasov codes in the literature that are not based on an expansion method such as [@Tzoufras:2011] [@Touati:2014] or [@Joglekar:2020]. In addition, since the Vlasov equation is a conservation equation of the number of particle in the phase-space, using a finite volume method in order to compute the Vlasov equation presents the advantage of allowing for the use of numerical schemes that are numerically flux conserving and/or that ensure the distribution function positivity compared to other numerical methods. ESVM has already been used during courses for under and post-graduate students about the "numerical tools for laser-plasma interaction Physics" and it is currently used for theoretical Plasma Physics investigations.
+`ESVM` has been developed in order to adapt simulations to specific Plasma Physics problems by chosing the more adequate finite volume numerical advection scheme in order to compute the Vlasov equation phase-space advection derivatives and to chose between computing the Maxwell-Gauss equation or the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step, only. The code aims at beeing used by the open-source Highly Parallel Computing (HPC) Plasma Physics community ranging from under or post-graduate students to teachers and researchers who usually use Particle-In-Cell (PIC) codes [@Dawson:1962] to study collisionless plasmas. Indeed, the PIC method may prohibit the study of Plasma Physical processes on large time scales and/or for very dense collisionless plasmas due to the statistical and numerical fluctuations of the computed quantities imposed by the use of a finite number of particles. Also, plasma instabilities naturally develop in PIC codes, seeded by the available fluctuations spatial spectrum k-vector for which the instability growth rate is maximum and some small amplitude Plasma Physical processes may be hidden under the fluctuactions level. Compared to the many open source PIC codes such as [@Derouillat:2018] and semi-Lagrangian codes such as [@Debuyl:2014], there is no open source finite volume Vlasov-Maxwell codes in the literature that are not based on an expansion method such as [@Tzoufras:2011] [@Touati:2014] or [@Joglekar:2020]. Finally, since the Vlasov equation is a conservation equation of the number of particle in the phase-space, using a finite volume method in order to compute the Vlasov equation presents the advantage of allowing for the use of numerical schemes that are numerically flux conserving and/or that ensure the distribution function positivity compared to other numerical methods. ESVM has already been used during courses for under and post-graduate students about the "numerical tools for laser-plasma interaction Physics" and it is currently used for theoretical Plasma Physics investigations.
 
 # Equations computed by ESVM
 
@@ -96,9 +96,9 @@ and
 are the plasma electron density, mean velocity and electrical charge current, respectively. ESVM also computes the plasma electron thermal velocity $v_{T_e} (x,t)$ defined according to the plasma electron internal energy density
 \begin{equation}
   \label{eq:internal_energy}
-  u_{T_e} (x,t) = \displaystyle \frac{ n_e (x,t) }{2} m_e {v_{T_e} (x,t)}^2  = \displaystyle \frac{m_e}{2} \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) {\displaystyle \left ( v_x - v_e (x,t) \right )}^2 \, d v_x.
+  u_{T_e} (x,t) = \displaystyle \frac{ m_e }{2} n_e (x,t) {v_{T_e} (x,t)}^2  = \displaystyle \frac{m_e}{2} \displaystyle \int_{v_{x,\mathrm{min}}}^{v_{x,\mathrm{max}}} f_e (x,v_x,t) {\displaystyle \left ( v_x - v_e (x,t) \right )}^2 \, d v_x.
 \end{equation}
-For example, in 1D plasmas at local Maxwell-Boltzmann equilibrium, $v_{T_e} (x,t) = \displaystyle \sqrt{k_B T_e (x,t) / m_e}$ where $k_B$ is the Boltzmann constant, $T_e(x,t)$ is the local electron temperature and $m_e$ the electron mass. Maxwell-Gauss equation \autoref{eq:gauss} is computed by using the electrostatic potential definition 
+For example, in 1D plasmas at local Maxwell-Boltzmann equilibrium, $v_{T_e} (x,t) = \displaystyle \sqrt{k_B T_e (x,t) / m_e}$ where $k_B$ is the Boltzmann constant, $T_e(x,t)$ is the local electron temperature and $m_e$ is the electron mass. Maxwell-Gauss equation \autoref{eq:gauss} is computed by using the electrostatic potential definition 
 \begin{equation}
   \label{eq:potential}
   \displaystyle \frac{\partial \Phi}{\partial x} (x,t) = - E_x (x,t)
@@ -116,14 +116,14 @@ When the simulation is running, ESVM stores at every time steps and displays on 
 \end{equation}
 \begin{equation}
 \label{eq:total_kinetic_energy}
-U_{K_e} (t_d) = {\lambda_{\mathrm{Debye}}}^2 \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} n_e (x,t) \displaystyle \frac{m_e {v_e (x,t_d)}^2}{2}  \,  d x
+U_{K_e} (t_d) = {\lambda_{\mathrm{Debye}}}^2 \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} \displaystyle \frac{m_e}{2} n_e (x,t) {v_e (x,t_d)}^2 \,  d x
 \end{equation}
 and
 \begin{equation}
   \label{eq:total_electrostatic_energy}
   U_{E_x} (t_d) = {\lambda_{\mathrm{Debye}}}^2 \displaystyle \int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}} \displaystyle \frac{{E_x (x,t_d)}^2}{8 \pi} \, d x,
 \end{equation}
-respectively as well as the total energy
+respectively, as well as the total energy
 \begin{equation}
   U_{\mathrm{tot}} (t_d) = U_{T_e} (t_d)+ U_{K_e} (t_d) + U_{E_x} (t_d)
 \end{equation}
@@ -138,27 +138,25 @@ in order to check the energy conservation in the simulation. The user can initia
   \end{array} \right .
 \end{equation}
 by no imposing any perturbation parameter or 
-- a well known Plasma Physics process; cf. section **ESVM Plasma Physics academic case simulations**. 
-- Finally, specific Plasma Physics simulations can easily be added in ESVM by implementing them in the subroutine `INIT_SIMU` of the [library.f90](https://github.com/michaeltouati/ESVM/blob/master/sources/library.f90) source file.
+- a provided Plasma Physics academic case; cf. section **ESVM Plasma Physics academic case simulations**. 
+- Finally, specific Plasma Physics simulations can easily be added in ESVM by implementing their initialization in the subroutines `INIT_SIMU` and/or `DRIVE` in  the [library.f90](https://github.com/michaeltouati/ESVM/blob/master/sources/library.f90) source file.
 
 # ESVM units
 
-The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = v_{T_{e_0}} / \omega_{p}$ and the constant electron density $n_0 = Z n_i$ for spatial densities. $v_{T_{e_0}}$ is therefore an important unit parameter of normalization since it fixes indirectly the space unit. It can be defined more generally as the initial plasma electron velocity distribution standard deviation if the plasma is not initialized at Maxwell-Boltzmann thermodynamic equilibrium; cf. \autoref{eq:internal_energy}. Injecting these units in the equations computed by the code, one deduces the resulting normalized electrostatic field and electron distribution function that consequently reads $\underline{E_x} = e E_x / m_e \omega_{p} v_{T_{e_0}}$ and $\underline{f_e} = f_e v_{T_{e_0}} / n_0$, respectively.
+The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = v_{T_{e_0}} / \omega_{p}$ and the average plasma electron density $n_0 = Z n_i$ for spatial densities. $v_{T_{e_0}}$ is therefore an important unit parameter of normalization since it fixes indirectly the space unit. It can be defined more generally as the initial plasma electron velocity distribution standard deviation if the plasma is not initialized at Maxwell-Boltzmann thermodynamic equilibrium \autoref{eq:driftingMaxwellBoltzmannEquilibrium}; cf. \autoref{eq:internal_energy}. Injecting these units in the equations computed by the code, one deduces the resulting normalized electrostatic field and electron distribution function that consequently reads $\underline{E_x} = e E_x / m_e \omega_{p} v_{T_{e_0}}$ and $\underline{f_e} = f_e v_{T_{e_0}} / n_0$, respectively.
 
 # ESVM numerical stability
 
-The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to be Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_{e_0}}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_{e_0}}$ and also sufficiently small to capture the desired Physics. The CFL stability condition (from the name of its finder R. Courant, K. Friedrichs and H. Lewy [@Courant:1928)] is implemented inside the code in such a way that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ such that the normalized simulation time step reads
+The spatial grid cells should be chosen lower than the Debye length $\Delta x < \lambda_{\mathrm{Debye}}$ for the simulation to be Physical. $v_{x,\mathrm{min}}$ and $v_{x,\mathrm{max}}$ should be chosen sufficiently large $|v_{x,\mathrm{min}/\mathrm{max}}| \gg v_{T_{e_0}}$ in such a way that there is no plasma electrons outside the simulation velocity space during the whole simulation. The simulation velocity bin size should be chosen lower than the thermal electron velocity $\Delta v_x < v_{T_{e_0}}$ and also sufficiently small to capture the desired Physics. The CFL stability condition, from the name of its finder R. Courant, K. Friedrichs and H. Lewy [@Courant:1928], is implemented inside the code in such a way that the user just needs to specify in the input deck the scalar parameter $\mathrm{cfl} < 1$ that fixes the normalized simulation time step according to 
 \begin{equation}
 \underline{\Delta t}_n = \mathrm{cfl} \times F^n(\underline{\Delta x}, \underline{\Delta v}_x ) < F^n(\underline{\Delta x}, \underline{\Delta v}_x)
 \end{equation}
-at the time step $\underline{t}_n = \sum_{m=1}^{n} \underline{\Delta t}_m$ at time iteration $n$ where $F^n(\underline{\Delta x}, \underline{\Delta v}_x)$ depends on the chosen numerical scheme. 
-
-For example, if one notes
+at the time step $\underline{t}_n = \sum_{m=1}^{n} \underline{\Delta t}_m$ at time iteration $n$ where $F^n(\underline{\Delta x}, \underline{\Delta v}_x)$ depends on the chosen numerical scheme. For example, if one notes
 \begin{equation}
   \label{eq:vol_def}
 \underline{f_e}^{n,i} = \displaystyle \frac{1}{\underline{\Delta x} } \displaystyle \int_{\underline{x}_{i-1/2}}^{\underline{x}_{i+1/2}} \underline{f_e} \left(\underline{x},\,\underline{t}_n\right)\, d \underline{x}
 \end{equation}
-the electron distribution function finite volume at the spatial location $\underline{x}_i$ located in between $\underline{x}_{i-1/2} = \underline{x}_{i} - \underline{\Delta x}/2$ and $\underline{x}_{i+1/2} = \underline{x}_{i} + \underline{\Delta x}/2$ and one considers the Lax-Wendroff method to compute the advection 
+the finite volume plasma electron distribution function at the spatial bin located in between $\underline{x}_{i-1/2} = \underline{x}_{i} - \underline{\Delta x}/2$ and $\underline{x}_{i+1/2} = \underline{x}_{i} + \underline{\Delta x}/2$ and one considers the Lax-Wendroff method to compute the advection 
 \begin{equation}
   \label{eq:advection}
   \displaystyle \frac{\partial \underline{f_e}}{\partial \underline{t}} + \underline{v_x} \displaystyle \frac{\partial \underline{f_e}}{\partial \underline{x} } = 0
@@ -166,7 +164,7 @@ the electron distribution function finite volume at the spatial location $\under
 of plasma electrons along the spatial $\underline{x}$-axis in the phase-space, the numerical scheme reads
 \begin{equation}
   \label{eq:LaxWendroff}
-  {\left [ \displaystyle \frac{\underline{f_e}^{n+1} - \underline{f_e}^{n} }{ \underline{\Delta t}_n } \right ]}^i + \underline{v_x} {\left [ \displaystyle \frac{\underline{F_x}^{i+1/2} - \underline{F_x}^{i-1/2} }{ \underline{\Delta x} } \right ]}^n = 0
+  \displaystyle \frac{\underline{f_e}^{n+1,i} - \underline{f_e}^{n,i} }{ \underline{\Delta t}_n } + \underline{v_x} \displaystyle \frac{\underline{F_x}^{n,i+1/2} - \underline{F_x}^{n,i-1/2} }{ \underline{\Delta x} } = 0
 \end{equation}
 where the plasma electron fluxes across the volume sections located at $\underline{x}_{i\pm1/2}$ are given by
 \begin{equation}
@@ -182,14 +180,14 @@ According to the Taylor expansion of $\underline{f_e}^{n,i+i}$, $\underline{f_e}
 \begin{equation}
   \label{eq:LaxWendroff_error}
   \begin{array}{lll}
-  \underline{\epsilon}^{n,i} &=& {\left [ \displaystyle \frac{\underline{f_e}^{n+1} - \underline{f_e}^{n} }{ \underline{\Delta t}_n } \right ]}^i + \underline{v_x} {\left [ \displaystyle \frac{\underline{F_x}^{i+1/2} - \underline{F_x}^{i-1/2} }{ \underline{\Delta x} } \right ]}^n - \displaystyle \left (  {\left . \displaystyle \frac{\partial \underline{f_e} }{\partial \underline{t}} \right |}^{n,i} + \underline{v_x}  {\left . \displaystyle \frac{\partial \underline{f_e} }{\partial \underline{x}} \right |}^{n,i} \right )
+  \underline{\epsilon}^{n,i} &=& \displaystyle \frac{\underline{f_e}^{n+1,i} - \underline{f_e}^{n,i} }{ \underline{\Delta t}_n } + \underline{v_x} \displaystyle \frac{\underline{F_x}^{n,i+1/2} - \underline{F_x}^{n,i-1/2} }{ \underline{\Delta x} }- \displaystyle \left (  {\left . \displaystyle \frac{\partial \underline{f_e} }{\partial \underline{t}} \right |}^{n,i} + \underline{v_x}  {\left . \displaystyle \frac{\partial \underline{f_e} }{\partial \underline{x}} \right |}^{n,i} \right )
   \cr &=& \displaystyle \frac{ {\underline{\Delta t}_n}^2 }{6} {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{t}^3} \right |}^{n,i}  + \underline{v_x} \displaystyle \frac{ {\underline{\Delta x}}^2 }{6}  {\left . \displaystyle \frac{\partial^3 \underline{f_e} }{\partial \underline{x}^3} \right |}^{n,i} + O\left ( {\underline{\Delta t}_n}^3 + {\underline{\Delta x}}^3 + \underline{\Delta t}_n {\underline{\Delta x}}^2\right ).
   \end{array}
 \end{equation}
 By using the Von Neumann stability analysis, assuming periodic boundary conditions for simplicity and noting
 \begin{equation}
   \label{eq:VonNeumann}
-   \widehat{\underline{f_e}}^n(\underline{k}^p) = \displaystyle \frac{1}{ N_x } \displaystyle \sum_{i=1}^{N_x} \underline{f_e}^{i,n} \exp{\left (- \iota \underline{k}^p \underline{x}_i \right )} \Leftrightarrow \underline{f_e}^{n,i}  = \displaystyle \sum_{p=1}^{N_x} \widehat{\underline{f_e}}^n(\underline{k}^p)  \exp{\left ( \iota \underline{k}^p \underline{x}_i \right )}
+   \widehat{\underline{f_e}}^n(\underline{k}^p) = \displaystyle \frac{1}{ N_x } \displaystyle \sum_{i=1}^{N_x} \underline{f_e}^{n,i} \exp{\left (- \iota \underline{k}^p \underline{x}_i \right )} \Leftrightarrow \underline{f_e}^{n,i}  = \displaystyle \sum_{p=1}^{N_x} \widehat{\underline{f_e}}^n(\underline{k}^p)  \exp{\left ( \iota \underline{k}^p \underline{x}_i \right )}
 \end{equation}
 with $\iota^2=-1$, $N_x=1+(\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})/\underline{\Delta x}$ the number of spatial grid points and $\underline{k}^p = 2 \pi (p-1) / (\underline{x}_{\mathrm{max}}-\underline{x}_{\mathrm{min}})$ the discrete Fourier mode, one gets by injecting \autoref{eq:VonNeumann} in \autoref{eq:LaxWendroff}
 \begin{equation}
@@ -199,7 +197,7 @@ for each term $p$ of the series. It implies the numerical scheme is stable,
 \begin{equation}
   \mathrm{meaning} \,\displaystyle \left | \displaystyle \frac{ \widehat{\underline{f_e}}^{n+1} (\underline{k}^p) }{ \widehat{\underline{f_e}}^{n} (\underline{k}^p) } \right | < 1,\,\mathrm{if}\,\underline{\Delta t}_n < \displaystyle \frac{ \underline{\Delta x} }{ \underline{v_x} } .
 \end{equation}
-Performing the same reasoning when discretizing also the velocity space $\underline{v_x}^\ell = \underline{v_{x,\mathrm{min}}} + (\ell-1 ) \underline{\Delta v}_x$ with $N_{v_x} = 1 + (\underline{v_{x,\mathrm{max}}}-\underline{v_{x,\mathrm{min}}}) / \underline{\Delta v}_x$ velocity grid points and considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in the velocity space for computing the Vlasov equation \autoref{eq:vlasov1d1v} with each numerical scheme implemented in ESVM, one finds (sometimes empirically when it is too difficult analytically) that
+Performing the same reasoning when discretizing also the velocity space with bins centered at $\underline{v_x}^\ell = \underline{v_{x,\mathrm{min}}} + (\ell-1 ) \underline{\Delta v}_x$ with $N_{v_x} = 1 + (\underline{v_{x,\mathrm{max}}}-\underline{v_{x,\mathrm{min}}}) / \underline{\Delta v}_x$ velocity bins and considering in addition the advection term of plasma electrons along the $\underline{v_x}$-axis in the velocity space for computing the Vlasov equation \autoref{eq:vlasov1d1v} with each numerical scheme implemented in ESVM, one finds (sometimes empirically when it is too difficult analytically) that
 \begin{equation}
   \label{CFL}
   F^n(\underline{\Delta x}, \underline{\Delta v}_x) = \displaystyle \frac{1/2}{ \displaystyle \frac{ \underset{\ell \in [1,N_{v_x}]}{\mathrm{max}}\{ \underline{v}_x^\ell \} }{ \underline{\Delta x} } + \displaystyle \frac{ \underset{i \in [1,N_x]}{\mathrm{max}}\{ \underline{E}_x^{n,i} \} }{ \underline{\Delta v}_x } }.
@@ -247,7 +245,7 @@ Only the perturbation amplitudes $A < 1$ for 1), 2) and 3), the perturbation dri
 \end{equation}
 keeps being respected during the linear stage of the simulation. Except for non-linear Plasma Physics processes such as 3) for which the non-linear theory should be considered, the methodology that can be used to check any ESVM simulation results is always the same. Only analytical estimates used to check the ESVM simulation results of the provided academic case 4) are consequently detailed here in order to highlight it. The user can check the provided academic case simulation results 1), 2) and 3) by directly comparing the ESVM simulation results with the analytical estimates provided in [@Decyk:1987] (available at [https://picksc.idre.ucla.edu/wp-content/uploads/2015/04/DecykKyiv1987.pdf](https://picksc.idre.ucla.edu/wp-content/uploads/2015/04/DecykKyiv1987.pdf)) and in the reference texbooks [@LandauLifshitz:1981] and [@GaleevSagdeev:1969], respectively. 
 
-The provided Plasma Physics academic case 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $\pm v_d$ with same standard velocity deviation $v_{T_{e_0}}$
+The provided Plasma Physics academic case 4) is initialized assuming two counter-propagating homogeneous Gaussian electron beams '$e,+$' and '$e,-$' of exactly opposite drift velocity $\pm v_d$ with same standard deviation $v_{T_{e_0}}$
 \begin{equation}
   \label{eq:EDF}
   f_e^{(0)} \displaystyle \left ( x,v_x,t\right ) = f_{e,+}^{(0)} \displaystyle \left (x,v_x,t \right ) + f_{e,-}^{(0)} \displaystyle \left (x,v_x,t \right )
@@ -274,9 +272,9 @@ on each beam of the form
 \begin{equation}
 \delta f_{e,\pm} \displaystyle \left ( x,v_x,t=0 \right ) = \pm A \sin{\displaystyle \left ( k_1 x \right )  } f_{e,\pm}^{(0)} \displaystyle \left ( x,v_x,t=0 \right )
 \end{equation}
-at the simulation start $t=0$ with $A = 0.1$, $k_1 = 2 \pi / L_x$ (parameter $k$ in the input-deck) where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$ can be modified by the user in the input-deck. 
+at the simulation start $t=0$ with $A = 0.1$ and $k_1 = 2 \pi / L_x $ (parameter $k$ in the input-deck) that can be modified by the user in the input-deck where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$. 
 
-In order to get analytical estimates of growing plasma electron density and mean velocity and electrostatic fields in this ESVM simulation, one can linearize the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM assuming the perturbation \autoref{eq:perturbation} remains small compared to the equilibrium distribution \autoref{eq:EDF} during the simulation. They read
+In order to get analytical estimates of the exponentially growing electrostatic field, plasma electron density and mean velocity perturbations in this ESVM simulation, one can linearize the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM assuming the perturbation \autoref{eq:perturbation} remains small compared to the equilibrium distribution \autoref{eq:EDF} during the simulation. They read
 \begin{equation}
   \label{eq:linearized_vlasov1d1v}
   \displaystyle \frac{\partial \delta f_e }{ \partial t} + \displaystyle \frac{\partial }{\partial x} \displaystyle \left ( v_x \delta f_e \right ) - \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_e^{(0)}}{d v_x} \delta E_x= 0
@@ -300,7 +298,7 @@ with $\forall p \in \mathbb{Z},\, k_p = 2 \pi p / L_x$ and
 \cr  \Leftrightarrow & X \displaystyle \left ( x,\,t\right)                                                               &=& \displaystyle \int_{\iota R - \infty}^{\iota R + \infty} & \displaystyle \frac{d \omega}{2 \pi}  & \displaystyle \sum_{p=-\infty}^\infty &   & \widehat{\widehat{\text{X}}}_p^{(+)} \displaystyle \left ( \omega \right ) &  \exp{ \displaystyle \left [ + \iota \displaystyle \left ( \omega t - k_p x \right ) \right ] }
 \end{array}
 \end{equation}
-where the integral in the complex $\omega$-plane is taken along a straight line $\omega = \iota R$. By multiplying \autoref{eq:linearized_vlasov1d1v} and \autoref{eq:linearized_gauss} by $\exp{ \displaystyle \left [ - \iota \displaystyle \left ( \omega t - k_p x \right ) \right ]  } / L_x$ and by integrating them from $x=-\infty$ to $x=\infty$ and from $t=0$ to $t = \infty$, we obtain respectively 
+where the integral in the complex $\omega$-plane is taken along a straight line $\omega = \iota R$. By multiplying \autoref{eq:linearized_vlasov1d1v} and \autoref{eq:linearized_gauss} by $\exp{ \displaystyle \left [ - \iota \displaystyle \left ( \omega t - k_p x \right ) \right ]  } / L_x$ and by integrating them from $x=0$ to $x=L_x$ and from $t=0$ to $t = \infty$, we obtain respectively 
 \begin{equation}
   \label{eq:Eq1}
   \widehat{\widehat{\delta \text{f} }}_{e,p}^{(+)} =  \displaystyle \frac{1}{\iota \displaystyle \left ( \omega - k_p v_x \right )} \displaystyle \left [ \widehat{\delta \text{f}}_{e,p} \displaystyle \left ( v_x,\,t=0\right )  + \displaystyle \frac{e}{m_e} \displaystyle \frac{d f_e^{(0)}}{d v_x} \widehat{\widehat{\delta \text{E}}}_{x,p}^{(+)} \right ]
@@ -421,7 +419,7 @@ In the limit $k_p v_d \ll \omega_{p}$, they simplify into
 \end{equation}
 and 
 \begin{equation}
-\begin{array}{llll}
+\begin{array}{clll}
       & & & \displaystyle \frac{e}{m_e} \displaystyle \int_0^t \delta E_{x} \displaystyle \left [ x + v_x \displaystyle \left ( \tau - t \right ) ,\, \tau \right ] d \tau  
  \cr &\underset{k_1 v_d \ll \omega_{p}}{\sim}&  A \displaystyle \frac{ v_d}{ 1 - {\displaystyle \left ( \displaystyle \frac{ k_1 v_x }{ \omega_{p} } \right )}^2  } & \displaystyle \left \{ \displaystyle \frac{k_1 v_x }{ \omega_p } \sin{ \displaystyle \left ( \omega_{p} t \right ) } \;\;\; \cos{ \displaystyle \left ( k_1 x \right ) } - \displaystyle \left [ \cos{ \displaystyle \left ( \omega_{p} t \right ) } \;\,\;- 1 \right ]  \sin{ \displaystyle \left ( k_1 x \right ) } \right \}
  \cr &+& A  \displaystyle \frac{ v_d }{ 1 +  {\displaystyle \left ( \displaystyle \frac{ v_x }{ v_d} \right )}^2 } & \displaystyle \left \{ - \displaystyle \frac{ v_x }{ v_d } \, \sinh{ \displaystyle \left (k_1 v_d t \right ) } \cos{ \displaystyle \left ( k_1 x \right ) } + \displaystyle \left [ \cosh{ \displaystyle \left ( k_1 v_d  t \right ) } - 1 \right ] \sin{ \displaystyle \left ( k_1 x \right ) } \right \}.
@@ -532,16 +530,16 @@ accounting for the initial conditions at $t=0$. Here, $J_\mu$ and $Y_\mu$ are th
 # ESVM Perspectives
 
 It is planned in a near future to :
-1) provide another Plasma Physics academic simulation about one BGK (from the name of its finder I. B. Bernstein, J. M. Greene and M. D. Kruskal) non linear electron plasma wave [@BernsteinGreenKruskal:1957]
-2) provide another Plasma Physics academic simulation about Plasma wave echo [@Gould:1967]
+1) provide another Plasma Physics academic simulation about one non-linear BGK electron plasma wave, from the name of its finder I. B. Bernstein, J. M. Greene and M. D. Kruskal [@BernsteinGreenKruskal:1957]
+2) provide another Plasma Physics academic simulation about the echo of two plasma electron waves [@Gould:1967]
 3) implement non-equally spaced phase-space cells
 4) implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes [@Liu:1994]
 5) compute the plasma ion Vlasov equation to allow for the ions to be mobile 
-6) implement MPI parallelization
-7) implement vectorization
-8) store the simulation results in hdf5 files instead of text files
+6) store the simulation results in hdf5 files instead of text files
+7) implement MPI parallelization
+8) implement vectorization
 9) extend the code to the relativistic regime : ESVM $\Rightarrow$ RESVM for open source Relativistic ElectroStatic Vlasov-Maxwell code
-10) implement a BGK (from the name of its finder P. L. Bhatnagar, E. P. Gross  and M. Krook) collision operator [@BhatnagarGrossKrook:1954]
+10) implement a BGK collision operator, from the name of its finder P. L. Bhatnagar, E. P. Gross  and M. Krook [@BhatnagarGrossKrook:1954]
 11) extend the code to 1D-2V and 1D-3V phase-space electrostatic plasma simulations
 12) implement the Landau [@Landau:1936] and Belaiev-Budker [@BelaievBudker:1957] relativistic collision operators using the Rosenbluth potentials [@Rosenbluth:1957] and their relativistic Braams-Karney extension [@BraamsKarney:1987] : (R)ESVM $\Rightarrow$ (R)ESVFPM for open source (Relativistic) ElectroStatic Vlasov-Fokker-Planck-Maxwell code
 13) extend the code to electrostatic 2D-1V, 2D-2V and 2D-3V phase-space plasma simulations : (R)ESV(FP)M $\Rightarrow$ (R)ESV(FP)M2 for open source (Relativistic) ElectroStatic Vlasov-(Fokker-Planck-)Maxwell in 2D
