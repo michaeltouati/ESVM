@@ -70,22 +70,22 @@ subroutine INIT_VAR(f_n, f_np1, n_e, j_e, v_e, vT_e, E_x_np1, E_x_n , phi_n, &
   integer                                , intent(out)   :: N_t
   logical                                , intent(out)   :: test_positivity, save_results
   !
-  f_n     = 0._PR
-  f_np1   = 0._PR
-  n_e     = 0._PR
-  j_e     = 0._PR
-  v_e     = 0._PR
-  vT_e    = 0._PR
-  E_x_np1 = 0._PR
-  E_x_n   = 0._PR
-  phi_n   = 0._PR
+  f_n     = zero
+  f_np1   = zero
+  n_e     = zero
+  j_e     = zero
+  v_e     = zero
+  vT_e    = zero
+  E_x_np1 = zero
+  E_x_n   = zero
+  phi_n   = zero
   !
-  dU_K = 0._PR
-  dU_T = 0._PR
-  dU_E = 0._PR
-  U_K  = 0._PR
-  U_T  = 0._PR
-  U_E  = 0._PR
+  dU_K = zero
+  dU_T = zero
+  dU_E = zero
+  U_K  = zero
+  U_T  = zero
+  U_E  = zero
   !
   time    = 0._PR
   N_t     = 1
@@ -145,10 +145,10 @@ subroutine INIT_SIMU(x, vx, f_n)
     ! absorbing
     case (1)
       do l=-1,N_vx+2,1
-        f_n(N_x+1,l) = 0._PR
-        f_n(N_x+2,l) = 0._PR
-        f_n(0,l)     = 0._PR
-        f_n(-1,l)    = 0._PR
+        f_n(N_x+1,l) = zero
+        f_n(N_x+2,l) = zero
+        f_n(0,l)     = zero
+        f_n(-1,l)    = zero
       end do
     ! periodic
     case (2)
@@ -160,10 +160,10 @@ subroutine INIT_SIMU(x, vx, f_n)
       end do
   end select
   do i=-1,N_x+2,1
-    f_n(i,N_vx+1) = 0._PR
-    f_n(i,N_vx+2) = 0._PR
-    f_n(i,0)      = 0._PR
-    f_n(i,-1)     = 0._PR
+    f_n(i,N_vx+1) = zero
+    f_n(i,N_vx+2) = zero
+    f_n(i,0)      = zero
+    f_n(i,-1)     = zero
   end do
 end subroutine INIT_SIMU
 
@@ -177,19 +177,21 @@ subroutine INIT_NEXT_STEP(f_n, f_np1, n_e, j_e, v_e, vT_e, &
   integer                                , intent(inout) :: N_t
   !
   f_n     = f_np1
-  f_np1   = 0._PR
-  n_e     = 0._PR
-  j_e     = 0._PR
-  v_e     = 0._PR
-  vT_e    = 0._PR
-  phi_n   = 0._PR
+  f_np1   = zero
+  n_e     = zero
+  j_e     = zero
+  v_e     = zero
+  vT_e    = zero
+  phi_n   = zero
   E_x_n   = E_x_np1 
-  E_x_np1 = 0._PR 
+  E_x_np1 = zero
+  !
   N_t     = N_t + 1
   time    = time + d_t
-  U_K = 0._PR
-  U_T = 0._PR
-  U_E = 0._PR
+  !
+  U_K = zero
+  U_T = zero
+  U_E = zero
 end subroutine INIT_NEXT_STEP
 
 subroutine DENSITIES(vx, f_n, n_e, j_e, v_e, vT_e)
@@ -469,10 +471,10 @@ subroutine BOUNDARIES(f_np1)
     ! absorbing
     case (1)
       do l=-1,N_vx+2,1
-        f_np1(N_x+1,l) = 0._PR
-        f_np1(N_x+2,l) = 0._PR
-        f_np1(0,l)     = 0._PR
-        f_np1(-1,l)    = 0._PR
+        f_np1(N_x+1,l) = zero
+        f_np1(N_x+2,l) = zero
+        f_np1(0,l)     = zero
+        f_np1(-1,l)    = zero
       end do
     ! periodic
     case (2)
@@ -484,10 +486,10 @@ subroutine BOUNDARIES(f_np1)
       end do
   end select
   do i=-1,N_x+2,1
-    f_np1(i,N_vx+1) = 0._PR
-    f_np1(i,N_vx+2) = 0._PR
-    f_np1(i,0)      = 0._PR
-    f_np1(i,-1)     = 0._PR
+    f_np1(i,N_vx+1) = zero
+    f_np1(i,N_vx+2) = zero
+    f_np1(i,0)      = zero
+    f_np1(i,-1)     = zero
   end do
 end subroutine BOUNDARIES
 

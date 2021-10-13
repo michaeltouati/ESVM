@@ -25,12 +25,12 @@
 ##                         Simulation name                           ##
 ##                                                                   ##
 ## simu = Simulation name                                            ##
-##       (less than 30 characters without spaces / punctuations      ##
+##       (less than 60 characters without spaces or punctuations     ##
 ##        except - or _)                                             ##
 ##                                                                   ##
 #######################################################################
 #
-#simu Ampere
+#simu Ampere-test
 #
 #######################################################################
 ##                                                                   ##

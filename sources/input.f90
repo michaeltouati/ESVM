@@ -36,7 +36,7 @@ public :: read_init_parameters
 !           (see the file input-deck for their definitions)
 !======================================================================
 
-character(len=30), public :: simu
+character(len=60), public :: simu
 integer,           public :: N_th
 real(PR),          public :: T
 real(PR),          public :: Z
@@ -183,9 +183,16 @@ subroutine read_init_parameters
   write(*,'(A,1I4)')' N_th    = ',N_th
   write(*,*)'-----------------------------------------'
   write(*,*)'* Plasma properties (immobile ions)'
-  write(*,'(A,1E22.14)')' T       = ',T
+  write(*,'(A,1E22.14,A)')' T       = ',T,' eV'
   write(*,'(A,1E22.14)')' Z       = ',Z
-  write(*,'(A,1E22.14)')' ni      = ',ni
+  write(*,'(A,1E22.14,A)')' ni      = ',ni,' /cm3'
+  write(*,*)'* Deduced ESVM units'
+  write(*,'(A,1E22.14,A)')' Debye   = ',Debye(Z*ni, T*eV),' cm'
+  write(*,'(A,1E22.14,A)')' me      = ',me,' g'
+  write(*,'(A,1E22.14,A)')' omega_p = ',omega_pe(Z*ni),' /s'
+  write(*,'(A,1E22.14,A)')' e       = ',e,' statcoulomb'
+  write(*,'(A,1E22.14,A)')' vTe0    = ',v_T(Te*eV),' cm/s'
+  write(*,'(A,1E22.14,A)')' n0      = ',Z*ni,' /cm3'
   write(*,*)'-----------------------------------------'
   write(*,*)'* 1D-1V phase-space : '
   write(*,'(A,1E22.14)')' x_min   = ',x_min
@@ -253,7 +260,7 @@ end function get_real
 
 function get_char(str)
   character(len=*), intent(in) :: str
-  Character(len=30)            :: get_char
+  Character(len=60)            :: get_char
   read (str, *) get_char
   get_char = adjustl(get_char)
   return

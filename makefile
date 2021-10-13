@@ -28,13 +28,13 @@
 ######################
 ######################
 
-# F90 = ifort
+F90 = ifort
 
 ##########
 # openMP #
 ##########
 
-# OPTS = -fopenmp -r8 -O3
+OPTS = -fopenmp -r8 -O3
 
 #########
 # debug #
@@ -48,13 +48,13 @@
 ####################
 ####################
 
-F90 = gfortran
+# F90 = gfortran
 
 ##########
 # openMP #
 ##########
 
-OPTS = -fopenmp -fdefault-real-8 -O3
+# OPTS = -fopenmp -fdefault-real-8 -O3
 
 #########
 # debug #

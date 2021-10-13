@@ -25,7 +25,7 @@
 ##                         Simulation name                           ##
 ##                                                                   ##
 ## simu = Simulation name                                            ##
-##       (less than 30 characters without spaces / punctuations      ##
+##       (less than 60 characters without spaces or punctuations     ##
 ##        except - or _)                                             ##
 ##                                                                   ##
 #######################################################################
@@ -91,7 +91,7 @@
 #
 #vx_max    6.
 #
-#d_vx    0.25
+#d_vx    0.125
 #
 #######################################################################
 ##                                                                   ##          

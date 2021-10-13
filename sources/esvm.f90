@@ -48,7 +48,6 @@ call cpu_time(timer_start)
 !
 call read_init_parameters()
 !
-call system('mkdir -p results')
 call system('mkdir -p results/'//trim(simu))
 !
 allocate(x(-1:N_x+2),vx(-1:N_vx+2))
