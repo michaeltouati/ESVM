@@ -109,10 +109,10 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   real(PR)                                            :: U_tot
   integer                                             :: l, i
   !
-  write(*,*)'============================'
-  write(*,'(A,1E11.3)')' time (/omega_p) =',time 
-  write(*,'(A,1I7)')' Number of iteration :',N_t
-  write(*,*)'============================'
+  write(*,*)'============================='
+  write(*,'(A,1E11.3)')' time (/omega_p)  =',time 
+  write(*,'(A,1I7)')' Number of iterations :',N_t
+  write(*,*)'============================='
   write(*,*)' '
   if (test_positivity.eqv..true.) write(*,*)'the distribution function became negative'
   write(*,'(A,1E11.3)')' Kinetic energy  (n0 Debye^3 me vTe0^2) = ', U_K
