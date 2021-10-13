@@ -82,7 +82,7 @@ TEST_DIR += New-features/my-new-feature
 ```
 - the input-deck if 3.
 ```sh
-##   Initial commit written by Michaël J TOUATI - Dec. 2015       ##
+##   Initial commit written by Michaël J TOUATI - Dec. 2015          ##
 ##   my-new-feature commit by my-name - my-add-date                  ##
 ```
 - the makefile if 4.
