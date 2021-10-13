@@ -101,7 +101,7 @@ make test
 ```sh
 make clean
 ```
-and issue that pull request :relieved:!
+and issue that pull request! :relieved:
 
 # License
 When you submit code changes, your submissions are understood to be under the same [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) that covers [ESVM](https://github.com/michaeltouati/ESVM). 
