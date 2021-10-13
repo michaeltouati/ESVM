@@ -42,12 +42,12 @@ It will be a pleasure to discuss about it.
 [ESVM](https://github.com/michaeltouati/ESVM) uses the [Fork and pull model](https://docs.github.com/en/github/collaborating-with-pull-requests/getting-started/about-collaborative-development-models). In order to fix a bug or to submit a new feature that you've added in [ESVM](https://github.com/michaeltouati/ESVM), follow these steps:
 
 1) Fork the repo and create your own branch from the [ESVM 'master' branch](https://github.com/michaeltouati/ESVM).
-2) Add your code. Please, keep the code Fortran 95 standard compliant with same coding style by at least : 
+2) Add your code. Please, keep the code Fortran 95 standard compliant with same coding style by : 
 - respecting 2 spaces for indentation rather than tabs
 - not using object oriented Fortran 2003 features
-- not forgetting to deallocate arrays
-- not using non-allocatable, assumed-shape dummy argument in subroutines for bounds-preservation
-- not using arrays as input/output in functions for bounds-preservation
+- not forgetting to deallocate allocated arrays
+- not using allocatable arrays with assumed-shape dummy argument in subroutines or functions for bounds-preservation
+- etc...
 3) If you've added a new feature that needs new simulation parameters in the [input-deck](https://github.com/michaeltouati/ESVM/blob/master/input-deck) and updated correspondingly the source file [input.f90](https://github.com/michaeltouati/ESVM/blob/master/sources/input.f90), please add their descriptions in the [input-deck](https://github.com/michaeltouati/ESVM/blob/master/input-deck) following the same style
 ```sh
 ##                                                                   ##
