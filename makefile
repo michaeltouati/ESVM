@@ -121,8 +121,8 @@ run :
 ################
 
 distclean :
-	@rm -rf sources/extract/__pycache__ 
 	@rm -f *.o *.mod esvm check-input-deck
+	@py3clean sources/plot
 
 figclean :
 	@rm -rf figures
