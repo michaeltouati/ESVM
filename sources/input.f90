@@ -190,7 +190,7 @@ subroutine read_init_parameters
   write(*,'(A,1E22.14,A)')' Debye   = ',Debye(Z*ni, T*eV),' cm'
   write(*,'(A,1E22.14,A)')' me      = ',me,' g'
   write(*,'(A,1E22.14,A)')' omega_p = ',omega_pe(Z*ni),' /s'
-  write(*,'(A,1E22.14,A)')' e       = ',e,' statcoulomb'
+  write(*,'(A,1E22.14,A)')' e       = ',e,' statC'
   write(*,'(A,1E22.14,A)')' vTe0    = ',v_T(Te*eV),' cm/s'
   write(*,'(A,1E22.14,A)')' n0      = ',Z*ni,' /cm3'
   write(*,*)'-----------------------------------------'

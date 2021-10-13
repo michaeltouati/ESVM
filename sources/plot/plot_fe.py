@@ -64,8 +64,8 @@ print('  ')
 
 print(' Search for the number of phase-space cells :')
 [Nx,Nvx] = lib.search_Nx_Nvx('results/'+simu_name+'/fe.dat')
-print(' * found Nx  = '+str(Nx) +' space cells')
-print(' * found Nvx = '+str(Nvx)+' velocity cells')
+print(' * found Nx  = '+str(Nx) +' space bins')
+print(' * found Nvx = '+str(Nvx)+' velocity bins')
 print('  ')
 
 print(' Density plot at :')

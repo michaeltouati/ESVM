@@ -2,7 +2,7 @@
  Recapitulation of simulation parameters :
  -----------------------------------------
  * Simulation :
- simu    = MUSCL2-test
+ simu    = Vlasov-nonlinear
  * Number of OpenMP threads :
  N_th    =    1
  -----------------------------------------
@@ -14,7 +14,7 @@
  Debye   =   0.74340066378433E-06 cm
  me      =   0.91094000000000E-27 g
  omega_p =   0.17839822657874E+16 /s
- e       =   0.48032000000000E-09 statcoulomb
+ e       =   0.48032000000000E-09 statC
  vTe0    =   0.14286379375210E+12 cm/s
  n0      =   0.10000000000000E+22 /cm3
  -----------------------------------------
@@ -277,4 +277,4 @@
  Total energy    (n0 Debye^3 me vTe0^2) =   0.541E+01
   
  ==============================================
- Total simulation time duration =   0.273E+00 s
+ Total simulation time duration =   0.942E+01 s

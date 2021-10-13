@@ -2,9 +2,9 @@
  Recapitulation of simulation parameters :
  -----------------------------------------
  * Simulation :
- simu    = Landau-test
+ simu    = Academic-cases
  * Number of OpenMP threads :
- N_th    =    8
+ N_th    =   64
  -----------------------------------------
  * Plasma properties (immobile ions)
  T       =   0.10000000000000E+03 eV
@@ -14,7 +14,7 @@
  Debye   =   0.23508393116395E-05 cm
  me      =   0.91094000000000E-27 g
  omega_p =   0.17839822657874E+15 /s
- e       =   0.48032000000000E-09 statcoulomb
+ e       =   0.48032000000000E-09 statC
  vTe0    =   0.45177498342916E+11 cm/s
  n0      =   0.10000000000000E+20 /cm3
  -----------------------------------------
@@ -281,4 +281,4 @@
  Total energy    (n0 Debye^3 me vTe0^2) =   0.107E+02
   
  ==============================================
- Total simulation time duration =   0.370E+00 s
+ Total simulation time duration =   0.971E+01 s
