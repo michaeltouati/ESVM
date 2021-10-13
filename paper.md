@@ -272,7 +272,7 @@ on each beam of the form
 \begin{equation}
 \delta f_{e,\pm} \displaystyle \left ( x,v_x,t=0 \right ) = \pm A \sin{\displaystyle \left ( k_1 x \right )  } f_{e,\pm}^{(0)} \displaystyle \left ( x,v_x,t=0 \right )
 \end{equation}
-at the simulation start $t=0$ with $A = 0.1$ and $k_1 = 2 \pi / L_x $ (parameter $k$ in the input-deck) that can be modified by the user in the input-deck where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$. 
+at the simulation start $t=0$ with $A = 0.1$ and $k_1 = 2 \pi / L_x$ (parameter $k$ in the input-deck) that can be modified by the user in the input-deck where $L_x= x_{\mathrm{max}} - x_{\mathrm{min}}$. 
 
 In order to get analytical estimates of the exponentially growing electrostatic field, plasma electron density and mean velocity perturbations in this ESVM simulation, one can linearize the Vlasov equation \autoref{eq:vlasov1d1v} and the self-consistent Maxwell-Gauss equation \autoref{eq:gauss} computed by ESVM assuming the perturbation \autoref{eq:perturbation} remains small compared to the equilibrium distribution \autoref{eq:EDF} during the simulation. They read
 \begin{equation}
