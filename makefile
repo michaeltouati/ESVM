@@ -122,7 +122,7 @@ run :
 
 distclean :
 	@rm -f *.o *.mod esvm check-input-deck
-	@py3clean sources/plot
+	@rm -rf sources/plot/__pycache__
 
 figclean :
 	@rm -rf figures

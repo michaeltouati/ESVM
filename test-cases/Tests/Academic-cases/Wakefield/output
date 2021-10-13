@@ -4,7 +4,7 @@
  * Simulation :
  simu    = Academic-cases
  * Number of OpenMP threads :
- N_th    =   64
+ N_th    =    4
  -----------------------------------------
  * Plasma properties (immobile ions)
  T       =   0.10000000000000E+04 eV
@@ -281,4 +281,4 @@
  Total energy    (n0 Debye^3 me vTe0^2) =   0.462E+01
   
  ==============================================
- Total simulation time duration =   0.202E+02 s
+ Total simulation time duration =   0.152E+01 s
