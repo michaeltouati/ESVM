@@ -166,7 +166,7 @@ of plasma electrons along the spatial $\underline{x}$-axis in the phase-space, t
   \label{eq:LaxWendroff}
   \displaystyle \frac{\underline{f_e}^{n+1,i} - \underline{f_e}^{n,i} }{ \underline{\Delta t}_n } + \underline{v_x} \displaystyle \frac{\underline{F_x}^{n,i+1/2} - \underline{F_x}^{n,i-1/2} }{ \underline{\Delta x} } = 0
 \end{equation}
-where the plasma electron fluxes across the volume sections located at $\underline{x}_{i\pm1/2}$ are given by
+where the plasma electron fluxes across the bin volume interfaces located at $\underline{x}_{i\pm1/2}$ are given by
 \begin{equation}
   \label{eq:LaxWendroff_fluxes_plus}
   \underline{F_x}^{n,i+1/2} = \displaystyle \frac{\underline{f_e}^{n,i+1} + \underline{f_e}^{n,i}}{2} - \displaystyle \frac{\underline{v_x} \underline{\Delta t}_n}{\underline{\Delta x}} \displaystyle \frac{\underline{f_e}^{n,i+1} - \underline{f_e}^{n,i}}{2}
