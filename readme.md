@@ -90,7 +90,7 @@ python3 sources/plot/plot_logfe.py
 # Cleaning the directory
 
 If you want to remove from the ESVM directory :
-- the compilation files and ESVM executable, type :
+- the compilation files and ESVM executables, type :
 ```sh
 make distclean
 ```
