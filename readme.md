@@ -106,3 +106,4 @@ make resclean
 ```sh
 make clean
 ```
+Be careful, the latter will remove all simulations results/figures. Store them elsewhere if you don't want to lose them.
