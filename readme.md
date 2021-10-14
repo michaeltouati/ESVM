@@ -39,13 +39,13 @@ to run the simulation.
 
 # Plotting the simulation results
 
-All simulation results are stored in files located in the folder 'results'. 
-Python scripts allowing to extract and plot the simulation results are located in the folder 'sources/plot'.
+All simulation results are stored in files located in the directory 'results'. 
+Python scripts allowing to extract and plot the simulation results are located in the directory 'sources/plot'.
 They can be used by simply typing :
 ```sh
 make plot
 ```
-to plot all the results, even when the simulation is still running. The resulting plots will be stored in the folder 'figures'. It can also be plotted separately :
+to plot all the results, even when the simulation is still running. The resulting plots will be stored in the directory 'figures'. It can also be plotted separately :
 - the energies scalar plots by typing :
 ```sh
 make plot_energies
