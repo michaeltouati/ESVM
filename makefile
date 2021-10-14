@@ -83,8 +83,8 @@ OBJTS_CHK  := $(SRCS_CHK:%.f90=%.o)
 %.o : $(SRC_PATH)%.f90
 	$(F90) $(OPTS) -c $(SRC_PATH)$*.f90
 
-all : check-input-deck esvm    \
-	  remove-compilation-files
+all : check-input-deck esvm  \
+	remove-compilation-files
 
 esvm : $(OBJTS)
 	$(F90) $(OPTS) $(OBJTS) -o esvm
@@ -154,9 +154,9 @@ plot_logfe : $(SRC_PATH_PY)plot_logfe.py
 	@python3 $(SRC_PATH_PY)plot_logfe.py
 
 plot :  plot_energies \
-		plot_hydro2D  \
-		plot_fe       \
-		plot_hydro1D
+	plot_hydro2D \
+	plot_fe \
+	plot_hydro1D
 
 ###############
 ###############
