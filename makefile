@@ -183,9 +183,9 @@ TEST_DIR += Academic-cases/Wakefield
 TEST_DIR += Academic-cases/Two-stream-insta
 # TEST_DIR += New-features/Example
 
-RED  =$(shell tput setaf 1)
-GREEN=$(shell tput setaf 2)
-RESET=$(shell tput sgr0)
+RED   =$(shell tput setaf 1)
+GREEN =$(shell tput setaf 2)
+RESET =$(shell tput sgr0)
 TESTS:=$(sort ${TEST_DIR})
 test :
 	@mv input-deck input-deck-old
