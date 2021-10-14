@@ -45,26 +45,46 @@ They can be used by simply typing :
 ```sh
 make plot
 ```
-to plot all the results. If you want to plot the 1D1V plasma electron distribution function phase-space density maps in logarithmic scale, just type :
-```sh
-make plot_logfe
-```
-The resulting plots will be stored in the folder 'figures'. It can also be plotted separately during the simulation run :
+to plot all the results, even when the simulation is still running. The resulting plots will be stored in the folder 'figures'. It can also be plotted separately :
 - the energies scalar plots by typing :
 ```sh
 make plot_energies
+```
+or
+```sh
+python3 sources/plot/plot_logfe.py
 ```
 - the 1D plasma electron hydrodynamic moments space-time density maps by typing :
 ```sh
 make plot_hydro2D
 ```
+or
+```sh
+python3 sources/plot/plot_hydro2D.py
+```
 - the 1D plasma electron hydrodynamic moments scalar plots by typing : 
 ```sh
 make plot_hydro1D
 ```
+or
+```sh
+python3 sources/plot/plot_hydro1D.py
+```
 - or the 1D1V plasma electron distribution function phase-space density maps by typing :
 ```sh
 make plot_fe
+```
+or
+```sh
+python3 sources/plot/plot_fe.py
+```
+If you need to plot the 1D1V plasma electron distribution function phase-space density maps in logarithmic scale instead, type :
+```sh
+make plot_logfe
+```
+or
+```sh
+python3 sources/plot/plot_logfe.py
 ```
 
 # Cleaning the directory
