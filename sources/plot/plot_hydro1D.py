@@ -101,7 +101,8 @@ lib.create_dir('figures/'+simu_name+'/je/')
 name     ='figures/'+simu_name+'/je/je_'
 lib.plot_1D_hydro_quantity_scalar_plot(Nx, filename, font, Ylabel, name)
 
-print(' * 1D plasma electron thermal velocity (standard deviation)')
+print(' * 1D plasma electron thermal velocity')
+print('   (standard deviation)')
 filename = 'results/'+simu_name+'/vTe.dat'
 Ylabel   = r'$v_{T_e} \left ( x,\,t\right ) \, \left( v_{T_{e_0}}\right )$'
 lib.create_dir('figures/'+simu_name+'/vTe/')

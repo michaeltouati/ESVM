@@ -114,8 +114,10 @@ do while (time.lt.L_t)
   !
   call BOUNDARIES(f_np1(-1:N_x+2,-1:N_vx+2))
   !
-  call DIAG_ENERGY(time, N_x, d_x, n_e, v_e, vT_e, E_x_n, &
-                 & dU_K, dU_T, dU_E, U_K, U_T, U_E)
+  call DIAG_ENERGY(time, N_x, d_x, &
+                 & n_e, v_e, vT_e, E_x_n, &
+                 & dU_K, dU_T, dU_E, &
+                 & U_K, U_T, U_E)
   !
   save_results = (mod(time,dt_diag).lt.d_t).and.(time.ge.d_t)
   save_results = save_results.or.(N_t.eq.1)

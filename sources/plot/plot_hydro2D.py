@@ -98,7 +98,8 @@ title    = r'$j_e \left ( x,\,t\right )\,(n_0 e v_{T_{e_0}})$'
 name     ='figures/'+simu_name+'/je'
 lib.plot_1D_hydro_quantity_2Dmap(Nx, filename, font, cmap_je, title, name)
 
-print(' * 1D plasma electron thermal velocity (standard deviation)')
+print(' * 1D plasma electron thermal velocity')
+print('   (standard deviation)')
 filename = 'results/'+simu_name+'/vTe.dat'
 cmap     = 'jet'
 name     ='figures/'+simu_name+'/vTe'

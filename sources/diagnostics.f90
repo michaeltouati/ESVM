@@ -29,8 +29,25 @@ use input
 use physics
 
 implicit none
+
 public  :: INIT_DIAG, DIAG_ENERGY
 public  :: DIAG, CLOSE_DIAG
+
+private :: DUMP_FIELD
+
+integer, parameter, private :: Ndiag_timing = 1
+
+integer, parameter, private :: Ndiag_fe  = 20
+integer, parameter, private :: Ndiag_ne  = 21
+integer, parameter, private :: Ndiag_je  = 22
+integer, parameter, private :: Ndiag_ve  = 23
+integer, parameter, private :: Ndiag_vTe = 24
+integer, parameter, private :: Ndiag_Phi = 25
+integer, parameter, private :: Ndiag_Ex  = 26
+
+integer, parameter, private :: Ndiag_UK = 40
+integer, parameter, private :: Ndiag_UT = 41
+integer, parameter, private :: Ndiag_UE = 42
 
 contains
 
@@ -38,162 +55,164 @@ contains
 
 subroutine INIT_DIAG()
   implicit none
-  open (unit=1 ,file='results/'//trim(simu)//'/fe.dat' ,form='formatted',status='unknown')
-  open (unit=2 ,file='results/'//trim(simu)//'/ne.dat' ,form='formatted',status='unknown')
-  open (unit=3 ,file='results/'//trim(simu)//'/Ex.dat' ,form='formatted',status='unknown')
-  open (unit=4 ,file='results/'//trim(simu)//'/je.dat' ,form='formatted',status='unknown')
-  open (unit=5 ,file='results/'//trim(simu)//'/ve.dat' ,form='formatted',status='unknown')
-  open (unit=7 ,file='results/'//trim(simu)//'/vTe.dat',form='formatted',status='unknown')
-  open (unit=11,file='results/'//trim(simu)//'/Phi.dat',form='formatted',status='unknown')
-  open (unit=8 ,file='results/'//trim(simu)//'/UK.dat' ,form='formatted',status='unknown')
-  open (unit=9 ,file='results/'//trim(simu)//'/UT.dat' ,form='formatted',status='unknown')
-  open (unit=10,file='results/'//trim(simu)//'/UE.dat' ,form='formatted',status='unknown')
-  open (unit=12,file='results/'//trim(simu)//'/timing.dat' ,form='formatted',status='unknown')
+  open (unit=Ndiag_timing, file='results/'//trim(simu)//'/timing.dat', form='formatted', status='unknown')
+  open (unit=Ndiag_fe    , file='results/'//trim(simu)//'/fe.dat'    , form='formatted', status='unknown')
+  open (unit=Ndiag_ne    , file='results/'//trim(simu)//'/ne.dat'    , form='formatted', status='unknown')
+  open (unit=Ndiag_je    , file='results/'//trim(simu)//'/je.dat'    , form='formatted', status='unknown')
+  open (unit=Ndiag_ve    , file='results/'//trim(simu)//'/ve.dat'    , form='formatted', status='unknown')
+  open (unit=Ndiag_vTe   , file='results/'//trim(simu)//'/vTe.dat'   , form='formatted', status='unknown')
+  open (unit=Ndiag_Phi   , file='results/'//trim(simu)//'/Phi.dat'   , form='formatted', status='unknown')
+  open (unit=Ndiag_Ex    , file='results/'//trim(simu)//'/Ex.dat'    , form='formatted', status='unknown')
+  open (unit=Ndiag_UK    , file='results/'//trim(simu)//'/UK.dat'    , form='formatted', status='unknown')
+  open (unit=Ndiag_UT    , file='results/'//trim(simu)//'/UT.dat'    , form='formatted', status='unknown')
+  open (unit=Ndiag_UE    , file='results/'//trim(simu)//'/UE.dat'    , form='formatted', status='unknown')
 end subroutine INIT_DIAG
 
-subroutine DIAG_ENERGY(time, N_x, d_x, n_e, v_e, vT_e, E_x_n, &
-                     & dU_K, dU_T, dU_E, U_K, U_T, U_E)
+subroutine DIAG_ENERGY(t0, Nx, dx, &
+                     & ne, ve, vTe, Exn, &
+                     & dUK, dUT, dUE, &
+                     & UK, UT, UE)
   implicit none
-  integer                      , intent(in)    :: N_x   
-  real(PR)                     , intent(in)    :: d_x, time
-  real(PR), dimension(-1:N_x+2), intent(in)    :: n_e, v_e, vT_e
-  real(PR), dimension(-1:N_x+2), intent(in)    :: E_x_n
-  real(PR), dimension(1:N_x)   , intent(inout) :: dU_K, dU_T, dU_E
-  real(PR)                     , intent(inout) :: U_K, U_T, U_E
-  integer                                      :: i
+  integer                     , intent(in)    :: Nx   
+  real(PR)                    , intent(in)    :: dx, t0
+  real(PR), dimension(-1:Nx+2), intent(in)    :: ne, ve, vTe
+  real(PR), dimension(-1:Nx+2), intent(in)    :: Exn
+  real(PR), dimension(1:Nx)   , intent(inout) :: dUK, dUT, dUE
+  real(PR)                    , intent(inout) :: UK, UT, UE
+  integer                                     :: i, k
+  ! real(PR), dimension(8:10)                   :: UP
   !
   !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
-  do i = 1,N_x,1
-    dU_K(i) = n_e(i) * (v_e(i)**2._PR) / 2._PR
-    dU_T(i) = n_e(i) * (vT_e(i)**2._PR) / 2._PR
-    dU_E(i) = (E_x_n(i)**2._PR) / 2._PR
+  do i = 1,Nx,1
+    dUK(i) = ne(i) * (ve(i)**2._PR)  / 2._PR
+    dUT(i) = ne(i) * (vTe(i)**2._PR) / 2._PR
+    dUE(i) = (Exn(i)**2._PR) / 2._PR
   end do
   !$omp END PARALLEL DO
   !
-  do i = 1,N_x,1
-    U_K = U_K + (dU_K(i) * d_x)
-    U_T = U_T + (dU_T(i) * d_x)
-    U_E = U_E + (dU_E(i) * d_x)
+  UK = max(zero, sum(dUK(1:Nx)) * dx)
+  UT = max(zero, sum(dUT(1:Nx)) * dx)
+  UE = max(zero, sum(dUE(1:Nx)) * dx)
+  !
+  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(k) COLLAPSE(1)
+  do k=Ndiag_UK,Ndiag_UE,1
+    select case (k)
+      case(Ndiag_UK)
+        write(Ndiag_UK,'(2E23.15)') t0, UK
+      case(Ndiag_UT)
+        write(Ndiag_UT,'(2E23.15)') t0, UT
+      case(Ndiag_UE)
+        write(Ndiag_UE,'(2E23.15)') t0, UE
+    end select
   end do
-  !
-  if (abs(U_K).lt.zero) then
-    write(8,'(4E23.15)') time, zero
-  else
-    write(8,'(4E23.15)') time, U_K
-  end if
-  !
-  if (abs(U_T).lt.zero) then
-    write(9,'(4E23.15)') time, zero
-  else
-    write(9,'(4E23.15)') time, U_T
-  end if
-  !
-  if (abs(U_E).lt.zero) then
-    write(10,'(4E23.15)') time, zero
-  else
-    write(10,'(4E23.15)') time, U_E
-  end if
+  !$omp END PARALLEL DO
 end subroutine DIAG_ENERGY
 
-subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
-              & f_n, n_e, E_x_n, j_e, v_e, vT_e, phi_n)
+subroutine DUMP_FIELD(Nval, t0, x0, val)
   implicit none
-  integer                                , intent(in) :: N_t, N_x, N_vx
-  real(PR), dimension(-1:N_x+2)          , intent(in) :: x
-  real(PR), dimension(-1:N_vx+2)         , intent(in) :: vx
-  real(PR)                               , intent(in) :: time
-  logical                                , intent(in) :: test_positivity
-  real(PR), dimension(-1:N_x+2,-1:N_vx+2), intent(in) :: f_n
-  real(PR), dimension(-1:N_x+2)          , intent(in) :: n_e, j_e, v_e, vT_e
-  real(PR), dimension(-1:N_x+2)          , intent(in) :: E_x_n , phi_n
-  real(PR)                               , intent(in) :: U_K, U_T, U_E
-  real(PR)                                            :: U_tot
-  integer                                             :: l, i
+  integer,  intent(in) :: Nval
+  real(PR), intent(in) :: t0, x0, val
+  !
+  if (abs(val).lt.zero) then
+    write(Nval,'(3E23.15)') t0, x0, zero
+  else
+    write(Nval,'(3E23.15)') t0, x0, val
+  end if
+end subroutine DUMP_FIELD
+
+subroutine DIAG(Nt, t0, Nx, x0, Nvx, vx0, positivity, UK, UT, UE, &
+              & fn, ne, Exn, je, ve, vTe, phin)
+  implicit none
+  integer                               , intent(in) :: Nt, Nx, Nvx
+  real(PR), dimension(-1:Nx+2)          , intent(in) :: x0
+  real(PR), dimension(-1:Nvx+2)         , intent(in) :: vx0
+  real(PR)                              , intent(in) :: t0
+  logical                               , intent(in) :: positivity
+  real(PR), dimension(-1:Nx+2,-1:N_vx+2), intent(in) :: fn
+  real(PR), dimension(-1:Nx+2)          , intent(in) :: ne, je, ve, vTe
+  real(PR), dimension(-1:Nx+2)          , intent(in) :: Exn , phin
+  real(PR)                              , intent(in) :: UK, UT, UE
+  real(PR)                                           :: Utot
+  integer                                            :: l, i, k
   !
   write(*,*)'================================'
-  write(*,'(A,1E14.7)')' time (/omega_p)  =',time 
-  write(*,'(A,1I10)')' Number of iterations :',N_t
+  write(*,'(A,1E14.7)')' time (/omega_p)  =',t0 
+  write(*,'(A,1I10)')' Number of iterations :',Nt
   write(*,*)'================================'
   write(*,*)' '
-  if (test_positivity.eqv..true.) write(*,*)'the distribution function became negative'
-  write(*,'(A,1E14.7)')' Kinetic energy  (n0 Debye^3 me vTe0^2) =', U_K
-  write(*,'(A,1E14.7)')' Thermal energy  (n0 Debye^3 me vTe0^2) =', U_T
-  write(*,'(A,1E14.7)')' Electric energy (n0 Debye^3 me vTe0^2) =', U_E
+  if (positivity.eqv..true.) write(*,*)'the distribution function became negative'
+  write(*,'(A,1E14.7)')' Kinetic energy  (n0 Debye^3 me vTe0^2) =', UK
+  write(*,'(A,1E14.7)')' Thermal energy  (n0 Debye^3 me vTe0^2) =', UT
+  write(*,'(A,1E14.7)')' Electric energy (n0 Debye^3 me vTe0^2) =', UE
   write(*,*)'------------------------------------------------------'
-  U_tot = U_K + U_T + U_E 
-  write(*,'(A,1E14.7)')' Total energy    (n0 Debye^3 me vTe0^2) =', U_tot
+  Utot = UK + UT + UE 
+  write(*,'(A,1E14.7)')' Total energy    (n0 Debye^3 me vTe0^2) =', Utot
   write(*,*)' '
   !
-  do l=1,N_vx,1
-    do i = 1,N_x,1
-      if (abs(f_n(i,l)).lt.zero) then
-        write(1,'(4E23.15)') time, vx(l), x(i), zero
-      else
-        write(1,'(4E23.15)') time, vx(l), x(i), f_n(i,l)
-      end if
-    end do
+  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(k,i,l) COLLAPSE(1)
+  do k=Ndiag_fe,Ndiag_Ex,1
+    select case (k)
+      case(Ndiag_fe)
+        do l = 1,Nvx,1
+          do i = 1,Nx,1
+            if (abs(fn(i,l)).lt.zero) then
+              write(Ndiag_fe,'(4E23.15)') t0, vx0(l), x0(i), zero
+            else
+              write(Ndiag_fe,'(4E23.15)') t0, vx0(l), x0(i), fn(i,l)
+            end if
+          end do
+        end do
+      case(Ndiag_ne)
+        do i = 1,Nx,1
+          call DUMP_FIELD(Ndiag_ne , t0, x0(i), ne(i)  )
+        end do
+      case(Ndiag_je)
+        do i = 1,Nx,1
+          call DUMP_FIELD(Ndiag_je , t0, x0(i), je(i)  )
+        end do
+      case(Ndiag_ve)
+        do i = 1,Nx,1
+          call DUMP_FIELD(Ndiag_ve , t0, x0(i), ve(i)  )
+        end do
+      case(Ndiag_vTe)
+        do i = 1,Nx,1
+          call DUMP_FIELD(Ndiag_vTe, t0, x0(i), vTe(i) )
+        end do
+      case(Ndiag_Phi)
+        do i = 1,Nx,1
+          call DUMP_FIELD(Ndiag_Phi, t0, x0(i), phin(i))
+        end do        
+      case(Ndiag_Ex)
+        do i = 1,Nx,1
+          call DUMP_FIELD(Ndiag_Ex , t0, x0(i), Exn(i) )
+        end do
+    end select
   end do
-  !
-  do i = 1,N_x,1
-    if (abs(n_e(i)).lt.zero) then
-      write(2,'(4E23.15)') time, x(i), zero
-    else
-      write(2,'(4E23.15)') time, x(i), n_e(i)
-    end if
-   !
-    if (abs(E_x_n(i)).lt.zero) then
-      write(3,'(4E23.15)') time, x(i), zero
-    else
-      write(3,'(4E23.15)') time, x(i), E_x_n(i)
-    end if
-   !
-    if (abs(j_e(i)).lt.zero) then
-      write(4,'(4E23.15)') time, x(i), zero
-    else
-      write(4,'(4E23.15)') time, x(i), j_e(i)
-    end if
-   !
-    if (abs(v_e(i)).lt.zero) then
-      write(5,'(4E23.15)') time, x(i), zero
-    else
-      write(5,'(4E23.15)') time, x(i), v_e(i)
-    end if
-   !
-    if (abs(vT_e(i)).lt.zero) then
-      write(7,'(4E23.15)') time, x(i), zero
-    else
-      write(7,'(4E23.15)') time, x(i), vT_e(i)
-    end if
-   !
-    if (abs(phi_n(i)).lt.zero) then
-      write(11,'(4E23.15)') time, x(i), zero
-    else
-      write(11,'(4E23.15)') time, x(i), phi_n(i)
-    end if
-  end do
+  !$omp END PARALLEL DO
 end subroutine DIAG
 
 subroutine CLOSE_DIAG(CPUtime0,clock0)
   implicit none
   real(PR), intent(in) :: CPUtime0,clock0
-  write(12,'(A,1E14.7,A)')" Simulation CPUxtime        = ",CPUtime0," hours"
-  write(12,'(A,1E14.7,A)')" Simulation ellapsed time   = ",clock0," hours"
+  !
+  write(Ndiag_timing,'(A,1E14.7,A)')" Simulation CPUxtime        = ",CPUtime0," hours"
+  write(Ndiag_timing,'(A,1E14.7,A)')" Simulation ellapsed time   = ",clock0," hours"
+  !
+  close(Ndiag_timing)
+  close(Ndiag_fe)
+  close(Ndiag_ne)
+  close(Ndiag_je)
+  close(Ndiag_ve)
+  close(Ndiag_vTe)
+  close(Ndiag_Phi)
+  close(Ndiag_Ex)
+  close(Ndiag_UK)
+  close(Ndiag_UT)
+  close(Ndiag_UE)
   !
   write (*,*)'================================================='
   write (*,'(A,1E14.7,A)')" Simulation CPUxtime        = ",CPUtime0," hours"
   write (*,'(A,1E14.7,A)')" Simulation ellapsed time   = ",clock0," hours"
-  !
-  close(1)
-  close(2)
-  close(3)
-  close(4)
-  close(5)
-  close(7)
-  close(8)
-  close(9)
-  close(10)
-  close(11)
-  close(12)
 end subroutine CLOSE_DIAG
 
 end module diagnostics

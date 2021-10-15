@@ -52,7 +52,7 @@
   
  Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2624364E+01
  Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623777E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.3760756E-08
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.3760746E-08
  ------------------------------------------------------
  Total energy    (n0 Debye^3 me vTe0^2) = 0.5248141E+01
   
@@ -277,5 +277,5 @@
  Total energy    (n0 Debye^3 me vTe0^2) = 0.2175292E+01
   
  =================================================
- Simulation CPUxtime        =  0.2357786E-02 hours
- Simulation ellapsed time   =  0.4694444E-04 hours
+ Simulation CPUxtime        =  0.4047572E-02 hours
+ Simulation ellapsed time   =  0.8627778E-04 hours
