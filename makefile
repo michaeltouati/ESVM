@@ -28,7 +28,7 @@
 ######################
 ######################
 
-F90 = ifort
+# F90 = ifort
 
 ##########
 # openMP #
@@ -40,7 +40,7 @@ F90 = ifort
 # debug #
 #########
 
-OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C 
+# OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C 
 
 ####################
 ####################
@@ -48,13 +48,13 @@ OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all 
 ####################
 ####################
 
-# F90 = gfortran
+F90 = gfortran
 
 ##########
 # openMP #
 ##########
 
-# OPTS = -fopenmp -fdefault-real-8 -O3
+OPTS = -fopenmp -fdefault-real-8 -O3
 
 #########
 # debug #
@@ -208,18 +208,17 @@ test :
 		cp test-cases/Tests/$${tst}/input-deck . ; \
 		./esvm > test.output ; \
 		if hash tac 2>/dev/null; then \
-			tail -n +0 test.output | head -n -3 > file1 ; \
-			tail -n +0 test-cases/Tests/$${tst}/output | head -n -3 > file2 ; \
+			tail -n +0 test.output | head -n -4 > file1 ; \
+			tail -n +0 test-cases/Tests/$${tst}/output | head -n -4 > file2 ; \
 		else \
-			tail -n +0 test.output | tail -r | tail -n +4 | tail -r > file1 ; \
-			tail -n +0 test-cases/Tests/$${tst}/output | tail -r | tail -n +4 | tail -r > file2 ; \
+			tail -n +0 test.output | tail -r | tail -n +5 | tail -r > file1 ; \
+			tail -n +0 test-cases/Tests/$${tst}/output | tail -r | tail -n +5 | tail -r > file2 ; \
 		fi ; \
 		diff file1 file2; \
 		TST=$$?; \
 		rm file1; rm file2; \
 		if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; \
 	done
-	@rm -f  test.output
 	@rm -rf results/Academic-cases
 	@rm -rf results/Boundary-conditions
 	@rm -rf results/Maxwell
@@ -228,3 +227,4 @@ test :
 	@rm -rf results/Vlasov-nonlinear
 	@rm -rf results/New-features
 	@mv input-deck-old input-deck
+	@rm -f  test.output

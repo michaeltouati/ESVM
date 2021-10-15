@@ -48,6 +48,7 @@ subroutine INIT_DIAG()
   open (unit=8 ,file='results/'//trim(simu)//'/UK.dat' ,form='formatted',status='unknown')
   open (unit=9 ,file='results/'//trim(simu)//'/UT.dat' ,form='formatted',status='unknown')
   open (unit=10,file='results/'//trim(simu)//'/UE.dat' ,form='formatted',status='unknown')
+  open (unit=12,file='results/'//trim(simu)//'/timing.dat' ,form='formatted',status='unknown')
 end subroutine INIT_DIAG
 
 subroutine DIAG_ENERGY(time, N_x, d_x, n_e, v_e, vT_e, E_x_n, &
@@ -109,18 +110,18 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   real(PR)                                            :: U_tot
   integer                                             :: l, i
   !
-  write(*,*)'============================='
-  write(*,'(A,1E11.3)')' time (/omega_p)  =',time 
-  write(*,'(A,1I7)')' Number of iterations :',N_t
-  write(*,*)'============================='
+  write(*,*)'================================'
+  write(*,'(A,1E14.7)')' time (/omega_p)  =',time 
+  write(*,'(A,1I10)')' Number of iterations :',N_t
+  write(*,*)'================================'
   write(*,*)' '
   if (test_positivity.eqv..true.) write(*,*)'the distribution function became negative'
-  write(*,'(A,1E11.3)')' Kinetic energy  (n0 Debye^3 me vTe0^2) = ', U_K
-  write(*,'(A,1E11.3)')' Thermal energy  (n0 Debye^3 me vTe0^2) = ', U_T
-  write(*,'(A,1E11.3)')' Electric energy (n0 Debye^3 me vTe0^2) = ', U_E
-  write(*,*)'----------------------------------------------------'
+  write(*,'(A,1E14.7)')' Kinetic energy  (n0 Debye^3 me vTe0^2) =', U_K
+  write(*,'(A,1E14.7)')' Thermal energy  (n0 Debye^3 me vTe0^2) =', U_T
+  write(*,'(A,1E14.7)')' Electric energy (n0 Debye^3 me vTe0^2) =', U_E
+  write(*,*)'------------------------------------------------------'
   U_tot = U_K + U_T + U_E 
-  write(*,'(A,1E11.3)')' Total energy    (n0 Debye^3 me vTe0^2) = ', U_tot
+  write(*,'(A,1E14.7)')' Total energy    (n0 Debye^3 me vTe0^2) =', U_tot
   write(*,*)' '
   !
   do l=1,N_vx,1
@@ -172,8 +173,16 @@ subroutine DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
   end do
 end subroutine DIAG
 
-subroutine CLOSE_DIAG()
+subroutine CLOSE_DIAG(CPUtime0,clock0)
   implicit none
+  real(PR), intent(in) :: CPUtime0,clock0
+  write(12,'(A,1E14.7,A)')" Simulation CPUxtime        = ",CPUtime0," hours"
+  write(12,'(A,1E14.7,A)')" Simulation ellapsed time   = ",clock0," hours"
+  !
+  write (*,*)'================================================='
+  write (*,'(A,1E14.7,A)')" Simulation CPUxtime        = ",CPUtime0," hours"
+  write (*,'(A,1E14.7,A)')" Simulation ellapsed time   = ",clock0," hours"
+  !
   close(1)
   close(2)
   close(3)
@@ -184,6 +193,7 @@ subroutine CLOSE_DIAG()
   close(9)
   close(10)
   close(11)
+  close(12)
 end subroutine CLOSE_DIAG
 
 end module diagnostics

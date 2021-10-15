@@ -41,11 +41,15 @@ integer                               :: N_t, i, l
 real(PR)                              :: f_max, flux_im1, flux_ip1
 real(PR), dimension(:), allocatable   :: dU_K, dU_T, dU_E 
 real(PR)                              :: U_K, U_T, U_E 
+real(PR)                              :: vm1, am1
 logical                               :: test_positivity, save_results
 real(PR)                              :: timer_start, timer_finish
-real(PR)                              :: simu_time
-real(PR)                              :: vm1, am1
+real(PR)                              :: CPUtime, clock
+integer                               :: clock_start, clock_finish
+integer                               :: rate
 !
+call system_clock(count_rate=rate)
+call system_clock(clock_start)
 call cpu_time(timer_start)
 !
 call read_init_parameters()
@@ -128,11 +132,12 @@ end do
 !
 deallocate(x,vx,f_n,f_np1,n_e,j_e,v_e,vT_e,E_x_n,E_x_np1)
 !
-call CLOSE_DIAG()
-!
+call system_clock(clock_finish)
 call cpu_time(timer_finish)
+clock   = real(clock_finish - clock_start,PR)/real(rate,PR)
+clock   = clock/3.6e3_PR
+CPUtime = (timer_finish - timer_start)/3.6e3_PR
 !
-write (*,*)'=============================================='
-write (*,'(A,1E11.3,A)')" Total simulation time duration = ",timer_finish-timer_start," s"
+call CLOSE_DIAG(CPUtime,clock)
 !
 end program ESVM
