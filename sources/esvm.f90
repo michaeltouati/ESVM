@@ -62,13 +62,17 @@ allocate(n_e(-1:N_x+2),j_e(-1:N_x+2),v_e(-1:N_x+2),vT_e(-1:N_x+2))
 allocate(phi_n(-1:N_x+2),E_x_n(-1:N_x+2),E_x_np1(-1:N_x+2))
 allocate(dU_K(1:N_x),dU_T(1:N_x),dU_E(1:N_x))
 !
-call GRID(N_x,N_vx,d_x,d_vx,x_min,vx_min,x(-1:N_x+2),vx(-1:N_vx+2))
+call GRID(N_x, N_vx, d_x, d_vx, &
+        & x_min, vx_min, x(-1:N_x+2), vx(-1:N_vx+2))
 !
-call INIT_VAR(f_n, f_np1, n_e, j_e, v_e, vT_e, E_x_np1, E_x_n , phi_n, &
-            & dU_K, dU_T, dU_E, U_K, U_T, U_E, time, N_t, & 
+call INIT_VAR(N_x, N_vx, f_n, f_np1, &
+            & n_e, j_e, v_e, vT_e, &
+            & E_x_np1, E_x_n , phi_n, &
+            & dU_K, dU_T, dU_E, &
+            & U_K, U_T, U_E, time, N_t, & 
             & test_positivity, save_results)
 !
-call INIT_SIMU(x(1:N_x), vx(1:N_vx), f_n)
+call INIT_SIMU(b_cond, N_x, N_vx, x(1:N_x), vx(1:N_vx), f_n)
 !
 call INIT_DIAG()
 !
@@ -76,19 +80,26 @@ do while (time.lt.L_t)
   !
   f_max = maxval(maxval(f_n(:,:),dim=2))
   !
-  call DENSITIES(vx(1:N_vx), f_n(-1:N_x+2,-1:N_vx+2),&
+  call DENSITIES(N_x, N_vx, d_vx, &
+               & vx(1:N_vx), f_n(-1:N_x+2,-1:N_vx+2),&
                & n_e(-1:N_x+2), j_e(-1:N_x+2),&
                & v_e(-1:N_x+2), vT_e(-1:N_x+2))
   ! Landau damping test-case
   if (perturb == 2) then
     if ( time < (6.* pi / omega_0) ) then
-      call DRIVE(d_t, time, x, E_x_n, E_x_np1, phi_n)
+      call DRIVE(N_x, d_t, time, x, &
+               & A, omega_0, k, &
+               & E_x_n, E_x_np1, phi_n)
     else 
-      call MAXWELL_SOLVER(maxwell, N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+      call MAXWELL_SOLVER(maxwell, b_cond, &
+                        & N_x, N_t, d_t, d_x, &
+                        & j_e, n_e, E_x_n, E_x_np1, phi_n)
     end if
   ! All other cases
   else
-    call MAXWELL_SOLVER(maxwell, N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+    call MAXWELL_SOLVER(maxwell, b_cond, &
+                      & N_x, N_t, d_t, d_x, &
+                      & j_e, n_e, E_x_n, E_x_np1, phi_n)
   end if
   !   
   d_t = cfl*(0.5_PR/((maxval(vx(1:N_vx))/d_x)+(maxval(abs(E_x_n(1:N_x)))/d_vx)))
@@ -112,7 +123,7 @@ do while (time.lt.L_t)
   end do
   !$omp END PARALLEL DO
   !
-  call BOUNDARIES(f_np1(-1:N_x+2,-1:N_vx+2))
+  call FE_BOUNDARIES(b_cond, N_x, N_vx, f_np1(-1:N_x+2,-1:N_vx+2))
   !
   call DIAG_ENERGY(time, N_x, d_x, &
                  & n_e, v_e, vT_e, E_x_n, &
@@ -129,11 +140,16 @@ do while (time.lt.L_t)
            & f_n, n_e, E_x_n, j_e, v_e, vT_e, phi_n)
   end if
  !
- call INIT_NEXT_STEP(f_n, f_np1, n_e, j_e, v_e, vT_e, &
-                   & phi_n, E_x_n, E_x_np1, N_t, d_t, time, U_K, U_T, U_E)
+ call INIT_NEXT_STEP(N_x, N_vx, f_n, f_np1, &
+                   & n_e, j_e, v_e, vT_e, &
+                   & phi_n, E_x_n, E_x_np1, &
+                   & N_t, d_t, time, &
+                   & U_K, U_T, U_E)
 end do
 !
-deallocate(x,vx,f_n,f_np1,n_e,j_e,v_e,vT_e,E_x_n,E_x_np1)
+deallocate(x, vx, f_n, f_np1)
+deallocate(n_e, j_e, v_e, vT_e)
+deallocate(E_x_n, E_x_np1)
 !
 call system_clock(clock_finish)
 call cpu_time(timer_finish)

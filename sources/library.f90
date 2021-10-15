@@ -32,361 +32,444 @@ implicit none
 public  :: GRID, INIT_VAR, INIT_SIMU
 public  :: DENSITIES, POISSON, AMPERE
 public  :: INIT_NEXT_STEP, MAXWELL_SOLVER
-public  :: DRIVE, FLUXES, BOUNDARIES
-private :: slope, minmod, minmod_3, maxmod, theta
+public  :: DRIVE, FLUXES, FE_BOUNDARIES
+private :: FIELD_BOUNDARY, slope, minmod
+private :: minmod_3, maxmod, theta
 
 contains
 
 ! Subroutines
   
-subroutine GRID(Nx,Nv,dx,dv,xmin,vmin,x,vx)
+subroutine GRID(Nx, Nvx, dx, dvx, &
+              & xmin, vmin, x0, vx0)
   implicit none
-  integer, intent(in)                         :: Nx, Nv
-  real(PR), intent(in)                        :: dx, dv, xmin, vmin
-  real(PR), dimension(-1:Nx+2), intent(out)   :: x
-  real(PR), dimension(-1:Nv+2), intent(out)   :: vx
+  integer,  intent(in)                        :: Nx, Nvx
+  real(PR), intent(in)                        :: dx, dvx, xmin, vmin
+  real(PR), dimension(-1:Nx+2),  intent(out)  :: x0
+  real(PR), dimension(-1:Nvx+2), intent(out)  :: vx0
   integer                                     :: i, l
-  do i=1,Nx+2,1
-    x(i)  = xmin + real(i-1,PR)*dx
+  !
+  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  do i=-1,Nx+2,1
+    x0(i)  = xmin + real(i-1,PR)*dx
   end do
-  x(0)  = x(1) - dx
-  x(-1) = x(0) - dx 
-  do l=1,Nv+2,1
-    vx(l) = vmin + real(l-1,PR)*dv
+  !$omp END PARALLEL DO
+  !
+  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(l) COLLAPSE(1)
+  do l=-1,Nvx+2,1
+    vx0(l) = vmin + real(l-1,PR)*dvx
   end do
-    vx(0)  = vx(1) - dv
-    vx(-1) = vx(0) - dx
-  end subroutine GRID
+  !$omp END PARALLEL DO
+end subroutine GRID
 
-subroutine INIT_VAR(f_n, f_np1, n_e, j_e, v_e, vT_e, E_x_np1, E_x_n , phi_n, &
-            & dU_K, dU_T, dU_E, U_K, U_T, U_E, time, N_t, & 
-            & test_positivity, save_results)
+subroutine INIT_VAR(Nx, Nvx, fn, fnp1, &
+                  & ne, je, ve, vTe, &
+                  & Exnp1, Exn, phin, &
+                  & dUK, dUT, dUE, &
+                  & UK, UT, UE, t0, Nt, & 
+                  & positivity, results)
   implicit none
-  real(PR), dimension(-1:N_x+2,-1:N_vx+2), intent(out)   :: f_n, f_np1
-  real(PR), dimension(-1:N_x+2)          , intent(out)   :: n_e, j_e, v_e, vT_e
-  real(PR), dimension(-1:N_x+2)          , intent(out)   :: E_x_np1, E_x_n , phi_n
-  real(PR), dimension(1:N_x)             , intent(out)   :: dU_K, dU_T, dU_E
-  real(PR)                               , intent(out)   :: U_K, U_T, U_E, time
-  integer                                , intent(out)   :: N_t
-  logical                                , intent(out)   :: test_positivity, save_results
+  integer,                               intent(in)    :: Nx, Nvx
+  real(PR), dimension(-1:Nx+2,-1:Nvx+2), intent(out)   :: fn, fnp1
+  real(PR), dimension(-1:Nx+2)         , intent(out)   :: ne, je, ve, vTe
+  real(PR), dimension(-1:Nx+2)         , intent(out)   :: Exnp1, Exn , phin
+  real(PR), dimension(1:Nx)            , intent(out)   :: dUK, dUT, dUE
+  real(PR)                             , intent(out)   :: UK, UT, UE, t0
+  integer                              , intent(out)   :: Nt
+  logical                              , intent(out)   :: positivity, results
+  integer                                              :: i, l
   !
-  f_n     = zero
-  f_np1   = zero
-  n_e     = zero
-  j_e     = zero
-  v_e     = zero
-  vT_e    = zero
-  E_x_np1 = zero
-  E_x_n   = zero
-  phi_n   = zero
+  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
+  do l=-1,Nvx+2,1
+    do i=-1,Nx+2,1
+      fn(i,l)    = zero
+      fnp1(i,l)  = zero
+    end do
+  end do
+  !$omp END PARALLEL DO
   !
-  dU_K = zero
-  dU_T = zero
-  dU_E = zero
-  U_K  = zero
-  U_T  = zero
-  U_E  = zero
+  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  do i=-1,Nx+2,1
+    ne(i)    = zero
+    je(i)    = zero
+    ve(i)    = zero
+    vTe(i)   = zero
+    Exnp1(i) = zero
+    Exn(i)   = zero
+    phin(i)  = zero
+  end do
+  !$omp END PARALLEL DO
   !
-  time    = 0._PR
-  N_t     = 1
+  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  do i=1,Nx,1
+    dUK(i) = zero
+    dUT(i) = zero
+    dUE(i) = zero
+  end do
+  !$omp END PARALLEL DO
   !
-  test_positivity = .false.
-  save_results    = .false.
+  UK  = zero
+  UT  = zero
+  UE  = zero
+  !
+  t0    = 0._PR
+  Nt    = 1
+  !
+  positivity = .false.
+  results    = .false.
 end subroutine INIT_VAR
 
-subroutine INIT_SIMU(x, vx, f_n)
+subroutine FE_BOUNDARIES(bcond, Nx, Nvx, f0)  
   implicit none
-  real(PR), dimension(1:N_x), intent(in)                 :: x
-  real(PR), dimension(1:N_vx), intent(in)                :: vx
-  real(PR), dimension(-1:N_x+2,-1:N_vx+2), intent(inout) :: f_n
-  integer                                                :: l, i
-  real(PR) :: xs, dx, dvx, X2
-  if (perturb == 1) then
-  ! Electrostatic wakefield test case :
-    dx  = 0.25_PR  ! "particle size"
-    dvx = 0.025_PR ! "particle size"
-    xs  = x_min + ( (x_max - x_min) / 8. ) 
-    do l=1,N_vx,1
-      do i=1,N_x,1
-        f_n(i,l) = (1.0_PR/sqrt(2._PR*pi))*&
-        & exp(-(vx(l)**2._PR)/2._PR) 
-        X2 = -0.5_PR * ( ( ( (x(i)-xs) / dx )**2._PR) + ( ( (vx(l)-vd) / dvx )**2._PR) )
-        f_n(i,l) = f_n(i,l) + ( A * exp(X2)/ (2._PR * pi * dx * dvx ) )
-      end do
-    end do
-  ! Landau damping test case :
-  else if (perturb == 2) then
-    do l=1,N_vx,1
-      do i=1,N_x,1
-        f_n(i,l) = (1._PR/sqrt(2._PR*pi))*&
-                 & exp(-(vx(l)**2._PR)/2._PR) 
-       end do
-    end do
-  else if (perturb == 3) then
-  ! Two-stream instability test case :
-    do l=1,N_vx,1
-      do i=1,N_x,1
-        f_n(i,l) = (0.5_PR/sqrt(2._PR*pi))*&
-        & ((1._PR+A*sin(k*x(i)))*exp(-((vx(l)-vd)**2._PR)/2._PR) + &
-        &  (1._PR-A*sin(k*x(i)))*exp(-((vx(l)+vd)**2._PR)/2._PR))
-       end do
-    end do
-  else
-  ! Maxwellian :
-    do l=1,N_vx,1
-      do i=1,N_x,1
-        f_n(i,l) = (1._PR/sqrt(2._PR*pi))*&
-                 & exp(-((vx(l)-vd)**2._PR)/2._PR) 
-       end do
-    end do
-  end if
-  ! Boundary conditions
-  select case (b_cond)
+  integer,                              intent(in)    :: bcond
+  integer,                              intent(in)    :: Nx, Nvx
+  real(PR), dimension(-1:Nx+2,-1:Nvx+2),intent(inout) :: f0
+  integer                                             :: l,i
+  !
+  select case (bcond)
     ! absorbing
     case (1)
-      do l=-1,N_vx+2,1
-        f_n(N_x+1,l) = zero
-        f_n(N_x+2,l) = zero
-        f_n(0,l)     = zero
-        f_n(-1,l)    = zero
+      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(l) COLLAPSE(1)
+      do l=-1,Nvx+2,1
+        f0(Nx+1,l) = zero
+        f0(Nx+2,l) = zero
+        f0(0,l)    = zero
+        f0(-1,l)   = zero
       end do
+      !$omp END PARALLEL DO
     ! periodic
     case (2)
-      do l=-1,N_vx+2,1
-        f_n(N_x+1,l) = f_n(1,l)
-        f_n(N_x+2,l) = f_n(2,l)
-        f_n(0,l)     = f_n(N_x,l)
-        f_n(-1,l)    = f_n(N_x-1,l)
+      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(l) COLLAPSE(1)
+      do l=-1,Nvx+2,1
+        f0(N_x+1,l) = f0(1,l)
+        f0(N_x+2,l) = f0(2,l)
+        f0(0,l)     = f0(N_x,l)
+        f0(-1,l)    = f0(N_x-1,l)
       end do
+      !$omp END PARALLEL DO
   end select
-  do i=-1,N_x+2,1
-    f_n(i,N_vx+1) = zero
-    f_n(i,N_vx+2) = zero
-    f_n(i,0)      = zero
-    f_n(i,-1)     = zero
+  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  do i=-1,Nx+2,1
+    f0(i,Nvx+1) = zero
+    f0(i,Nvx+2) = zero
+    f0(i,0)     = zero
+    f0(i,-1)    = zero
   end do
+  !$omp END PARALLEL DO
+end subroutine FE_BOUNDARIES
+
+subroutine INIT_SIMU(bcond, Nx,Nvx,x0,vx0,f0)
+  implicit none
+  integer,                               intent(in)    :: bcond
+  integer,                               intent(in)    :: Nx, Nvx
+  real(PR), dimension(1:Nx),             intent(in)    :: x0
+  real(PR), dimension(1:Nvx),            intent(in)    :: vx0
+  real(PR), dimension(-1:Nx+2,-1:Nvx+2), intent(inout) :: f0
+  integer                                              :: l, i
+  real(PR)                                             :: xs, dx
+  real(PR)                                             :: dvx, X2
+  real(PR)                                             :: norm
+  real(PR)                                             :: norm1, norm2 
+  !
+  norm = 1.0_PR/sqrt(2._PR*pi)
+  !
+  if (perturb == 1) then
+  ! Electrostatic wakefield test case :
+    dx    = 0.25_PR  ! "particle size"
+    dvx   = 0.025_PR ! "particle size"
+    xs    = x_min + ( (x_max - x_min) / 8._PR ) 
+    norm1 = A / ( 2._PR * pi * dx * dvx )
+    !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l,X2) COLLAPSE(2)
+    do l=1,Nvx,1
+      do i=1,Nx,1
+        f0(i,l) = norm * exp(-(vx0(l)**2._PR)/2._PR) 
+        X2 = -0.5_PR * &
+           & (  ( ((x0(i) -xs)/dx )**2._PR) &
+           &  + ( ((vx0(l)-vd)/dvx)**2._PR) )
+        f0(i,l) = f0(i,l) + ( norm1 * exp(X2) )
+      end do
+    end do
+    !$omp END PARALLEL DO
+  ! Landau damping test case :
+  else if (perturb == 2) then
+    !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
+    do l=1,Nvx,1
+      do i=1,Nx,1
+        f0(i,l) = norm * exp(-(vx0(l)**2._PR)/2._PR) 
+       end do
+    end do
+    !$omp END PARALLEL DO
+  else if (perturb == 3) then
+  ! Two-stream instability test case :
+    norm = 0.5_PR * norm
+    !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l,norm1,norm2) COLLAPSE(2)
+    do l=1,Nvx,1
+      do i=1,Nx,1
+        norm1   = A * sin(k*x0(i))
+        norm2   = 1._PR-norm1
+        norm1   = 1._PR+norm1
+        f0(i,l) = norm * &
+        & ( (norm1*exp(-((vx0(l)-vd)**2._PR)/2._PR)) + &
+        &   (norm2*exp(-((vx0(l)+vd)**2._PR)/2._PR)) )
+       end do
+    end do
+    !$omp END PARALLEL DO
+  else
+  ! Maxwellian :
+    !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
+    do l=1,Nvx,1
+      do i=1,Nx,1
+        f0(i,l) = norm * exp(-((vx0(l)-vd)**2._PR)/2._PR) 
+       end do
+    end do
+    !$omp END PARALLEL DO
+  end if
+  ! Boundary conditions
+  call FE_BOUNDARIES(bcond, Nx, Nvx, f0)
+  !
 end subroutine INIT_SIMU
 
-subroutine INIT_NEXT_STEP(f_n, f_np1, n_e, j_e, v_e, vT_e, &
-                  & phi_n, E_x_n, E_x_np1, N_t, d_t, time, U_K, U_T, U_E)
+subroutine INIT_NEXT_STEP(Nx, Nvx, fn, fnp1, &
+                        & ne, je, ve, vTe, &
+                        & phin, Exn, Exnp1, &
+                        & Nt, dt, t0, &
+                        & UK, UT, UE)
   implicit none
-  real(PR), dimension(-1:N_x+2,-1:N_vx+2), intent(inout) :: f_n, f_np1
-  real(PR), dimension(-1:N_x+2)          , intent(inout) :: n_e, j_e, v_e, vT_e
-  real(PR), dimension(-1:N_x+2)          , intent(inout) :: E_x_np1, E_x_n , phi_n
-  real(PR)                               , intent(inout) :: U_K, U_T, U_E, d_t, time
-  integer                                , intent(inout) :: N_t
+  integer,                               intent(in)    :: Nx,Nvx
+  real(PR), dimension(-1:Nx+2,-1:Nvx+2), intent(inout) :: fn,fnp1
+  real(PR), dimension(-1:Nx+2)         , intent(inout) :: ne,je,ve,vTe
+  real(PR), dimension(-1:Nx+2)         , intent(inout) :: Exnp1,Exn,phin
+  real(PR)                             , intent(inout) :: UK,UT,UE,dt,t0
+  integer                              , intent(inout) :: Nt
+  integer                                              :: l, i
   !
-  f_n     = f_np1
-  f_np1   = zero
-  n_e     = zero
-  j_e     = zero
-  v_e     = zero
-  vT_e    = zero
-  phi_n   = zero
-  E_x_n   = E_x_np1 
-  E_x_np1 = zero
+  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
+  do l=-1,Nvx+2,1
+    do i=-1,Nx+2,1
+      fn(i,l)   = fnp1(i,l)
+      fnp1(i,l) = zero
+    end do 
+  end do
+  !$omp END PARALLEL DO
   !
-  N_t     = N_t + 1
-  time    = time + d_t
+  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  do i=-1,Nx+2,1
+    ne(i)    = zero
+    je(i)    = zero
+    ve(i)    = zero
+    vTe(i)   = zero
+    phin(i)  = zero
+    Exn(i)   = Exnp1(i) 
+    Exnp1(i) = zero
+  end do
+  !$omp END PARALLEL DO
   !
-  U_K = zero
-  U_T = zero
-  U_E = zero
+  Nt = Nt + 1
+  t0 = t0 + dt
+  !
+  UK = zero
+  UT = zero
+  UE = zero
 end subroutine INIT_NEXT_STEP
 
-subroutine DENSITIES(vx, f_n, n_e, j_e, v_e, vT_e)
+subroutine DENSITIES(Nx, Nvx, dvx, vx0, fn, ne, je, ve, vTe)
   implicit none
-  real(PR), dimension(1:N_vx), intent(in)               :: vx
-  real(PR), dimension(-1:N_x+2,-1:N_vx+2), intent(in)   :: f_n
-  real(PR), dimension(-1:N_x+2), intent(out)            :: n_e, j_e, v_e, vT_e
-  integer                                               :: i, l
-  real(PR), dimension(:), allocatable                   :: F1,F2,F3
+  integer,                               intent(in)   :: Nx, Nvx
+  real(PR),                              intent(in)   :: dvx
+  real(PR), dimension(1:Nvx),            intent(in)   :: vx0
+  real(PR), dimension(-1:Nx+2,-1:Nvx+2), intent(in)   :: fn
+  real(PR), dimension(-1:Nx+2),          intent(out)  :: ne, je
+  real(PR), dimension(-1:Nx+2),          intent(out)  :: ve, vTe
+  integer                                             :: i, l
+  real(PR), dimension(:), allocatable                 :: F1,F2,F3
   !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l,F1,F2,F3) COLLAPSE(1)
-  do i=-1,N_x+2,1
-    allocate(F1(1:N_vx),F2(1:N_vx),F3(1:N_vx))
-    F1(1:N_vx) = f_n(i,1:N_vx)*d_vx
-    do l=1,N_vx,1
-      F2(l) = - f_n(i,l) * vx(l) * d_vx
-      F3(l) = f_n(i,l) * (vx(l)**2._PR) * d_vx
+  do i=-1,Nx+2,1
+    allocate(F1(1:Nvx),F2(1:Nvx),F3(1:Nvx))
+    F1(1:Nvx) = fn(i,1:Nvx)*dvx
+    do l=1,Nvx,1
+      F2(l) = - fn(i,l) * vx0(l) * dvx
+      F3(l) = fn(i,l) * (vx0(l)**2._PR) * dvx
     end do
-    n_e(i)  = sum(F1(1:N_vx))
-    j_e(i)  = sum(F2(1:N_vx))
-    if (abs(n_e(i)).lt.zero) then
-      v_e(i) = 0.
+    ne(i)  = sum(F1(1:Nvx))
+    je(i)  = sum(F2(1:Nvx))
+    if (abs(ne(i)).lt.zero) then
+      ve(i) = 0.
     else
-      v_e(i)  = - j_e(i) / n_e(i)
+      ve(i)  = - je(i) / ne(i)
     end if
-    if (abs(n_e(i)).ne.(v_e(i)**2._PR)) then
-      vT_e(i) = ((sum(F3(1:N_vx))/n_e(i))-(v_e(i)**2._PR))**0.5_PR
+    if (abs(ne(i)).ne.(ve(i)**2._PR)) then
+      vTe(i) = ((sum(F3(1:Nvx))/ne(i))-(ve(i)**2._PR))**0.5_PR
     else
-      vT_e(i) = 0.
+      vTe(i) = 0.
     end if
-   deallocate(F1,F2,F3)
+    deallocate(F1,F2,F3)
   end do
   !$omp END PARALLEL DO
 end subroutine DENSITIES
 
-subroutine MAXWELL_SOLVER(solver, N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+subroutine MAXWELL_SOLVER(solver, bcond, &
+                        & Nx, Nt, dt, dx, &
+                        & je, ne, Exn, Exnp1, phin)
   implicit none
-  integer, intent(in)                          :: solver, N_t
-  real(PR), intent(in)                         :: d_t, d_x
-  real(PR), dimension(-1:N_x+2), intent(in)    :: j_e, n_e
-  real(PR), dimension(-1:N_x+2), intent(inout) :: E_x_n
-  real(PR), dimension(-1:N_x+2), intent(out)   :: E_x_np1, phi_n
+  integer,                      intent(in)    :: bcond, Nx
+  integer,                      intent(in)    :: solver, Nt
+  real(PR),                     intent(in)    :: dt, dx
+  real(PR), dimension(-1:Nx+2), intent(in)    :: je, ne
+  real(PR), dimension(-1:Nx+2), intent(inout) :: Exn
+  real(PR), dimension(-1:Nx+2), intent(out)   :: Exnp1, phin
   if (solver == 1) then
-    call AMPERE(N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+    call AMPERE(bcond, Nx, Nt, dt, dx, &
+              & je, ne, Exn, Exnp1, phin)
   else 
-    call POISSON(d_x, n_e, E_x_n, E_x_np1, phi_n)
+    call POISSON(bcond, Nx, dx, &
+               & ne, Exn, phin)
   end if
 end subroutine MAXWELL_SOLVER
 
-subroutine POISSON(d_x, n_e, E_x_n, E_x_np1, phi_n)
+subroutine FIELD_BOUNDARY(bcond, Nx, Ex)
   implicit none
-  real(PR), intent(in)                         :: d_x
-  real(PR), dimension(-1:N_x+2), intent(in)    :: n_e
-  real(PR), dimension(-1:N_x+2), intent(inout) :: E_x_n
-  real(PR), dimension(-1:N_x+2), intent(out)   :: E_x_np1, phi_n
-  integer                                      :: i
-  real(PR), dimension(1:N_x+1)                 :: a, b, c, d, e, phi_temp 
+  integer, intent(in)                          :: bcond, Nx
+  real(PR), dimension(-1:N_x+2), intent(inout) :: Ex
+  !
+  select case (bcond)
+    ! absorbing
+    case (1)
+      Ex(0)     = Ex(1)
+      Ex(-1)    = Ex(0)
+      Ex(N_x+1) = Ex(N_x)
+      Ex(N_x+2) = Ex(N_x+1)
+    ! periodic
+    case (2)
+      Ex(0)     = Ex(N_x)
+      Ex(-1)    = Ex(N_x-1)
+      Ex(N_x+1) = Ex(1)
+      Ex(N_x+2) = Ex(2)
+  end select
+end subroutine FIELD_BOUNDARY
+
+subroutine POISSON(bcond, Nx, dx, &
+                 & ne, Exn, phin)
+  implicit none
+  integer,                      intent(in)  :: bcond, Nx
+  real(PR),                     intent(in)  :: dx
+  real(PR), dimension(-1:Nx+2), intent(in)  :: ne
+  real(PR), dimension(-1:Nx+2), intent(out) :: Exn
+  real(PR), dimension(-1:Nx+2), intent(out) :: phin
+  integer                                   :: i
+  real(PR), dimension(1:Nx+1)               :: a, b, c, d, e
+  real(PR), dimension(1:Nx+1)               :: phi_temp 
+  !
   !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
-  do i=1,N_x,1
+  do i=1,Nx,1
     a(i)        = -1._PR
     b(i)        =  2._PR
     c(i)        = -1._PR
-    d(i)        = (1._PR - n_e(i))*(d_x**2._PR)
-    if (b_cond.eq.2) then
+    d(i)        = (1._PR - ne(i)) * (dx**2._PR)
+    if (bcond.eq.2) then
       e(i)        = 0._PR
       phi_temp(i) = 0._PR
     end if
   end do
   !omp END PARALLEL DO
-  select case (b_cond)
+  select case (bcond)
     ! absorbing boundary conditions
     case (1)
-      call SOLVE_TRIDIAG(a(1:N_x),b(1:N_x),c(1:N_x),d(1:N_x),phi_n(1:N_x)   ,N_x)
-      phi_n(N_x+1) = 0._PR
-      phi_n(N_x+2) = phi_n(N_x) - phi_n(N_x-1)
-      phi_n(0)     = 0._PR
-      phi_n(-1)    = phi_n(1) - phi_n(2)
+      call SOLVE_TRIDIAG(Nx, a(1:Nx),b(1:Nx),c(1:Nx),d(1:Nx), &
+                       & phin(1:Nx))
+      phin(Nx+1) = 0._PR
+      phin(Nx+2) = phin(Nx) - phin(Nx-1)
+      phin(0)    = 0._PR
+      phin(-1)   = phin(1)  - phin(2)
     ! periodic boundary conditions
     case (2)
-      call SOLVE_TRIDIAG(a(1:N_x-1),b(1:N_x-1),c(1:N_x-1),d(1:N_x-1),phi_n(1:N_x-1)   ,N_x-1)
-      e(1)   = a(1)
-      e(N_x-1) = c(N_x-1)
-      call SOLVE_TRIDIAG(a(1:N_x-1),b(1:N_x-1),c(1:N_x-1),e(1:N_x-1),phi_temp(1:N_x-1),N_x-1)
-      phi_n(N_x) = (d(N_x)-(c(N_x)*phi_n(1))   -(a(N_x)*phi_n(N_x-1))) &
-                &/ (b(N_x)+(c(N_x)*phi_temp(1))+(a(N_x)*phi_temp(N_x-1))) 
-      phi_n(N_x+1) = phi_n(1)
-      phi_n(N_x+2) = phi_n(2)
-      phi_n(0)  = phi_n(N_x)
-      phi_n(-1) = phi_n(N_x-1)
+      call SOLVE_TRIDIAG(Nx-1, a(1:Nx-1),b(1:Nx-1),c(1:Nx-1),d(1:Nx-1), &
+                       & phin(1:Nx-1))
+      e(1)    = a(1)
+      e(Nx-1) = c(Nx-1)
+      call SOLVE_TRIDIAG(Nx-1, a(1:Nx-1),b(1:Nx-1),c(1:Nx-1),e(1:Nx-1), &
+                       & phi_temp(1:Nx-1))
+      phin(Nx) = (d(Nx)-(c(Nx)*phin(1))   -(a(Nx)*phin(Nx-1))) &
+                &/ (b(Nx)+(c(Nx)*phi_temp(1))+(a(Nx)*phi_temp(Nx-1))) 
+      phin(Nx+1) = phin(1)
+      phin(Nx+2) = phin(2)
+      phin(0)    = phin(Nx)
+      phin(-1)   = phin(Nx-1)
   end select
   !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
-  do i=1,N_x,1
-    E_x_n(i) = (phi_n(i-1) - phi_n(i+1))/(2._PR*d_x)
+  do i=1,Nx,1
+    Exn(i) = (phin(i-1) - phin(i+1))/(2._PR*d_x)
   end do
   !omp END PARALLEL DO
-  select case (b_cond)
-    ! absorbing
-    case (1)
-      E_x_n(0)     = E_x_n(1)
-      E_x_n(-1)    = E_x_n(0)
-      E_x_n(N_x+1) = E_x_n(N_x)
-      E_x_n(N_x+2) = E_x_n(N_x+1)
-      E_x_np1(0)     = E_x_np1(1)
-      E_x_np1(-1)    = E_x_np1(0)
-      E_x_np1(N_x+1) = E_x_np1(N_x)
-      E_x_np1(N_x+2) = E_x_np1(N_x+1)
-    ! periodic
-    case (2)
-      E_x_np1(0)     = E_x_np1(N_x)
-      E_x_np1(-1)    = E_x_np1(N_x-1)
-      E_x_np1(N_x+1) = E_x_np1(1)
-      E_x_np1(N_x+2) = E_x_np1(2)
-      E_x_n(0)     = E_x_n(N_x)
-      E_x_n(-1)    = E_x_n(N_x-1)
-      E_x_n(N_x+1) = E_x_n(1)
-      E_x_n(N_x+2) = E_x_n(2)
-  end select
+  !
+  call FIELD_BOUNDARY(bcond, Nx, Exn)
 end subroutine POISSON
 
-subroutine AMPERE(N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
+subroutine AMPERE(bcond, Nx, Nt, dt, dx, &
+                & je, ne, Exn, Exnp1, phin)
   implicit none
-  integer, intent(in)                          :: N_t
-  real(PR), intent(in)                         :: d_t, d_x
-  real(PR), dimension(-1:N_x+2), intent(in)    :: j_e, n_e
-  real(PR), dimension(-1:N_x+2), intent(inout) :: E_x_n
-  real(PR), dimension(-1:N_x+2), intent(out)   :: E_x_np1, phi_n
-  integer                                      :: i
-  real(PR)                                     :: dx2
+  integer,                      intent(in)    :: bcond, Nx
+  integer,                      intent(in)    :: Nt
+  real(PR),                     intent(in)    :: dt, dx
+  real(PR), dimension(-1:Nx+2), intent(in)    :: je, ne
+  real(PR), dimension(-1:Nx+2), intent(inout) :: Exn
+  real(PR), dimension(-1:Nx+2), intent(out)   :: Exnp1, phin
+  integer                                     :: i
+  real(PR)                                    :: dx2
   !
-  if (N_t.eq.1) then
-    call POISSON(d_x, n_e, E_x_n, E_x_np1, phi_n)
+  if (Nt.eq.1) then
+    call POISSON(bcond, Nx, dx, ne, Exn, phin)
   else
-    dx2 = 2._PR*d_x
+    dx2 = 2._PR*dx
     !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
-    do i=1,N_x,1
-      E_x_np1(i) = E_x_n(i)   - (d_t*j_e(i))
-      phi_n(i)   = phi_n(i-2) - (dx2*E_x_n(i-1))
+    do i=1,Nx,1
+      Exnp1(i) = Exn(i)    - (dt *je(i)   )
+      phin(i)  = phin(i-2) - (dx2*Exn(i-1))
     end do
     !omp END PARALLEL DO
     !
-    select case (b_cond)
-      ! absorbing
-      case (1)
-        E_x_n(0)     = E_x_n(1)
-        E_x_n(-1)    = E_x_n(0)
-        E_x_n(N_x+1) = E_x_n(N_x)
-        E_x_n(N_x+2) = E_x_n(N_x+1)
-        E_x_np1(0)     = E_x_np1(1)
-        E_x_np1(-1)    = E_x_np1(0)
-        E_x_np1(N_x+1) = E_x_np1(N_x)
-        E_x_np1(N_x+2) = E_x_np1(N_x+1)
-      ! periodic
-      case (2)
-        E_x_np1(0)     = E_x_np1(N_x)
-        E_x_np1(-1)    = E_x_np1(N_x-1)
-        E_x_np1(N_x+1) = E_x_np1(1)
-        E_x_np1(N_x+2) = E_x_np1(2)
-        E_x_n(0)     = E_x_n(N_x)
-        E_x_n(-1)    = E_x_n(N_x-1)
-        E_x_n(N_x+1) = E_x_n(1)
-        E_x_n(N_x+2) = E_x_n(2)
-    end select
+    call FIELD_BOUNDARY(bcond, Nx, Exnp1)
   end if
 end subroutine AMPERE
 
-subroutine DRIVE(d_t, time, x, E_x_n, E_x_np1, phi_n)
+subroutine DRIVE(Nx, dt, t0, x0, &
+               & A1, Om0, K0, &
+               & Exn, Exnp1, phin)
   implicit none
-  real(PR), intent(in)                       :: d_t, time
-  real(PR), dimension(-1:N_x+2), intent(in)  :: x
-  real(PR), dimension(-1:N_x+2), intent(out) :: E_x_n, phi_n
-  real(PR), dimension(-1:N_x+2), intent(out) :: E_x_np1
-  integer                                    :: i
-  real(PR)                                   :: B, ot, ot2
+  integer,                      intent(in)  :: Nx
+  real(PR),                     intent(in)  :: dt, t0
+  real(PR),                     intent(in)  :: A1, Om0, K0
+  real(PR), dimension(-1:Nx+2), intent(in)  :: x0
+  real(PR), dimension(-1:Nx+2), intent(out) :: Exn, phin
+  real(PR), dimension(-1:Nx+2), intent(out) :: Exnp1
+  integer                                   :: i
+  real(PR)                                  :: A2, kx0
+  real(PR)                                  :: ot, ot2
   !
-  B   = A / k
-  ot  = omega_0 * time
-  ot2 = omega_0 * (time+d_t)
- !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
-  do i=-1,N_x+2
-    E_x_n(i)   = A * sin( ot - (k*x(i)) )
-    phi_n(i)   = B * cos( ot - (k*x(i)) )
-    E_x_np1(i) = A * sin( ot2 - (k*x(i)) )
+  A2   = A1 / K0
+  ot  = Om0 * t0
+  ot2 = Om0 * (t0+dt)
+ !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,kx0) COLLAPSE(1)
+  do i=-1,Nx+2
+    kx0      = K0 * x0(i)
+    Exn(i)   = A1 * sin( ot  - kx0 )
+    phin(i)  = A2 * cos( ot  - kx0 )
+    Exnp1(i) = A1 * sin( ot2 - kx0 )
   end do
   !omp END PARALLEL DO
 end subroutine DRIVE
 
-subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
-                     & u_im2, u_im1, u_i, u_ip1, u_ip2, flux_l, flux_r) 
+subroutine FLUXES(method, vx0, u_max, dt, d_mu, &
+                & u_im2, u_im1, u_i, u_ip1, u_ip2, &
+                & flux_l, flux_r) 
   implicit none
-  integer, intent(in)   :: scheme
-  real(PR), intent(in)  :: vx, u_max, d_t, d_mu, u_im2, u_im1, u_i, u_ip1, u_ip2
+  integer,  intent(in)  :: method
+  real(PR), intent(in)  :: vx0, u_max, dt, d_mu
+  real(PR), intent(in)  :: u_im2, u_im1, u_i, u_ip1, u_ip2
   real(PR), intent(out) :: flux_l, flux_r
   real(PR)              :: eps_l, eps_r
-  real(PR)              :: t, sigma_im1, sigma_i, sigma_ip1
-  if (scheme.eq.NL_MUSCL1) then 
-    if (vx.ge.0._PR) then
+  real(PR)              :: theta0, sigma_im1, sigma_i, sigma_ip1
+  if (method.eq.NL_MUSCL1) then 
+    if (vx0.ge.0._PR) then
       if ((u_ip1-u_i).gt.0._PR) then
         eps_r = min(1._PR,2._PR*u_i/(u_ip1-u_i))
       else 
@@ -397,8 +480,8 @@ subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
       else 
         eps_l = 0._PR
       end if
-      flux_r = vx*(u_i  +(0.5_PR*eps_r*(u_ip1-u_i)))
-      flux_l = vx*(u_im1+(0.5_PR*eps_l*(u_i  -u_im1)))
+      flux_r = vx0*(u_i  +(0.5_PR*eps_r*(u_ip1-u_i)))
+      flux_l = vx0*(u_im1+(0.5_PR*eps_l*(u_i  -u_im1)))
     else
       if ((u_ip1-u_i).lt.0._PR) then
         eps_r = min(1._PR,-2._PR*u_ip1/(u_ip1-u_i))
@@ -410,11 +493,11 @@ subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
       else 
         eps_l = 0._PR
       end if
-      flux_r = vx*(u_ip1-(0.5_PR*eps_r*(u_ip1-u_i)))
-      flux_l = vx*(u_i  -(0.5_PR*eps_l*(u_i-u_im1)))
+      flux_r = vx0*(u_ip1-(0.5_PR*eps_r*(u_ip1-u_i)))
+      flux_l = vx0*(u_i  -(0.5_PR*eps_l*(u_i-u_im1)))
     end if
-  else if (scheme.eq.NL_MUSCL2) then
-    if (vx.ge.0._PR) then
+  else if (method.eq.NL_MUSCL2) then
+    if (vx0.ge.0._PR) then
       if ((u_ip1-u_i)*(u_i-u_im1).le.0._PR) then
         eps_r = 0._PR
       else if ((u_ip1-u_i).lt.0._PR) then
@@ -429,8 +512,8 @@ subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
       else 
         eps_l = min(1._PR,2._PR*u_im1/(u_i-u_im1))
       end if
-      flux_r = vx*(u_i  +(0.5_PR*eps_r*(u_ip1-u_i  )))
-      flux_l = vx*(u_im1+(0.5_PR*eps_l*(u_i  -u_im1)))
+      flux_r = vx0*(u_i  +(0.5_PR*eps_r*(u_ip1-u_i  )))
+      flux_l = vx0*(u_im1+(0.5_PR*eps_l*(u_i  -u_im1)))
     else
       if ((u_ip1-u_i)*(u_i-u_im1).le.0._PR) then
         eps_r = 0._PR
@@ -446,83 +529,51 @@ subroutine FLUXES(scheme, vx, u_max, d_t, d_mu,&
       else 
         eps_l = min(1._PR,-2._PR*u_i/(u_i-u_im1))
       end if
-      flux_r = vx*(u_ip1-(0.5_PR*eps_r*(u_ip1-u_i  )))
-      flux_l = vx*(u_i  -(0.5_PR*eps_l*(u_i  -u_im1)))
+      flux_r = vx0*(u_ip1-(0.5_PR*eps_r*(u_ip1-u_i  )))
+      flux_l = vx0*(u_i  -(0.5_PR*eps_l*(u_i  -u_im1)))
     end if
   else
-    sigma_im1 = slope(scheme,u_im2,u_im1,u_i)
-    sigma_i   = slope(scheme,u_im1,u_i,u_ip1)
-    sigma_ip1 = slope(scheme,u_i,u_ip1,u_ip2)
-    t = theta(vx)
-    flux_l = ( vx * ( ( (1._PR+t) * u_im1 ) + ( (1._PR-t) * u_i ) ) / 2._PR )    &
-         & + ( t * vx * ( 1._PR - ( t * vx * d_t / d_mu ) ) *                    &
-         &   ( ( (1._PR+t) * sigma_im1 ) + ( (1._PR-t) * sigma_i   ) ) / 4._PR )
-    flux_r = ( vx * ( ( (1._PR+t) * u_i ) + ( (1._PR-t) * u_ip1 ) ) / 2._PR )    &
-         & + ( t * vx * ( 1._PR - ( t * vx * d_t / d_mu ) ) *                    &
-         &   ( ( (1._PR+t) * sigma_i )   + ( (1._PR-t) * sigma_ip1 ) ) / 4._PR )
+    sigma_im1 = slope(method, u_im2, u_im1, u_i  )
+    sigma_i   = slope(method, u_im1, u_i  , u_ip1)
+    sigma_ip1 = slope(method, u_i  , u_ip1, u_ip2)
+    theta0 = theta(vx0)
+    flux_l = ( vx0 * ( ( (1._PR+theta0) * u_im1 ) + ( (1._PR-theta0) * u_i ) ) / 2._PR )    &
+         & + ( theta0 * vx0 * ( 1._PR - ( theta0 * vx0 * dt / d_mu ) ) *                    &
+         &   ( ( (1._PR+theta0) * sigma_im1 ) + ( (1._PR-theta0) * sigma_i   ) ) / 4._PR )
+    flux_r = ( vx0 * ( ( (1._PR+theta0) * u_i ) + ( (1._PR-theta0) * u_ip1 ) ) / 2._PR )    &
+         & + ( theta0 * vx0 * ( 1._PR - ( theta0 * vx0 * dt / d_mu ) ) *                    &
+         &   ( ( (1._PR+theta0) * sigma_i )   + ( (1._PR-theta0) * sigma_ip1 ) ) / 4._PR )
   end if
 end subroutine FLUXES
 
-subroutine BOUNDARIES(f_np1)  
-   implicit none
-  real(PR), dimension(-1:N_x+2,-1:N_vx+2),intent(inout) :: f_np1
-  integer                                               :: l,i
-  select case (b_cond)
-    ! absorbing
-    case (1)
-      do l=-1,N_vx+2,1
-        f_np1(N_x+1,l) = zero
-        f_np1(N_x+2,l) = zero
-        f_np1(0,l)     = zero
-        f_np1(-1,l)    = zero
-      end do
-    ! periodic
-    case (2)
-      do l=-1,N_vx+2,1
-        f_np1(N_x+1,l) = f_np1(1,l)
-        f_np1(N_x+2,l) = f_np1(2,l)
-        f_np1(0,l)     = f_np1(N_x,l)
-        f_np1(-1,l)    = f_np1(N_x-1,l)
-      end do
-  end select
-  do i=-1,N_x+2,1
-    f_np1(i,N_vx+1) = zero
-    f_np1(i,N_vx+2) = zero
-    f_np1(i,0)      = zero
-    f_np1(i,-1)     = zero
-  end do
-end subroutine BOUNDARIES
-
-subroutine SOLVE_TRIDIAG(a,b,c,d,x,n)
+subroutine SOLVE_TRIDIAG(N0, a0, b0, c0, d0, x0)
   implicit none
-  integer,intent(in)                :: n
-  real(PR),dimension(n),intent(in)  :: a,b,c,d
-  real(PR),dimension(n),intent(out) :: x
-  real(PR),dimension(n)             :: cp,dp
-  real(PR)                          :: m
-  integer                           :: i
-  cp(1) = c(1)/b(1)
-  dp(1) = d(1)/b(1)
-  do i = 2,n,1
-     m = b(i)-(cp(i-1)*a(i))
-     cp(i) = c(i)/m
-     dp(i) = (d(i)-(dp(i-1)*a(i)))/m
-  enddo
-  x(n) = dp(n)
-  do i = n-1, 1, -1
-     x(i) = dp(i)-cp(i)*x(i+1)
+  integer,intent(in)                 :: N0
+  real(PR),dimension(N0),intent(in)  :: a0,b0,c0,d0
+  real(PR),dimension(N0),intent(out) :: x0
+  real(PR),dimension(N0)             :: cp,dp
+  real(PR)                           :: yp
+  integer                            :: i
+  cp(1) = c0(1)/b0(1)
+  dp(1) = d0(1)/b0(1)
+  do i = 2,N0,1
+     yp    = b0(i)-(cp(i-1)*a0(i))
+     cp(i) = c0(i)/yp
+     dp(i) = (d0(i)-(dp(i-1)*a0(i)))/yp
+  end do
+  x0(N0) = dp(N0)
+  do i = N0-1,1,-1
+     x0(i) = dp(i)-cp(i)*x0(i+1)
   end do 
 end subroutine SOLVE_TRIDIAG
 
-! Functions
-  
-function slope(scheme,u_im1, u_i, u_ip1)
+function slope(method, u_im1, u_i, u_ip1)
   implicit none
-  integer, intent(in)  :: scheme
+  integer,  intent(in) :: method
   real(PR), intent(in) :: u_im1, u_i, u_ip1
   real(PR)             :: slope
-  select case (scheme)
-    case DEFAULT
+  select case (method)
+    case default
       slope = 0._PR
     case (L_donor_cell)
       slope = 0._PR
@@ -541,52 +592,52 @@ function slope(scheme,u_im1, u_i, u_ip1)
   end select
 end function slope
   
-function minmod(a, b)
-   implicit none
-  real(PR), intent(in) :: a,b
+function minmod(a0, b0)
+  implicit none
+  real(PR), intent(in) :: a0, b0
   real(PR)             :: minmod
-  if ((a*b).le.0._PR) then
+  if ((a0*b0).le.0._PR) then
     minmod = 0._PR
   else
-    if (abs(a).gt.abs(b)) then
-      minmod = b
+    if (abs(a0).gt.abs(b0)) then
+      minmod = b0
     else
-      minmod = a
+      minmod = a0
     end if
   end if
 end function minmod
   
-function minmod_3(a, b, c)
-   implicit none
-  real(PR), intent(in) :: a, b, c
+function minmod_3(a0, b0, c0)
+  implicit none
+  real(PR), intent(in) :: a0, b0, c0
   real(PR)             :: minmod_3
-  minmod_3 = max(0._PR,min(a,b,c)) + min(0._PR,max(a,b,c))
+  minmod_3 = max(0._PR,min(a0,b0,c0)) + min(0._PR,max(a0,b0,c0))
 end function minmod_3
   
-function maxmod(a, b)
+function maxmod(a0, b0)
   implicit none
-  real(PR), intent(in) :: a,b
+  real(PR), intent(in) :: a0, b0
   real(PR)             :: maxmod
-  if ((a*b).le.0._PR) then
+  if ((a0*b0).le.0._PR) then
     maxmod = 0._PR
   else
-    if (abs(a).gt.abs(b)) then
-      maxmod = a
+    if (abs(a0).gt.abs(b0)) then
+      maxmod = a0
     else
-      maxmod = b
+      maxmod = b0
     end if
   end if
 end function maxmod
   
-function theta(vx)
+function theta(vx0)
   implicit none
-  real(PR), intent(in) :: vx
+  real(PR), intent(in) :: vx0
   real(PR)             :: theta
-  if (vx.ge.0) then
-    theta = 1._PR
+  if (vx0.ge.0) then
+    theta =   1._PR
   else
     theta = - 1._PR
   end if
 end function theta
-    
+
 end module library

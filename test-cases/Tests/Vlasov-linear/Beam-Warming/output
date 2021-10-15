@@ -8,15 +8,15 @@
  -----------------------------------------
  * Plasma properties (immobile ions)
  T       =  0.10000000000000E+04 eV
-         =  0.11604258709350E+08 K
+         =  0.11604518121550E+08 K
  Z       =  0.10000000000000E+01
  ni      =  0.10000000000000E+22 /cm3
  * Deduced ESVM units
- Debye   =  0.74340066378433E-06 cm
- me      =  0.91094000000000E-27 g
- omega_p =  0.17839822657874E+16 /s
- e       =  0.48032000000000E-09 statC
- vTe0    =  0.13262136005659E+10 cm/s
+ Debye   =  0.74339430995725E-06 cm
+ me      =  0.91093837000000E-27 g
+ omega_p =  0.17839861009805E+16 /s
+ e       =  0.48032040000000E-09 statC
+ vTe0    =  0.13262051165117E+10 cm/s
  n0      =  0.10000000000000E+22 /cm3
  -----------------------------------------
  * 1D-1V phase-space : 
@@ -50,33 +50,33 @@
  Number of iterations :         1
  ================================
   
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2624364E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623777E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.2828038E-08
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2624362E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623776E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.2924380E-08
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5248141E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5248139E+01
   
  ================================
  time (/omega_p)  = 0.2573892E+00
  Number of iterations :        13
  ================================
   
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2493679E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623844E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.1454758E+00
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2493678E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623843E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.1454757E+00
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5262999E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5262997E+01
   
  ================================
  time (/omega_p)  = 0.5067278E+00
  Number of iterations :        26
  ================================
   
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2071599E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623987E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.5837938E+00
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2071598E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623985E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.5837934E+00
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5279379E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5279377E+01
   
  ================================
  time (/omega_p)  = 0.7519378E+00
@@ -84,11 +84,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1471783E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2624040E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.1198668E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1471782E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2624039E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.1198667E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5294490E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5294488E+01
   
  ================================
  time (/omega_p)  = 0.1012712E+01
@@ -96,11 +96,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.7950250E+00
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2624007E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.1889599E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.7950251E+00
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2624006E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.1889598E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5308631E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5308629E+01
   
  ================================
  time (/omega_p)  = 0.1260545E+01
@@ -108,11 +108,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2789774E+00
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2624007E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.2417314E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2789776E+00
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2624006E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.2417312E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5320298E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5320296E+01
   
  ================================
  time (/omega_p)  = 0.1501448E+01
@@ -120,11 +120,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2024093E-01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2624005E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.2686193E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2024102E-01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2624004E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.2686191E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5330439E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5330437E+01
   
  ================================
  time (/omega_p)  = 0.1755345E+01
@@ -132,11 +132,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.7531965E-01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623972E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.2641435E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.7531939E-01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623971E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.2641434E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5340726E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5340724E+01
   
  ================================
  time (/omega_p)  = 0.2012612E+01
@@ -144,23 +144,23 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.4627133E+00
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623892E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.2265184E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.4627125E+00
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623891E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.2265183E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5351789E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5351786E+01
   
  ================================
- time (/omega_p)  = 0.2263311E+01
+ time (/omega_p)  = 0.2263312E+01
  Number of iterations :       138
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1069927E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623697E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1069925E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623696E+01
  Electric energy (n0 Debye^3 me vTe0^2) = 0.1670327E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5363950E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5363948E+01
   
  ================================
  time (/omega_p)  = 0.2511687E+01
@@ -168,11 +168,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1750631E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623357E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1750629E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2623356E+01
  Electric energy (n0 Debye^3 me vTe0^2) = 0.1003655E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5377642E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5377640E+01
   
  ================================
  time (/omega_p)  = 0.2761754E+01
@@ -180,11 +180,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2351453E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622925E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.4184770E+00
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2351451E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622924E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.4184777E+00
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5392854E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5392852E+01
   
  ================================
  time (/omega_p)  = 0.3017731E+01
@@ -192,11 +192,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2728223E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622581E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.5836938E-01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2728221E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622580E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.5836982E-01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5409173E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5409171E+01
   
  ================================
  time (/omega_p)  = 0.3257213E+01
@@ -204,11 +204,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2777605E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622513E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.2428925E-01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2777604E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622512E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.2428889E-01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5424408E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5424405E+01
   
  ================================
  time (/omega_p)  = 0.3501405E+01
@@ -217,10 +217,10 @@
   
  the distribution function became negative
  Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.2505858E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622512E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.3128291E+00
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622511E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.3128278E+00
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5441199E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5441197E+01
   
  ================================
  time (/omega_p)  = 0.3757622E+01
@@ -228,11 +228,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1939101E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622510E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.8970311E+00
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1939102E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622509E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.8970291E+00
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5458643E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5458640E+01
   
  ================================
  time (/omega_p)  = 0.4009420E+01
@@ -240,11 +240,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1242814E+01
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622517E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.1608963E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1242815E+01
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622516E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.1608960E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5474294E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5474292E+01
   
  ================================
  time (/omega_p)  = 0.4261401E+01
@@ -252,11 +252,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.5849268E+00
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622500E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.2280485E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.5849280E+00
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622499E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.2280483E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5487912E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5487910E+01
   
  ================================
  time (/omega_p)  = 0.4503170E+01
@@ -264,11 +264,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1456931E+00
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622550E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.2731102E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1456938E+00
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622549E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.2731100E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5499345E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5499343E+01
   
  ================================
  time (/omega_p)  = 0.4754906E+01
@@ -276,11 +276,11 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1764247E-02
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622440E+01
- Electric energy (n0 Debye^3 me vTe0^2) = 0.2885912E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1764152E-02
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622438E+01
+ Electric energy (n0 Debye^3 me vTe0^2) = 0.2885910E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5510115E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5510113E+01
   
  ================================
  time (/omega_p)  = 0.4991934E+01
@@ -288,12 +288,12 @@
  ================================
   
  the distribution function became negative
- Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1940127E+00
- Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622447E+01
+ Kinetic energy  (n0 Debye^3 me vTe0^2) = 0.1940116E+00
+ Thermal energy  (n0 Debye^3 me vTe0^2) = 0.2622446E+01
  Electric energy (n0 Debye^3 me vTe0^2) = 0.2703966E+01
  ------------------------------------------------------
- Total energy    (n0 Debye^3 me vTe0^2) = 0.5520425E+01
+ Total energy    (n0 Debye^3 me vTe0^2) = 0.5520423E+01
   
  =================================================
- Simulation CPUxtime        =  0.2526837E-02 hours
- Simulation ellapsed time   =  0.4861111E-04 hours
+ Simulation CPUxtime        =  0.2441138E-02 hours
+ Simulation ellapsed time   =  0.4694444E-04 hours
