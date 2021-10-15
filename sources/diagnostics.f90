@@ -120,7 +120,8 @@ subroutine DUMP_FIELD(Nval, t0, x0, val)
   end if
 end subroutine DUMP_FIELD
 
-subroutine DIAG(Nt, t0, Nx, x0, Nvx, vx0, positivity, UK, UT, UE, &
+subroutine DIAG(Nt, t0, Nx, x0, Nvx, vx0, &
+              & positivity, UK, UT, UE, &
               & fn, ne, Exn, je, ve, vTe, phin)
   implicit none
   integer                               , intent(in) :: Nt, Nx, Nvx
@@ -191,7 +192,7 @@ subroutine DIAG(Nt, t0, Nx, x0, Nvx, vx0, positivity, UK, UT, UE, &
   !$omp END PARALLEL DO
 end subroutine DIAG
 
-subroutine CLOSE_DIAG(CPUtime0,clock0)
+subroutine CLOSE_DIAG(CPUtime0, clock0)
   implicit none
   real(PR), intent(in) :: CPUtime0,clock0
   !

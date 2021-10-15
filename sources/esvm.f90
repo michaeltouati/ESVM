@@ -124,7 +124,8 @@ do while (time.lt.L_t)
   save_results = save_results.or.((L_t-time).le.d_t)
   !
   if (save_results.eqv..true.) then
-    call DIAG(N_t, time, N_x, x, N_vx, vx, test_positivity, U_K, U_T, U_E, &
+    call DIAG(N_t, time, N_x, x, N_vx, vx, & 
+           & test_positivity, U_K, U_T, U_E, &
            & f_n, n_e, E_x_n, j_e, v_e, vT_e, phi_n)
   end if
  !
@@ -140,6 +141,6 @@ clock   = real(clock_finish - clock_start,PR)/real(rate,PR)
 clock   = clock/3.6e3_PR
 CPUtime = (timer_finish - timer_start)/3.6e3_PR
 !
-call CLOSE_DIAG(CPUtime,clock)
+call CLOSE_DIAG(CPUtime, clock)
 !
 end program ESVM
