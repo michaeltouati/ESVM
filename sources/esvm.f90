@@ -43,6 +43,8 @@ real(PR), dimension(:), allocatable   :: dU_K, dU_T, dU_E
 real(PR)                              :: U_K, U_T, U_E 
 logical                               :: test_positivity, save_results
 real(PR)                              :: timer_start, timer_finish
+real(PR)                              :: simu_time
+real(PR)                              :: vm1, am1
 !
 call cpu_time(timer_start)
 !
@@ -85,7 +87,9 @@ do while (time.lt.L_t)
     call MAXWELL_SOLVER(maxwell, N_t, d_t, d_x, j_e, n_e, E_x_n, E_x_np1, phi_n)
   end if
   !   
-  d_t   = cfl*(0.5_PR/((maxval(vx(1:N_vx))/d_x)+(maxval(abs(E_x_n(1:N_x)))/d_vx)))
+  d_t = cfl*(0.5_PR/((maxval(vx(1:N_vx))/d_x)+(maxval(abs(E_x_n(1:N_x)))/d_vx)))
+  vm1 = d_t / d_x
+  am1 = d_t / d_vx
   !
   !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(l,i,flux_im1,flux_ip1) COLLAPSE(2)
   do l=1,N_vx,1
@@ -93,12 +97,12 @@ do while (time.lt.L_t)
       call fluxes(scheme, vx(l), f_max, d_t, d_x, &
                 & f_n(i-2,l), f_n(i-1,l), f_n(i,l), f_n(i+1,l), f_n(i+2,l), &
                 & flux_im1, flux_ip1)
-      f_np1(i,l) = f_n(i,l) - (d_t * (flux_ip1 - flux_im1) / d_x)  
+      f_np1(i,l) = f_n(i,l) - ( vm1 * (flux_ip1 - flux_im1) )  
       !
       call fluxes(scheme,-E_x_n(i), f_max, d_t, d_vx,&
                 & f_n(i,l-2), f_n(i,l-1), f_n(i,l), f_n(i,l+1), f_n(i,l+2), &
                 & flux_im1, flux_ip1)
-      f_np1(i,l) = f_np1(i,l) - (d_t * (flux_ip1 - flux_im1) / d_vx)
+      f_np1(i,l) = f_np1(i,l) - ( am1 * (flux_ip1 - flux_im1) )
       if ((f_np1(i,l).lt.0._PR).and.(test_positivity.eqv..false.)) test_positivity = .true.
     end do
   end do
