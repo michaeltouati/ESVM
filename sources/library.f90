@@ -33,7 +33,7 @@ public  :: GRID, INIT_VAR, INIT_SIMU
 public  :: DENSITIES, POISSON, AMPERE
 public  :: INIT_NEXT_STEP, MAXWELL_SOLVER
 public  :: DRIVE, FLUXES, FE_BOUNDARIES
-private :: FIELD_BOUNDARY, slope, minmod
+private :: FIELD_BOUNDARIES, slope, minmod
 private :: minmod_3, maxmod, theta
 
 contains
@@ -230,16 +230,13 @@ subroutine INIT_SIMU(bcond, Nx,Nvx,x0,vx0,f0)
 end subroutine INIT_SIMU
 
 subroutine INIT_NEXT_STEP(Nx, Nvx, fn, fnp1, &
-                        & ne, je, ve, vTe, &
-                        & phin, Exn, Exnp1, &
-                        & Nt, dt, t0, &
-                        & UK, UT, UE)
+                        & Exn, Exnp1, &
+                        & Nt, dt, t0)
   implicit none
-  integer,                               intent(in)    :: Nx,Nvx
-  real(PR), dimension(-1:Nx+2,-1:Nvx+2), intent(inout) :: fn,fnp1
-  real(PR), dimension(-1:Nx+2)         , intent(inout) :: ne,je,ve,vTe
-  real(PR), dimension(-1:Nx+2)         , intent(inout) :: Exnp1,Exn,phin
-  real(PR)                             , intent(inout) :: UK,UT,UE,dt,t0
+  integer,                               intent(in)    :: Nx, Nvx
+  real(PR), dimension(-1:Nx+2,-1:Nvx+2), intent(inout) :: fn, fnp1
+  real(PR), dimension(-1:Nx+2)         , intent(inout) :: Exnp1, Exn
+  real(PR)                             , intent(inout) :: dt, t0
   integer                              , intent(inout) :: Nt
   integer                                              :: l, i
   !
@@ -247,29 +244,18 @@ subroutine INIT_NEXT_STEP(Nx, Nvx, fn, fnp1, &
   do l=-1,Nvx+2,1
     do i=-1,Nx+2,1
       fn(i,l)   = fnp1(i,l)
-      fnp1(i,l) = zero
     end do 
   end do
   !$omp END PARALLEL DO
   !
   !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
   do i=-1,Nx+2,1
-    ne(i)    = zero
-    je(i)    = zero
-    ve(i)    = zero
-    vTe(i)   = zero
-    phin(i)  = zero
     Exn(i)   = Exnp1(i) 
-    Exnp1(i) = zero
   end do
   !$omp END PARALLEL DO
   !
   Nt = Nt + 1
   t0 = t0 + dt
-  !
-  UK = zero
-  UT = zero
-  UE = zero
 end subroutine INIT_NEXT_STEP
 
 subroutine DENSITIES(Nx, Nvx, dvx, vx0, fn, ne, je, ve, vTe)
@@ -326,10 +312,10 @@ subroutine MAXWELL_SOLVER(solver, bcond, &
   end if
 end subroutine MAXWELL_SOLVER
 
-subroutine FIELD_BOUNDARY(bcond, Nx, Ex)
+subroutine FIELD_BOUNDARIES(bcond, Nx, Ex)
   implicit none
-  integer, intent(in)                          :: bcond, Nx
-  real(PR), dimension(-1:N_x+2), intent(inout) :: Ex
+  integer, intent(in)                         :: bcond, Nx
+  real(PR), dimension(-1:Nx+2), intent(inout) :: Ex
   !
   select case (bcond)
     ! absorbing
@@ -345,7 +331,7 @@ subroutine FIELD_BOUNDARY(bcond, Nx, Ex)
       Ex(N_x+1) = Ex(1)
       Ex(N_x+2) = Ex(2)
   end select
-end subroutine FIELD_BOUNDARY
+end subroutine FIELD_BOUNDARIES
 
 subroutine POISSON(bcond, Nx, dx, &
                  & ne, Exn, phin)
@@ -401,7 +387,7 @@ subroutine POISSON(bcond, Nx, dx, &
   end do
   !omp END PARALLEL DO
   !
-  call FIELD_BOUNDARY(bcond, Nx, Exn)
+  call FIELD_BOUNDARIES(bcond, Nx, Exn)
 end subroutine POISSON
 
 subroutine AMPERE(bcond, Nx, Nt, dt, dx, &
@@ -427,7 +413,7 @@ subroutine AMPERE(bcond, Nx, Nt, dt, dx, &
     end do
     !omp END PARALLEL DO
     !
-    call FIELD_BOUNDARY(bcond, Nx, Exnp1)
+    call FIELD_BOUNDARIES(bcond, Nx, Exnp1)
   end if
 end subroutine AMPERE
 

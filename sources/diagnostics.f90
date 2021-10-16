@@ -68,11 +68,13 @@ subroutine INIT_DIAG()
   open (unit=Ndiag_UE    , file='results/'//trim(simu)//'/UE.dat'    , form='formatted', status='unknown')
 end subroutine INIT_DIAG
 
-subroutine DIAG_ENERGY(t0, Nx, dx, &
+subroutine DIAG_ENERGY(energies, &
+                     & t0, Nx, dx, &
                      & ne, ve, vTe, Exn, &
                      & dUK, dUT, dUE, &
                      & UK, UT, UE)
   implicit none
+  logical                     , intent(in)    :: energies
   integer                     , intent(in)    :: Nx   
   real(PR)                    , intent(in)    :: dx, t0
   real(PR), dimension(-1:Nx+2), intent(in)    :: ne, ve, vTe
@@ -80,7 +82,6 @@ subroutine DIAG_ENERGY(t0, Nx, dx, &
   real(PR), dimension(1:Nx)   , intent(inout) :: dUK, dUT, dUE
   real(PR)                    , intent(inout) :: UK, UT, UE
   integer                                     :: i, k
-  ! real(PR), dimension(8:10)                   :: UP
   !
   !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
   do i = 1,Nx,1
@@ -94,18 +95,20 @@ subroutine DIAG_ENERGY(t0, Nx, dx, &
   UT = max(zero, sum(dUT(1:Nx)) * dx)
   UE = max(zero, sum(dUE(1:Nx)) * dx)
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(k) COLLAPSE(1)
-  do k=Ndiag_UK,Ndiag_UE,1
-    select case (k)
-      case(Ndiag_UK)
-        write(Ndiag_UK,'(2E23.15)') t0, UK
-      case(Ndiag_UT)
-        write(Ndiag_UT,'(2E23.15)') t0, UT
-      case(Ndiag_UE)
-        write(Ndiag_UE,'(2E23.15)') t0, UE
-    end select
-  end do
-  !$omp END PARALLEL DO
+  if (energies.eqv..true.) then
+    !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(k) COLLAPSE(1)
+    do k=Ndiag_UK,Ndiag_UE,1
+      select case (k)
+        case(Ndiag_UK)
+          write(Ndiag_UK,'(2E23.15)') t0, UK
+        case(Ndiag_UT)
+          write(Ndiag_UT,'(2E23.15)') t0, UT
+        case(Ndiag_UE)
+          write(Ndiag_UE,'(2E23.15)') t0, UE
+      end select
+    end do
+    !$omp END PARALLEL DO
+  end if
 end subroutine DIAG_ENERGY
 
 subroutine DUMP_FIELD(Nval, t0, x0, val)

@@ -37,13 +37,15 @@ real(PR), dimension(:), allocatable   :: x, vx
 real(PR), dimension(:,:), allocatable :: f_n, f_np1
 real(PR), dimension(:), allocatable   :: n_e, j_e, v_e, vT_e
 real(PR), dimension(:), allocatable   :: E_x_n, E_x_np1, phi_n
-integer                               :: N_t, i, l 
+integer                               :: N_t, i, l
 real(PR)                              :: f_max, flux_im1, flux_ip1
-real(PR), dimension(:), allocatable   :: dU_K, dU_T, dU_E 
-real(PR)                              :: U_K, U_T, U_E 
+real(PR), dimension(:), allocatable   :: dU_K, dU_T, dU_E
+real(PR)                              :: U_K, U_T, U_E
 real(PR)                              :: vm1, am1
-logical                               :: test_positivity, save_results
+logical                               :: test_positivity
+logical                               :: save_energies, save_results
 real(PR)                              :: timer_start, timer_finish
+real(PR)                              :: dt_diag_nrj
 real(PR)                              :: CPUtime, clock
 integer                               :: clock_start, clock_finish
 integer                               :: rate
@@ -86,17 +88,19 @@ do while (time.lt.L_t)
                & v_e(-1:N_x+2), vT_e(-1:N_x+2))
   ! Landau damping test-case
   if (perturb == 2) then
-    if ( time < (6.* pi / omega_0) ) then
+    dt_diag_nrj = 0.5_PR * pi / omega_0
+    if ( time < (12._PR*dt_diag_nrj) ) then
       call DRIVE(N_x, d_t, time, x, &
                & A, omega_0, k, &
                & E_x_n, E_x_np1, phi_n)
-    else 
+    else
       call MAXWELL_SOLVER(maxwell, b_cond, &
                         & N_x, N_t, d_t, d_x, &
                         & j_e, n_e, E_x_n, E_x_np1, phi_n)
     end if
   ! All other cases
   else
+    dt_diag_nrj = 0.5_PR * pi
     call MAXWELL_SOLVER(maxwell, b_cond, &
                       & N_x, N_t, d_t, d_x, &
                       & j_e, n_e, E_x_n, E_x_np1, phi_n)
@@ -125,7 +129,12 @@ do while (time.lt.L_t)
   !
   call FE_BOUNDARIES(b_cond, N_x, N_vx, f_np1(-1:N_x+2,-1:N_vx+2))
   !
-  call DIAG_ENERGY(time, N_x, d_x, &
+  save_energies = (mod(time,dt_diag_nrj).lt.d_t).and.(time.ge.d_t)
+  save_energies = save_energies.or.(N_t.eq.1)
+  save_energies = save_energies.or.((L_t-time).le.d_t)
+  !
+  call DIAG_ENERGY(save_energies, &
+                 & time, N_x, d_x, &
                  & n_e, v_e, vT_e, E_x_n, &
                  & dU_K, dU_T, dU_E, &
                  & U_K, U_T, U_E)
@@ -141,15 +150,14 @@ do while (time.lt.L_t)
   end if
  !
  call INIT_NEXT_STEP(N_x, N_vx, f_n, f_np1, &
-                   & n_e, j_e, v_e, vT_e, &
-                   & phi_n, E_x_n, E_x_np1, &
-                   & N_t, d_t, time, &
-                   & U_K, U_T, U_E)
+                   & E_x_n, E_x_np1, &
+                   & N_t, d_t, time) 
 end do
 !
 deallocate(x, vx, f_n, f_np1)
 deallocate(n_e, j_e, v_e, vT_e)
-deallocate(E_x_n, E_x_np1)
+deallocate(E_x_n, E_x_np1, phi_n)
+deallocate(dU_K, dU_T, dU_E)
 !
 call system_clock(clock_finish)
 call cpu_time(timer_finish)
