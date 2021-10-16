@@ -28,19 +28,19 @@
 ######################
 ######################
 
-F90 = ifort
+# F90 = ifort
 
 ##########
 # openMP #
 ##########
 
-# OPTS = -fopenmp -r8 -O3
+# OPTS = -fopenmp -O2
 
 #########
 # debug #
 #########
 
-OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C 
+# OPTS = -g -traceback -fopenmp -r8 -std95 -fpe0 -debug all -debug-parameters all -C 
 
 ####################
 ####################
@@ -54,7 +54,7 @@ F90 = gfortran
 # openMP #
 ##########
 
-OPTS = -fopenmp -fdefault-real-8 -O3
+OPTS = -fopenmp -O2
 
 #########
 # debug #
