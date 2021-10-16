@@ -7,8 +7,6 @@ Modify the makefile as a function of the wished compilation options and the Fort
 ```sh
 make
 ```
-It is recommended to compile the code with the double-precision option (-fdefault-real-8 for the GNU compiler gfortran or -r8 for the INTEL compiler ifort). 
-
 The compilation can be tested by typing
 ```sh
 make test
