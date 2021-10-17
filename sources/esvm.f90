@@ -107,7 +107,12 @@ do while (time.lt.L_t)
                       & N_x, N_t, d_t, d_x, &
                       & j_e, n_e, E_x_n, E_x_np1, phi_n)
   end if
-  !   
+  !
+  call ENERGIES(N_x, d_x, &
+              & n_e, v_e, vT_e, E_x_n, &
+              & dU_K, dU_T, dU_E, &
+              & U_K, U_T, U_E)
+  !
   d_t = cfl*(0.5_PR/((maxval(vx(1:N_vx))/d_x)+(maxval(abs(E_x_n(1:N_x)))/d_vx)))
   vm1 = d_t / d_x
   am1 = d_t / d_vx
@@ -135,11 +140,9 @@ do while (time.lt.L_t)
   save_energies = save_energies.or.(N_t.eq.1)
   save_energies = save_energies.or.((L_t-time).le.d_t)
   !
-  call DIAG_ENERGY(save_energies, &
-                 & time, N_x, d_x, &
-                 & n_e, v_e, vT_e, E_x_n, &
-                 & dU_K, dU_T, dU_E, &
-                 & U_K, U_T, U_E)
+  if (save_energies.eqv..true.) then
+    call DIAG_ENERGY(time, U_K, U_T, U_E)
+  end if
   !
   save_results = (mod(time,dt_diag).lt.d_t).and.(time.ge.d_t)
   save_results = save_results.or.(N_t.eq.1)

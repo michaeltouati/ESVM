@@ -30,7 +30,8 @@ use physics
   
 implicit none
 public  :: GRID, INIT_VAR, INIT_SIMU
-public  :: DENSITIES, POISSON, AMPERE
+public  :: DENSITIES, ENERGIES
+public  :: POISSON, AMPERE
 public  :: INIT_NEXT_STEP, MAXWELL_SOLVER
 public  :: DRIVE, FLUXES, FE_BOUNDARIES
 private :: FIELD_BOUNDARIES, slope, minmod
@@ -292,6 +293,33 @@ subroutine DENSITIES(Nx, Nvx, dvx, vx0, fn, ne, je, ve, vTe)
   end do
   !$omp END PARALLEL DO
 end subroutine DENSITIES
+
+subroutine ENERGIES(Nx, dx, &
+                  & ne, ve, vTe, Exn, &
+                  & dUK, dUT, dUE, &
+                  & UK, UT, UE)
+  implicit none
+  integer                     , intent(in)    :: Nx
+  real(PR)                    , intent(in)    :: dx
+  real(PR), dimension(-1:Nx+2), intent(in)    :: ne, ve, vTe
+  real(PR), dimension(-1:Nx+2), intent(in)    :: Exn
+  real(PR), dimension(1:Nx)   , intent(inout) :: dUK, dUT, dUE
+  real(PR)                    , intent(inout) :: UK, UT, UE
+  integer                                     :: i
+  !
+  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  do i = 1,Nx,1
+    dUK(i) = ne(i) * (ve(i)**2._PR)  / 2._PR
+    dUT(i) = ne(i) * (vTe(i)**2._PR) / 2._PR
+    dUE(i) = (Exn(i)**2._PR) / 2._PR
+  end do
+  !$omp END PARALLEL DO
+  !
+  UK = max(zero, sum(dUK(1:Nx)) * dx)
+  UT = max(zero, sum(dUT(1:Nx)) * dx)
+  UE = max(zero, sum(dUE(1:Nx)) * dx)
+  !
+end subroutine ENERGIES
 
 subroutine MAXWELL_SOLVER(solver, bcond, &
                         & Nx, Nt, dt, dx, &
