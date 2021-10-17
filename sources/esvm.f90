@@ -86,9 +86,12 @@ do while (time.lt.L_t)
                & vx(1:N_vx), f_n(-1:N_x+2,-1:N_vx+2),&
                & n_e(-1:N_x+2), j_e(-1:N_x+2),&
                & v_e(-1:N_x+2), vT_e(-1:N_x+2))
+  !
+  dt_diag_nrj = 0.1_PR
+  !
   ! Landau damping test-case
   if (perturb == 2) then
-    dt_diag_nrj = 0.2_PR / omega_0
+    dt_diag_nrj = dt_diag_nrj / omega_0
     if ( time < (6._PR * pi / omega_0) ) then
       call DRIVE(N_x, d_t, time, x, &
                & A, omega_0, k, &
@@ -100,7 +103,6 @@ do while (time.lt.L_t)
     end if
   ! All other cases
   else
-    dt_diag_nrj = 0.2_PR
     call MAXWELL_SOLVER(maxwell, b_cond, &
                       & N_x, N_t, d_t, d_x, &
                       & j_e, n_e, E_x_n, E_x_np1, phi_n)
