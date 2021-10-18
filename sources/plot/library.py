@@ -37,6 +37,14 @@ def get_results_dir():
             name = array[1]
             break
     file.close()
+    to_print=' '+name+' ESVM SIMULATION PLOTS :'
+    N_to_print = len(to_print)
+    line_to_print= ' '
+    for char in range(0,len(to_print)-1):
+        line_to_print+='='
+    print(line_to_print)
+    print(to_print)
+    print(line_to_print)
     return name
 
 def create_dir(name):

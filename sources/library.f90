@@ -25,8 +25,6 @@ module library
 
 use acuracy
 use constants
-use input
-use physics
   
 implicit none
 public  :: GRID, INIT_VAR, INIT_SIMU
@@ -142,10 +140,10 @@ subroutine FE_BOUNDARIES(bcond, Nx, Nvx, f0)
     case (2)
       !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(l) COLLAPSE(1)
       do l=-1,Nvx+2,1
-        f0(N_x+1,l) = f0(1,l)
-        f0(N_x+2,l) = f0(2,l)
-        f0(0,l)     = f0(N_x,l)
-        f0(-1,l)    = f0(N_x-1,l)
+        f0(Nx+1,l) = f0(1,l)
+        f0(Nx+2,l) = f0(2,l)
+        f0(0,l)    = f0(Nx,l)
+        f0(-1,l)   = f0(Nx-1,l)
       end do
       !$omp END PARALLEL DO
   end select
@@ -159,12 +157,16 @@ subroutine FE_BOUNDARIES(bcond, Nx, Nvx, f0)
   !$omp END PARALLEL DO
 end subroutine FE_BOUNDARIES
 
-subroutine INIT_SIMU(bcond, Nx,Nvx,x0,vx0,f0)
+subroutine INIT_SIMU(bcond, academic_case, &
+                   & Ap, kp ,vd, &
+                   & Nx, Nvx, x0, vx0, f0)
   implicit none
   integer,                               intent(in)    :: bcond
+  integer,                               intent(in)    :: academic_case
+  real(PR),                              intent(in)    :: Ap, kp ,vd
   integer,                               intent(in)    :: Nx, Nvx
-  real(PR), dimension(1:Nx),             intent(in)    :: x0
-  real(PR), dimension(1:Nvx),            intent(in)    :: vx0
+  real(PR), dimension(-1:Nx+2),          intent(in)    :: x0
+  real(PR), dimension(-1:Nvx+2),         intent(in)    :: vx0
   real(PR), dimension(-1:Nx+2,-1:Nvx+2), intent(inout) :: f0
   integer                                              :: l, i
   real(PR)                                             :: xs, dx
@@ -174,57 +176,58 @@ subroutine INIT_SIMU(bcond, Nx,Nvx,x0,vx0,f0)
   !
   norm = 1.0_PR/sqrt(2._PR*pi)
   !
-  if (perturb == 1) then
-  ! Electrostatic wakefield test case :
-    dx    = 0.25_PR  ! "particle size"
-    dvx   = 0.025_PR ! "particle size"
-    xs    = x_min + ( (x_max - x_min) / 8._PR ) 
-    norm1 = A / ( 2._PR * pi * dx * dvx )
-    !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l,X2) COLLAPSE(2)
-    do l=1,Nvx,1
-      do i=1,Nx,1
-        f0(i,l) = norm * exp(-(vx0(l)**2._PR)/2._PR) 
-        X2 = -0.5_PR * &
-           & (  ( ((x0(i) -xs)/dx )**2._PR) &
-           &  + ( ((vx0(l)-vd)/dvx)**2._PR) )
-        f0(i,l) = f0(i,l) + ( norm1 * exp(X2) )
+  select case (academic_case)
+    case (1)
+    ! Electrostatic wakefield test case :
+      dx    = 0.25_PR  ! "particle size"
+      dvx   = 0.025_PR ! "particle size"
+      xs    = x0(1) + ( (x0(Nx) - x0(1)) / 8._PR ) 
+      norm1 = Ap / ( 2._PR * pi * dx * dvx )
+      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l,X2) COLLAPSE(2)
+      do l=1,Nvx,1
+        do i=1,Nx,1
+          f0(i,l) = norm * exp(-(vx0(l)**2._PR)/2._PR) 
+          X2 = -0.5_PR * &
+             & (  ( ((x0(i) -xs)/dx )**2._PR) &
+             &  + ( ((vx0(l)-vd)/dvx)**2._PR) )
+          f0(i,l) = f0(i,l) + ( norm1 * exp(X2) )
+        end do
       end do
-    end do
-    !$omp END PARALLEL DO
-  ! Landau damping test case :
-  else if (perturb == 2) then
-    !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
-    do l=1,Nvx,1
-      do i=1,Nx,1
-        f0(i,l) = norm * exp(-(vx0(l)**2._PR)/2._PR) 
-       end do
-    end do
-    !$omp END PARALLEL DO
-  else if (perturb == 3) then
-  ! Two-stream instability test case :
-    norm = 0.5_PR * norm
-    !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l,norm1,norm2) COLLAPSE(2)
-    do l=1,Nvx,1
-      do i=1,Nx,1
-        norm1   = A * sin(k*x0(i))
-        norm2   = 1._PR-norm1
-        norm1   = 1._PR+norm1
-        f0(i,l) = norm * &
-        & ( (norm1*exp(-((vx0(l)-vd)**2._PR)/2._PR)) + &
-        &   (norm2*exp(-((vx0(l)+vd)**2._PR)/2._PR)) )
-       end do
-    end do
-    !$omp END PARALLEL DO
-  else
-  ! Maxwellian :
-    !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
-    do l=1,Nvx,1
-      do i=1,Nx,1
-        f0(i,l) = norm * exp(-((vx0(l)-vd)**2._PR)/2._PR) 
-       end do
-    end do
-    !$omp END PARALLEL DO
-  end if
+      !$omp END PARALLEL DO
+    ! Landau damping test case :
+    case (2)
+      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
+      do l=1,Nvx,1
+        do i=1,Nx,1
+          f0(i,l) = norm * exp(-(vx0(l)**2._PR)/2._PR)
+         end do
+      end do
+      !$omp END PARALLEL DO
+    case (3)
+    ! Two-stream instability test case :
+      norm = 0.5_PR * norm
+      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l,norm1,norm2) COLLAPSE(2)
+      do l=1,Nvx,1
+        do i=1,Nx,1
+          norm1   = Ap * sin(kp*x0(i))
+          norm2   = 1._PR-norm1
+          norm1   = 1._PR+norm1
+          f0(i,l) = norm * &
+          & ( (norm1*exp(-((vx0(l)-vd)**2._PR)/2._PR)) + &
+          &   (norm2*exp(-((vx0(l)+vd)**2._PR)/2._PR)) )
+         end do
+      end do
+      !$omp END PARALLEL DO
+    case default
+    ! Maxwellian :
+      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
+      do l=1,Nvx,1
+        do i=1,Nx,1
+          f0(i,l) = norm * exp(-((vx0(l)-vd)**2._PR)/2._PR)
+         end do
+      end do
+      !$omp END PARALLEL DO
+  end select
   ! Boundary conditions
   call FE_BOUNDARIES(bcond, Nx, Nvx, f0)
   !
@@ -263,7 +266,7 @@ subroutine DENSITIES(Nx, Nvx, dvx, vx0, fn, ne, je, ve, vTe)
   implicit none
   integer,                               intent(in)   :: Nx, Nvx
   real(PR),                              intent(in)   :: dvx
-  real(PR), dimension(-1:N_vx+2),        intent(in)   :: vx0
+  real(PR), dimension(-1:Nvx+2),         intent(in)   :: vx0
   real(PR), dimension(-1:Nx+2,-1:Nvx+2), intent(in)   :: fn
   real(PR), dimension(-1:Nx+2),          intent(out)  :: ne, je
   real(PR), dimension(-1:Nx+2),          intent(out)  :: ve, vTe
@@ -348,16 +351,16 @@ subroutine FIELD_BOUNDARIES(bcond, Nx, Ex)
   select case (bcond)
     ! absorbing
     case (1)
-      Ex(0)     = Ex(1)
-      Ex(-1)    = Ex(0)
-      Ex(N_x+1) = Ex(N_x)
-      Ex(N_x+2) = Ex(N_x+1)
+      Ex(0)    = Ex(1)
+      Ex(-1)   = Ex(0)
+      Ex(Nx+1) = Ex(Nx)
+      Ex(Nx+2) = Ex(Nx+1)
     ! periodic
     case (2)
-      Ex(0)     = Ex(N_x)
-      Ex(-1)    = Ex(N_x-1)
-      Ex(N_x+1) = Ex(1)
-      Ex(N_x+2) = Ex(2)
+      Ex(0)    = Ex(Nx)
+      Ex(-1)   = Ex(Nx-1)
+      Ex(Nx+1) = Ex(1)
+      Ex(Nx+2) = Ex(2)
   end select
 end subroutine FIELD_BOUNDARIES
 
@@ -411,7 +414,7 @@ subroutine POISSON(bcond, Nx, dx, &
   end select
   !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
   do i=1,Nx,1
-    Exn(i) = (phin(i-1) - phin(i+1))/(2._PR*d_x)
+    Exn(i) = (phin(i-1) - phin(i+1))/(2._PR*dx)
   end do
   !omp END PARALLEL DO
   !
@@ -472,12 +475,12 @@ subroutine DRIVE(Nx, dt, t0, x0, &
   !omp END PARALLEL DO
 end subroutine DRIVE
 
-subroutine FLUXES(method, vx0, u_max, dt, d_mu, &
+subroutine FLUXES(method, bVL, vx0, u_max, dt, d_mu, &
                 & u_im2, u_im1, u_i, u_ip1, u_ip2, &
                 & flux_l, flux_r) 
   implicit none
   integer,  intent(in)  :: method
-  real(PR), intent(in)  :: vx0, u_max, dt, d_mu
+  real(PR), intent(in)  :: bVL, vx0, u_max, dt, d_mu
   real(PR), intent(in)  :: u_im2, u_im1, u_i, u_ip1, u_ip2
   real(PR), intent(out) :: flux_l, flux_r
   real(PR)              :: eps_l, eps_r
@@ -547,9 +550,9 @@ subroutine FLUXES(method, vx0, u_max, dt, d_mu, &
       flux_l = vx0*(u_i  -(0.5_PR*eps_l*(u_i  -u_im1)))
     end if
   else
-    sigma_im1 = slope(method, u_im2, u_im1, u_i  )
-    sigma_i   = slope(method, u_im1, u_i  , u_ip1)
-    sigma_ip1 = slope(method, u_i  , u_ip1, u_ip2)
+    sigma_im1 = slope(method, bVL, u_im2, u_im1, u_i  )
+    sigma_i   = slope(method, bVL, u_im1, u_i  , u_ip1)
+    sigma_ip1 = slope(method, bVL, u_i  , u_ip1, u_ip2)
     theta0 = theta(vx0)
     flux_l = ( vx0 * ( ( (1._PR+theta0) * u_im1 ) + ( (1._PR-theta0) * u_i ) ) / 2._PR )    &
          & + ( theta0 * vx0 * ( 1._PR - ( theta0 * vx0 * dt / d_mu ) ) *                    &
@@ -581,10 +584,10 @@ subroutine SOLVE_TRIDIAG(N0, a0, b0, c0, d0, x0)
   end do 
 end subroutine SOLVE_TRIDIAG
 
-function slope(method, u_im1, u_i, u_ip1)
+function slope(method, bVL, u_im1, u_i, u_ip1)
   implicit none
   integer,  intent(in) :: method
-  real(PR), intent(in) :: u_im1, u_i, u_ip1
+  real(PR), intent(in) :: bVL, u_im1, u_i, u_ip1
   real(PR)             :: slope
   select case (method)
     case default
@@ -602,7 +605,7 @@ function slope(method, u_im1, u_i, u_ip1)
     case (NL_superbee)
       slope = maxmod(minmod(u_ip1 - u_i,2._PR*(u_i - u_im1)),minmod(2._PR*(u_ip1 - u_i),u_i - u_im1))
     case (NL_Van_Leer)
-      slope = minmod_3(b*(u_ip1 - u_i),0.5_PR*(u_ip1 - u_im1),b*(u_i - u_im1))
+      slope = minmod_3(bVL*(u_ip1 - u_i),0.5_PR*(u_ip1 - u_im1),bVL*(u_i - u_im1))
   end select
 end function slope
   

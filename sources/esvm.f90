@@ -26,10 +26,8 @@ program ESVM
 use acuracy
 use constants
 use input
-use physics
 use diagnostics
 use library
-use omp_lib
 !
 implicit none
 real(PR)                              :: time, d_t
@@ -45,7 +43,7 @@ real(PR)                              :: vm1, am1
 logical                               :: test_positivity
 logical                               :: save_energies, save_results
 real(PR)                              :: timer_start, timer_finish
-real(PR)                              :: dt_diag_nrj
+real(PR)                              :: t_drive, dt_diag_nrj
 real(PR)                              :: CPUtime, clock
 integer                               :: clock_start, clock_finish
 integer                               :: rate
@@ -74,9 +72,14 @@ call INIT_VAR(N_x, N_vx, f_n, f_np1, &
             & U_K, U_T, U_E, time, N_t, & 
             & test_positivity, save_results)
 !
-call INIT_SIMU(b_cond, N_x, N_vx, x(1:N_x), vx(1:N_vx), f_n)
+call INIT_SIMU(b_cond, perturb, A_pert, k_pert, v_d, &
+             & N_x, N_vx, x(-1:N_x+2), vx(-1:N_vx+2), f_n)
 !
 call INIT_DIAG()
+!
+t_drive     = 6._PR * pi / omega_pert
+dt_diag_nrj = 0.1_PR
+if (perturb == 2) dt_diag_nrj = dt_diag_nrj / omega_pert
 !
 do while (time.lt.L_t)
   !
@@ -86,15 +89,11 @@ do while (time.lt.L_t)
                & vx(-1:N_vx+2), f_n(-1:N_x+2,-1:N_vx+2),&
                & n_e(-1:N_x+2), j_e(-1:N_x+2),&
                & v_e(-1:N_x+2), vT_e(-1:N_x+2))
-  !
-  dt_diag_nrj = 0.1_PR
-  !
   ! Landau damping test-case
   if (perturb == 2) then
-    dt_diag_nrj = dt_diag_nrj / omega_0
-    if ( time < (6._PR * pi / omega_0) ) then
+    if ( time < t_drive ) then
       call DRIVE(N_x, d_t, time, x, &
-               & A, omega_0, k, &
+               & A_pert, omega_pert, k_pert, &
                & E_x_n, E_x_np1, phi_n)
     else
       call MAXWELL_SOLVER(maxwell, b_cond, &
@@ -120,12 +119,12 @@ do while (time.lt.L_t)
   !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(l,i,flux_im1,flux_ip1) COLLAPSE(2)
   do l=1,N_vx,1
     do i = 1,N_x,1
-      call fluxes(scheme, vx(l), f_max, d_t, d_x, &
+      call fluxes(scheme, b_VL, vx(l), f_max, d_t, d_x, &
                 & f_n(i-2,l), f_n(i-1,l), f_n(i,l), f_n(i+1,l), f_n(i+2,l), &
                 & flux_im1, flux_ip1)
       f_np1(i,l) = f_n(i,l) - ( vm1 * (flux_ip1 - flux_im1) )  
       !
-      call fluxes(scheme,-E_x_n(i), f_max, d_t, d_vx,&
+      call fluxes(scheme, b_VL, -E_x_n(i), f_max, d_t, d_vx,&
                 & f_n(i,l-2), f_n(i,l-1), f_n(i,l), f_n(i,l+1), f_n(i,l+2), &
                 & flux_im1, flux_ip1)
       f_np1(i,l) = f_np1(i,l) - ( am1 * (flux_ip1 - flux_im1) )

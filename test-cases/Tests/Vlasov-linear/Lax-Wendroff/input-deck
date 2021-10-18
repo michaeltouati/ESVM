@@ -129,7 +129,7 @@
 ##          - Non linear : scheme = 5 (minmod), 6 (superbee),        ##
 ##                         7 (Van_Leer), 8 (MUSCL1) or 9 (MUSCL2)    ##
 ##                                                                   ##
-## b = free parameter for Van Leer schemes only (1<=b<=2)            ##
+## b_VL = free parameter for Van Leer schemes only (1<=b_VL<=2)      ##
 ##                                                                   ##
 #######################################################################
 #
@@ -139,7 +139,7 @@
 #
 #scheme 2
 #
-#b      2.
+#b_VL 2.
 #
 #######################################################################
 ##                                                                   ##
@@ -151,23 +151,24 @@
 ##           2 for the (non)linear Landau damping test case          ##
 ##           3 for the two stream instability test case              ##
 ##                                                                   ##
-## A       = perturbation amplitude                                  ##
+## A_pert     = perturbation amplitude                               ##
 ##                                                                   ##
-## k       = perturbation wave vector                                ##
+## k_pert     = perturbation wave vector                             ##
 ##                                                                   ##
-## omega_0 = perturbation angular frequency                          ##
+## omega_pert = perturbation angular frequency                       ##
 ##                                                                   ##
-## vd      = perturbation drift velocity(ies)                        ##
+## v_d        = perturbation/Maxwell-Boltzmann equilibrium           ##
+##              drift velocity(ies)                                  ##
 ##                                                                   ##
 #######################################################################
 #
-#perturb  0  
+#perturb    0
 #
-#A        1.e-1
+#A_pert     1.e-1
 #
-#k        0.07853981633
+#k_pert     0.07853981633
 #
-#omega_0  0.07853981633
+#omega_pert 0.07853981633
 #
-#vd       1.
+#v_d        1.
 #

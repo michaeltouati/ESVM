@@ -23,8 +23,6 @@
 !! Initial commit written by Michaël J TOUATI - Sept. 2021
 program CHECK_INPUT_DECK
 !
-use acuracy
-use constants
 use input
 !
 call read_init_parameters()

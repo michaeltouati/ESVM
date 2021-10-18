@@ -26,7 +26,6 @@ module diagnostics
 use acuracy
 use constants
 use input
-use physics
 
 implicit none
 

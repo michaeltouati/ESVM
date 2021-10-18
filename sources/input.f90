@@ -53,12 +53,12 @@ real(PR),          public :: dt_diag
 integer,           public :: maxwell
 integer,           public :: b_cond
 integer,           public :: scheme
-real(PR),          public :: b
+real(PR),          public :: b_VL
 integer,           public :: perturb
-real(PR),          public :: A
-real(PR),          public :: k
-real(PR),          public :: omega_0
-real(PR),          public :: vd
+real(PR),          public :: A_pert
+real(PR),          public :: k_pert
+real(PR),          public :: omega_pert
+real(PR),          public :: v_d
 integer,           public :: N_x
 integer,           public :: N_vx
 real(PR),          public :: n0
@@ -128,18 +128,18 @@ subroutine read_init_parameters
         b_cond = get_integer(str(istr+1:))
       case ('#scheme')
         scheme = get_integer(str(istr+1:))
-      case ('#b')
-        b      = get_real(str(istr+1:))
+      case ('#b_VL')
+        b_VL = get_real(str(istr+1:))
       case ('#perturb')
         perturb = get_integer(str(istr+1:))
-      case ('#A')
-        A = get_real(str(istr+1:))
-      case ('#k')
-        k = get_real(str(istr+1:))
-      case ('#omega_0')
-        omega_0= get_real(str(istr+1:))
-      case ('#vd')
-        vd = get_real(str(istr+1:))
+      case ('#A_pert')
+        A_pert = get_real(str(istr+1:))
+      case ('#k_pert')
+        k_pert = get_real(str(istr+1:))
+      case ('#omega_pert')
+        omega_pert= get_real(str(istr+1:))
+      case ('#v_d')
+        v_d = get_real(str(istr+1:))
     end select
 
   end do read
@@ -155,78 +155,82 @@ subroutine read_init_parameters
   N_vx    = 1 + floor( (vx_max-vx_min)/d_vx)
 
   if ((cfl < 0.) .or. (cfl > 0.999999)) then
-    print*,'The CFL parameter must be 0 < cfl < 1!'
+    write(*,*)'The CFL parameter must be 0 < cfl < 1!'
+    write(*,*)'here cfl = ',cfl
     stop
   end if
 
   if ((maxwell .ne. 1 ) .and. (maxwell .ne. 2)) then
-    print*,'maxwell must be 1 or 2 for Maxwell-Ampere or Maxwell-Poisson solver respectively!'
+    write(*,*)'maxwell must be 1 or 2 for Maxwell-Ampere or Maxwell-Poisson solver respectively!'
+    write(*,*)'here maxwell = ',maxwell
     stop
   end if
 
   if ((b_cond .ne. 1 ) .and. (b_cond .ne. 2)) then
-    print*,'b_cond must be 1 or 2 for absorbing or periodic boundary conditions respectively!'
+    write(*,*)'b_cond must be 1 or 2 for absorbing or periodic boundary conditions respectively!'
+    write(*,*)'here b_cond = ',b_cond
     stop
   end if
 
-  if ((b < 1.) .or. (b > 2.)) then
-    print*,'the Van Leer schemes parameter b must be 1 < b < 2!'
+  if ((b_VL < 1.) .or. (b_VL > 2.)) then
+    write(*,*)'the Van Leer schemes parameter b_VL must be 1 < b < 2!'
+    write(*,*)'here b_VL = ',b_VL
     stop
   end if
 
-  write(*,*)'-----------------------------------------'
-  write(*,*)'Recapitulation of simulation parameters :'
-  write(*,*)'-----------------------------------------'
+  write(*,*)'------------------------------------------'
+  write(*,*)' Recapitulation of simulation parameters :'
+  write(*,*)'------------------------------------------'
   write(*,*)'* Simulation :'
-  write(*,*)'simu    = ',trim(simu)
+  write(*,*)'  simu    = ',trim(simu)
   write(*,*)'* Number of OpenMP threads :'
-  write(*,'(A,1I4)')' N_th    = ',N_th
-  write(*,*)'-----------------------------------------'
+  write(*,'(A,1I4)')'   N_th    = ',N_th
+  write(*,*)'------------------------------------------'
   write(*,*)'* Plasma properties (immobile ions)'
-  write(*,'(A,1E21.14,A)')' T       = ',T,' eV'
-  write(*,'(A,1E21.14,A)')'         = ',Te,' K'
-  write(*,'(A,1E21.14)')' Z       = ',Z
-  write(*,'(A,1E21.14,A)')' ni      = ',ni,' /cm3'
+  write(*,'(A,1E21.14,A)')'   T          = ',T,' eV'
+  write(*,'(A,1E21.14,A)')'              = ',Te,' K'
+  write(*,'(A,1E21.14)')'   Z          = ',Z
+  write(*,'(A,1E21.14,A)')'   ni         = ',ni,' /cm3'
   write(*,*)'* Deduced ESVM units'
-  write(*,'(A,1E21.14,A)')' Debye   = ',Debye(n0,Te),' cm'
-  write(*,'(A,1E21.14,A)')' me      = ',me,' g'
-  write(*,'(A,1E21.14,A)')' omega_p = ',omega_pe(n0),' /s'
-  write(*,'(A,1E21.14,A)')' e       = ',e,' statC'
-  write(*,'(A,1E21.14,A)')' vTe0    = ',v_T(Te),' cm/s'
-  write(*,'(A,1E21.14,A)')' n0      = ',n0,' /cm3'
-  write(*,*)'-----------------------------------------'
+  write(*,'(A,1E21.14,A)')'   Debye      = ',Debye(n0,Te),' cm'
+  write(*,'(A,1E21.14,A)')'   me         = ',me,' g'
+  write(*,'(A,1E21.14,A)')'   omega_p    = ',omega_pe(n0),' /s'
+  write(*,'(A,1E21.14,A)')'   e          = ',e,' statC'
+  write(*,'(A,1E21.14,A)')'   vTe0       = ',v_T(Te),' cm/s'
+  write(*,'(A,1E21.14,A)')'   n0         = ',n0,' /cm3'
+  write(*,*)'------------------------------------------'
   write(*,*)'* 1D-1V phase-space : '
-  write(*,'(A,1E21.14)')' x_min   = ',x_min
-  write(*,'(A,1E21.14)')' x_max   = ',x_max
-  write(*,'(A,1E21.14)')' d_x     = ',d_x
-  write(*,'(A,1E21.14)')' vx_min  = ',vx_min
-  write(*,'(A,1E21.14)')' vx_max  = ',vx_max
-  write(*,'(A,1E21.14)')' d_vx    = ',d_vx
-  write(*,*)'-----------------------------------------'
+  write(*,'(A,1E21.14)')'   x_min      = ',x_min
+  write(*,'(A,1E21.14)')'   x_max      = ',x_max
+  write(*,'(A,1E21.14)')'   d_x        = ',d_x
+  write(*,'(A,1E21.14)')'   vx_min     = ',vx_min
+  write(*,'(A,1E21.14)')'   vx_max     = ',vx_max
+  write(*,'(A,1E21.14)')'   d_vx       = ',d_vx
+  write(*,*)'------------------------------------------'
   write(*,*)'* Simulation properties : '
-  write(*,'(A,1E21.14)')' cfl     = ',cfl
-  write(*,'(A,1E21.14)')' L_t     = ',L_t
-  write(*,'(A,1E21.14)')' dt_diag = ',dt_diag
-  write(*,'(A,1I3)')' maxwell = ',maxwell
-  write(*,'(A,1I3)')' b_cond  = ',b_cond
-  write(*,'(A,1I3)')' scheme  = ',scheme
-  write(*,'(A,1E21.14)')' b       = ',b
-  write(*,*)'-----------------------------------------'
+  write(*,'(A,1E21.14)')'   cfl        = ',cfl
+  write(*,'(A,1E21.14)')'   L_t        = ',L_t
+  write(*,'(A,1E21.14)')'   dt_diag    = ',dt_diag
+  write(*,'(A,1I3)')'   maxwell    = ',maxwell
+  write(*,'(A,1I3)')'   b_cond     = ',b_cond
+  write(*,'(A,1I3)')'   scheme     = ',scheme
+  write(*,'(A,1E21.14)')'   b_VL       = ',b_VL
+  write(*,*)'------------------------------------------'
   write(*,*)'* Perturbation properties : '
-  write(*,'(A,1I3)')' perturb = ',perturb
+  write(*,'(A,1I3)')'   perturb    = ',perturb
   if (perturb .ne. 0) then
-    write(*,'(A,1E21.14)')' A       = ',A
-    write(*,'(A,1E21.14)')' k       = ',k
-    write(*,'(A,1E21.14)')' omega_0 = ',omega_0
-    write(*,'(A,1E21.14)')' vd      = ',vd
+    write(*,'(A,1E21.14)')'   A_pert     = ',A_pert
+    write(*,'(A,1E21.14)')'   k_pert     = ',k_pert
+    write(*,'(A,1E21.14)')'   omega_pert = ',omega_pert
+    write(*,'(A,1E21.14)')'   v_d        = ',v_d
   else 
-    write(*,*)'no perturbation'
+    write(*,*)'  no perturbation'
   end if
-  write(*,*)'-----------------------------------------'
+  write(*,*)'------------------------------------------'
   write(*,*)'* Deduced bins number : '
-  write(*,'(A,1I7)')' N_x     = ',N_x
-  write(*,'(A,1I7)')' N_vx    = ',N_vx
-  write(*,*)'-----------------------------------------' 
+  write(*,'(A,1I7)')'   N_x        = ',N_x
+  write(*,'(A,1I7)')'   N_vx       = ',N_vx
+  write(*,*)'------------------------------------------' 
   write(*,*) ' '
 end subroutine read_init_parameters
 
