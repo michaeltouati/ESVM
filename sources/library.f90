@@ -263,7 +263,7 @@ subroutine DENSITIES(Nx, Nvx, dvx, vx0, fn, ne, je, ve, vTe)
   implicit none
   integer,                               intent(in)   :: Nx, Nvx
   real(PR),                              intent(in)   :: dvx
-  real(PR), dimension(1:Nvx),            intent(in)   :: vx0
+  real(PR), dimension(-1:N_vx+2),        intent(in)   :: vx0
   real(PR), dimension(-1:Nx+2,-1:Nvx+2), intent(in)   :: fn
   real(PR), dimension(-1:Nx+2),          intent(out)  :: ne, je
   real(PR), dimension(-1:Nx+2),          intent(out)  :: ve, vTe

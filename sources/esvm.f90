@@ -83,7 +83,7 @@ do while (time.lt.L_t)
   f_max = maxval(maxval(f_n(:,:),dim=2))
   !
   call DENSITIES(N_x, N_vx, d_vx, &
-               & vx(1:N_vx), f_n(-1:N_x+2,-1:N_vx+2),&
+               & vx(-1:N_vx+2), f_n(-1:N_x+2,-1:N_vx+2),&
                & n_e(-1:N_x+2), j_e(-1:N_x+2),&
                & v_e(-1:N_x+2), vT_e(-1:N_x+2))
   !
