@@ -23,10 +23,9 @@
 !! Initial commit written by Michaël J TOUATI - Dec. 2015
 module acuracy
   
-  implicit none
+implicit none
   
-  ! Double Floatting Point Format :
- 
-  integer, parameter, public :: PR = 8
+! Double Floatting Point Format :
+integer, parameter, public :: PR = 8
   
 end module acuracy
