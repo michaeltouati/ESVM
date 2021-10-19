@@ -52,8 +52,6 @@ module constants
   !                                Conversion factors
   !=======================================================================================
   
-  real(PR), parameter, public :: fs      = 1.E-15_PR
-  real(PR), parameter, public :: microns = 1.E-4_PR
   real(PR), parameter, public :: Joules  = 1.E7_PR             ! 1 J in erg
   real(PR), parameter, public :: qe      = 1.602176634E-19_PR  ! Elementary charge [C]
   real(PR), parameter, public :: eV      = qe * Joules / kB    ! 1 eV = 11604 K
