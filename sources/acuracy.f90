@@ -25,7 +25,8 @@ module acuracy
   
 implicit none
   
-! Double Floatting Point Format :
+! Double Floatting Point Format
+! Number of bytes occupied in the memory by one real number :
 integer, parameter, public :: PR = 8
   
 end module acuracy
