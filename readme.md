@@ -4,7 +4,7 @@ ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 95 standard-comp
 
 # Compiling the code
 
-Modify the makefile as a function of the wished compilation options and the Fortran compiler installed on your computer and then type :
+Modify the [makefile](https://github.com/michaeltouati/ESVM/blob/master/makefile) as a function of the wished compilation options and the Fortran compiler installed on your computer and then type
 
 ```sh
 make
@@ -19,7 +19,7 @@ The tests consist in comparing file1 and file2 where :
 
 # Running a simulation
 
-Fill the wished input-deck (all parameters are described inside), eventually check them by typing
+Fill the wished [input-deck](https://github.com/michaeltouati/ESVM/blob/master/input-deck) (all parameters are described inside), eventually check them by typing
 ```sh
 ./check-input-deck
 ```
@@ -27,7 +27,7 @@ or
 ```sh
 make check
 ```
-and then type :
+and then type
 ```sh
 ./esvm
 ```
