@@ -1,4 +1,4 @@
-[![License: GPLv3](https://www.gnu.org/graphics/gplv3-or-later.svg)](https://www.gnu.org/graphics/gplv3-or-later.svg)
+[![License: GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Written by Michaël J TOUATI
 
