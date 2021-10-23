@@ -23,11 +23,5 @@ jobs:
     - name: make check
       run: make check
       
-    - name: make run
-      run: make run
-      
-    - name: make plot
-      run: make plot
-      
     - name: make clean
       run: make clean
