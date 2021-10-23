@@ -5,13 +5,13 @@
 # Simulation plot examples
 
 <p align="center">
-  <img width="500" height="420" src="test-cases/Wakefield-Emission/Ex.png">
-  <img width="500" height="420" src="test-cases/Linear-Landau-Damping/energy_log.png">
+  <img width="300" height="240" src="test-cases/Wakefield-Emission/Ex.png">
+  <img width="300" height="240" src="test-cases/Linear-Landau-Damping/energy_log.png">
 </p>
 
 <p align="center">
-  <img width="500" height="420" src="test-cases/Two-Stream-Instability/fe_81.png">
-  <img width="500" height="420" src="test-cases/Non-Linear-Landau-Damping/logfe_124.png">
+  <img width="300" height="240" src="test-cases/Two-Stream-Instability/fe_81.png">
+  <img width="300" height="240" src="test-cases/Non-Linear-Landau-Damping/logfe_124.png">
 </p>
 
 # Code units
