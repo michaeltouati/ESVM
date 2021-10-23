@@ -2,6 +2,8 @@
 
 [ESVM](https://github.com/michaeltouati/ESVM) (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 95 standard-compliant code, parallelized with OpenMP and using Python 3 for post-processing, that allows for the study of collisionless plasmas. Many finite volume advection schemes are implemented in order to discretize the Vlasov equation. The latter is coupled with the self-consistent Maxwell-Gauss equation or equivalently with the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step, only. Both absorbing and periodic boundary conditions for both the particles and the fields are implemented. Python scripts, using the Matplotlib and Numpy packages, are provided to automatically extract and plot the stored simulation results. The simulation parameters are described in the [input-deck](https://github.com/michaeltouati/ESVM/blob/master/input-deck) and they can be modified without having to recompile the code. Compilation rules can be modified in the [makefile](https://github.com/michaeltouati/ESVM/blob/master/makefile) depending on the user compiler preferences. Classical Plasma Physics academic case simulations that need less than one CPUxhour each, tools for testing the compilation of the code and tools for checking the simulation parameters are provided.
 
+# ESVM simulation plot examples
+
 <p align="center">
   <img width="500" height="420" src="test-cases/Wakefield-Emission/Ex.png">
   <img width="500" height="420" src="test-cases/Linear-Landau-Damping/energy_log.png">
@@ -11,6 +13,10 @@
   <img width="500" height="420" src="test-cases/Two-Stream-Instability/fe_81.png">
   <img width="500" height="420" src="test-cases/Non-Linear-Landau-Damping/logfe_124.png">
 </p>
+
+# ESVM units
+
+The code units consist in the commonly used electrostatic units : the electron mass $m_e$ for masses, the elementary charge $e$ for electrical charges, the inverse of the Langmuir plasma electron angular frequency <img src="https://render.githubusercontent.com/render/math?math=\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}"> $\omega_{p} = \displaystyle \sqrt{ 4 \pi Z n_i e^2 / m_e}$ for times, the Debye electron screening length $\lambda_{\mathrm{Debye}} = v_{T_{e_0}} / \omega_{p}$ and the average plasma electron density $n_0 = Z n_i$ for spatial densities. $v_{T_{e_0}}$ is therefore an important unit parameter of normalization since it fixes indirectly the space unit. It can be defined more generally as the initial plasma electron velocity distribution standard deviation if the plasma is not initialized at Maxwell-Boltzmann thermodynamic equilibrium \autoref{eq:driftingMaxwellBoltzmannEquilibrium}; cf. \autoref{eq:internal_energy}. Injecting these units in the equations computed by the code, detailed in the previous section, one deduces the resulting normalized energies, electrostatic field, electrostatic potential, plasma electron electrical current and distribution function that consequently reads $\underline{U_X} = U_X / \left ( n_0 {\lambda_{\mathrm{Debye}}}^3 m_e {v_{T_{e_0}}}^2 \right )$ where $X=T_e$, $K_e$ or $E_x$, $\underline{E_x} = e E_x / \left ( m_e \omega_{p} v_{T_{e_0}} \right )$, $\underline{\Phi} = e \Phi / \left ( m_e {v_{T_{e_0}}}^2 \right )$, $\underline{j_e} = j_e / \left ( n_0 e v_{T_{e_0}} \right )$ and $\underline{f_e} = f_e v_{T_{e_0}} / n_0$, respectively.
 
 # Compiling the code
 
