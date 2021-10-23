@@ -118,8 +118,8 @@ python3 sources/plot/plot_logfe.py
 
 # Cleaning the directory
 
-If you want to remove from the ESVM directory :
-- the compilation files and ESVM executables, type :
+If you want to remove from the [ESVM](https://github.com/michaeltouati/ESVM) directory :
+- the compilation files and executables, type :
 ```sh
 make distclean
 ```
@@ -135,7 +135,7 @@ make resclean
 ```sh
 make clean
 ```
-Be careful, the three latters will remove all simulations results/figures. Store them elsewhere if you don't want to lose them.
+Be careful, the three latters will remove all simulations results and or figures. Store them elsewhere if you don't want to lose them.
 
 # License
 When you submit code changes, your submissions are understood to be under the same [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) that covers [ESVM](https://github.com/michaeltouati/ESVM). 
