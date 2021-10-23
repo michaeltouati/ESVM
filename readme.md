@@ -1,5 +1,5 @@
 [![Fortran](https://img.shields.io/badge/Fortran-%23734F96.svg?style=for-the-badge&logo=fortran&logoColor=white)](https://fortran-lang.org/)
-[![Fortran](https://img.shields.io/badge/GNU%20Make-FFFFFF?style=for-the-badge&logo=gnu&logoColor=#7D929E)](https://www.gnu.org/software/make/)
+[![Make](https://img.shields.io/badge/GNU%20Make-black?style=for-the-badge&logo=gnu&logoColor=#7D929E)](https://www.gnu.org/software/make/)
 [![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
 [![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://www.python.org/)
 [![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)](https://numpy.org/)
