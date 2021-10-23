@@ -1,4 +1,4 @@
-[<img src=https://img.shields.io/badge/Fortran-%23734F96.svg?style=for-the-badge&logo=fortran&logoColor=white height="24">](https://fortran-lang.org/)
+[<img src='https://img.shields.io/badge/Fortran-%23734F96.svg?style=for-the-badge&logo=fortran&logoColor=white' height="24">](https://fortran-lang.org/)
 [![License : GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Make](https://img.shields.io/badge/GNU%20Make-black?style=for-the-badge&logo=gnu&logoColor=#7D929E)](https://www.gnu.org/software/make/)
 [![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
