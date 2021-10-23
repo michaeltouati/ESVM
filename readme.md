@@ -8,6 +8,7 @@
 [<img src=https://img.shields.io/badge/License-GPLv3-blue.svg height="28">](https://www.gnu.org/licenses/gpl-3.0)
 [<img src=https://joss.theoj.org/papers/d0f6a6298710d69b63a8a62d843f8f88/status.svg height="28">](https://joss.theoj.org/papers/d0f6a6298710d69b63a8a62d843f8f88)
 [<img src=https://img.shields.io/github/issues/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/issues)
+[<img src=https://img.shields.io/github/downloads/michaeltouati/ESVM/v1.0/total>]
 
 ## Written by Michaël J TOUATI
 
