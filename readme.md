@@ -5,8 +5,8 @@
 # Simulation plot examples
 
 <p align="center">
-  <img width="350" height="300" src="test-cases/Wakefield-Emission/Ex.png">
-  <img width="350" height="300" src="test-cases/Linear-Landau-Damping/energy_log.png">
+  <img width="375" height="325" src="test-cases/Wakefield-Emission/Ex.png">
+  <img width="375" height="325" src="test-cases/Linear-Landau-Damping/energy_log.png">
 </p>
 
 <p align="center">
