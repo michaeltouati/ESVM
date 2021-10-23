@@ -9,9 +9,9 @@
 [![JOSS : status](https://joss.theoj.org/papers/d0f6a6298710d69b63a8a62d843f8f88/status.svg)](https://joss.theoj.org/papers/d0f6a6298710d69b63a8a62d843f8f88)
 [![Open issues](https://img.shields.io/github/issues/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/issues)
 [![Closed issues](https://img.shields.io/github/issues-closed/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/issues)
-[![Closed pull requests](https://img.shields.io/github/issues-pr-closed/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/pulls)
 [![Open pull requests](https://img.shields.io/github/issues-pr/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/pulls)
-[![Clones](https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://github.com/michaeltouati/ESVM/blob/master/clone.json?raw=True&logo=github)](https://github.com/MShawon/github-clone-count-badge)
+[![Closed pull requests](https://img.shields.io/github/issues-pr-closed/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/pulls)
+[![Clones : 14 days](https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://github.com/michaeltouati/ESVM/blob/master/clone.json?raw=True&logo=github)](https://github.com/MShawon/github-clone-count-badge)
 [![Downloads](https://img.shields.io/github/downloads/michaeltouati/ESVM/total)](https://github.com/michaeltouati/ESVM/releases)
 <!-- [<img src=https://img.shields.io/github/watchers/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/watchers) -->
 <!-- [<img src=https://img.shields.io/github/stars/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/stargazers) -->
