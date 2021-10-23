@@ -4,6 +4,10 @@ ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 95 standard-comp
 
 ![Two stream instability test case : Plasma electrons phase-space $\underline{f_e}(\underline{x},\underline{v_x},\underline{t}=19.99)$ in the two-stream instability of two counter-propagating electron beams initialized according to \autoref{eq:perturbed_beams} with $A=10^{-1}$, $\underline{k}=0.06159985595$ ($\underline{x_{\mathrm{min}}}=-\underline{x_{\mathrm{max}}}=51$) and $\underline{v_d}=10$.\label{fig:two-stream-instability}](test-cases/Two-Stream-Instability/fe_81.png)
 
+<p align="center">
+  <img width="460" height="300" src="test-cases/Two-Stream-Instability/fe_81.png">
+</p>
+
 # Compiling the code
 
 Modify the [makefile](https://github.com/michaeltouati/ESVM/blob/master/makefile) as a function of the wished compilation options and the Fortran compiler installed on your computer and then type
