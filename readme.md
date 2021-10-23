@@ -9,6 +9,7 @@
 [![JOSS : status](https://joss.theoj.org/papers/d0f6a6298710d69b63a8a62d843f8f88/status.svg)](https://joss.theoj.org/papers/d0f6a6298710d69b63a8a62d843f8f88)
 [![Issues : closed](https://img.shields.io/github/issues-closed/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/issues)
 [![Pull requests : closed](https://img.shields.io/github/issues-pr-closed/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/pulls)
+[![GitHub Clones](https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=clone.json url?raw=True&logo=github)](https://github.com/MShawon/github-clone-count-badge)
 <!-- [<img src=https://img.shields.io/github/issues/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/issues) -->
 <!-- [<img src=https://img.shields.io/github/issues-pr/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/pulls) -->
 <!-- [<img src=https://img.shields.io/github/downloads/michaeltouati/ESVM/total height="28">](https://github.com/michaeltouati/ESVM/releases) -->
