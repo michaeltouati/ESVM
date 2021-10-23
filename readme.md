@@ -3,7 +3,7 @@
 [![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)](https://numpy.org/)
 [<img src=https://matplotlib.org/_static/logo2_compressed.svg height="30">](https://matplotlib.org/stable/index.html#)
 [![LaTeX](https://img.shields.io/badge/latex-%23008080.svg?style=for-the-badge&logo=latex&logoColor=white)](https://www.latex-project.org//)
-[![License: GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[<img src=https://img.shields.io/badge/License-GPLv3-blue.svg height="30">](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Written by Michaël J TOUATI
 
