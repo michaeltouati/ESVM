@@ -16,7 +16,7 @@ In the following can be found how to :
 
 For problems related with plotting, please make sure first LaTeX, dvipng and ghostscript softwares are each working and on your PATH for the Matplotlib Python package to be able to render tex fonts. If the bug persists or if it is related to another problem, follow these steps :
 1) Go to ['Issues'](https://github.com/michaeltouati/ESVM/issues) on the [ESVM master branch](https://github.com/michaeltouati/ESVM) 
-2) Click on 'New issue'
+2) Click on 'New issue' and then Get started (Bug report)
 4) Describe the bug the more "clear and concise" as possible in the title starting with "Bug :"
 5) Describe with details the bug providing the more pieces of information as possible such as input-deck, terminal output and/or screenshot, etc... but more importantly, your environment :
 - OS: [e.g., Ubuntu 20.04]
@@ -30,7 +30,7 @@ For problems related with plotting, please make sure first LaTeX, dvipng and gho
 
 If you want to propose a new feature in [ESVM](https://github.com/michaeltouati/ESVM) that is not already in the perspectives of the code mentioned in the last section of the documentation [esvm.pdf](https://github.com/michaeltouati/ESVM/blob/master/esvm.pdf), follow these steps :
 1) Go to ['Issues'](https://github.com/michaeltouati/ESVM/issues) on the [ESVM master branch](https://github.com/michaeltouati/ESVM)
-2) Click on 'New issue'
+2) Click on 'New issue' and then Get started (Feature request)
 4) Describe the new feature request the more "clear and concise" as possible in the title starting with "Feature request :"
 5) Describe with details the requested feature and
 6) Click on 'Submit new issue'
