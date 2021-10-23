@@ -4,6 +4,7 @@ ESVM (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 95 standard-comp
 
 <p align="center">
   <img width="600" height="500" src="test-cases/Two-Stream-Instability/fe_81.png">
+  <img width="600" height="500" src="test-cases/Non-Linear-Landau-Damping/logfe_124.png">
 </p>
 
 # Compiling the code
