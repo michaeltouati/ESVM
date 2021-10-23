@@ -10,8 +10,8 @@
 </p>
 
 <p align="center">
-  <img width="300" height="240" src="test-cases/Two-Stream-Instability/fe_81.png">
-  <img width="300" height="240" src="test-cases/Non-Linear-Landau-Damping/logfe_124.png">
+  <img width="400" height="325" src="test-cases/Two-Stream-Instability/fe_81.png">
+  <img width="400" height="325" src="test-cases/Non-Linear-Landau-Damping/logfe_124.png">
 </p>
 
 # Code units
