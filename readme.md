@@ -16,7 +16,7 @@
 
 # Code units
 
-The code units consist in the commonly used electrostatic units : the electron mass for masses, the elementary charge for electrical charges, the inverse of the Langmuir plasma electron angular frequency for times, the Debye electron screening length for space and the average plasma electron density for spatial densities. The initial plasma electron velocity distribution standard deviation is therefore an important unit parameter of normalization since it fixes indirectly the space unit.
+The code units consist in the commonly used electrostatic units : the electron mass for masses, the elementary charge for electrical charges, the inverse of the Langmuir plasma electron angular frequency for times, the Debye electron screening length for spaces and the average plasma electron density for spatial densities. The initial plasma electron velocity distribution standard deviation is therefore an important unit parameter of normalization since it fixes indirectly the spatial unit.
 
 # Compiling the code
 
