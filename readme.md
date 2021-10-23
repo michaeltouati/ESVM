@@ -12,8 +12,9 @@
 [<img src=https://img.shields.io/github/downloads/michaeltouati/ESVM/total height="28">](https://github.com/michaeltouati/ESVM/releases)
 [<img src=https://img.shields.io/github/issues-pr/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/pulls)
 [<img src=https://img.shields.io/github/issues-pr-closed/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/pulls)
-[<img src=https://img.shields.io/github/forks/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/network/members)
-[<img src=https://img.shields.io/github/stars/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/stargazers)
+<!-- [<img src=https://img.shields.io/github/watchers/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/watchers) -->
+<!-- [<img src=https://img.shields.io/github/stars/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/stargazers) -->
+<!-- [<img src=https://img.shields.io/github/forks/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/network/members) -->
 <!-- ![My Stats](https://github-readme-stats.vercel.app/api?username=michaeltouati&show_icons=true) -->
 
 ## Written by Michaël J TOUATI
