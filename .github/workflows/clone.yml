@@ -29,8 +29,8 @@ jobs:
       - name: Add to git repo
         run: |
           git add .
-          git config --local user.name "michaeltouati"
-          git config --local user.email "touati.mickael@gmail.com"
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
           git commit -m "Automated clone.json update"
           
       - name: Push
