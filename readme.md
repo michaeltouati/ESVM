@@ -11,6 +11,7 @@
 [<img src=https://img.shields.io/github/issues-closed/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/issues)
 [<img src=https://img.shields.io/github/issues-pr/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/pulls)
 [<img src=https://img.shields.io/github/issues-pr-closed/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/pulls)
+[<img src=https://img.shields.io/github/repos/michaeltouati/ESVM/traffic/clones height="28">](git@github.com:michaeltouati/ESVM.git)
 <!-- [<img src=https://img.shields.io/github/downloads/michaeltouati/ESVM/total height="28">](https://github.com/michaeltouati/ESVM/releases) -->
 <!-- [<img src=https://img.shields.io/github/watchers/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/watchers) -->
 <!-- [<img src=https://img.shields.io/github/stars/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/stargazers) -->
