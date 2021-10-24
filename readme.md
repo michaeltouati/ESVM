@@ -15,6 +15,8 @@
 [![Closed pull requests](https://img.shields.io/github/issues-pr-closed/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/pulls)
 [![Clones : 14 days](https://img.shields.io/badge/dynamic/json?color=success&label=Clones&query=count&url=https://github.com/michaeltouati/ESVM/blob/master/.github/clone.json?raw=True&logo=github)](https://github.com/michaeltouati/ESVM/actions/workflows/clones.yml)
 
+## Written by Michaël J TOUATI
+
 [ESVM](https://github.com/michaeltouati/ESVM) (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell [Fortran 95](https://fortran-lang.org/) standard-compliant code, parallelized with OpenMP and using Python 3 for post-processing, that allows for the study of collisionless plasmas. Vlasov equation is coupled with the self-consistent Maxwell-Gauss equation, or equivalently with the Maxwell-Ampere equation with Maxwell-Gauss equation computed at the first time step, only. Both absorbing and periodic boundary conditions for both the particles and the fields are implemented. More pieces of information can be found in the [esvm.pdf](https://github.com/michaeltouati/ESVM/blob/master/esvm.pdf) peer-reviewed article draft. [Python](https://www.python.org/) scripts, using the [Matplotlib](https://matplotlib.org/stable/index.html#) and [Numpy](https://numpy.org/) packages, are provided to automatically extract and plot the stored simulation results. The simulation parameters are described in the [input-deck](https://github.com/michaeltouati/ESVM/blob/master/input-deck) and they can be modified without having to recompile the code. Compilation rules can be modified in the [makefile](https://github.com/michaeltouati/ESVM/blob/master/makefile) depending on the user compiler preferences. Classical Plasma Physics academic case simulations that need less than one CPUxhour each, tools for testing the compilation of the code and tools for checking the simulation parameters are provided.
 
 # Simulation plot examples
@@ -141,5 +143,3 @@ Be careful, the three latters will remove all simulations results and or figures
 
 # License
 [ESVM](https://github.com/michaeltouati/ESVM) is distributed under the terms of the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) license. 
-
-## Initial commit by Michaël J TOUATI
