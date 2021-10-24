@@ -13,7 +13,7 @@
 [![Closed pull requests](https://img.shields.io/github/issues-pr-closed/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/pulls)
 [![Clones : 14 days](https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://github.com/michaeltouati/ESVM/blob/master/.github/clone.json?raw=True&logo=github)](https://github.com/michaeltouati/ESVM/actions/workflows/clone.yml)
 [![Downloads](https://img.shields.io/github/downloads/michaeltouati/ESVM/total)](https://github.com/michaeltouati/ESVM/releases)
-[![Tests check](https://img.shields.io/github/workflow/status/michaeltouati/ESVM/Test)](https://github.com/michaeltouati/ESVM/actions/workflows/test.yml)
+[![Tests check](https://img.shields.io/github/workflow/status/michaeltouati/ESVM/Tests)](https://github.com/michaeltouati/ESVM/actions/workflows/test.yml)
 <!-- [<img src=https://img.shields.io/github/watchers/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/watchers) -->
 <!-- [<img src=https://img.shields.io/github/stars/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/stargazers) -->
 <!-- [<img src=https://img.shields.io/github/forks/michaeltouati/ESVM height="28">](https://github.com/michaeltouati/ESVM/network/members) -->
