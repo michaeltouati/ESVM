@@ -1,4 +1,5 @@
 [<img src='https://img.shields.io/badge/Fortran-%23734F96.svg?style=for-the-badge&logo=fortran&logoColor=white' height="20">](https://fortran-lang.org/)
+[<img src='https://www.openmp.org/wp-content/uploads/openmp-header-logo-100h.png' height="20">](https://www.openmp.org/)
 [<img src='https://img.shields.io/badge/GNU%20Make-black?style=for-the-badge&logo=gnu&logoColor=#7D929E' height="20">](https://www.gnu.org/software/make/)
 [<img src='https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white' height="20">](https://www.gnu.org/software/bash/)
 [<img src='https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54' height="20">](https://www.python.org/)
