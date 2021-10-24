@@ -103,17 +103,17 @@ subroutine DIAG(Nt, t0, Nx, x0, Nvx, vx0, &
               & positivity, UK, UT, UE, &
               & fn, ne, Exn, je, ve, vTe, phin)
   implicit none
-  integer                               , intent(in) :: Nt, Nx, Nvx
-  real(PR), dimension(-1:Nx+2)          , intent(in) :: x0
-  real(PR), dimension(-1:Nvx+2)         , intent(in) :: vx0
-  real(PR)                              , intent(in) :: t0
-  logical                               , intent(in) :: positivity
-  real(PR), dimension(-1:Nx+2,-1:N_vx+2), intent(in) :: fn
-  real(PR), dimension(-1:Nx+2)          , intent(in) :: ne, je, ve, vTe
-  real(PR), dimension(-1:Nx+2)          , intent(in) :: Exn, phin
-  real(PR)                              , intent(in) :: UK, UT, UE
-  real(PR)                                           :: Utot
-  integer                                            :: l, i, k
+  integer                              , intent(in) :: Nt, Nx, Nvx
+  real(PR), dimension(-1:Nx+2)         , intent(in) :: x0
+  real(PR), dimension(-1:Nvx+2)        , intent(in) :: vx0
+  real(PR)                             , intent(in) :: t0
+  logical                              , intent(in) :: positivity
+  real(PR), dimension(-1:Nx+2,-1:Nvx+2), intent(in) :: fn
+  real(PR), dimension(-1:Nx+2)         , intent(in) :: ne, je, ve, vTe
+  real(PR), dimension(-1:Nx+2)         , intent(in) :: Exn, phin
+  real(PR)                             , intent(in) :: UK, UT, UE
+  real(PR)                                          :: Utot
+  integer                                           :: l, i, k
   !
   write(*,*)'================================'
   write(*,'(A,1E14.7)')' time (/omega_p)  =',t0 
