@@ -1,4 +1,4 @@
-name: Makefile CI
+name: test
 
 on:
   push:
@@ -19,9 +19,6 @@ jobs:
       
     - name: make test
       run: make test
-      
-    - name: make check
-      run: make check
       
     - name: make clean
       run: make clean
