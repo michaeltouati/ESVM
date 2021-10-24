@@ -142,4 +142,4 @@ Be careful, the three latters will remove all simulations results and or figures
 # License
 [ESVM](https://github.com/michaeltouati/ESVM) is distributed under the terms of the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) license. 
 
-## Written by Michaël J TOUATI
+## Initial commit by Michaël J TOUATI
