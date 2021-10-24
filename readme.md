@@ -13,8 +13,8 @@
 [![Open pull requests](https://img.shields.io/github/issues-pr/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/pulls)
 [![Closed pull requests](https://img.shields.io/github/issues-pr-closed/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/pulls)
 [![Clones : 14 days](https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://github.com/michaeltouati/ESVM/blob/master/.github/clone.json?raw=True&logo=github)](https://github.com/michaeltouati/ESVM/actions/workflows/clones.yml)
-<!-- [![Downloads](https://img.shields.io/github/downloads/michaeltouati/ESVM/total)](https://github.com/michaeltouati/ESVM/releases) -->
 [![Tests check](https://img.shields.io/github/workflow/status/michaeltouati/ESVM/Tests)](https://github.com/michaeltouati/ESVM/actions/workflows/tests.yml)
+<!-- [![Downloads](https://img.shields.io/github/downloads/michaeltouati/ESVM/total)](https://github.com/michaeltouati/ESVM/releases) -->
 <!-- ![My Stats](https://github-readme-stats.vercel.app/api?username=michaeltouati&show_icons=true) -->
 
 ## Written by Michaël J TOUATI
