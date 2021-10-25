@@ -32,30 +32,30 @@ jobs:
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           git commit -m "Automated clone.json update"
-      #- name: Get Date
-      #  run: echo "DATE=$(date +%Y/%m/%d-%H:%M:%S)" >> $GITHUB_ENV
-      #- name: Create Pull Request
-      #  id: cpr
-      #  uses: peter-evans/create-pull-request@v3
-      #  with:
-      #    token: ${{ secrets.SECRET_TOKEN }}
-      #    commit-message: Update report
-      #    committer: GitHub <noreply@github.com>
-      #    author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-      #    branch: clones-badge-update
-      #    delete-branch: true
-      #    title: 'Clones badge update'
-      #    body: |
-      #      Update .github/clone.json file 
-      #      - Updated on ${{ env.DATE }}
-      #      - Auto-pull-requested by https://github.com/peter-evans/create-pull-request
-      #    assignees: ${{ github.actor }}
-      #    reviewers: ${{ github.actor }}
-      #    team-reviewers: |
-      #      owners
-      #      maintainers
-      #    draft: false
-      - name: Push
-        uses: ad-m/github-push-action@master
+      - name: Get Date
+        run: echo "DATE=$(date +%Y/%m/%d-%H:%M:%S)" >> $GITHUB_ENV
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.SECRET_TOKEN }}
+          commit-message: Update report
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: clones-badge-update
+          delete-branch: true
+          title: 'Clones badge update'
+          body: |
+            Update .github/clone.json file 
+            - Updated on ${{ env.DATE }}
+            - Auto-pull-requested by https://github.com/peter-evans/create-pull-request
+          assignees: ${{ github.actor }}
+          reviewers: ${{ github.actor }}
+          team-reviewers: |
+            owners
+            maintainers
+          draft: false
+      #- name: Push
+      #  uses: ad-m/github-push-action@master
+      #  with:
+      #    github_token: ${{ secrets.GITHUB_TOKEN }}
