@@ -1,5 +1,5 @@
 name: Clones 
-# Count (for 14 days at every 8 hours)
+# Count (for 14 days every days at 05:00 UTC)
 
 # Controls when the action will run. 
 on:
