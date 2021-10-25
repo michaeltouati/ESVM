@@ -14,7 +14,7 @@
 [![Open pull requests](https://img.shields.io/github/issues-pr/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/pulls)
 [![Closed pull requests](https://img.shields.io/github/issues-pr-closed/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/pulls)
 [![Clones : 14 days](https://img.shields.io/badge/dynamic/json?color=success&label=Clones%20(<15%20days)&query=count&url=https://github.com/michaeltouati/ESVM/blob/master/.github/clone.json?raw=True&logo=github)](https://github.com/michaeltouati/ESVM/actions/workflows/clones.yml)
-[![Downloads](https://img.shields.io/github/downloads/michaeltouati/AMoRE/total)](https://github.com/michaeltouati/AMoRE/releases)
+[![Downloads](https://img.shields.io/github/downloads/michaeltouati/ESVM/total)](https://github.com/michaeltouati/ESVM/releases)
 
 ## Written by Michaël J TOUATI
 
