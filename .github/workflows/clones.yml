@@ -4,7 +4,7 @@ name: Clones
 # Controls when the action will run. 
 on:
   schedule:
-   - cron: "0 */8 * * *"
+   - cron: "0 5 * * *"
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
