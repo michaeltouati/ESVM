@@ -7,6 +7,7 @@
 [<img src='https://img.shields.io/badge/latex-%23008080.svg?style=for-the-badge&logo=latex&logoColor=white' height="20">](https://www.latex-project.org//)
 [![JOSS : status](https://joss.theoj.org/papers/d0f6a6298710d69b63a8a62d843f8f88/status.svg)](https://joss.theoj.org/papers/d0f6a6298710d69b63a8a62d843f8f88)
 [![License : GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Compilation check](https://github.com/michaeltouati/ESVM/actions/workflows/compilation.yml/badge.svg)](https://github.com/michaeltouati/ESVM/actions/workflows/compilation.yml)
 [![Tests check](https://github.com/michaeltouati/ESVM/actions/workflows/tests.yml/badge.svg)](https://github.com/michaeltouati/ESVM/actions/workflows/tests.yml)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 [![Open issues](https://img.shields.io/github/issues/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/issues)
