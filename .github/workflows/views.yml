@@ -42,11 +42,11 @@ jobs:
       #    commit-message: Update report
       #    committer: GitHub <noreply@github.com>
       #    author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-      #    branch: clones-badge-update
+      #    branch: views-badge-update
       #    delete-branch: true
-      #    title: 'Clones badge update'
+      #    title: 'Views badge update'
       #    body: |
-      #      Update .github/clone.json file 
+      #      Update .github/view.json file 
       #      - Updated on ${{ env.DATE }}
       #      - Auto-pull-requested by https://github.com/peter-evans/create-pull-request
       #    assignees: ${{ github.actor }}
