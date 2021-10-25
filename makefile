@@ -217,7 +217,7 @@ test :
 		diff file1 file2; \
 		TST=$$?; \
 		rm file1; rm file2; \
-		if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; fi; \
+		if [ $$TST -eq 0 ]; then echo "${GREEN}PASSED${RESET}"; else echo "${RED}NOT PASSED${RESET}"; exit 2;fi; \
 	done
 	@rm -rf results/Academic-cases
 	@rm -rf results/Boundary-conditions
