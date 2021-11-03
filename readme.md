@@ -13,6 +13,7 @@
 [![Clones : 14 days](https://img.shields.io/badge/dynamic/json?color=success&label=Clones%20(<15%20days)&query=count&url=https://github.com/michaeltouati/ESVM/blob/master/.github/clone.json?raw=True&logo=github)](https://github.com/michaeltouati/ESVM/actions/workflows/clones.yml)
 [![Compilation check](https://github.com/michaeltouati/ESVM/actions/workflows/compilation.yml/badge.svg?branch=master)](https://github.com/michaeltouati/ESVM/actions/workflows/compilation.yml)
 [![Tests check](https://github.com/michaeltouati/ESVM/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/michaeltouati/ESVM/actions/workflows/tests.yml)
+[![Plotting tools check](https://github.com/michaeltouati/ESVM/actions/workflows/plots.yml/badge.svg?branch=master)](https://github.com/michaeltouati/ESVM/actions/workflows/plots.yml)
 [![Open issues](https://img.shields.io/github/issues/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/issues)
 [![Closed issues](https://img.shields.io/github/issues-closed/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/issues)
 [![Open pull requests](https://img.shields.io/github/issues-pr/michaeltouati/ESVM)](https://github.com/michaeltouati/ESVM/pulls)
@@ -96,7 +97,7 @@ make plot_hydro2D
 ```
 or
 ```sh
-python3 sources/plot/plot_hydro2D.py
+python3 sources/plot/plot_hydro2d.py
 ```
 - the 1D plasma electron hydrodynamic moments scalar plots by typing : 
 ```sh
@@ -104,7 +105,7 @@ make plot_hydro1D
 ```
 or
 ```sh
-python3 sources/plot/plot_hydro1D.py
+python3 sources/plot/plot_hydro1d.py
 ```
 - or the 1D1V plasma electron distribution function phase-space density maps by typing :
 ```sh

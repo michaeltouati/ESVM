@@ -1,0 +1,41 @@
+name: Plotting tools
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - uses: actions/checkout@v2
+      
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install numpy matplotlib pylint
+        
+    - name: Analysing the code with pylint
+      run: |
+        # pylint sources/plot/library.py
+        echo 'pylint sources/plot/plot_energy.py'
+        pylint sources/plot/plot_energies.py
+        echo 'pylint sources/plot/plot_hydro1d.py'
+        pylint sources/plot/plot_hydro1d.py
+        # echo 'pylint sources/plot/plot_hydro2d.py'
+        # pylint sources/plot/plot_hydro2d.py
+        # echo 'pylint sources/plot/plot_fe.py'
+        # pylint sources/plot/plot_fe.py
+        # echo 'pylint sources/plot/plot_logfe.py'
+        # pylint sources/plot/plot_logfe.py

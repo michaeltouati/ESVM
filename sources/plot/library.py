@@ -28,6 +28,14 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 from matplotlib import mlab, cm
 
+FONT_SIZE = 16
+
+FONT = {'style':  'normal',
+        'color':  'black',
+        'weight': 'normal',
+        'size': FONT_SIZE,
+        }
+
 def get_results_dir():
     file = open('input-deck','r')
     for line in file:
@@ -63,6 +71,64 @@ def extract_energy_file(file_name):
         u0.append(float(array[1]))
     file.close()
     return [t0,u0]
+
+def make_scalars_plot_figure(**kwargs):
+    """
+    Plot and save a .png image of scalar fields (maximum 10)
+    kwargs keys :
+    * Scalars  : xplot_min, xplot_max,
+                 yplot_min, yplot_max
+    * Vectors  : xplot,
+                 yplot1, ... yplot10
+    * Strings  : xlabel, ylabel,
+                 color1, ..., color10,
+                 legend1, ..., legend9
+                 title, filename
+    * Logicals : logx, logy, grid
+    """
+    fig=plt.figure()
+    plt.rc('text', usetex=True)
+    for i in range(1,11):
+        condition = ('yplot'+str(i) in kwargs)
+        condition = condition and ('legend'+str(i) in kwargs)
+        condition = condition and ('color'+str(i) in kwargs)
+        if condition :
+            yplot  = kwargs['yplot' +str(i)]
+            legend = kwargs['legend'+str(i)]
+            color  = kwargs['color' +str(i)]
+            if kwargs['logx'] :
+                if kwargs['logy'] :
+                    plt.loglog(kwargs['xplot'],yplot,
+                               linewidth=2,label=legend,color=color)
+                else:
+                    plt.semilogx(kwargs['xplot'],yplot,
+                                 linewidth=2,label=legend,color=color)
+            else :
+                if kwargs['logy'] :
+                    plt.semilogy(kwargs['xplot'],yplot,
+                                 linewidth=2,label=legend,color=color)
+                else :
+                    plt.plot(kwargs['xplot'],yplot,
+                         linewidth=2,label=legend,color=color)
+    leg = plt.legend(fontsize=FONT_SIZE,
+                     fancybox=True,
+                     bbox_to_anchor=[1., 1.],
+                     loc='upper left')
+    leg.get_frame().set_alpha(0.5)
+    if ('xplot_min' in kwargs) and ('xplot_max' in kwargs) :
+        plt.xlim([kwargs['xplot_min'],kwargs['xplot_max']])
+    if ('yplot_min' in kwargs) and ('yplot_max' in kwargs) :
+        plt.ylim([kwargs['yplot_min'],kwargs['yplot_max']])
+    if 'title' in kwargs :
+        plt.title(kwargs['title'], fontdict=FONT)
+    plt.xticks(fontsize=FONT_SIZE)
+    plt.xlabel(kwargs['xlabel'], fontdict=FONT)
+    plt.ylabel(kwargs['ylabel'], fontdict=FONT)
+    plt.yticks(fontsize=FONT_SIZE)
+    if kwargs['grid']:
+        plt.grid(which='both', axis='both')
+    fig.savefig(kwargs['filename'],bbox_inches='tight')
+    plt.close(fig)
 
 def search_Nx_Nvx(file_name):
 	t0  = []
@@ -145,7 +211,10 @@ def plot_1D_hydro_quantity_2Dmap(N_x, file_name, font_properties, colormap, plot
     fig.savefig(plot_name+'.png',bbox_inches='tight')
     plt.close(fig)
 
-def plot_1D_hydro_quantity_scalar_plot(N_x, file_name, font_properties, y_label, plot_name):
+def plot_1D_hydro_quantity_scalar_plot(N_x, file_name, y_label, plot_name):
+    """
+    Read, plot and save a .png image of one scalar fields
+    """
     x = []
     p = []
     X = np.zeros(N_x)
@@ -168,12 +237,12 @@ def plot_1D_hydro_quantity_scalar_plot(N_x, file_name, font_properties, y_label,
             fig=plt.figure()
             plt.rc('text', usetex=True)
             plt.plot(X, P, linewidth=2, color = 'black')
-            plt.title(r'$t =$'+str(time)+r'$\,\omega_p^{-1}$', fontdict=font_properties)
-            plt.xticks(fontsize=16)
-            plt.xlabel(r'$x\,(\lambda_\mathrm{Debye})$', fontdict=font_properties)
+            plt.title(r'$t =$'+str(time)+r'$\,\omega_p^{-1}$', fontdict=FONT)
+            plt.xticks(fontsize=FONT_SIZE)
+            plt.xlabel(r'$x\,(\lambda_\mathrm{Debye})$', fontdict=FONT)
             plt.xlim([np.amin(X),np.amax(X)])
-            plt.ylabel(y_label, fontdict=font_properties)
-            plt.yticks(fontsize=16)
+            plt.ylabel(y_label, fontdict=FONT)
+            plt.yticks(fontsize=FONT_SIZE)
             ex_min = np.amin(p)
             if (ex_min < 0.) :
                 ex_min = 1.1 * ex_min

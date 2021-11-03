@@ -141,14 +141,14 @@ clean : distclean figclean resclean
 plot_energies : $(SRC_PATH_PY)plot_energies.py
 	@python3 $(SRC_PATH_PY)plot_energies.py
 
-plot_hydro2D : $(SRC_PATH_PY)plot_hydro2D.py
-	@python3 $(SRC_PATH_PY)plot_hydro2D.py
+plot_hydro2D : $(SRC_PATH_PY)plot_hydro2d.py
+	@python3 $(SRC_PATH_PY)plot_hydro2d.py
 
 plot_fe : $(SRC_PATH_PY)plot_fe.py
 	@python3 $(SRC_PATH_PY)plot_fe.py
 
-plot_hydro1D : $(SRC_PATH_PY)plot_hydro1D.py
-	@python3 $(SRC_PATH_PY)plot_hydro1D.py
+plot_hydro1D : $(SRC_PATH_PY)plot_hydro1d.py
+	@python3 $(SRC_PATH_PY)plot_hydro1d.py
 
 plot_logfe : $(SRC_PATH_PY)plot_logfe.py
 	@python3 $(SRC_PATH_PY)plot_logfe.py
