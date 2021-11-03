@@ -21,88 +21,79 @@
 ##                                                                   ##
 #######################################################################
 ## Initial commit written by Michaël J TOUATI - Dec. 2015
-import os
-import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
-from matplotlib.ticker import MaxNLocator
-from matplotlib import mlab, cm
+"""
+Read and plot data t (fs) | x (microns) | F from files:
+* Ex.dat
+* Phi.dat
+* ne.dat
+* je.dat
+* ve.dat
+* vTe.dat
+"""
 import library as lib
 
-####################
-# Input parameters #
-####################
 
-font = {'family': 'non-serif',
-        'style':  'normal',
-        'color':  'black',
-        'weight': 'normal',
-        'size': 16,
-        }
-
-cmap_Ex  = 'jet'
-cmap_ne  = 'jet'
-cmap_ve  = 'jet'
-cmap_je  = 'jet'
-cmap_vte = 'jet'
-
-##########
-# Script #
-##########
-
-simu_name=lib.get_results_dir()
-
-lib.create_dir('figures/')
-lib.create_dir('figures/'+simu_name+'/')
+SIMU_NAME=lib.get_results_dir()
 
 print(' -------------------------')
 print(' 1D hydrodynamic moments :')
 print(' -------------------------')
 print('  ')
 
+lib.create_dir('figures/')
+
+SIMU_DIR = 'figures/'+SIMU_NAME+'/'
+lib.create_dir(SIMU_DIR)
+
+RES_DIR = 'results/'+SIMU_NAME+'/'
+
 print(' Search for the number of phase-space cells:')
-[Nx,Nvx] = lib.search_Nx_Nvx('results/'+simu_name+'/fe.dat')
-print(' * found Nx  = '+str(Nx) +' space bins')
-print(' * found Nvx = '+str(Nvx)+' velocity bins')
+[N_X,N_VX] = lib.search_Nx_Nvx(RES_DIR+'fe.dat')
+print(' * found Nx  = '+str(N_X) +' space bins')
+print(' * found Nvx = '+str(N_VX)+' velocity bins')
 print('  ')
 
 print(' 2D space-time density plot:')
 print(' * 1D elecrostatic field')
-filename = 'results/'+simu_name+'/Ex.dat'
-name     ='figures/'+simu_name+'/Ex'
-title    = r'$E_x \left ( x,\,t\right )\,(m_e \omega_p v_{T_{e_0}} / e)$'
-lib.plot_1D_hydro_quantity_2Dmap(Nx, filename, font, cmap_Ex, title, name)
+EX_RES = RES_DIR  + 'Ex.dat'
+EX_FIG = SIMU_DIR + 'Ex'
+EX_TTL = r'$E_x \left ( x,\,t\right )\,(m_e \omega_p v_{T_{e_0}} / e)$'
+EX_CMP = 'jet'
+lib.plot_1D_hydro_quantity_2Dmap(N_X, EX_RES, EX_CMP, EX_TTL, EX_FIG)
 
 print(' * 1D elecrostatic potential')
-filename = 'results/'+simu_name+'/Phi.dat'
-name     ='figures/'+simu_name+'/Phi'
-title    = r'$\Phi \left ( x,\,t\right )\,(m_e {v_{T_{e_0}}}^2 / e)$'
-lib.plot_1D_hydro_quantity_2Dmap(Nx, filename, font, cmap_Ex, title, name)
+PHI_RES = RES_DIR  + 'Phi.dat'
+PHI_FIG = SIMU_DIR + 'Phi'
+PHI_TTL = r'$\Phi \left ( x,\,t\right )\,(m_e {v_{T_{e_0}}}^2 / e)$'
+PHI_CMP = 'jet'
+lib.plot_1D_hydro_quantity_2Dmap(N_X, PHI_RES, PHI_CMP, PHI_TTL, PHI_FIG)
 
 print(' * 1D plasma electron density')
-filename = 'results/'+simu_name+'/ne.dat'
-title    = r'$n_e \left ( x,\,t\right )\,(n_0)$'
-name     ='figures/'+simu_name+'/ne'
-lib.plot_1D_hydro_quantity_2Dmap(Nx, filename, font, cmap_ne, title, name)
+NE_RES = RES_DIR  + 'ne.dat'
+NE_FIG = SIMU_DIR + 'ne'
+NE_TTL = r'$n_e \left ( x,\,t\right )\,(n_0)$'
+NE_CMP = 'jet'
+lib.plot_1D_hydro_quantity_2Dmap(N_X, NE_RES, NE_CMP, NE_TTL, NE_FIG)
 
 print(' * 1D plasma electron mean velocity')
-filename = 'results/'+simu_name+'/ve.dat'
-name     ='figures/'+simu_name+'/ve'
-cmap     = 'jet'
-title    = r'$v_e \left ( x,\,t\right )\,(v_{T_{e_0}})$'
-lib.plot_1D_hydro_quantity_2Dmap(Nx, filename, font, cmap_ve, title, name)
+VE_RES = RES_DIR  + 've.dat'
+VE_FIG = SIMU_DIR + 've'
+VE_TTL = r'$v_e \left ( x,\,t\right )\,(v_{T_{e_0}})$'
+VE_CMP = 'jet'
+lib.plot_1D_hydro_quantity_2Dmap(N_X, VE_RES, VE_CMP, VE_TTL, VE_FIG)
 
-filename = 'results/'+simu_name+'/je.dat'
-cmap     = 'jet'
-title    = r'$j_e \left ( x,\,t\right )\,(n_0 e v_{T_{e_0}})$'
-name     ='figures/'+simu_name+'/je'
-lib.plot_1D_hydro_quantity_2Dmap(Nx, filename, font, cmap_je, title, name)
+print(' * 1D plasma electron electrical current')
+JE_RES = RES_DIR  + 'je.dat'
+JE_FIG = SIMU_DIR + 'je'
+JE_TTL = r'$j_e \left ( x,\,t\right )\,(n_0 e v_{T_{e_0}})$'
+JE_CMP = 'jet'
+lib.plot_1D_hydro_quantity_2Dmap(N_X, JE_RES, JE_CMP, JE_TTL, JE_FIG)
 
 print(' * 1D plasma electron thermal velocity')
 print('   (standard deviation)')
-filename = 'results/'+simu_name+'/vTe.dat'
-cmap     = 'jet'
-name     ='figures/'+simu_name+'/vTe'
-title    = r'$v_{T_e} \left ( x,\,t\right )\,(v_{T_{e_0}})$'
-lib.plot_1D_hydro_quantity_2Dmap(Nx, filename, font, cmap_vte, title, name)
+VTE_RES = RES_DIR  + 'vTe.dat'
+VTE_FIG = SIMU_DIR + 'vTe'
+VTE_TTL = r'$v_{T_e} \left ( x,\,t\right )\,(v_{T_{e_0}})$'
+VTE_CMP = 'jet'
+lib.plot_1D_hydro_quantity_2Dmap(N_X, VTE_RES, VTE_CMP, VTE_TTL, VTE_FIG)
 print('  ')

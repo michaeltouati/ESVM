@@ -161,7 +161,10 @@ def search_Nx_Nvx(file_name):
 	Nvx0 = int(NvxNx0 / Nx0)
 	return [Nx0,Nvx0]
 
-def plot_1D_hydro_quantity_2Dmap(N_x, file_name, font_properties, colormap, plot_title,plot_name):
+def plot_1D_hydro_quantity_2Dmap(N_x, file_name, colormap, plot_title, plot_name):
+    """
+    Read, plot and save a .png image of one scalar fields as a function of x and t
+    """
     t = []
     x = []
     p = []
@@ -200,20 +203,20 @@ def plot_1D_hydro_quantity_2Dmap(N_x, file_name, font_properties, colormap, plot
     plt.rc('text', usetex=True)
     plt.pcolormesh(X,T,P,cmap=cmap,norm=norm,shading='gouraud')
     cbar=plt.colorbar()
-    cbar.ax.tick_params(labelsize=16)
-    plt.title(plot_title, fontdict=font_properties)
-    plt.xticks(fontsize=16)
-    plt.xlabel(r'$x\,(\lambda_\mathrm{Debye})$', fontdict=font_properties)
+    cbar.ax.tick_params(labelsize=FONT_SIZE)
+    plt.title(plot_title, fontdict=FONT)
+    plt.xticks(fontsize=FONT_SIZE)
+    plt.xlabel(r'$x\,(\lambda_\mathrm{Debye})$', fontdict=FONT)
     plt.xlim([np.amin(x),np.amax(x)])
-    plt.ylabel(r'$t\,(/ \omega_p)$', fontdict=font_properties)
-    plt.yticks(fontsize=16)
+    plt.ylabel(r'$t\,(/ \omega_p)$', fontdict=FONT)
+    plt.yticks(fontsize=FONT_SIZE)
     plt.ylim([np.amin(t),np.amax(t)])
     fig.savefig(plot_name+'.png',bbox_inches='tight')
     plt.close(fig)
 
 def plot_1D_hydro_quantity_scalar_plot(N_x, file_name, y_label, plot_name):
     """
-    Read, plot and save a .png image of one scalar fields
+    Read, plot and save a .png image of one scalar fields as a function of x at all damped times
     """
     x = []
     p = []
