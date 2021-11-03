@@ -48,7 +48,7 @@ lib.create_dir(SIMU_DIR)
 RES_DIR = 'results/'+SIMU_NAME+'/'
 
 print(' Search for the number of phase-space cells:')
-[N_X,N_VX] = lib.search_Nx_Nvx(RES_DIR+'fe.dat')
+[N_X,N_VX] = lib.search_nx_nvx(RES_DIR+'fe.dat')
 print(' * found Nx  = '+str(N_X) +' space bins')
 print(' * found Nvx = '+str(N_VX)+' velocity bins')
 print('  ')
@@ -59,35 +59,35 @@ EX_RES = RES_DIR  + 'Ex.dat'
 EX_FIG = SIMU_DIR + 'Ex'
 EX_TTL = r'$E_x \left ( x,\,t\right )\,(m_e \omega_p v_{T_{e_0}} / e)$'
 EX_CMP = 'jet'
-lib.plot_1D_hydro_quantity_2Dmap(N_X, EX_RES, EX_CMP, EX_TTL, EX_FIG)
+lib.plot_1d_hydro_quantity_2dmap(N_X, EX_RES, EX_CMP, EX_TTL, EX_FIG)
 
 print(' * 1D elecrostatic potential')
 PHI_RES = RES_DIR  + 'Phi.dat'
 PHI_FIG = SIMU_DIR + 'Phi'
 PHI_TTL = r'$\Phi \left ( x,\,t\right )\,(m_e {v_{T_{e_0}}}^2 / e)$'
 PHI_CMP = 'jet'
-lib.plot_1D_hydro_quantity_2Dmap(N_X, PHI_RES, PHI_CMP, PHI_TTL, PHI_FIG)
+lib.plot_1d_hydro_quantity_2dmap(N_X, PHI_RES, PHI_CMP, PHI_TTL, PHI_FIG)
 
 print(' * 1D plasma electron density')
 NE_RES = RES_DIR  + 'ne.dat'
 NE_FIG = SIMU_DIR + 'ne'
 NE_TTL = r'$n_e \left ( x,\,t\right )\,(n_0)$'
 NE_CMP = 'jet'
-lib.plot_1D_hydro_quantity_2Dmap(N_X, NE_RES, NE_CMP, NE_TTL, NE_FIG)
+lib.plot_1d_hydro_quantity_2dmap(N_X, NE_RES, NE_CMP, NE_TTL, NE_FIG)
 
 print(' * 1D plasma electron mean velocity')
 VE_RES = RES_DIR  + 've.dat'
 VE_FIG = SIMU_DIR + 've'
 VE_TTL = r'$v_e \left ( x,\,t\right )\,(v_{T_{e_0}})$'
 VE_CMP = 'jet'
-lib.plot_1D_hydro_quantity_2Dmap(N_X, VE_RES, VE_CMP, VE_TTL, VE_FIG)
+lib.plot_1d_hydro_quantity_2dmap(N_X, VE_RES, VE_CMP, VE_TTL, VE_FIG)
 
 print(' * 1D plasma electron electrical current')
 JE_RES = RES_DIR  + 'je.dat'
 JE_FIG = SIMU_DIR + 'je'
 JE_TTL = r'$j_e \left ( x,\,t\right )\,(n_0 e v_{T_{e_0}})$'
 JE_CMP = 'jet'
-lib.plot_1D_hydro_quantity_2Dmap(N_X, JE_RES, JE_CMP, JE_TTL, JE_FIG)
+lib.plot_1d_hydro_quantity_2dmap(N_X, JE_RES, JE_CMP, JE_TTL, JE_FIG)
 
 print(' * 1D plasma electron thermal velocity')
 print('   (standard deviation)')
@@ -95,5 +95,5 @@ VTE_RES = RES_DIR  + 'vTe.dat'
 VTE_FIG = SIMU_DIR + 'vTe'
 VTE_TTL = r'$v_{T_e} \left ( x,\,t\right )\,(v_{T_{e_0}})$'
 VTE_CMP = 'jet'
-lib.plot_1D_hydro_quantity_2Dmap(N_X, VTE_RES, VTE_CMP, VTE_TTL, VTE_FIG)
+lib.plot_1d_hydro_quantity_2dmap(N_X, VTE_RES, VTE_CMP, VTE_TTL, VTE_FIG)
 print('  ')

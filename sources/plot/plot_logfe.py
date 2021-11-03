@@ -63,7 +63,7 @@ print(' --------------------------------------------------------------------')
 print('  ')
 
 print(' Search for the number of phase-space cells:')
-[Nx,Nvx] = lib.search_Nx_Nvx('results/'+simu_name+'/fe.dat')
+[Nx,Nvx] = lib.search_nx_nvx('results/'+simu_name+'/fe.dat')
 print(' * found Nx  = '+str(Nx) +' space bins')
 print(' * found Nvx = '+str(Nvx)+' velocity bins')
 print('  ')

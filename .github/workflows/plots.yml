@@ -28,7 +28,7 @@ jobs:
         
     - name: Analysing the code with pylint
       run: |
-        # pylint sources/plot/library.py
+        pylint sources/plot/library.py
         echo 'pylint sources/plot/plot_energy.py'
         pylint sources/plot/plot_energies.py
         echo 'pylint sources/plot/plot_hydro1d.py'
