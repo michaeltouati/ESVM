@@ -116,7 +116,10 @@ do while (time.lt.L_t)
   vm1 = d_t / d_x
   am1 = d_t / d_vx
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(l,i,flux_im1,flux_ip1) COLLAPSE(2)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(N_vx, N_x, d_t, d_x, d_vx, f_n, f_np1, vx, E_x_n) &
+  !$omp& SHARED(vm1, am1, test_positivity, scheme, b_VL, f_max) &
+  !$omp& PRIVATE(l,i,flux_im1,flux_ip1) COLLAPSE(2)
   do l=1,N_vx,1
     do i = 1,N_x,1
       call fluxes(scheme, b_VL, vx(l), f_max, d_t, d_x, &

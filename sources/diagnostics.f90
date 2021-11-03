@@ -73,7 +73,9 @@ subroutine DIAG_ENERGY(t0, UK, UT, UE)
   real(PR)                    , intent(in) :: UK, UT, UE
   integer                                  :: k
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(k) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE)&
+  !$omp& SHARED(t0, UK, UT, UE) &
+  !$omp& PRIVATE(k) COLLAPSE(1)
   do k=Ndiag_UK,Ndiag_UE,1
     select case (k)
       case(Ndiag_UK)
@@ -129,7 +131,9 @@ subroutine DIAG(Nt, t0, Nx, x0, Nvx, vx0, &
   write(*,'(A,1E14.7)')' Total energy    (n0 Debye^3 me vTe0^2) =', Utot
   write(*,*)' '
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(k,i,l) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nvx, Nx, t0, vx0, x0, fn, ne, je, ve, vTe, phin, Exn) &
+  !$omp& PRIVATE(k,i,l) COLLAPSE(1)
   do k=Ndiag_fe,Ndiag_Ex,1
     select case (k)
       case(Ndiag_fe)

@@ -48,13 +48,17 @@ subroutine GRID(Nx, Nvx, dx, dvx, &
   real(PR), dimension(-1:Nvx+2), intent(out)  :: vx0
   integer                                     :: i, l
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nx, xmin, dx, x0) &
+  !$omp& PRIVATE(i) COLLAPSE(1)
   do i=-1,Nx+2,1
     x0(i)  = xmin + real(i-1,PR)*dx
   end do
   !$omp END PARALLEL DO
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(l) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nvx, vmin, dvx, vx0) &
+  !$omp& PRIVATE(l) COLLAPSE(1)
   do l=-1,Nvx+2,1
     vx0(l) = vmin + real(l-1,PR)*dvx
   end do
@@ -78,7 +82,9 @@ subroutine INIT_VAR(Nx, Nvx, fn, fnp1, &
   logical                              , intent(out)   :: positivity, results
   integer                                              :: i, l
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nx, Nvx, fn, fnp1) &
+  !$omp& PRIVATE(i,l) COLLAPSE(2)
   do l=-1,Nvx+2,1
     do i=-1,Nx+2,1
       fn(i,l)    = zero
@@ -87,7 +93,9 @@ subroutine INIT_VAR(Nx, Nvx, fn, fnp1, &
   end do
   !$omp END PARALLEL DO
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nx, ne, je, ve, vTe, Exn, Exnp1, phin) &
+  !$omp& PRIVATE(i) COLLAPSE(1)
   do i=-1,Nx+2,1
     ne(i)    = zero
     je(i)    = zero
@@ -99,7 +107,9 @@ subroutine INIT_VAR(Nx, Nvx, fn, fnp1, &
   end do
   !$omp END PARALLEL DO
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nx, dUK, dUT, dUE) &
+  !$omp& PRIVATE(i) COLLAPSE(1)
   do i=1,Nx,1
     dUK(i) = zero
     dUT(i) = zero
@@ -128,7 +138,9 @@ subroutine FE_BOUNDARIES(bcond, Nx, Nvx, f0)
   select case (bcond)
     ! absorbing
     case (1)
-      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(l) COLLAPSE(1)
+      !$omp  PARALLEL DO DEFAULT(NONE) &
+      !$omp& SHARED(Nvx, Nx, f0) &
+      !$omp& PRIVATE(l) COLLAPSE(1)
       do l=-1,Nvx+2,1
         f0(Nx+1,l) = zero
         f0(Nx+2,l) = zero
@@ -138,7 +150,9 @@ subroutine FE_BOUNDARIES(bcond, Nx, Nvx, f0)
       !$omp END PARALLEL DO
     ! periodic
     case (2)
-      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(l) COLLAPSE(1)
+      !$omp  PARALLEL DO DEFAULT(NONE) &
+      !$omp& SHARED(Nvx, Nx, f0) &
+      !$omp& PRIVATE(l) COLLAPSE(1)
       do l=-1,Nvx+2,1
         f0(Nx+1,l) = f0(1,l)
         f0(Nx+2,l) = f0(2,l)
@@ -147,7 +161,9 @@ subroutine FE_BOUNDARIES(bcond, Nx, Nvx, f0)
       end do
       !$omp END PARALLEL DO
   end select
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nvx, Nx, f0) &
+  !$omp& PRIVATE(i) COLLAPSE(1)
   do i=-1,Nx+2,1
     f0(i,Nvx+1) = zero
     f0(i,Nvx+2) = zero
@@ -183,7 +199,9 @@ subroutine INIT_SIMU(bcond, academic_case, &
       dvx   = 0.025_PR ! "particle size"
       xs    = x0(1) + ( (x0(Nx) - x0(1)) / 8._PR ) 
       norm1 = Ap / ( 2._PR * pi * dx * dvx )
-      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l,X2) COLLAPSE(2)
+      !$omp  PARALLEL DO DEFAULT(NONE) &
+      !$omp& SHARED(Nvx, Nx, f0, norm, norm1, vx0, vd, x0, xs, dx, dvx) &
+      !$omp& PRIVATE(i,l,X2) COLLAPSE(2)
       do l=1,Nvx,1
         do i=1,Nx,1
           f0(i,l) = norm * exp(-(vx0(l)**2._PR)/2._PR) 
@@ -196,7 +214,9 @@ subroutine INIT_SIMU(bcond, academic_case, &
       !$omp END PARALLEL DO
     ! Landau damping test case :
     case (2)
-      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
+      !$omp  PARALLEL DO DEFAULT(NONE) &
+      !$omp& SHARED(Nvx, Nx, f0, norm, vx0) &
+      !$omp& PRIVATE(i,l) COLLAPSE(2)
       do l=1,Nvx,1
         do i=1,Nx,1
           f0(i,l) = norm * exp(-(vx0(l)**2._PR)/2._PR)
@@ -206,7 +226,9 @@ subroutine INIT_SIMU(bcond, academic_case, &
     case (3)
     ! Two-stream instability test case :
       norm = 0.5_PR * norm
-      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l,norm1,norm2) COLLAPSE(2)
+      !$omp  PARALLEL DO DEFAULT(NONE) &
+      !$omp& SHARED(Nvx, Nx, f0, norm, Ap, kp, vx0, vd, x0) &
+      !$omp& PRIVATE(i,l,norm1,norm2) COLLAPSE(2)
       do l=1,Nvx,1
         do i=1,Nx,1
           norm1   = Ap * sin(kp*x0(i))
@@ -220,7 +242,9 @@ subroutine INIT_SIMU(bcond, academic_case, &
       !$omp END PARALLEL DO
     case default
     ! Maxwellian :
-      !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
+      !$omp  PARALLEL DO DEFAULT(NONE) &
+      !$omp& SHARED(Nvx, Nx, f0, norm, vx0, vd) &
+      !$omp& PRIVATE(i,l) COLLAPSE(2)
       do l=1,Nvx,1
         do i=1,Nx,1
           f0(i,l) = norm * exp(-((vx0(l)-vd)**2._PR)/2._PR)
@@ -244,7 +268,9 @@ subroutine INIT_NEXT_STEP(Nx, Nvx, fn, fnp1, &
   integer                              , intent(inout) :: Nt
   integer                                              :: l, i
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l) COLLAPSE(2)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nvx, Nx, fn, fnp1) &
+  !$omp& PRIVATE(i,l) COLLAPSE(2)
   do l=-1,Nvx+2,1
     do i=-1,Nx+2,1
       fn(i,l)   = fnp1(i,l)
@@ -252,7 +278,9 @@ subroutine INIT_NEXT_STEP(Nx, Nvx, fn, fnp1, &
   end do
   !$omp END PARALLEL DO
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nx, Exn, Exnp1) &
+  !$omp& PRIVATE(i) COLLAPSE(1)
   do i=-1,Nx+2,1
     Exn(i)   = Exnp1(i) 
   end do
@@ -272,7 +300,9 @@ subroutine DENSITIES(Nx, Nvx, dvx, vx0, fn, ne, je, ve, vTe)
   real(PR), dimension(-1:Nx+2),          intent(out)  :: ve, vTe
   integer                                             :: i, l
   real(PR), dimension(:), allocatable                 :: F1,F2,F3
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,l,F1,F2,F3) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nvx, Nx, dvx, vx0, fn, ne, je, ve, vTe) &
+  !$omp& PRIVATE(i,l,F1,F2,F3) COLLAPSE(1)
   do i=-1,Nx+2,1
     allocate(F1(1:Nvx),F2(1:Nvx),F3(1:Nvx))
     F1(1:Nvx) = fn(i,1:Nvx)*dvx
@@ -310,7 +340,9 @@ subroutine ENERGIES(Nx, dx, &
   real(PR)                    , intent(inout) :: UK, UT, UE
   integer                                     :: i
   !
-  !$omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nx, ne, ve, vTe, Exn, dUK, dUT, dUE) &
+  !$omp& PRIVATE(i) COLLAPSE(1)
   do i = 1,Nx,1
     dUK(i) = ne(i) * (ve(i)**2._PR)  / 2._PR
     dUT(i) = ne(i) * (vTe(i)**2._PR) / 2._PR
@@ -376,7 +408,9 @@ subroutine POISSON(bcond, Nx, dx, &
   real(PR), dimension(1:Nx+1)               :: a, b, c, d, e
   real(PR), dimension(1:Nx+1)               :: phi_temp 
   !
-  !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nx, dx, ne, bcond, a, b, c, d, e, phi_temp) &
+  !$omp& PRIVATE(i) COLLAPSE(1)
   do i=1,Nx,1
     a(i)        = -1._PR
     b(i)        =  2._PR
@@ -387,7 +421,7 @@ subroutine POISSON(bcond, Nx, dx, &
       phi_temp(i) = 0._PR
     end if
   end do
-  !omp END PARALLEL DO
+  !$omp END PARALLEL DO
   select case (bcond)
     ! absorbing boundary conditions
     case (1)
@@ -412,11 +446,13 @@ subroutine POISSON(bcond, Nx, dx, &
       phin(0)    = phin(Nx)
       phin(-1)   = phin(Nx-1)
   end select
-  !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nx, dx, phin, Exn) &
+  !$omp& PRIVATE(i) COLLAPSE(1)
   do i=1,Nx,1
     Exn(i) = (phin(i-1) - phin(i+1))/(2._PR*dx)
   end do
-  !omp END PARALLEL DO
+  !$omp END PARALLEL DO
   !
   call FIELD_BOUNDARIES(bcond, Nx, Exn)
 end subroutine POISSON
@@ -437,12 +473,14 @@ subroutine AMPERE(bcond, Nx, Nt, dt, dx, &
     call POISSON(bcond, Nx, dx, ne, Exn, phin)
   else
     dx2 = 2._PR*dx
-    !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i) COLLAPSE(1)
+    !$omp  PARALLEL DO DEFAULT(NONE) &
+    !$omp& SHARED(Nx, dt, dx2, je, Exn, phin, Exnp1) &
+    !$omp& PRIVATE(i) COLLAPSE(1)
     do i=1,Nx,1
       Exnp1(i) = Exn(i)    - (dt *je(i)   )
       phin(i)  = phin(i-2) - (dx2*Exn(i-1))
     end do
-    !omp END PARALLEL DO
+    !$omp END PARALLEL DO
     !
     call FIELD_BOUNDARIES(bcond, Nx, Exnp1)
   end if
@@ -465,14 +503,16 @@ subroutine DRIVE(Nx, dt, t0, x0, &
   A2   = A1 / K0
   ot  = Om0 * t0
   ot2 = Om0 * (t0+dt)
- !omp PARALLEL DO DEFAULT(SHARED) PRIVATE(i,kx0) COLLAPSE(1)
+  !$omp  PARALLEL DO DEFAULT(NONE) &
+  !$omp& SHARED(Nx, x0, A1, A2, K0, ot, ot2, Exn, Exnp1, phin) &
+  !$omp& PRIVATE(i,kx0) COLLAPSE(1)
   do i=-1,Nx+2
     kx0      = K0 * x0(i)
     Exn(i)   = A1 * sin( ot  - kx0 )
     phin(i)  = A2 * cos( ot  - kx0 )
     Exnp1(i) = A1 * sin( ot2 - kx0 )
   end do
-  !omp END PARALLEL DO
+  !$omp END PARALLEL DO
 end subroutine DRIVE
 
 subroutine FLUXES(method, bVL, vx0, u_max, dt, d_mu, &
