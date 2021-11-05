@@ -32,29 +32,7 @@ Read and plot data t (fs) | x (microns) | F from files:
 """
 import library as lib
 
-SIMU_NAME=lib.get_results_dir()
-
-print(' -------------------------')
-print(' 1D hydrodynamic moments :')
-print(' -------------------------')
-print('  ')
-
-lib.create_dir('figures/')
-
-SIMU_DIR = 'figures/'+SIMU_NAME+'/'
-lib.create_dir(SIMU_DIR)
-
-RES_DIR = 'results/'+SIMU_NAME+'/'
-
-print(' Search for the number of phase-space cells:')
-[N_X,N_VX] = lib.search_nx_nvx(RES_DIR+'fe.dat')
-print(' * found Nx  = '+str(N_X) +' space bins')
-print(' * found Nvx = '+str(N_VX)+' velocity bins')
-print('  ')
-
-################
-# Scalar plots #
-################
+[SIMU_NAME, RES_DIR, SIMU_DIR, N_X, N_VX] = lib.init_plot_hydro()
 
 print(' Scalar plot :')
 print(' * 1D Electrostatic field at :')

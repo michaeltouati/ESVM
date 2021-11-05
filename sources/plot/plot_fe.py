@@ -21,122 +21,95 @@
 ##                                                                   ##
 #######################################################################
 ## Initial commit written by Michaël J TOUATI - Dec. 2015
-import os
+"""
+Read and plot data t (fs) | x (Debye) | vx (vTe0)  | fe (n0/vTe0)
+from the file fe.dat
+"""
 import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
-from matplotlib.ticker import MaxNLocator
-from matplotlib import mlab, cm
 import library as lib
 
-####################
-# Input parameters #
-####################
-
-font = {'family': 'non-serif',
-        'style':  'normal',
-        'color':  'black',
-        'weight': 'normal',
-        'size': 16,
-        }
-
-# cmap_fe = 'gist_ncar'
-# cmap_fe = 'nipy_spectral'
-#cmap_fe = 'gist_stern'
-#cmap_fe = 'gnuplot'
-#cmap_fe = 'gnuplot2'
-cmap_fe = 'Blues'
-#cmap_fe = 'jet'
-
-##########
-# Script #
-##########
-
-simu_name=lib.get_results_dir()
-
-lib.create_dir('figures/')
-lib.create_dir('figures/'+simu_name+'/')
+SIMU_NAME=lib.get_results_dir()
 
 print(' ------------------------------------------------------')
 print(' 1D1V plasma electron distribution function phase-space')
 print(' ------------------------------------------------------')
 print('  ')
 
-print(' Search for the number of phase-space cells :')
-[Nx,Nvx] = lib.search_nx_nvx('results/'+simu_name+'/fe.dat')
-print(' * found Nx  = '+str(Nx) +' space bins')
-print(' * found Nvx = '+str(Nvx)+' velocity bins')
-print('  ')
+FE_RES = 'results/'+SIMU_NAME+'/fe.dat'
+
+lib.create_dir('figures/')
+
+SIMU_DIR = 'figures/'+SIMU_NAME+'/'
+lib.create_dir(SIMU_DIR)
+
+[N_X,N_VX] = lib.search_nx_nvx(FE_RES)
 
 print(' Density plot at :')
-filename = 'results/'+simu_name+'/fe.dat'
-N1 = Nvx
-N2 = Nx
 
-title = r'$f_e \left ( x,\,v_x,\,t\right )\,(n_0/v_{T_{e_0}})$'
+FE_DIR = SIMU_DIR+'fe/'
+lib.create_dir(FE_DIR)
 
-lib.create_dir('figures/'+simu_name+'/fe/')
+FE_FIG  = 'figures/'+SIMU_NAME+'/fe/fe_'
+FE_CMP  = 'Blues'
+FE_TTL  = r'$f_e \left ( x,\,v_x,\,t\right )\,$'
+FE_TTL += r'$(n_0/v_{T_{e_0}})$'
+X_LBL   = r'$x\,(\lambda_\mathrm{Debye})$'
+VX_LBL  = r'$v_x\,(v_{T_{e_0}})$'
 
-name='figures/'+simu_name+'/fe/fe_'
-
-N3 = int(N1*N2)
-vx = []
-x = []
-p = []
-N1 = int(N1)
-N2 = int(N2)
-N3 = int(N3)
-X = np.zeros((N1,N2))
-VX = np.zeros((N1,N2))
-P = np.zeros((N1,N2))
-file = open(filename, 'r')
-counter = 0
-for line in file:
-    line      = line.strip()
-    array     = line.split()
-    vx.append(float(array[1]))
-    x.append(float(array[2]))
-    p.append(float(array[3]))
-    counter = counter + 1
-    if counter % N3 == 0:
-        time = int(100.*float(array[0]))/100.
-        print(' * t (/omega_p) = '+str(time))
-        N = int(counter / N3)
-        val=max(abs(np.amax(p[(N-1)*N3:N*N3])),abs(np.amin(p[(N-1)*N3:N*N3])))
-        if (val != 0):
-            Power=int(np.log(val)/np.log(10))
-        else:
-            Power = 0
-        p[(N-1)*N3:N*N3] = [pp / (10.**Power) for pp in p[(N-1)*N3:N*N3]]
-        for i in range(0,N1):
-            for k in range(0,N2):
-                X[i][k]=x[(N-1)*N3+i*N2+k]
-                VX[i][k]=vx[(N-1)*N3+i*N2+k]
-                P[i][k]=p[(N-1)*N3+i*N2+k]
-        cmap = plt.get_cmap(cmap_fe)
-        Maxval = np.amax(p[(int(N)-1)*int(N3):int(N)*int(N3)])
-        Minval = np.amin(p[(int(N)-1)*int(N3):int(N)*int(N3)])
-        if ( Minval == Maxval ) :
-            if ( Minval == 0. ) :
-                Maxval =  1.
-                Minval = -1.
-            else :
-                Maxval = 1.1*Maxval
-                Minval = 0.9*Maxval
-        norm = cm.colors.Normalize(vmax=Maxval, vmin=Minval)
-        fig=plt.figure()
-        plt.rc('text', usetex=True)
-        plt.pcolormesh(X,VX,P,cmap=cmap,norm=norm,shading='gouraud')
-        cbar=plt.colorbar()
-        cbar.ax.tick_params(labelsize=16)
-        plt.title(title+' at '+r'$t =$'+str(time)+r'$\,\omega_p^{-1}$', fontdict=font)
-        plt.xticks(fontsize=16)
-        plt.xlabel(r'$x\,(\lambda_\mathrm{Debye})$', fontdict=font)
-        plt.xlim([np.amin(x[(N-1)*N3:N*N3]),np.amax(x[(N-1)*N3:N*N3])])
-        plt.ylabel(r'$v_x\,(v_{T_{e_0}})$', fontdict=font)
-        plt.yticks(fontsize=16)
-        plt.ylim([np.amin(vx[(N-1)*N3:N*N3]),np.amax(vx[(N-1)*N3:N*N3])])
-        #plt.axes().set_aspect('equal')
-        fig.savefig(name+str(N)+'.png',bbox_inches='tight')
-        plt.close(fig)
-file.close()
+N_P    = N_VX*N_X
+X_PLT  = []
+VX_PLT = []
+FE_PLT = []
+X_MAP  = np.zeros((N_VX,N_X))
+VX_MAP = np.zeros((N_VX,N_X))
+FE_MAP = np.zeros((N_VX,N_X))
+with open(FE_RES, 'r', encoding='utf-8') as FILE :
+    COUNTER = 0
+    for LINE in FILE:
+        ARRAY = LINE.strip().split()
+        VX_PLT.append(float(ARRAY[1]))
+        X_PLT.append( float(ARRAY[2]))
+        FE_PLT.append(float(ARRAY[3]))
+        COUNTER += 1
+        if COUNTER % N_P == 0:
+            STR_TIME = f"{float(ARRAY[0]):1.4E}"
+            print(' * t (/omega_p) = '+STR_TIME)
+            N_T   = int(COUNTER / N_P)
+            for i in range(0,N_VX):
+                for k in range(0,N_X):
+                    INDEX        = (N_T-1)*N_P+i*N_X+k
+                    X_MAP[i][k]  = X_PLT[INDEX]
+                    VX_MAP[i][k] = VX_PLT[INDEX]
+                    FE_MAP[i][k] = FE_PLT[INDEX]
+            P_MIN   = (N_T-1)*N_P
+            P_MAX   = N_T*N_P
+            FE_TTL2 = FE_TTL+' at '+r'$t =$'+STR_TIME+r'$\,\omega_p^{-1}$'
+            FE_FIG2 = FE_FIG+str(N_T)+'.png'
+            X_MIN   = np.amin( X_PLT[P_MIN:P_MAX])
+            X_MAX   = np.amax( X_PLT[P_MIN:P_MAX])
+            VX_MIN  = np.amin(VX_PLT[P_MIN:P_MAX])
+            VX_MAX  = np.amax(VX_PLT[P_MIN:P_MAX])
+            FE_MAX  = np.amax(FE_PLT[P_MIN:P_MAX])
+            FE_MIN  = np.amin(FE_PLT[P_MIN:P_MAX])
+            if FE_MIN == FE_MAX :
+                if FE_MIN == 0. :
+                    FE_MAX =  1.
+                    FE_MIN = -1.
+                else :
+                    FE_MAX = 1.1*FE_MAX
+                    FE_MIN = 0.9*FE_MAX
+            lib.make_2d_field_pcolormesh_figure(xmap     =  X_MAP,
+                                                ymap     = VX_MAP,
+                                                zmap     = FE_MAP,
+                                                colormap = FE_CMP,
+                                                xmap_min =  X_MIN,
+                                                xmap_max =  X_MAX,
+                                                ymap_min = VX_MIN,
+                                                ymap_max = VX_MAX,
+                                                zmap_min = FE_MIN,
+                                                zmap_max = FE_MAX,
+                                                xlabel   =  X_LBL,
+                                                ylabel   = VX_LBL,
+                                                title    = FE_TTL2,
+                                                eq_axis  = False,
+                                                fig_file = FE_FIG2)

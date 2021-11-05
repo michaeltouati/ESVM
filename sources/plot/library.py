@@ -142,6 +142,7 @@ def search_nx_nvx(file_name):
     """
     Return ESVM simulation phase-space bins numbers
     """
+    print(' Search for the number of phase-space cells:')
     t_0  = []
     v_0  = []
     with open(file_name, 'r', encoding='utf-8') as file :
@@ -156,7 +157,7 @@ def search_nx_nvx(file_name):
             array     = line.split()
             t_0.append(float(array[0]))
             v_0.append(float(array[1]))
-            counter = counter + 1
+            counter += 1
             if v_0[counter]!=v_0[counter-1]:
                 nx_0 = counter
                 break
@@ -169,7 +170,10 @@ def search_nx_nvx(file_name):
                 nvxnx_0 = counter
                 break
     nvx_0 = int(nvxnx_0 / nx_0)
-    return [int(nx_0),int(nvx_0)]
+    print(' * found Nx  = '+str(nx_0) +' space bins')
+    print(' * found Nvx = '+str(nvx_0)+' velocity bins')
+    print('  ')
+    return [nx_0,nvx_0]
 
 def make_2d_field_pcolormesh_figure(**kwargs):
     """
@@ -277,6 +281,22 @@ def plot_1d_hydro_quantity_2dmap(n_x, file_name, colormap, plot_title, plot_name
                                     eq_axis  = False,
                                     fig_file = plot_name+'.png')
 
+def init_plot_hydro():
+    """
+    Initialize 1D hydro. quantities plot scripts
+    """
+    simu_name=get_results_dir()
+    print(' -------------------------')
+    print(' 1D hydrodynamic moments :')
+    print(' -------------------------')
+    print('  ')
+    create_dir('figures/')
+    simu_dir = 'figures/'+simu_name+'/'
+    create_dir(simu_dir)
+    res_dir = 'results/'+simu_name+'/'
+    [n_x,n_vx] = search_nx_nvx(res_dir+'fe.dat')
+    return [simu_name, res_dir, simu_dir, n_x, n_vx]
+
 def plot_1d_hydro_quantity_scalar_plot(n_x, file_name, y_label, plot_name):
     """
     Read, plot and save a .png image of one scalar fields as a function of x at all damped times
@@ -291,8 +311,8 @@ def plot_1d_hydro_quantity_scalar_plot(n_x, file_name, y_label, plot_name):
             p_0.append(float(array[2]))
             counter = counter + 1
             if counter % n_x == 0:
-                n_t = int(counter / n_x)
-                time = int(100.*float(array[0]))/100.
+                n_t  = int(counter / n_x)
+                time = f"{float(array[0]):1.4E}"
                 print('   * t (/omega_p) = '+str(time))
                 ex_min = np.amin(p_0)
                 if ex_min < 0. :

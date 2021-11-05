@@ -28,6 +28,7 @@ jobs:
         
     - name: Analysing the code with pylint
       run: |
+        echo 'pylint sources/plot/library.py'
         pylint sources/plot/library.py
         echo 'pylint sources/plot/plot_energy.py'
         pylint sources/plot/plot_energies.py
@@ -35,7 +36,7 @@ jobs:
         pylint sources/plot/plot_hydro1d.py
         echo 'pylint sources/plot/plot_hydro2d.py'
         pylint sources/plot/plot_hydro2d.py
-        # echo 'pylint sources/plot/plot_fe.py'
-        # pylint sources/plot/plot_fe.py
-        # echo 'pylint sources/plot/plot_logfe.py'
-        # pylint sources/plot/plot_logfe.py
+        echo 'pylint sources/plot/plot_fe.py'
+        pylint sources/plot/plot_fe.py
+        echo 'pylint sources/plot/plot_logfe.py'
+        pylint sources/plot/plot_logfe.py
