@@ -42,6 +42,7 @@ bibliography: paper.bib
 # Summary
 
 A plasma is a set of charged particles consisting of electrons and ionized atoms whose quantity is sufficiently large to behave collectively through the long-distance electromagnetic fields they produce. It is thought that more than 99.9% of visible matter in the universe is in the plasma state. In a collisionless plasma  consisting in an ionized gas composed of electrons moving inbetween much heavier ions, any electrostatic field is rapidly screened by the plasma electrons over the Debye screening distance [@DebyeHuckel:1923]. When the number of electrons in these Debye spheres can be assumed to be infinite, the plasma electron population is correctly described by the Vlasov equation [@Vlasov:1938] that neglects all correlations between particles such as the binary Coulomb collisions between them. In addition to being simple, the resulting Vlasov-Maxwell set of equations is extremely rich in physics and has many applications ranging from astrophysics and theoretical plasma physics to intense laser-matter interaction experiments. [ESVM](https://github.com/michaeltouati/ESVM) (ElectroStatic Vlasov-Maxwell) is a Vlasov-Maxwell Fortran 95 standard-compliant code, parallelized with OpenMP and using Python 3 for post-processing, that allows for the study of these collisionless plasmas. Many finite volume advection schemes [@Godunov:1959] are implemented in order to discretize the Vlasov equation, namely:
+
 - the donor-cell scheme, i.e., the downwind / upwind scheme [@Courant:1952] depending on the advection direction in each phase-space cell, 
 - the Lax-Wendroff scheme [@LaxWendroff:1960], 
 - the Fromm scheme [@Fromm:1968],
@@ -60,21 +61,22 @@ Unlike the linear second order Lax-Wendroff, Fromm, and Beam-Warming schemes, th
 # Future work
 
 The author plans, in the near future, to:
-1) provide another plasma physics academic simulation about one non-linear BGK electron plasma wave, from the name of its finder I. B. Bernstein, J. M. Greene, and M. D. Kruskal [@BernsteinGreenKruskal:1957]
-2) provide another plasma physics academic simulation about the echo of two plasma electron waves [@Gould:1967]
-3) implement non-equally spaced phase-space cells
-4) implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes [@Liu:1994]
-5) compute the plasma ion Vlasov equation to allow for the ions to be mobile 
-6) store the simulation results in hdf5 files instead of text files
-7) implement MPI parallelization
-8) implement vectorization
-9) extend the code to the relativistic regime: ESVM $\Rightarrow$ RESVM for open source Relativistic ElectroStatic Vlasov-Maxwell code
-10) implement a BGK collision operator, from the name of its finder P. L. Bhatnagar, E. P. Gross,  and M. Krook [@BhatnagarGrossKrook:1954]
-11) extend the code to 1D-2V and 1D-3V phase-space electrostatic plasma simulations
-12) implement the Landau [@Landau:1936] and Belaiev-Budker [@BelaievBudker:1957] relativistic collision operators using the Rosenbluth potentials [@Rosenbluth:1957] and their relativistic Braams-Karney extension [@BraamsKarney:1987]: (R)ESVM $\Rightarrow$ (R)ESVFPM for open source (Relativistic) ElectroStatic Vlasov-Fokker-Planck-Maxwell code
-13) extend the code to electrostatic 2D-1V, 2D-2V, and 2D-3V phase-space plasma simulations: (R)ESV(FP)M $\Rightarrow$ (R)ESV(FP)M2 for open source (Relativistic) ElectroStatic Vlasov-(Fokker-Planck-)Maxwell in 2D
-14) extend the code with the second order finite difference Yee scheme [@Yee:1966] to electromagnetic 2D-1V, 2D-2V, and 2D-3V phase-space plasma simulations: (R)ESV(FP)M(2) $\Rightarrow$ (R)EMV(FP)M(2) for open source (Relativistic) ElectroMagnetic Vlasov-(Fokker-Planck)-Maxwell (in 2D)
-15) implement the Perfectly Matched Layer (PML) technique [@Berenger:1994] to absorb the electromagnetic fields at the spatial simulation box boundaries
-16) deploy the code to GPU architectures.
+
+1. provide another plasma physics academic simulation about one non-linear BGK electron plasma wave, from the name of its finder I. B. Bernstein, J. M. Greene, and M. D. Kruskal [@BernsteinGreenKruskal:1957]
+2. provide another plasma physics academic simulation about the echo of two plasma electron waves [@Gould:1967]
+3. implement non-equally spaced phase-space cells
+4. implement high order Weighted Essentially Non-Oscillatory (WENO) advection schemes [@Liu:1994]
+5. compute the plasma ion Vlasov equation to allow for the ions to be mobile 
+6. store the simulation results in hdf5 files instead of text files
+7. implement MPI parallelization
+8. implement vectorization
+9. extend the code to the relativistic regime: ESVM $\Rightarrow$ RESVM for open source Relativistic ElectroStatic Vlasov-Maxwell code
+10. implement a BGK collision operator, from the name of its finder P. L. Bhatnagar, E. P. Gross,  and M. Krook [@BhatnagarGrossKrook:1954]
+11. extend the code to 1D-2V and 1D-3V phase-space electrostatic plasma simulations
+12. implement the Landau [@Landau:1936] and Belaiev-Budker [@BelaievBudker:1957] relativistic collision operators using the Rosenbluth potentials [@Rosenbluth:1957] and their relativistic Braams-Karney extension [@BraamsKarney:1987]: (R)ESVM $\Rightarrow$ (R)ESVFPM for open source (Relativistic) ElectroStatic Vlasov-Fokker-Planck-Maxwell code
+13. extend the code to electrostatic 2D-1V, 2D-2V, and 2D-3V phase-space plasma simulations: (R)ESV(FP)M $\Rightarrow$ (R)ESV(FP)M2 for open source (Relativistic) ElectroStatic Vlasov-(Fokker-Planck-)Maxwell in 2D
+14. extend the code with the second order finite difference Yee scheme [@Yee:1966] to electromagnetic 2D-1V, 2D-2V, and 2D-3V phase-space plasma simulations: (R)ESV(FP)M(2) $\Rightarrow$ (R)EMV(FP)M(2) for open source (Relativistic) ElectroMagnetic Vlasov-(Fokker-Planck)-Maxwell (in 2D)
+15. implement the Perfectly Matched Layer (PML) technique [@Berenger:1994] to absorb the electromagnetic fields at the spatial simulation box boundaries
+16. deploy the code to GPU architectures.
 
 # References
