@@ -25,7 +25,7 @@ tags:
   - Two-stream instability
   - Electrostatic wakefield
 authors:
-  - name: Michaël J TOUATI
+  - name: Michaël J. Touati
     orcid: 0000-0001-7590-0941
     affiliation: "1, 2, 3"
 affiliations:
