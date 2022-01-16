@@ -8,7 +8,6 @@
 [![JOSS : status](https://joss.theoj.org/papers/d0f6a6298710d69b63a8a62d843f8f88/status.svg)](https://joss.theoj.org/papers/d0f6a6298710d69b63a8a62d843f8f88)
 [![License : GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
-
 [![Clones : 14 days](https://img.shields.io/badge/dynamic/json?color=success&label=Clones%20(<15%20days)&query=count&url=https://github.com/michaeltouati/ESVM/blob/master/.github/clone.json?raw=True&logo=github)](https://github.com/michaeltouati/ESVM/actions/workflows/clones.yml)
 [![Compilation check](https://github.com/michaeltouati/ESVM/actions/workflows/compilation.yml/badge.svg?branch=master)](https://github.com/michaeltouati/ESVM/actions/workflows/compilation.yml)
 [![Tests check](https://github.com/michaeltouati/ESVM/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/michaeltouati/ESVM/actions/workflows/tests.yml)
