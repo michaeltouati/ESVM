@@ -97,7 +97,7 @@ def make_scalars_plot_figure(**kwargs):
     fig=plt.figure()
     plt.rc('text', usetex=True)
     for i in range(1,11):
-        condition = ('yplot'+str(i) in kwargs)
+        condition = 'yplot'+str(i) in kwargs
         condition = condition and ('legend'+str(i) in kwargs)
         condition = condition and ('color'+str(i) in kwargs)
         if condition :
@@ -238,6 +238,7 @@ def get_1d_hydro_quantity(n_x, file_name):
     t_out = []
     x_out = []
     p_out = []
+    n_t = 0
     with open(file_name, 'r', encoding='utf-8') as file :
         counter = 0
         for line in file:
