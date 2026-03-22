@@ -51,7 +51,7 @@ lib.create_dir(FE_DIR)
 
 FE_FIG  = 'figures/'+SIMU_NAME+'/fe/fe_'
 FE_CMP  = 'Blues'
-FE_TTL  = r'$f_e \left ( x,\,v_x,\,t\right )\,$'
+FE_TTL  = r'$f_e \left ( x,\,v_x,\,t\right )\,$' # pylint: disable=invalid-name
 FE_TTL += r'$(n_0/v_{T_{e_0}})$'
 X_LBL   = r'$x\,(\lambda_\mathrm{Debye})$'
 VX_LBL  = r'$v_x\,(v_{T_{e_0}})$'
@@ -64,7 +64,7 @@ X_MAP  = np.zeros((N_VX,N_X))
 VX_MAP = np.zeros((N_VX,N_X))
 FE_MAP = np.zeros((N_VX,N_X))
 with open(FE_RES, 'r', encoding='utf-8') as FILE :
-    COUNTER = 0
+    COUNTER = 0 # pylint: disable=invalid-name
     for LINE in FILE:
         ARRAY = LINE.strip().split()
         VX_PLT.append(float(ARRAY[1]))
@@ -74,7 +74,7 @@ with open(FE_RES, 'r', encoding='utf-8') as FILE :
         if COUNTER % N_P == 0:
             STR_TIME = f"{float(ARRAY[0]):1.4E}"
             print(' * t (/omega_p) = '+STR_TIME)
-            N_T   = int(COUNTER / N_P)
+            N_T   = int(COUNTER / N_P) # pylint: disable=invalid-name
             for i in range(0,N_VX):
                 for k in range(0,N_X):
                     INDEX        = (N_T-1)*N_P+i*N_X+k
