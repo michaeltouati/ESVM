@@ -51,7 +51,7 @@ lib.create_dir(LOGFE_DIR)
 
 LOGFE_FIG  = LOGFE_DIR + 'logfe_'
 LOGFE_CMP  = 'nipy_spectral'
-LOGFE_TTL  = r'$\log_{10} \displaystyle ( $'
+LOGFE_TTL  = r'$\log_{10} \displaystyle ( $' # pylint: disable=invalid-name
 LOGFE_TTL += r'$f_e \left (x,\,v_x,\,t\right)\,(n_0/v_{T_{e_0}}) )$'
 X_LBL      = r'$x\,(\lambda_\mathrm{Debye})$'
 VX_LBL     = r'$v_x\,(v_{T_{e_0}})$'
@@ -65,7 +65,7 @@ X_MAP     = np.zeros((N_VX,N_X))
 VX_MAP    = np.zeros((N_VX,N_X))
 LOGFE_MAP = np.zeros((N_VX,N_X))
 with open(LOGFE_RES, 'r', encoding='utf-8') as FILE :
-    COUNTER_LOG = 0
+    COUNTER_LOG = 0 # pylint: disable=invalid-name
     for LINE in FILE:
         ARRAY = LINE.strip().split()
         VX_PLT.append(float(ARRAY[1]))
@@ -75,7 +75,7 @@ with open(LOGFE_RES, 'r', encoding='utf-8') as FILE :
         if COUNTER_LOG % N_P == 0:
             STR_TIME = f"{float(ARRAY[0]):1.4E}"
             print(' * t (/omega_p) = '+STR_TIME)
-            N_T = int(COUNTER_LOG / N_P)
+            N_T = int(COUNTER_LOG / N_P) # pylint: disable=invalid-name
             for i in range(0,N_VX):
                 for k in range(0,N_X):
                     INDEX           = (N_T-1)*N_P+i*N_X+k
