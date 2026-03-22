@@ -45,18 +45,18 @@ RES_DIR = 'results/'+SIMU_NAME+'/'
 
 # total plasma electron kinetic energy
 [TK,UK0] = lib.extract_energy_file(RES_DIR+'UK.dat')
-T   = TK
-N_T = len(TK)
+T   = TK      # pylint: disable=invalid-name
+N_T = len(TK) # pylint: disable=invalid-name
 # total plasma electron internal energy
 [TT,UT0] = lib.extract_energy_file(RES_DIR+'UT.dat')
 if len(TT) < N_T:
-    T   = TT
-    N_T = len(TT)
+    T   = TT      # pylint: disable=invalid-name
+    N_T = len(TT) # pylint: disable=invalid-name
 # total electrostatic energy
 [TE,UE0] = lib.extract_energy_file(RES_DIR+'UE.dat')
 if len(TE) < N_T:
-    T   = TE
-    N_T = len(TE)
+    T   = TE      # pylint: disable=invalid-name
+    N_T = len(TE) # pylint: disable=invalid-name
 #
 UK   = []
 UT   = []
@@ -70,7 +70,7 @@ for i in range(0,N_T):
 T_MIN    = 0.
 T_MAX    = T[N_T-1]
 T_LBL    = r'$t\,(\omega_p^{-1})$'
-U_LBL    = r'$\mathrm{Energy}\,$'
+U_LBL    = r'$\mathrm{Energy}\,$' # pylint: disable=invalid-name
 U_LBL   += r'$\left (n_0 {\lambda_{\mathrm{Debye}}}^3 m_e {v_{T_{e_0}}}^2 \right )$'
 U_FIGLOG = SIMU_DIR+'energy_log.png'
 lib.make_scalars_plot_figure(xplot     = T,
